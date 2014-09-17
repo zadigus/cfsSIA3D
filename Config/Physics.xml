@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Physics xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation='PhysicsConfiguration.xsd'>
+
+<Component name="Rheology">
+	<Parameter name="n">3</Parameter>   <!-- Glen's exponent -->
+	<Parameter name="A">0.1</Parameter> <!-- rate factor in bar^{-1}*a^{-n} -->
+</Component>
+
+<Component name="MassBalance" type="AcAmELA">
+	<Parameter name="ac">0.1</Parameter>
+	<Parameter name="am">0.005</Parameter>
+	<Parameter name="ELA">2700</Parameter>
+	<Parameter name="eps">0.1</Parameter>
+</Component>
+
+<Component name="SlidingLaw" type="None"/>
+</Physics>

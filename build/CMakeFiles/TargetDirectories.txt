@@ -1,0 +1,12 @@
+E:/cfsSIA3D-src/build/CMakeFiles/ALL_BUILD.dir
+E:/cfsSIA3D-src/build/Physics/Components/CMakeFiles/Components.dir
+E:/cfsSIA3D-src/build/Numerics/LinSyst/CMakeFiles/LinSyst.dir
+E:/cfsSIA3D-src/build/Physics/Components/MassBalance/CMakeFiles/MassBalance.dir
+E:/cfsSIA3D-src/build/Numerics/Mesh/CMakeFiles/Mesh.dir
+E:/cfsSIA3D-src/build/Physics/CMakeFiles/Physics.dir
+E:/cfsSIA3D-src/build/Physics/Components/Rheology/CMakeFiles/Rheology.dir
+E:/cfsSIA3D-src/build/Numerics/Schemes/CMakeFiles/Schemes.dir
+E:/cfsSIA3D-src/build/Physics/Components/SlidingLaw/CMakeFiles/SlidingLaw.dir
+E:/cfsSIA3D-src/build/Utility/CMakeFiles/Utility.dir
+E:/cfsSIA3D-src/build/CMakeFiles/ZERO_CHECK.dir
+E:/cfsSIA3D-src/build/Applications/CMakeFiles/cfsSIA3D.dir

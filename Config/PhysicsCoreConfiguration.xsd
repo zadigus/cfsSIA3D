@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:include schemaLocation="Parameter.xsd"/>
+	
+	<xsd:complexType name="PhysicsCoreConfiguration"> 
+		<xsd:sequence>
+			<xsd:element ref="Parameter" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="PhysicsCore" type="PhysicsCoreConfiguration"> 
+		<xsd:annotation>
+      <xsd:documentation>
+        TODO: Write documentation
+      </xsd:documentation>
+    </xsd:annotation>
+	</xsd:element>
+</xsd:schema>

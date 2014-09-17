@@ -1,0 +1,14 @@
+﻿Build started 13.09.2014 17:37:44.
+     1>Project "E:\cfsSIA3D-src\build\Numerics\LinSyst\LinSyst.vcxproj" on node 3 (Build target(s)).
+     1>CustomBuild:
+         Building Custom Rule E:/cfsSIA3D-src/Numerics/LinSyst/CMakeLists.txt
+         CMake does not need to re-run because E:\cfsSIA3D-src\build\Numerics\LinSyst\CMakeFiles\generate.stamp is up-to-date.
+       ClCompile:
+         D:\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /I"E:\cfsSIA3D-src\Numerics\LinSyst" /I"E:\cfsSIA3D-src\build\Numerics\LinSyst" /Zi /nologo /W3 /WX- /Od /Ob0 /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"LinSyst.dir\Debug\\" /Fd"LinSyst.dir\Debug\vc120.pdb" /Gd /TP /errorReport:prompt ..\..\..\Numerics\LinSyst\LinSyst.cpp
+         LinSyst.cpp
+     1>..\..\..\Numerics\LinSyst\LinSyst.cpp(8): fatal error C1083: Cannot open include file: 'LinSystSIA3D.h': No such file or directory
+     1>Done Building Project "E:\cfsSIA3D-src\build\Numerics\LinSyst\LinSyst.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:01.14

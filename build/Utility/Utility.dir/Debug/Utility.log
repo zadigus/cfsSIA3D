@@ -1,0 +1,28 @@
+﻿Build started 13.09.2014 17:38:01.
+     1>Project "E:\cfsSIA3D-src\build\Utility\Utility.vcxproj" on node 4 (Rebuild target(s)).
+     1>CustomBuild:
+         Building Custom Rule E:/cfsSIA3D-src/Utility/CMakeLists.txt
+         CMake does not need to re-run because E:\cfsSIA3D-src\build\Utility\CMakeFiles\generate.stamp is up-to-date.
+       ClCompile:
+         D:\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /I"E:\cfsSIA3D-src\Utility" /Zi /nologo /W3 /WX- /Od /Ob0 /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"Utility.dir\Debug\\" /Fd"Utility.dir\Debug\vc120.pdb" /Gd /TP /errorReport:prompt ..\..\Utility\Array2D.cpp ..\..\Utility\Math.cpp
+         Array2D.cpp
+     1>D:\Microsoft Visual Studio 12.0\VC\include\xutility(2132): warning C4996: 'std::_Copy_impl': Function call with parameters that may be unsafe - this call relies on the caller to check that the passed values are correct. To disable this warning, use -D_SCL_SECURE_NO_WARNINGS. See documentation on how to use Visual C++ 'Checked Iterators'
+                 D:\Microsoft Visual Studio 12.0\VC\include\xutility(2113) : see declaration of 'std::_Copy_impl'
+                 ..\..\Utility\Array2D.cpp(25) : see reference to function template instantiation '_OutIt std::copy<double*,double*>(_InIt,_InIt,_OutIt)' being compiled
+                 with
+                 [
+                     _OutIt=double *
+         ,            _InIt=double *
+                 ]
+         Math.cpp
+     1>..\..\Utility\Math.cpp(13): warning C4267: '=' : conversion from 'size_t' to 'unsigned int', possible loss of data
+         Generating Code...
+       Lib:
+         D:\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\Lib.exe /OUT:"E:\cfsSIA3D-src\build\Utility\Debug\Utility.lib" /NOLOGO /MACHINE:X64 Utility.dir\Debug\Array2D.obj
+         Utility.dir\Debug\Math.obj
+         Utility.vcxproj -> E:\cfsSIA3D-src\build\Utility\Debug\Utility.lib
+     1>Done Building Project "E:\cfsSIA3D-src\build\Utility\Utility.vcxproj" (Rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.01

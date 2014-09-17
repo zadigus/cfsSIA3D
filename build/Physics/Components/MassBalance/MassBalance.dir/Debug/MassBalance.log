@@ -1,0 +1,28 @@
+﻿Build started 13.09.2014 17:38:06.
+     1>Project "E:\cfsSIA3D-src\build\Physics\Components\MassBalance\MassBalance.vcxproj" on node 3 (Rebuild target(s)).
+     1>CustomBuild:
+         Building Custom Rule E:/cfsSIA3D-src/Physics/Components/MassBalance/CMakeLists.txt
+         CMake does not need to re-run because E:\cfsSIA3D-src\build\Physics\Components\MassBalance\CMakeFiles\generate.stamp is up-to-date.
+       ClCompile:
+         D:\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /I"E:\cfsSIA3D-src\build\Physics\Components\MassBalance" /I"E:\cfsSIA3D-src\Physics\Components\MassBalance" /I"E:\cfsSIA3D-src\Physics\Components\MassBalance\.." /I"E:\cfsSIA3D-src\build\Physics\Components\MassBalance\.." /I"E:\cfsSIA3D-src\Physics\Components\MassBalance\..\.." /I"E:\cfsSIA3D-src\Physics\Components\MassBalance\..\..\.." /I"E:\xsd-4.0.0\libxsd" /IE:\xerces\include /Zi /nologo /W3 /WX- /Od /Ob0 /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"MassBalance.dir\Debug\\" /Fd"MassBalance.dir\Debug\vc120.pdb" /Gd /TP /errorReport:prompt ..\..\..\..\Physics\Components\MassBalance\AcAmELA.cpp ..\..\..\..\Physics\Components\MassBalance\ConstantMB.cpp ..\..\..\..\Physics\Components\MassBalance\GradELA.cpp ..\..\..\..\Physics\Components\MassBalance\MassBalance.cpp ..\..\..\..\Physics\Components\MassBalance\MassBalanceFactory.cpp ..\..\..\..\Physics\Components\MassBalance\ZeroMB.cpp
+         AcAmELA.cpp
+         ConstantMB.cpp
+     1>..\..\..\..\Physics\Components\MassBalance\ConstantMB.cpp(8): warning C4244: 'argument' : conversion from 'double' to 'unsigned int', possible loss of data
+         GradELA.cpp
+         MassBalance.cpp
+         MassBalanceFactory.cpp
+         ZeroMB.cpp
+         Generating Code...
+       Lib:
+         D:\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\Lib.exe /OUT:"E:\cfsSIA3D-src\build\Physics\Components\MassBalance\Debug\MassBalance.lib" /NOLOGO /MACHINE:X64 MassBalance.dir\Debug\AcAmELA.obj
+         MassBalance.dir\Debug\ConstantMB.obj
+         MassBalance.dir\Debug\GradELA.obj
+         MassBalance.dir\Debug\MassBalance.obj
+         MassBalance.dir\Debug\MassBalanceFactory.obj
+         MassBalance.dir\Debug\ZeroMB.obj
+         MassBalance.vcxproj -> E:\cfsSIA3D-src\build\Physics\Components\MassBalance\Debug\MassBalance.lib
+     1>Done Building Project "E:\cfsSIA3D-src\build\Physics\Components\MassBalance\MassBalance.vcxproj" (Rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:05.24

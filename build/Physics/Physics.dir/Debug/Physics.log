@@ -1,0 +1,19 @@
+﻿Build started 13.09.2014 17:38:12.
+     1>Project "E:\cfsSIA3D-src\build\Physics\Physics.vcxproj" on node 3 (Rebuild target(s)).
+     1>CustomBuild:
+         Building Custom Rule E:/cfsSIA3D-src/Physics/CMakeLists.txt
+         CMake does not need to re-run because E:\cfsSIA3D-src\build\Physics\CMakeFiles\generate.stamp is up-to-date.
+       ClCompile:
+         D:\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /I"E:\cfsSIA3D-src\Physics" /I"E:\cfsSIA3D-src\build\Physics" /I"E:\cfsSIA3D-src\Physics\Components" /I"E:\xsd-4.0.0\libxsd" /IE:\xerces\include /Zi /nologo /W3 /WX- /Od /Ob0 /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"Physics.dir\Debug\\" /Fd"Physics.dir\Debug\vc120.pdb" /Gd /TP /errorReport:prompt ..\..\Physics\PhysicalModel.cpp ..\..\Physics\PhysicsCoreParams.cpp
+         PhysicalModel.cpp
+         PhysicsCoreParams.cpp
+         Generating Code...
+       Lib:
+         D:\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\Lib.exe /OUT:"E:\cfsSIA3D-src\build\Physics\Debug\Physics.lib" /NOLOGO /MACHINE:X64 Physics.dir\Debug\PhysicalModel.obj
+         Physics.dir\Debug\PhysicsCoreParams.obj
+         Physics.vcxproj -> E:\cfsSIA3D-src\build\Physics\Debug\Physics.lib
+     1>Done Building Project "E:\cfsSIA3D-src\build\Physics\Physics.vcxproj" (Rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.74

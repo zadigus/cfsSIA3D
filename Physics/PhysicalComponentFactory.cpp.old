@@ -1,0 +1,14 @@
+#include "PhysicalComponentFactory.hpp"
+
+#include "PhysicsConfiguration/PhysicsConfiguration.hpp" // TODO: define!
+
+PhysicalComponentFactory::PhysicalComponentFactory(PhysicsConfiguration* aPhysConf)
+: _PhysConf(aPhysConf)
+{
+
+}
+
+PhysicalComponentFactory::~PhysicalComponentFactory()
+{
+
+}

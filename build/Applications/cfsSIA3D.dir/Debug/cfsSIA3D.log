@@ -1,0 +1,16 @@
+﻿Build started 13.09.2014 17:38:14.
+     1>Project "E:\cfsSIA3D-src\build\Applications\cfsSIA3D.vcxproj" on node 4 (Rebuild target(s)).
+     1>CustomBuild:
+         Building Custom Rule E:/cfsSIA3D-src/Applications/CMakeLists.txt
+         CMake does not need to re-run because E:\cfsSIA3D-src\build\Applications\CMakeFiles\generate.stamp is up-to-date.
+       ClCompile:
+         D:\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /I"E:\cfsSIA3D-src\Applications\.." /I"E:\cfsSIA3D-src\build\Applications\.." /IE:\xerces\include /I"E:\xsd-4.0.0\libxsd" /Zi /nologo /W3 /WX- /Od /Ob0 /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"cfsSIA3D.dir\Debug\\" /Fd"cfsSIA3D.dir\Debug\vc120.pdb" /Gd /TP /errorReport:prompt ..\..\Applications\main.cpp
+         main.cpp
+       Link:
+         D:\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"E:\cfsSIA3D-src\build\Applications\Debug\cfsSIA3D.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib ..\Numerics\Mesh\Debug\Mesh.lib ..\Utility\Debug\Utility.lib ..\Physics\Debug\Physics.lib ..\Physics\Components\MassBalance\Debug\MassBalance.lib ..\Physics\Components\Rheology\Debug\Rheology.lib ..\Physics\Components\SlidingLaw\Debug\SlidingLaw.lib ..\Physics\Components\Debug\Components.lib "E:\xerces\lib\xerces-c_3D.lib" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/cfsSIA3D-src/build/Applications/Debug/cfsSIA3D.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/cfsSIA3D-src/build/Applications/Debug/cfsSIA3D.lib" /MACHINE:X64  /machine:x64 /debug cfsSIA3D.dir\Debug\main.obj
+         cfsSIA3D.vcxproj -> E:\cfsSIA3D-src\build\Applications\Debug\cfsSIA3D.exe
+     1>Done Building Project "E:\cfsSIA3D-src\build\Applications\cfsSIA3D.vcxproj" (Rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.54

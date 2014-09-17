@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PhysicsCore xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation='PhysicsCoreConfiguration.xsd'>
+	<Parameter name="g">9.81</Parameter>   <!-- gravitational acceleration in m/s^2 -->
+	<Parameter name="rho_i">910</Parameter> <!-- ice density in kg/m^3 -->
+	<Parameter name="rho_w">1000</Parameter> <!-- water density in kg/m^3 -->
+</PhysicsCore>
