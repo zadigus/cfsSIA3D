@@ -1,4 +1,4 @@
-#include "PhysicalModel.hpp"
+#include "PhysicsModel.hpp"
 #include "PhysicsCoreParams.hpp"
 
 #include <iostream>
@@ -16,7 +16,7 @@
 #include "Components/Rheology/Rheology.hpp"
 #include "Components/SlidingLaw/SlidingLaw.hpp"
 
-PhysicalModel::PhysicalModel(std::unique_ptr<PhysicsConfiguration>& aPhysConf, std::unique_ptr<PhysicsCoreConfiguration>& aPhysCoreConf)
+PhysicsModel::PhysicsModel(std::unique_ptr<PhysicsConfiguration>& aPhysConf, std::unique_ptr<PhysicsCoreConfiguration>& aPhysCoreConf)
 : _MassBalance(NULL)
 , _Rheology(NULL)
 , _SlidingLaw(NULL)
@@ -47,7 +47,7 @@ PhysicalModel::PhysicalModel(std::unique_ptr<PhysicsConfiguration>& aPhysConf, s
 	}
 }
 
-PhysicalModel::~PhysicalModel()
+PhysicsModel::~PhysicsModel()
 {
 
 }

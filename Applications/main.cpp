@@ -3,7 +3,7 @@
 
 #include "Physics/Components/PhysicsConfiguration.hpp"
 #include "Physics/Components/PhysicsCoreConfiguration.hpp"
-#include "Physics/PhysicalModel.hpp"
+#include "Physics/PhysicsModel.hpp"
 #include <memory>
 
 int main(int argc, char* argv[])
@@ -34,7 +34,7 @@ int main(int argc, char* argv[])
 			std::cout << "Component " << it->name() << std::endl;
 		}*/
 
-		PhysicalModel pm(physConf, physCoreConf);
+		PhysicsModel pm(physConf, physCoreConf);
 	}
 	catch (const xml_schema::exception& e)
 	{
