@@ -4,7 +4,7 @@
 #include <iostream>
 #include "Components/PhysicsCoreConfiguration.hpp"
 #include "Components/PhysicsConfiguration.hpp"
-#include "Components/PhysicalComponent.hpp"
+#include "Components/PhysicsComponent.hpp"
 
 // Factories
 #include "Components/MassBalance/MassBalanceFactory.hpp"

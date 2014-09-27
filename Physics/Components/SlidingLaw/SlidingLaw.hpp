@@ -1,7 +1,7 @@
 #ifndef SLIDINGLAW_H_
 #define SLIDINGLAW_H_
 
-#include "PhysicalComponent.hpp"
+#include "PhysicsComponent.hpp"
 
 #include <memory>
 #include <vector>
@@ -9,7 +9,7 @@
 class Grid;
 class Component;
 
-class SlidingLaw : public PhysicalComponent {
+class SlidingLaw : public PhysicsComponent {
 	public:
 		SlidingLaw(Component* aSlidingLaw/*, unsigned int=0, unsigned int=0, double=0*/);
 		virtual ~SlidingLaw();

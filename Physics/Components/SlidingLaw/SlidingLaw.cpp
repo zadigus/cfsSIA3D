@@ -5,7 +5,7 @@
 #include "PhysicsConfiguration.hpp"
 
 SlidingLaw::SlidingLaw(Component* aSlidingLaw/*, unsigned int nx, unsigned int ny, double dx*/) 
-: PhysicalComponent(aSlidingLaw)
+: PhysicsComponent(aSlidingLaw)
 , _sl(nullptr)
 , _sc(nullptr)
 //, _sl(new Grid(nx, ny, dx, dx))

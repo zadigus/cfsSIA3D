@@ -1,5 +1,5 @@
-#ifndef PHYSICALCOMPONENT_H_
-#define PHYSICALCOMPONENT_H_
+#ifndef PHYSICSCOMPONENT_H_
+#define PHYSICSCOMPONENT_H_
 
 //#include <vector>
 #include <memory>
@@ -11,11 +11,11 @@ class Component;
 //#include "PhysicsConfiguration.hpp"
 
 // Interface class for a general physical component
-class PhysicalComponent {
+class PhysicsComponent {
 public:
-	PhysicalComponent(Component* aComponent); // , std::unique_ptr<PhysicsCoreConfiguration>& aPhysCoreConf);
-	//PhysicalComponent(PhysicsConfiguration::Component_const_iterator& aComponent/*std::shared_ptr<PhysicsConfiguration>& physConf, std::string compName*/ /*unsigned int N=0*/);
-	virtual ~PhysicalComponent();
+	PhysicsComponent(Component* aComponent); // , std::unique_ptr<PhysicsCoreConfiguration>& aPhysCoreConf);
+	//PhysicsComponent(PhysicsConfiguration::Component_const_iterator& aComponent/*std::shared_ptr<PhysicsConfiguration>& physConf, std::string compName*/ /*unsigned int N=0*/);
+	virtual ~PhysicsComponent();
 
 	// Setter // Getter
 	//virtual void Set(unsigned int i, double val) { _x[i] = val; }
@@ -31,4 +31,4 @@ protected:
 
 };
 
-#endif /* PHYSICALCOMPONENT_H_ */
+#endif /* PHYSICSCOMPONENT_H_ */

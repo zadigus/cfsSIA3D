@@ -1,7 +1,7 @@
 #ifndef RHEOLOGY_H_
 #define RHEOLOGY_H_
 
-#include "PhysicalComponent.hpp"
+#include "PhysicsComponent.hpp"
 
 #include <string>
 #include <vector>
@@ -10,7 +10,7 @@
 
 struct PhysicsCoreParams;
 
-class Rheology : public PhysicalComponent {
+class Rheology : public PhysicsComponent {
 public:
 	Rheology(Component* aComponent, std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams);
 	virtual ~Rheology();

@@ -6,7 +6,7 @@
 #include <iostream>
 
 Rheology::Rheology(Component* aComponent, std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams)
-	: PhysicalComponent(aComponent)
+	: PhysicsComponent(aComponent)
 	, _rho(aPhysCoreParams->rho_i())
 	, _g(aPhysCoreParams->g()) 
 { 

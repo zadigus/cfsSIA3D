@@ -4,7 +4,7 @@
 #include "PhysicsCoreParams.hpp"
 
 MassBalance::MassBalance(Component* aComponent, std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams)
-: PhysicalComponent(aComponent)
+: PhysicsComponent(aComponent)
 , _rho_ice(aPhysCoreParams->rho_i())
 , _rho_water(aPhysCoreParams->rho_w())
 {  

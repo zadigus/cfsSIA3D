@@ -1,14 +1,14 @@
 #ifndef MASSBALANCE_H_
 #define MASSBALANCE_H_
 
-#include "PhysicalComponent.hpp"
+#include "PhysicsComponent.hpp"
 
 class Grid;
 class Component;
 struct PhysicsCoreParams;
 
 // Interface class for mass-balance data
-class MassBalance : public PhysicalComponent {
+class MassBalance : public PhysicsComponent {
 public:
 	MassBalance(Component* aComponent, std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams);
 	virtual ~MassBalance();
