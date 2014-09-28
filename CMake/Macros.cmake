@@ -3,13 +3,18 @@ MACRO (XSD2CPPCLASS xsd_file)
 	SET(xsd_file_path ${CONFIG_PATH}/${xsd_file})
 	SET(HPP_SUFFIX "hpp")
 	SET(CPP_SUFFIX "cpp")
-	
+
 	INCLUDE_DIRECTORIES(
 		${XSD_INCLUDE_DIR}
 		${XERCES_INCLUDE_DIRS}
 	)
 	
-	SET(XSD_ARGS "cxx-tree" --std c++11 --hxx-suffix ".${HPP_SUFFIX}"  --cxx-suffix ".${CPP_SUFFIX}" --root-element-last)
+	SET(XSD_ARGS "cxx-tree" --std c++11 --hxx-suffix ".${HPP_SUFFIX}"  --cxx-suffix ".${CPP_SUFFIX}" --root-element-last)# --namespace-map ${namespacemap}) #"http://www.ruag.com/PhysicsConfiguration=N_Physics")
+	
+	FOREACH(arg  ${ARGN})
+		LIST(APPEND XSD_ARGS --namespace-map ${arg})
+	ENDFOREACH()
+	
 	ADD_CUSTOM_COMMAND(
 		OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${xsd_base_name}.${HPP_SUFFIX} ${CMAKE_CURRENT_BINARY_DIR}/${xsd_base_name}.${CPP_SUFFIX}
 		COMMAND ${XSD_EXECUTABLE} 

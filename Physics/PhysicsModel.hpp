@@ -3,22 +3,33 @@
 
 #include <memory>
 
-class PhysicsConfiguration;
-class PhysicsCoreConfiguration;
-class MassBalance;
-class Rheology;
-class SlidingLaw;
+namespace N_Physics {
 
-class PhysicsModel 
-{
-	public: 
+	class PhysicsConfiguration;
+	class PhysicsCoreConfiguration;
+
+	class MassBalance;
+	class Rheology;
+	class SlidingLaw;
+
+	class PhysicsModel
+	{
+	public:
+		static PhysicsModel& getInstance();
 		// implement the construction of the physics components with the various factories
-		PhysicsModel(std::unique_ptr<PhysicsConfiguration>& aPhysConf, std::unique_ptr<PhysicsCoreConfiguration>& aPhysCoreConf);
+		void init(std::unique_ptr<PhysicsConfiguration>& aPhysConf, std::unique_ptr<PhysicsCoreConfiguration>& aPhysCoreConf);
+
+	private:
+		//PhysicsModel(std::unique_ptr<PhysicsConfiguration>& aPhysConf, std::unique_ptr<PhysicsCoreConfiguration>& aPhysCoreConf);
+		PhysicsModel();
 		~PhysicsModel();
+
 	private:
 		std::shared_ptr<MassBalance> _MassBalance;
 		std::shared_ptr<Rheology>    _Rheology;
 		std::shared_ptr<SlidingLaw>  _SlidingLaw;
-};
+	};
+
+}
 
 #endif

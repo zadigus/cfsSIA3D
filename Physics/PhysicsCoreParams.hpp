@@ -5,17 +5,21 @@
 #include <map>
 #include <string>
 
-class PhysicsCoreConfiguration;
+namespace N_Physics {
 
-struct PhysicsCoreParams 
-{
-	PhysicsCoreParams(std::unique_ptr<PhysicsCoreConfiguration>& aPhysicsCoreConf);
+	class PhysicsCoreConfiguration;
 
-	double g();     // gravitational acceleration [m/s^2]
-	double rho_i(); // ice density [kg/m^3]
-	double rho_w(); // water density [kg/m^3]
+	struct PhysicsCoreParams
+	{
+		PhysicsCoreParams(std::unique_ptr<PhysicsCoreConfiguration>& aPhysicsCoreConf);
 
-	std::map<std::string, double> _parameters;
-};
+		double g();     // gravitational acceleration [m/s^2]
+		double rho_i(); // ice density [kg/m^3]
+		double rho_w(); // water density [kg/m^3]
+
+		std::map<std::string, double> _parameters;
+	};
+
+}
 
 #endif

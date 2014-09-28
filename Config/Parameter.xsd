@@ -1,5 +1,7 @@
 <?xml version="1.0" ?>
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:schema targetNamespace="http://www.ruag.com/Parameter"
+						xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+						elementFormDefault="qualified">
 	<xsd:element name="Parameter">
 		<xsd:complexType>
 			<xsd:simpleContent>

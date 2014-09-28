@@ -1,8 +1,8 @@
 #include <iostream>
 #include "Numerics/Mesh/Grid.hpp"
 
-#include "Physics/Components/PhysicsConfiguration.hpp"
-#include "Physics/Components/PhysicsCoreConfiguration.hpp"
+#include "Physics/PhysicsComponents/PhysicsConfiguration.hpp"
+#include "Physics/PhysicsComponents/PhysicsCoreConfiguration.hpp"
 #include "Physics/PhysicsModel.hpp"
 #include <memory>
 
@@ -26,15 +26,10 @@ int main(int argc, char* argv[])
 
 	try
 	{
-		std::unique_ptr<PhysicsConfiguration> physConf(Physics(argv[1]));
-		std::unique_ptr<PhysicsCoreConfiguration> physCoreConf(PhysicsCore(argv[2]));
-		/*PhysicsConfiguration::Component_sequence compSeq = physConf->Component();
-		for (PhysicsConfiguration::Component_const_iterator it = compSeq.begin(); it != compSeq.end(); it++)
-		{
-			std::cout << "Component " << it->name() << std::endl;
-		}*/
+		std::unique_ptr<N_Physics::PhysicsConfiguration> physConf(N_Physics::Physics(argv[1]));
+		std::unique_ptr<N_Physics::PhysicsCoreConfiguration> physCoreConf(N_Physics::PhysicsCore(argv[2]));
 
-		PhysicsModel pm(physConf, physCoreConf);
+		N_Physics::PhysicsModel::getInstance().init(physConf, physCoreConf);
 	}
 	catch (const xml_schema::exception& e)
 	{

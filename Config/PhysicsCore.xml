@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<PhysicsCore xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation='PhysicsCoreConfiguration.xsd'>
-	<Parameter name="g">9.81</Parameter>   <!-- gravitational acceleration in m/s^2 -->
-	<Parameter name="rho_i">910</Parameter> <!-- ice density in kg/m^3 -->
-	<Parameter name="rho_w">1000</Parameter> <!-- water density in kg/m^3 -->
-</PhysicsCore>
+<!--PhysicsCore xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation='PhysicsCoreConfiguration.xsd'-->
+<!--param:Parameter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                 xsi:schemaLocation="http://www.ruag.com/Parameter Parameter.xsd" 
+                 xmlns:param="http://www.ruag.com/Parameter"--> 
+
+<p:PhysicsCore xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+            xsi:schemaLocation="http://www.ruag.com/PhysicsCoreConfiguration PhysicsCoreConfiguration.xsd" 
+            xmlns:p="http://www.ruag.com/PhysicsCoreConfiguration"
+						xmlns:param="http://www.ruag.com/Parameter"> 
+	<param:Parameter name="g">9.81</param:Parameter>   <!-- gravitational acceleration in m/s^2 -->
+	<param:Parameter name="rho_i">910</param:Parameter> <!-- ice density in kg/m^3 -->
+	<param:Parameter name="rho_w">1000</param:Parameter> <!-- water density in kg/m^3 -->
+</p:PhysicsCore>

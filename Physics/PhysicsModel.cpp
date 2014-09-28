@@ -2,52 +2,86 @@
 #include "PhysicsCoreParams.hpp"
 
 #include <iostream>
-#include "Components/PhysicsCoreConfiguration.hpp"
-#include "Components/PhysicsConfiguration.hpp"
-#include "Components/PhysicsComponent.hpp"
+#include "PhysicsComponents/PhysicsCoreConfiguration.hpp"
+#include "PhysicsComponents/PhysicsConfiguration.hpp"
+#include "PhysicsComponents/PhysicsComponent.hpp"
 
 // Factories
-#include "Components/MassBalance/MassBalanceFactory.hpp"
-#include "Components/Rheology/RheologyFactory.hpp"
-#include "Components/SlidingLaw/SlidingLawFactory.hpp"
+#include "PhysicsComponents/MassBalance/MassBalanceFactory.hpp"
+#include "PhysicsComponents/Rheology/RheologyFactory.hpp"
+#include "PhysicsComponents/SlidingLaw/SlidingLawFactory.hpp"
 
 // Physical components
-#include "Components/MassBalance/MassBalance.hpp"
-#include "Components/Rheology/Rheology.hpp"
-#include "Components/SlidingLaw/SlidingLaw.hpp"
+#include "PhysicsComponents/MassBalance/MassBalance.hpp"
+#include "PhysicsComponents/Rheology/Rheology.hpp"
+#include "PhysicsComponents/SlidingLaw/SlidingLaw.hpp"
 
-PhysicsModel::PhysicsModel(std::unique_ptr<PhysicsConfiguration>& aPhysConf, std::unique_ptr<PhysicsCoreConfiguration>& aPhysCoreConf)
-: _MassBalance(NULL)
-, _Rheology(NULL)
-, _SlidingLaw(NULL)
-{
+namespace N_Physics {
 
-	std::unique_ptr<PhysicsCoreParams> physCore(new PhysicsCoreParams(aPhysCoreConf));
-
-	PhysicsConfiguration::Component_sequence compSeq = aPhysConf->Component();
-	for (PhysicsConfiguration::Component_iterator it = compSeq.begin(); it != compSeq.end(); it++)
+	PhysicsModel& PhysicsModel::getInstance()
 	{
-		if (!std::strcmp(it->name()->c_str(), "MassBalance")) // TODO: handle with the case where one of these components is not present in the config
-		{ // doesn't work with ==
-			_MassBalance.reset(MassBalanceFactory::make(&(*it), physCore));
-		}
-		else if (!std::strcmp(it->name()->c_str(), "Rheology"))
-		{
-			_Rheology.reset(RheologyFactory::make(&(*it), physCore));
-		}
-		else if (!std::strcmp(it->name()->c_str(), "SlidingLaw"))
-		{
-			_SlidingLaw.reset(SlidingLawFactory::make(&(*it)));
-		}
-		else 
-		{
-			std::cerr << "Unknown component " << it->name()->c_str() << "." << std::endl;
-		}
+		static PhysicsModel instance;
+		return instance;
+	}
+
+	PhysicsModel::PhysicsModel()
+		: _MassBalance(NULL)
+		, _Rheology(NULL)
+		, _SlidingLaw(NULL)
+	{
 
 	}
-}
 
-PhysicsModel::~PhysicsModel()
-{
+	void PhysicsModel::init(std::unique_ptr<PhysicsConfiguration>& aPhysConf, std::unique_ptr<PhysicsCoreConfiguration>& aPhysCoreConf)
+	{
+		std::unique_ptr<PhysicsCoreParams> physCore(new PhysicsCoreParams(aPhysCoreConf));
+
+		std::string MB_ID("MassBalance");
+
+		// Read configuration
+		PhysicsConfiguration::Component_sequence compSeq = aPhysConf->Component();
+		for (PhysicsConfiguration::Component_iterator it = compSeq.begin(); it != compSeq.end(); it++)
+		{
+			if (!it->name()->compare("MassBalance"))
+			{ // doesn't work with ==
+				_MassBalance.reset(MassBalanceFactory::make(&(*it), physCore));
+			}
+			else if (!it->name()->compare("Rheology"))
+			{
+				_Rheology.reset(RheologyFactory::make(&(*it), physCore));
+			}
+			else if (!it->name()->compare("SlidingLaw"))
+			{
+				_SlidingLaw.reset(SlidingLawFactory::make(&(*it)));
+			}
+			else
+			{
+				std::cerr << "Unknown component " << it->name()->c_str() << "." << std::endl;
+			}
+		}
+
+		// Check configuration
+		if (!_MassBalance)
+		{
+			//std::cout << "Setting MassBalance to zero." << std::endl;
+			//_MassBalance.reset(new ZeroMB);
+			_MassBalance.reset(MassBalanceFactory::make());
+		}
+		if (!_SlidingLaw)
+		{
+			//std::cout << "Setting SlidingLaw to zero." << std::endl;
+			_SlidingLaw.reset(SlidingLawFactory::make());
+		}
+		if (!_Rheology)
+		{ // nothing can happen without a rheology
+			std::cerr << "Missing compulsory rheology component." << std::endl;
+			exit(EXIT_FAILURE);
+		}
+	}
+
+	PhysicsModel::~PhysicsModel()
+	{
+
+	}
 
 }
