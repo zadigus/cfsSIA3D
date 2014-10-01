@@ -31,7 +31,7 @@ namespace N_Physics {
 		//std::vector<double> _x;  // physical parameters
 		std::string _name; // component's name
 		std::string _type; // component's type
-		std::map<std::string, double> _parameters;
+		std::map<std::string, std::string> _parameters;
 
 
 	};

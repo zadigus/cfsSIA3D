@@ -15,20 +15,20 @@ namespace N_Physics {
 
 	double PhysicsCoreParams::g()
 	{
-		std::map<std::string, double>::iterator it(_parameters.find("g"));
-		return it != _parameters.end() ? it->second : 9.81;
+		std::map<std::string, std::string>::iterator it(_parameters.find("g"));
+		return it != _parameters.end() ? std::stod(it->second) : 9.81;
 	}
 
 	double PhysicsCoreParams::rho_w()
 	{
-		std::map<std::string, double>::iterator it(_parameters.find("rho_w"));
-		return it != _parameters.end() ? it->second : 1000;
+		std::map<std::string, std::string>::iterator it(_parameters.find("rho_w"));
+		return it != _parameters.end() ? std::stod(it->second) : 1000;
 	}
 
 	double PhysicsCoreParams::rho_i()
 	{
-		std::map<std::string, double>::iterator it(_parameters.find("rho_i"));
-		return it != _parameters.end() ? it->second : 910;
+		std::map<std::string, std::string>::iterator it(_parameters.find("rho_i"));
+		return it != _parameters.end() ? std::stod(it->second) : 910;
 	}
 
 }

@@ -8,7 +8,10 @@
 
 namespace N_Physics {
 
-	AltitudeSL::AltitudeSL(Component* aComponent) : SlidingLaw(aComponent)
+	AltitudeSL::AltitudeSL(Component* aComponent) 
+		: SlidingLaw(aComponent)
+		, _Z(std::stod(_parameters["Z"]))
+		, _C(std::stod(_parameters["C"]))
 	{
 
 	}
@@ -37,7 +40,6 @@ namespace N_Physics {
 				}
 			}
 		}
-		//Stagger(n); // generate sliding at the staggered grid's points
 	}
 
 }

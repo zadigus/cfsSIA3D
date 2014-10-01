@@ -5,10 +5,14 @@
 
 namespace N_Physics {
 
-	GradELA::GradELA(Component* aComponent, std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams) : MassBalance(aComponent, aPhysCoreParams)
+	GradELA::GradELA(Component* aComponent, std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams) 
+		: MassBalance(aComponent, aPhysCoreParams)
+		, _ELA(std::stod(_parameters["ELA"]))
+		, _m1(std::stod(_parameters["m1"]))
+		, _m2(std::stod(_parameters["m2"]))
+		, _eps(std::stod(_parameters["eps"]))
 	{
-		//_x.resize(4);
-		//ReadModelParameters(mbFile, _x, 4);
+
 	}
 
 	GradELA::GradELA() : MassBalance()

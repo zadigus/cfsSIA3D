@@ -13,7 +13,7 @@ namespace N_Physics {
 
 	class SlidingLaw : public PhysicsComponent {
 	public:
-		SlidingLaw(Component* aSlidingLaw/*, unsigned int=0, unsigned int=0, double=0*/);
+		SlidingLaw(Component* aSlidingLaw);
 		SlidingLaw();
 		virtual ~SlidingLaw();
 

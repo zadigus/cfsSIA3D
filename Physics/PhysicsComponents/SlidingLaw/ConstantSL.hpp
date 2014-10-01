@@ -12,10 +12,8 @@ namespace N_Physics {
 	public:
 		ConstantSL(Component* aComponent);
 		~ConstantSL();
-		//void Generate(Grid&, int);
 	protected:
 		virtual void Init(const Grid&);
-		//virtual void Fill(Grid&, unsigned int);
 	};
 }
 

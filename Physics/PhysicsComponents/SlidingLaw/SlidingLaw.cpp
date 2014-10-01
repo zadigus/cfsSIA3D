@@ -6,12 +6,10 @@
 
 namespace N_Physics {
 
-	SlidingLaw::SlidingLaw(Component* aSlidingLaw/*, unsigned int nx, unsigned int ny, double dx*/)
+	SlidingLaw::SlidingLaw(Component* aSlidingLaw)
 		: PhysicsComponent(aSlidingLaw)
 		, _sl(nullptr)
 		, _sc(nullptr)
-		//, _sl(new Grid(nx, ny, dx, dx))
-		//, _sc(new Grid(nx, ny, dx, dx))
 	{
 
 	}

@@ -9,7 +9,7 @@ class Grid;
 namespace N_Physics {
 	class ZeroSL : public AltitudeSL {
 	public:
-		ZeroSL(/*Component* aComponent*/);
+		ZeroSL();
 		virtual ~ZeroSL();
 
 	protected:

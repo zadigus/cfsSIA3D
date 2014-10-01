@@ -7,7 +7,7 @@ namespace N_Physics {
 
 	ConstantMB::ConstantMB(Component* aComponent, std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams)
 		: MassBalance(aComponent, aPhysCoreParams)
-		, _mb(new Grid(_parameters["grid"])) // TODO: deal with this problem; the _parameter is of type double; we want also string parameters; OR do only string parameters and then cast
+		, _mb(new Grid(_parameters["grid"])) 
 	{
 
 	}

@@ -7,7 +7,6 @@ class Grid;
 
 namespace N_Physics {
 
-	//class Component;
 	struct PhysicsCoreParams;
 
 	class ConstantMB : public MassBalance {

@@ -5,13 +5,17 @@
 
 namespace N_Physics {
 
-	AcAmELA::AcAmELA(Component* aComponent, std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams) : MassBalance(aComponent, aPhysCoreParams)
+	AcAmELA::AcAmELA(Component* aComponent, std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams) 
+		: MassBalance(aComponent, aPhysCoreParams)
+		, _ELA(std::stod(_parameters["ELA"]))
+		, _ac(std::stod(_parameters["ac"]))
+		, _am(std::stod(_parameters["am"]))
+		, _eps(std::stod(_parameters["eps"]))
 	{
-		//_x.resize(4);
-		//ReadModelParameters(mbFile, _x, 4);
+	
 	}
 
-	AcAmELA::~AcAmELA() //TODO: double-check that this calls the MassBalance::~MassBalance ...
+	AcAmELA::~AcAmELA()
 	{
 
 	}

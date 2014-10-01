@@ -5,7 +5,7 @@
 	<xsd:element name="Parameter">
 		<xsd:complexType>
 			<xsd:simpleContent>
-				<xsd:extension base="xsd:double">
+				<xsd:extension base="xsd:string">
 					<xsd:attribute name="name" type="xsd:string" use="required"/>
 				</xsd:extension>
 			</xsd:simpleContent>

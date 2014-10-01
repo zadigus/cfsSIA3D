@@ -8,11 +8,9 @@
 
 namespace N_Physics {
 
-	ZeroSL::ZeroSL(/*Component* aComponent*/) : AltitudeSL(/*aComponent*/)
+	ZeroSL::ZeroSL() : AltitudeSL()
 	{
-		/*// TODO: assert that aComponent doesn't contain anything!
-		_parameters.emplace("C", 0);
-		_parameters.emplace("Z", 0);*/
+	
 	}
 
 	ZeroSL::~ZeroSL()
