@@ -1,11 +1,11 @@
 #include "MassBalance.hpp"
-//#include "PhysicsCoreConfiguration.hpp"
-#include "PhysicsConfiguration.hpp"
+
+#include "Configuration/ModelConfiguration.hpp"
 #include "PhysicsCoreParams.hpp"
 
 namespace N_Physics {
 
-	MassBalance::MassBalance(Component* aComponent, std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams)
+	MassBalance::MassBalance(N_Configuration::Component* aComponent, std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams)
 		: PhysicsComponent(aComponent)
 		, _rho_ice(aPhysCoreParams->rho_i())
 		, _rho_water(aPhysCoreParams->rho_w())

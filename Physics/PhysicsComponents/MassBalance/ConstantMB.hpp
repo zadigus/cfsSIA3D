@@ -12,7 +12,7 @@ namespace N_Physics {
 	class ConstantMB : public MassBalance {
 	public:
 		// Constructor / destructor
-		ConstantMB(Component* aComponent, std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams);
+		ConstantMB(N_Configuration::Component* aComponent, std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams);
 		virtual ~ConstantMB();
 
 		const double operator()(const double x, const double y, const double b, const double H);

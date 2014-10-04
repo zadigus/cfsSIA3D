@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Physics xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation='PhysicsConfiguration.xsd'-->
-
-<!--param:Parameter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-                 xsi:schemaLocation="http://www.ruag.com/Parameter Parameter.xsd" xmlns:param="http://www.ruag.com/Parameter"--> 
-
-<p:Physics xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-            xsi:schemaLocation="http://www.ruag.com/PhysicsConfiguration PhysicsConfiguration.xsd" 
-            xmlns:p="http://www.ruag.com/PhysicsConfiguration"
+<m:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+            xsi:schemaLocation="http://www.ruag.com/ModelConfiguration ModelConfiguration.xsd" 
+            xmlns:m="http://www.ruag.com/ModelConfiguration"
 						xmlns:param="http://www.ruag.com/Parameter"> 
 
-<p:Component name="MassBalance" type="AcAmELA">
+<!--m:Component name="MassBalance" type="acamela">
 	<param:Parameter name="ac">0.1</param:Parameter>
 	<param:Parameter name="am">0.005</param:Parameter>
 	<param:Parameter name="ELA">2700</param:Parameter>
 	<param:Parameter name="eps">0.1</param:Parameter>
-</p:Component>
+</m:Component-->
 
-<p:Component name="SlidingLaw"/>
+<m:Component name="MassBalance" type="GradELA">
+	<param:Parameter name="m1">0.1</param:Parameter>
+	<param:Parameter name="m2">0.005</param:Parameter>
+	<param:Parameter name="ELA">2700</param:Parameter>
+	<param:Parameter name="eps">0.1</param:Parameter>
+</m:Component>
 
-<p:Component name="Rheology">
+<m:Component name="SlidingLaw"/>
+
+<m:Component name="Rheology">
 	<param:Parameter name="n">3</param:Parameter>   <!-- Glen's exponent -->
 	<param:Parameter name="A">0.1</param:Parameter> <!-- rate factor in bar^{-1}*a^{-n} -->
-</p:Component>
+</m:Component>
 
-</p:Physics>
+</m:Model>

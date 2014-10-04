@@ -11,7 +11,7 @@ namespace N_Physics {
 	class GradELA : public MassBalance {
 		public:
 			// Constructor / destructor
-			GradELA(Component* aComponent, std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams);
+			GradELA(N_Configuration::Component* aComponent, std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams);
 			GradELA();
 			virtual ~GradELA();
 

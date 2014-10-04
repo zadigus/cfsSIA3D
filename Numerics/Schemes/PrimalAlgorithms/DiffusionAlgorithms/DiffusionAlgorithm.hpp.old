@@ -1,0 +1,20 @@
+#ifndef DIFFUSIONALGORITHM_HPP_
+#define DIFFUSIONALGORITHM_HPP_
+
+#include "PrimalAlgorithm.hpp"
+
+namespace N_Mathematics {
+
+	class DiffusionAlgorithm : public PrimalAlgorithm
+	{
+	public:
+		DiffusionAlgorithm(const std::shared_ptr<Grid>& H);
+		virtual ~DiffusionAlgorithm();
+
+		virtual void Run() = 0;
+
+	};
+
+}
+
+#endif

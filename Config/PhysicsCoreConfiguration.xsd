@@ -4,7 +4,6 @@
 						xmlns:physcore="http://www.ruag.com/PhysicsCoreConfiguration"
             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 						elementFormDefault="qualified">
-	<!--xsd:include schemaLocation="Parameter.xsd"/-->
 	<xsd:import schemaLocation="Parameter.xsd" namespace="http://www.ruag.com/Parameter"/>
 	
 	<xsd:complexType name="PhysicsCoreConfiguration"> 

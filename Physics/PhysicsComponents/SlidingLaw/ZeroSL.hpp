@@ -4,7 +4,6 @@
 #include "AltitudeSL.hpp"
 
 class Grid;
-//class Component;
 
 namespace N_Physics {
 	class ZeroSL : public AltitudeSL {

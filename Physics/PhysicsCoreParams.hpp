@@ -5,13 +5,15 @@
 #include <map>
 #include <string>
 
-namespace N_Physics {
-
+namespace N_Configuration {
 	class PhysicsCoreConfiguration;
+}
+
+namespace N_Physics {
 
 	struct PhysicsCoreParams
 	{
-		PhysicsCoreParams(std::unique_ptr<PhysicsCoreConfiguration>& aPhysicsCoreConf);
+		PhysicsCoreParams(std::unique_ptr<N_Configuration::PhysicsCoreConfiguration>& aPhysicsCoreConf);
 
 		double g();     // gravitational acceleration [m/s^2]
 		double rho_i(); // ice density [kg/m^3]

@@ -7,13 +7,12 @@
 #include <vector>
 
 class Grid;
-//class Component;
 
 namespace N_Physics {
 
 	class SlidingLaw : public PhysicsComponent {
 	public:
-		SlidingLaw(Component* aSlidingLaw);
+		SlidingLaw(N_Configuration::Component* aSlidingLaw);
 		SlidingLaw();
 		virtual ~SlidingLaw();
 

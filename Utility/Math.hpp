@@ -4,7 +4,7 @@
 #include <cmath>
 #include <vector>
 
-namespace Math
+namespace N_MathUtils
 {
 
 	static double ZERO = 1e-10;

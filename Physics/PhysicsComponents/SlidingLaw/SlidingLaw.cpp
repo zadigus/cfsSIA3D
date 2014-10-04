@@ -2,11 +2,11 @@
 
 #include <cmath>
 #include "Numerics/Mesh/Grid.hpp"
-#include "PhysicsConfiguration.hpp"
+#include "Configuration/ModelConfiguration.hpp"
 
 namespace N_Physics {
 
-	SlidingLaw::SlidingLaw(Component* aSlidingLaw)
+	SlidingLaw::SlidingLaw(N_Configuration::Component* aSlidingLaw)
 		: PhysicsComponent(aSlidingLaw)
 		, _sl(nullptr)
 		, _sc(nullptr)

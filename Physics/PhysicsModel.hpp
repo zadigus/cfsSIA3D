@@ -3,10 +3,12 @@
 
 #include <memory>
 
-namespace N_Physics {
-
-	class PhysicsConfiguration;
+namespace N_Configuration {
+	class ModelConfiguration;
 	class PhysicsCoreConfiguration;
+}
+
+namespace N_Physics {
 
 	class MassBalance;
 	class Rheology;
@@ -17,10 +19,9 @@ namespace N_Physics {
 	public:
 		static PhysicsModel& getInstance();
 		// implement the construction of the physics components with the various factories
-		void init(std::unique_ptr<PhysicsConfiguration>& aPhysConf, std::unique_ptr<PhysicsCoreConfiguration>& aPhysCoreConf);
+		void init(std::unique_ptr<N_Configuration::ModelConfiguration>& aPhysConf, std::unique_ptr<N_Configuration::PhysicsCoreConfiguration>& aPhysCoreConf);
 
 	private:
-		//PhysicsModel(std::unique_ptr<PhysicsConfiguration>& aPhysConf, std::unique_ptr<PhysicsCoreConfiguration>& aPhysCoreConf);
 		PhysicsModel();
 		~PhysicsModel();
 

@@ -1,11 +1,11 @@
 #include "ConstantSL.hpp"
 
 #include "Numerics/Mesh/Grid.hpp"
-#include "PhysicsConfiguration.hpp"
+#include "Configuration/ModelConfiguration.hpp"
 
 namespace N_Physics {
 
-	ConstantSL::ConstantSL(Component* aComponent)
+	ConstantSL::ConstantSL(N_Configuration::Component* aComponent)
 		: SlidingLaw(aComponent)
 	{
 		

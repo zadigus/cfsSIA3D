@@ -36,7 +36,7 @@ Grid::Grid(std::string fileName)
 
 		assert(tmpx != 0); assert(tmpy != 0);
 
-		if (!Math::isInteger(tmpx) || !Math::isInteger(tmpy)) {
+		if (!N_MathUtils::isInteger(tmpx) || !N_MathUtils::isInteger(tmpy)) {
 			std::cerr << "ncols / nrows not integer in grid file" << std::endl;
 			std::cerr << "ncols, nrows = " << tmpx << "\t" << tmpy << std::endl;
 			exit(1);
@@ -220,7 +220,7 @@ const double Grid::operator()(const double x, const double y)
 	std::vector<std::vector<double>>::iterator erase_pos;
 	for (std::vector<std::vector<double>>::iterator it = bounds.begin(); it != bounds.end(); it++)
 	{
-		tmp = Math::EuclideanDistance(*it, w, 2);
+		tmp = N_MathUtils::EuclideanDistance(*it, w, 2);
 		if (tmp > max) // find element with maximal distance to the considered point w
 		{
 			max = tmp;
@@ -236,10 +236,10 @@ const double Grid::operator()(const double x, const double y)
 	bounds.erase(erase_pos);
 
 	// compute normal to the plane spanned by the 3 remaining vectors
-	std::vector<double> n = Math::crossDiff3D(bounds[0], bounds[1], bounds[2]);
+	std::vector<double> n = N_MathUtils::crossDiff3D(bounds[0], bounds[1], bounds[2]);
 
 	// planar interpolation
-	double out = (abs(n[2]) < Math::ZERO) ? minVal : bounds[0][2] - (n[0] * (w[0] - bounds[0][0]) + n[1] * (w[1] - bounds[0][1])) / n[2];
+	double out = (abs(n[2]) < N_MathUtils::ZERO) ? minVal : bounds[0][2] - (n[0] * (w[0] - bounds[0][0]) + n[1] * (w[1] - bounds[0][1])) / n[2];
 	assert(!isnan(out));
 	return out; // return interpolated value
 }

@@ -1,16 +1,17 @@
 #include <iostream>
 #include "Numerics/Mesh/Grid.hpp"
 
-#include "Physics/PhysicsComponents/PhysicsConfiguration.hpp"
-#include "Physics/PhysicsComponents/PhysicsCoreConfiguration.hpp"
+#include "Configuration/AppConfiguration.hpp"
+#include "Configuration/ModelConfiguration.hpp"
+#include "Configuration/PhysicsCoreConfiguration.hpp"
 #include "Physics/PhysicsModel.hpp"
 #include <memory>
 
 int main(int argc, char* argv[])
 {
-	if (argc != 3)
+	if (argc != 2)
 	{
-		std::cerr << "Usage: " << argv[0] << " Physics PhysicsCore" << std::endl;
+		std::cerr << "Usage: " << argv[0] << " ConfigFile" << std::endl;
 		return 1;
 	}
 
@@ -26,8 +27,23 @@ int main(int argc, char* argv[])
 
 	try
 	{
-		std::unique_ptr<N_Physics::PhysicsConfiguration> physConf(N_Physics::Physics(argv[1]));
-		std::unique_ptr<N_Physics::PhysicsCoreConfiguration> physCoreConf(N_Physics::PhysicsCore(argv[2]));
+		std::unique_ptr<N_Configuration::AppConfiguration> appConf(N_Configuration::App(argv[1]));
+
+		std::unique_ptr<N_Configuration::ModelConfiguration> physConf;
+		std::unique_ptr<N_Configuration::PhysicsCoreConfiguration> physCoreConf;
+		std::unique_ptr<N_Configuration::ModelConfiguration> mathConf;
+
+		N_Configuration::AppConfiguration::Parameter_sequence fileNames(appConf->Parameter());
+		for (N_Configuration::AppConfiguration::Parameter_const_iterator it = fileNames.begin(); it != fileNames.end(); ++it)
+		{
+			std::cout << it->name() << ", " << *it << std::endl;
+			if (!std::strcmp(it->name().c_str(), "Physics"))
+				physConf = N_Configuration::Model(*it);
+			if (!std::strcmp(it->name().c_str(), "PhysicsCore"))
+				physCoreConf = N_Configuration::PhysicsCore(*it);
+			if (!std::strcmp(it->name().c_str(), "Maths"))
+				mathConf = N_Configuration::Model(*it);
+		}
 
 		N_Physics::PhysicsModel::getInstance().init(physConf, physCoreConf);
 	}

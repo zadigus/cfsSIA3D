@@ -1,7 +1,7 @@
 #include "Math.hpp"
 #include <cassert>
 
-namespace Math
+namespace N_MathUtils
 {
 	//===================================================================================================
 	double EuclideanDistance(std::vector<double>& v1, std::vector<double>& v2, unsigned int n)

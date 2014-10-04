@@ -13,7 +13,7 @@ namespace N_Physics {
 
 	class Rheology : public PhysicsComponent {
 	public:
-		Rheology(Component* aComponent, std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams);
+		Rheology(N_Configuration::Component* aComponent, std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams);
 		virtual ~Rheology();
 
 		// Setter

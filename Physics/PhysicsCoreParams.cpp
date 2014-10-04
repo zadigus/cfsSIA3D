@@ -1,13 +1,13 @@
 #include "PhysicsCoreParams.hpp"
 
-#include "PhysicsComponents/PhysicsCoreConfiguration.hpp"
+#include "Configuration/PhysicsCoreConfiguration.hpp"
 
 namespace N_Physics {
 
-	PhysicsCoreParams::PhysicsCoreParams(std::unique_ptr<PhysicsCoreConfiguration>& aPhysicsCoreConf)
+	PhysicsCoreParams::PhysicsCoreParams(std::unique_ptr<N_Configuration::PhysicsCoreConfiguration>& aPhysicsCoreConf)
 	{
-		PhysicsCoreConfiguration::Parameter_sequence paramSeq = aPhysicsCoreConf->Parameter();
-		for (PhysicsCoreConfiguration::Parameter_const_iterator it = paramSeq.begin(); it != paramSeq.end(); it++)
+		N_Configuration::PhysicsCoreConfiguration::Parameter_sequence paramSeq = aPhysicsCoreConf->Parameter();
+		for (N_Configuration::PhysicsCoreConfiguration::Parameter_const_iterator it = paramSeq.begin(); it != paramSeq.end(); it++)
 		{
 			_parameters.emplace(it->name(), (*it));
 		}

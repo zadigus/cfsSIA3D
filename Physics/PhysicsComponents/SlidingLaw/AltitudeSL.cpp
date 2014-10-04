@@ -4,11 +4,11 @@
 #include <cmath>
 
 #include "Numerics/Mesh/Grid.hpp"
-#include "PhysicsConfiguration.hpp"
+#include "Configuration/ModelConfiguration.hpp"
 
 namespace N_Physics {
 
-	AltitudeSL::AltitudeSL(Component* aComponent) 
+	AltitudeSL::AltitudeSL(N_Configuration::Component* aComponent)
 		: SlidingLaw(aComponent)
 		, _Z(std::stod(_parameters["Z"]))
 		, _C(std::stod(_parameters["C"]))

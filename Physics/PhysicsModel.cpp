@@ -2,8 +2,8 @@
 #include "PhysicsCoreParams.hpp"
 
 #include <iostream>
-#include "PhysicsComponents/PhysicsCoreConfiguration.hpp"
-#include "PhysicsComponents/PhysicsConfiguration.hpp"
+#include "Configuration/PhysicsCoreConfiguration.hpp"
+#include "Configuration/ModelConfiguration.hpp"
 #include "PhysicsComponents/PhysicsComponent.hpp"
 
 // Factories
@@ -32,15 +32,18 @@ namespace N_Physics {
 
 	}
 
-	void PhysicsModel::init(std::unique_ptr<PhysicsConfiguration>& aPhysConf, std::unique_ptr<PhysicsCoreConfiguration>& aPhysCoreConf)
+	PhysicsModel::~PhysicsModel()
+	{
+
+	}
+
+	void PhysicsModel::init(std::unique_ptr<N_Configuration::ModelConfiguration>& aPhysConf, std::unique_ptr<N_Configuration::PhysicsCoreConfiguration>& aPhysCoreConf)
 	{
 		std::unique_ptr<PhysicsCoreParams> physCore(new PhysicsCoreParams(aPhysCoreConf));
 
-		std::string MB_ID("MassBalance");
-
 		// Read configuration
-		PhysicsConfiguration::Component_sequence compSeq = aPhysConf->Component();
-		for (PhysicsConfiguration::Component_iterator it = compSeq.begin(); it != compSeq.end(); it++)
+		N_Configuration::ModelConfiguration::Component_sequence compSeq = aPhysConf->Component();
+		for (N_Configuration::ModelConfiguration::Component_iterator it = compSeq.begin(); it != compSeq.end(); it++)
 		{
 			if (!it->name()->compare("MassBalance"))
 			{ // doesn't work with ==
@@ -77,11 +80,6 @@ namespace N_Physics {
 			std::cerr << "Missing compulsory rheology component." << std::endl;
 			exit(EXIT_FAILURE);
 		}
-	}
-
-	PhysicsModel::~PhysicsModel()
-	{
-
 	}
 
 }

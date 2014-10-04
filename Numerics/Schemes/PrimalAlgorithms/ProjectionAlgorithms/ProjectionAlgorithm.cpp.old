@@ -1,0 +1,18 @@
+#include "ProjectionAlgorithm.hpp"
+
+#include "Mesh/Grid.hpp"
+
+namespace N_Mathematics {
+
+	ProjectionAlgorithm::ProjectionAlgorithm(const std::shared_ptr<Grid>& H)
+		: PrimalAlgorithm(H)
+	{
+
+	}
+
+	ProjectionAlgorithm::~ProjectionAlgorithm()
+	{
+
+	}
+
+}

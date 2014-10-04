@@ -1,0 +1,17 @@
+#include "DiffusionAlgorithm.hpp"
+
+#include "Mesh/Grid.hpp"
+
+namespace N_Mathematics {
+
+	DiffusionAlgorithm::DiffusionAlgorithm(const std::shared_ptr<Grid>& H)
+		: PrimalAlgorithm(H)
+	{
+
+	}
+
+	DiffusionAlgorithm::~DiffusionAlgorithm()
+	{
+
+	}
+}

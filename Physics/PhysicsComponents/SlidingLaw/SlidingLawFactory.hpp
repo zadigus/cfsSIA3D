@@ -3,16 +3,19 @@
 
 #include <memory>
 
+namespace N_Configuration {
+	class Component;
+}
+
 namespace N_Physics {
 
-	class Component;
 	class SlidingLaw;
 
 	class SlidingLawFactory
 	{
 	public:
 		// factory method
-		static SlidingLaw* make(Component* aSlidingLaw = nullptr);
+		static SlidingLaw* make(N_Configuration::Component* aSlidingLaw = nullptr);
 	};
 }
 #endif

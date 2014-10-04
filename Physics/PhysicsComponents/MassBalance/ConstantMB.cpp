@@ -1,11 +1,11 @@
 #include "ConstantMB.hpp"
-#include "PhysicsConfiguration.hpp"
+#include "Configuration/ModelConfiguration.hpp"
 #include "Numerics/Mesh/Grid.hpp"
 #include "PhysicsCoreParams.hpp"
 
 namespace N_Physics {
 
-	ConstantMB::ConstantMB(Component* aComponent, std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams)
+	ConstantMB::ConstantMB(N_Configuration::Component* aComponent, std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams)
 		: MassBalance(aComponent, aPhysCoreParams)
 		, _mb(new Grid(_parameters["grid"])) 
 	{

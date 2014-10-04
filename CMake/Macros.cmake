@@ -9,7 +9,7 @@ MACRO (XSD2CPPCLASS xsd_file)
 		${XERCES_INCLUDE_DIRS}
 	)
 	
-	SET(XSD_ARGS "cxx-tree" --std c++11 --hxx-suffix ".${HPP_SUFFIX}"  --cxx-suffix ".${CPP_SUFFIX}" --root-element-last)# --namespace-map ${namespacemap}) #"http://www.ruag.com/PhysicsConfiguration=N_Physics")
+	SET(XSD_ARGS "cxx-tree" --std c++11 --hxx-suffix ".${HPP_SUFFIX}"  --cxx-suffix ".${CPP_SUFFIX}" --root-element-last)
 	
 	FOREACH(arg  ${ARGN})
 		LIST(APPEND XSD_ARGS --namespace-map ${arg})

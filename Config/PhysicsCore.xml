@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--PhysicsCore xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation='PhysicsCoreConfiguration.xsd'-->
-<!--param:Parameter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-                 xsi:schemaLocation="http://www.ruag.com/Parameter Parameter.xsd" 
-                 xmlns:param="http://www.ruag.com/Parameter"--> 
 
 <p:PhysicsCore xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
             xsi:schemaLocation="http://www.ruag.com/PhysicsCoreConfiguration PhysicsCoreConfiguration.xsd" 

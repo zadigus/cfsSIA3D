@@ -1,0 +1,17 @@
+#include "ClimateAlgorithm.hpp"
+
+#include "Mesh/Grid.hpp"
+
+namespace N_Mathematics {
+
+	ClimateAlgorithm::ClimateAlgorithm(const std::shared_ptr<Grid>& H)
+		: PrimalAlgorithm(H)
+	{
+
+	}
+
+	ClimateAlgorithm::~ClimateAlgorithm()
+	{
+
+	}
+}

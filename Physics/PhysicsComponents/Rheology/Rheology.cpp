@@ -7,7 +7,7 @@
 
 namespace N_Physics {
 
-	Rheology::Rheology(Component* aComponent, std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams)
+	Rheology::Rheology(N_Configuration::Component* aComponent, std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams)
 		: PhysicsComponent(aComponent)
 		, _A(std::stod(_parameters["A"]))
 		, _n(std::stod(_parameters["n"]))

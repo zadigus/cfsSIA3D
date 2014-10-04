@@ -3,9 +3,12 @@
 
 #include <memory>
 
+namespace N_Configuration {
+	class Component;
+}
+
 namespace N_Physics {
 
-	class Component;
 	class Rheology;
 	struct PhysicsCoreParams;
 
@@ -13,7 +16,7 @@ namespace N_Physics {
 	{
 	public:
 		// factory method
-		static Rheology* make(Component* aRheology, std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams);
+		static Rheology* make(N_Configuration::Component* aRheology, std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams);
 	};
 }
 

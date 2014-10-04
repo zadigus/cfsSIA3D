@@ -4,13 +4,12 @@
 #include "SlidingLaw.hpp"
 
 class Grid;
-//class Component;
 
 namespace N_Physics {
 
 	class AltitudeSL : public SlidingLaw {
 	public:
-		AltitudeSL(Component* aComponent);
+		AltitudeSL(N_Configuration::Component* aComponent);
 		AltitudeSL();
 		virtual ~AltitudeSL();
 

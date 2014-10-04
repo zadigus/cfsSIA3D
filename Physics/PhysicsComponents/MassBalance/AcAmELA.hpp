@@ -11,7 +11,7 @@ namespace N_Physics {
 	class AcAmELA : public MassBalance {
 		public:
 			// Constructor / destructor
-			AcAmELA(Component* aComponent, std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams);
+			AcAmELA(N_Configuration::Component* aComponent, std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams);
 			virtual ~AcAmELA();
 
 			virtual const double operator()(const double x, const double y, const double b, const double H);

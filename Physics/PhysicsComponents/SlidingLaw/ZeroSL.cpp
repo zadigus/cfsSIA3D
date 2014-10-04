@@ -4,7 +4,7 @@
 #include <cmath>
 
 #include "Numerics/Mesh/Grid.hpp"
-#include "PhysicsConfiguration.hpp"
+#include "Configuration/ModelConfiguration.hpp"
 
 namespace N_Physics {
 

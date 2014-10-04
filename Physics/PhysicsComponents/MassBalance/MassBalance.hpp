@@ -13,7 +13,7 @@ namespace N_Physics { // TODO: add N_ in front of namespace
 	// Interface class for mass-balance data
 	class MassBalance : public PhysicsComponent {
 	public:
-		MassBalance(Component* aComponent, std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams);
+		MassBalance(N_Configuration::Component* aComponent, std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams);
 		MassBalance();
 		virtual ~MassBalance();
 

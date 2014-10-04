@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<m:Model
+						xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+            xsi:schemaLocation="http://www.ruag.com/ModelConfiguration ModelConfiguration.xsd" 
+            xmlns:m="http://www.ruag.com/ModelConfiguration"
+						xmlns:param="http://www.ruag.com/Parameter"> 
+
+<m:Component name="Diffusion"  type="SemiImplicit"/> <!-- add e.g. parameters for the linear system -->
+<m:Component name="Climate"    type="FullyImplicit"/> 
+<m:Component name="Projection" type="Heaviside"/> 
+
+</m:Model>

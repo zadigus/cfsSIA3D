@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<a:App
+						xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+            xsi:schemaLocation="http://www.ruag.com/AppConfiguration AppConfiguration.xsd" 
+            xmlns:a="http://www.ruag.com/AppConfiguration"
+						xmlns:param="http://www.ruag.com/Parameter"> 
+
+	<!-- TODO: allow these files to be written relative to some bin path -->
+						
+	<param:Parameter name="Physics">e:\cfsSIA3D-src\Config\Physics.xml</param:Parameter>
+	<param:Parameter name="PhysicsCore">e:\cfsSIA3D-src\Config\PhysicsCore.xml</param:Parameter>
+	<param:Parameter name="Maths">e:\cfsSIA3D-src\Config\Primal.xml</param:Parameter>
+	
+</a:App>

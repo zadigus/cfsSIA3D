@@ -3,9 +3,12 @@
 
 #include <memory>
 
+namespace N_Configuration {
+	class Component;
+}
+
 namespace N_Physics {
 	
-	class Component;
 	class MassBalance;
 	struct PhysicsCoreParams;
 
@@ -16,7 +19,7 @@ namespace N_Physics {
 		//~MassBalanceFactory();
 
 		// factory methods
-		static MassBalance* make(Component* aMassBalance = nullptr, std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams = std::unique_ptr<PhysicsCoreParams>(nullptr));
+		static MassBalance* make(N_Configuration::Component* aMassBalance = nullptr, std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams = std::unique_ptr<PhysicsCoreParams>(nullptr));
 
 		//protected:
 		//std::unique_ptr<PhysicsConfiguration> _PhysConf;

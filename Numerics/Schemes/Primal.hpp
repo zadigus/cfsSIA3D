@@ -3,17 +3,21 @@
 
 #include <memory>
 
-namespace Mathematics {
+namespace N_Configuration {
+	class ModelConfiguration;
+}
 
-	class DiffusionAlgorithm;
-	class ClimateAlgorithm;
-	class ProjectionAlgorithm;
+namespace N_Mathematics {
+
+	class PrimalAlgorithm;
+	//class ClimateAlgorithm;
+	//class ProjectionAlgorithm;
 
 	class Primal
 	{
 		public:
-			Primal();  // TODO: figure out what kind of parameters to feed this class with; set the various algorithms here (read what algo to use from the config)
-			~Primal(); 
+			static Primal& getInstance();
+			void init(std::unique_ptr<N_Configuration::ModelConfiguration>& aMathConf);
 
 			// General purpose
 			void Run(); 								// compute one whole evolution from time ti to time tf
@@ -22,16 +26,18 @@ namespace Mathematics {
 
 			// Primal algorithm
 			void Diffusion();						// solve the diffusion step
-			void Climate(); 	        // compute step dh/dt = B
+			void Climate(); 						// compute step dh/dt = B
 			void Projection();					// enforce H >= 0
 
 		private:
-			// TODO: include H?
+			Primal(); 
+			~Primal();
+			// TODO: include H? No, include Glacier
 
 			// Strategy pattern
-			std::unique_ptr<DiffusionAlgorithm>   _DiffusionAlgo;
-			std::unique_ptr<ClimateAlgorithm>       _ClimateAlgo;
-			std::unique_ptr<ProjectionAlgorithm> _ProjectionAlgo;
+			std::unique_ptr<PrimalAlgorithm>     _DiffusionAlgo;
+			std::unique_ptr<PrimalAlgorithm>       _ClimateAlgo;
+			std::unique_ptr<PrimalAlgorithm>    _ProjectionAlgo;
 	};
 
 }

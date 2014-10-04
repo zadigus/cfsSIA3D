@@ -1,25 +1,22 @@
 #ifndef PHYSICSCOMPONENT_H_
 #define PHYSICSCOMPONENT_H_
 
-//#include <vector>
 #include <memory>
 #include <string>
 #include <map>
 
 
-//class PhysicsCoreConfiguration;
-//#include "PhysicsConfiguration.hpp"
+namespace N_Configuration {
+	class Component;
+}
 
 namespace N_Physics {
-
-	class Component;
 
 	// Interface class for a general physical component
 	class PhysicsComponent {
 	public:
-		PhysicsComponent(Component* aComponent); // , std::unique_ptr<PhysicsCoreConfiguration>& aPhysCoreConf);
+		PhysicsComponent(N_Configuration::Component* aComponent);
 		PhysicsComponent();
-		//PhysicsComponent(PhysicsConfiguration::Component_const_iterator& aComponent/*std::shared_ptr<PhysicsConfiguration>& physConf, std::string compName*/ /*unsigned int N=0*/);
 		virtual ~PhysicsComponent();
 
 		// Setter // Getter
