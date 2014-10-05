@@ -3,15 +3,19 @@
 
 #include "PrimalAlgorithm.hpp"
 
+namespace N_Configuration {
+	class Component;
+}
+
 namespace N_Mathematics {
 
 	class SemiImplicitDiffusionAlgorithm : public PrimalAlgorithm
 	{
-	public:
-		SemiImplicitDiffusionAlgorithm(const std::shared_ptr<Grid>& H);
-		virtual ~SemiImplicitDiffusionAlgorithm();
+		public:
+			SemiImplicitDiffusionAlgorithm(N_Configuration::Component* aDiffusionAlgo, const std::shared_ptr<Grid>& H);
+			virtual ~SemiImplicitDiffusionAlgorithm();
 
-		virtual void Run() = 0;
+			virtual void Run();
 
 	};
 

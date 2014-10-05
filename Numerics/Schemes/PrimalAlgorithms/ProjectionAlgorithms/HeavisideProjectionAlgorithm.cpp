@@ -3,10 +3,12 @@
 #include "Numerics/Mesh/Grid.hpp"
 #include "Utility/Math.hpp"
 
+#include "Configuration/ModelConfiguration.hpp"
+
 namespace N_Mathematics {
 
-	HeavisideProjectionAlgorithm::HeavisideProjectionAlgorithm(const std::shared_ptr<Grid>& H)
-		: PrimalAlgorithm(H)
+	HeavisideProjectionAlgorithm::HeavisideProjectionAlgorithm(N_Configuration::Component* aProjectionAlgo, const std::shared_ptr<Grid>& H)
+		: PrimalAlgorithm(aProjectionAlgo, H)
 	{
 
 	}

@@ -3,12 +3,16 @@
 
 #include "PrimalAlgorithm.hpp"
 
+namespace N_Configuration {
+	class Component;
+}
+
 namespace N_Mathematics {
 
 	class FullyImplicitClimateAlgorithm : public PrimalAlgorithm
 	{
 	public:
-		FullyImplicitClimateAlgorithm(const std::shared_ptr<Grid>& H);
+		FullyImplicitClimateAlgorithm(N_Configuration::Component* aClimateAlgo, const std::shared_ptr<Grid>& H);
 		virtual ~FullyImplicitClimateAlgorithm();
 
 		virtual void Run();

@@ -3,12 +3,16 @@
 
 #include "PrimalAlgorithm.hpp"
 
+namespace N_Configuration {
+	class Component;
+}
+
 namespace N_Mathematics {
 
 	class HeavisideProjectionAlgorithm : public PrimalAlgorithm
 	{
 		public:
-			HeavisideProjectionAlgorithm(const std::shared_ptr<Grid>& H);
+			HeavisideProjectionAlgorithm(N_Configuration::Component* aProjectionAlgo, const std::shared_ptr<Grid>& H);
 			virtual ~HeavisideProjectionAlgorithm();
 
 			virtual void Run();
