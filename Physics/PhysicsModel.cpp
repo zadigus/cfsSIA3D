@@ -18,9 +18,12 @@
 
 namespace N_Physics {
 
+	//PhysicsModel* PhysicsModel::_instance = nullptr;
+
 	PhysicsModel& PhysicsModel::getInstance()
 	{
 		static PhysicsModel instance;
+		//_instance = &instance;
 		return instance;
 	}
 
@@ -36,6 +39,20 @@ namespace N_Physics {
 	{
 
 	}
+
+	/*PhysicsModel::PhysicsModel(const PhysicsModel& rhs)
+	{
+		_instance = rhs._instance;
+	}
+
+	PhysicsModel& PhysicsModel::operator= (const PhysicsModel& rhs)
+	{
+		if (this != &rhs)
+		{
+			_instance = rhs._instance;
+		}
+		return *this;
+	}*/
 
 	void PhysicsModel::init(std::unique_ptr<N_Configuration::ModelConfiguration>& aPhysConf, std::unique_ptr<N_Configuration::PhysicsCoreConfiguration>& aPhysCoreConf)
 	{

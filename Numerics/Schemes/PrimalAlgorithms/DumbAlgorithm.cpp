@@ -1,11 +1,12 @@
 #include "DumbAlgorithm.hpp"
 
-#include "Numerics/Mesh/Grid.hpp"
+//#include "Numerics/Mesh/Grid.hpp"
+#include "Glacier/Glacier.hpp"
 
 namespace N_Mathematics {
 
-	DumbAlgorithm::DumbAlgorithm(const std::shared_ptr<Grid>& H)
-		: PrimalAlgorithm(nullptr, H)
+	DumbAlgorithm::DumbAlgorithm(std::shared_ptr<N_Glacier::Glacier>& aGlacier)
+		: PrimalAlgorithm(nullptr, aGlacier)
 	{
 		
 	}

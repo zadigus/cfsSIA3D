@@ -4,10 +4,14 @@
 #include <memory>
 #include "PrimalAlgorithm.hpp"
 
-class Grid;
+//class Grid;
 
 namespace N_Configuration {
 	class Component;
+}
+
+namespace N_Glacier {
+	class Glacier;
 }
 
 namespace N_Mathematics {
@@ -15,7 +19,7 @@ namespace N_Mathematics {
 	class DumbAlgorithm : public PrimalAlgorithm
 	{
 		public:
-			DumbAlgorithm(const std::shared_ptr<Grid>& H);
+			DumbAlgorithm(std::shared_ptr<N_Glacier::Glacier>& aGlacier);
 			virtual ~DumbAlgorithm();
 			virtual void Run(); 
 	};

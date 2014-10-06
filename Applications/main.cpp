@@ -7,7 +7,7 @@
 #include "Physics/PhysicsModel.hpp"
 #include <memory>
 
-int main(int argc, char* argv[])
+int main(int argc, char* argv[]) // TODO: I need a front-end and a back-end
 {
 	if (argc != 2)
 	{
@@ -46,6 +46,9 @@ int main(int argc, char* argv[])
 		}
 
 		N_Physics::PhysicsModel::getInstance().init(physConf, physCoreConf);
+
+		//std::shared_ptr<N_Physics::PhysicsModel> pm(&N_Physics::PhysicsModel::getInstance()); // that doesn't work because the dtor is private
+
 	}
 	catch (const xml_schema::exception& e)
 	{

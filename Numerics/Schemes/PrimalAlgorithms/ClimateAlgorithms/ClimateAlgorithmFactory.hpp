@@ -3,10 +3,14 @@
 
 #include <memory>
 
-class Grid;
+//class Grid;
 
 namespace N_Configuration {
 	class Component;
+}
+
+namespace N_Glacier {
+	class Glacier;
 }
 
 namespace N_Mathematics {
@@ -16,7 +20,7 @@ namespace N_Mathematics {
 	class ClimateAlgorithmFactory 
 	{
 		public:
-			static PrimalAlgorithm* make(const std::shared_ptr<Grid>& H, N_Configuration::Component* aClimateAlgo = nullptr);
+			static PrimalAlgorithm* make(std::shared_ptr<N_Glacier::Glacier>& aGlacier, N_Configuration::Component* aClimateAlgo = nullptr);
 	};
 
 }

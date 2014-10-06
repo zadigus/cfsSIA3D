@@ -9,13 +9,19 @@
 #include "PrimalAlgorithms/DiffusionAlgorithms/DiffusionAlgorithmFactory.hpp"
 #include "PrimalAlgorithms/ProjectionAlgorithms/ProjectionAlgorithmFactory.hpp"
 
+// Glacier
+#include "Glacier/Glacier.hpp"
+
 #include <iostream>
 
 namespace N_Mathematics {
 
-	Primal& Primal::getInstance()
+	//Primal* Primal::_instance = nullptr;
+
+	Primal& Primal::getInstance() 
 	{
 		static Primal instance;
+		//_instance = &instance;
 		return instance;
 	}
 
@@ -32,24 +38,37 @@ namespace N_Mathematics {
 
 	}
 
-	void Primal::init(std::unique_ptr<N_Configuration::ModelConfiguration>& aMathConf)
+	/*Primal::Primal(const Primal& rhs)
 	{
-		// TODO: configure the Diffusion, Climate, and Projection algorithms with FACTORIES that read each component of aMathConf
+		_instance = rhs._instance;
+	}
+
+	Primal& Primal::operator= (const Primal& rhs)
+	{
+		if (this != &rhs)
+		{
+			_instance = rhs._instance;
+		}
+		return *this;
+	}*/
+
+	void Primal::init(std::unique_ptr<N_Configuration::ModelConfiguration>& aMathConf, std::shared_ptr<N_Glacier::Glacier>& aGlacier)
+	{
 		N_Configuration::ModelConfiguration::Component_sequence compSeq(aMathConf->Component());
 		for (N_Configuration::ModelConfiguration::Component_iterator it = compSeq.begin(); it != compSeq.end(); ++it) // TODO: use a const_iterator
 		{
 			std::cout << "Math::Component " << it->name() << std::endl;
 			if (!std::strcmp(it->name()->c_str(), "Diffusion"))
 			{
-				_DiffusionAlgo.reset(DiffusionAlgorithmFactory::make(N_Glacier::Glacier::getInstance().H(), &(*it))); // TODO: get _H from Glacier Singleton which should return a reference to the std::shared_ptr<Grid>
+				_DiffusionAlgo.reset(DiffusionAlgorithmFactory::make(aGlacier, &(*it))); 
 			}
 			else if (!std::strcmp(it->name()->c_str(), "Climate"))
 			{
-				_ClimateAlgo.reset(ClimateAlgorithmFactory::make(N_Glacier::Glacier::getInstance().H(), &(*it)));
+				_ClimateAlgo.reset(ClimateAlgorithmFactory::make(aGlacier, &(*it)));
 			}
 			else if (!std::strcmp(it->name()->c_str(), "Projection"))
 			{
-				_ProjectionAlgo.reset(ProjectionAlgorithmFactory::make(N_Glacier::Glacier::getInstance().H(), &(*it)));
+				_ProjectionAlgo.reset(ProjectionAlgorithmFactory::make(aGlacier, &(*it)));
 			}
 			else
 			{
@@ -60,15 +79,15 @@ namespace N_Mathematics {
 		// Check configuration
 		if (!_DiffusionAlgo)
 		{
-			_DiffusionAlgo.reset(DiffusionAlgorithmFactory::make(N_Glacier::Glacier::getInstance().H()));
+			_DiffusionAlgo.reset(DiffusionAlgorithmFactory::make(aGlacier));
 		}
 		if (!_ClimateAlgo)
 		{
-			_ClimateAlgo.reset(ClimateAlgorithmFactory::make(N_Glacier::Glacier::getInstance().H()));
+			_ClimateAlgo.reset(ClimateAlgorithmFactory::make(aGlacier));
 		}
 		if (!_ProjectionAlgo)
 		{
-			_ProjectionAlgo.reset(ProjectionAlgorithmFactory::make(N_Glacier::Glacier::getInstance().H()));
+			_ProjectionAlgo.reset(ProjectionAlgorithmFactory::make(aGlacier));
 		}
 	}
 

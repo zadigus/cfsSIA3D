@@ -7,17 +7,19 @@ namespace N_Configuration {
 	class ModelConfiguration;
 }
 
+namespace N_Glacier {
+	class Glacier;
+}
+
 namespace N_Mathematics {
 
 	class PrimalAlgorithm;
-	//class ClimateAlgorithm;
-	//class ProjectionAlgorithm;
 
 	class Primal
 	{
 		public:
-			static Primal& getInstance();
-			void init(std::unique_ptr<N_Configuration::ModelConfiguration>& aMathConf);
+			static Primal& getInstance(); 
+			void init(std::unique_ptr<N_Configuration::ModelConfiguration>& aMathConf, std::shared_ptr<N_Glacier::Glacier>& aGlacier);
 
 			// General purpose
 			void Run(); 								// compute one whole evolution from time ti to time tf
@@ -30,9 +32,15 @@ namespace N_Mathematics {
 			void Projection();					// enforce H >= 0
 
 		private:
+			//static Primal* _instance;
+
+			// Ctor/Dtor
 			Primal(); 
 			~Primal();
-			// TODO: include H? No, include Glacier
+
+			// Copy ctor / assignment operator
+			/*Primal(const Primal& rhs);
+			Primal& operator=(const Primal& rhs);*/
 
 			// Strategy pattern
 			std::unique_ptr<PrimalAlgorithm>     _DiffusionAlgo;

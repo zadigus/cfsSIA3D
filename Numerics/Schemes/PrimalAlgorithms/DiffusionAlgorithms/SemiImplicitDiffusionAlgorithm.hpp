@@ -7,12 +7,16 @@ namespace N_Configuration {
 	class Component;
 }
 
+namespace N_Glacier {
+	class Glacier;
+}
+
 namespace N_Mathematics {
 
 	class SemiImplicitDiffusionAlgorithm : public PrimalAlgorithm
 	{
 		public:
-			SemiImplicitDiffusionAlgorithm(N_Configuration::Component* aDiffusionAlgo, const std::shared_ptr<Grid>& H);
+			SemiImplicitDiffusionAlgorithm(N_Configuration::Component* aDiffusionAlgo, std::shared_ptr<N_Glacier::Glacier>& aGlacier);
 			virtual ~SemiImplicitDiffusionAlgorithm();
 
 			virtual void Run();

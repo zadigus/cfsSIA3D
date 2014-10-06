@@ -1,12 +1,14 @@
 #include "FullyImplicitClimateAlgorithm.hpp"
 
 #include "Configuration/ModelConfiguration.hpp"
-#include "Numerics/Mesh/Grid.hpp"
+//#include "Numerics/Mesh/Grid.hpp"
+
+#include "Glacier/Glacier.hpp"
 
 namespace N_Mathematics {
 
-	FullyImplicitClimateAlgorithm::FullyImplicitClimateAlgorithm(N_Configuration::Component* aClimateAlgo, const std::shared_ptr<Grid>& H)
-		: PrimalAlgorithm(aClimateAlgo, H)
+	FullyImplicitClimateAlgorithm::FullyImplicitClimateAlgorithm(N_Configuration::Component* aClimateAlgo, std::shared_ptr<N_Glacier::Glacier>& aGlacier)
+		: PrimalAlgorithm(aClimateAlgo, aGlacier)
 	{
 
 	}
@@ -18,7 +20,7 @@ namespace N_Mathematics {
 
 	void FullyImplicitClimateAlgorithm::Run()
 	{
-		Grid H(*(_H.get()));
+		//Grid H(*(_H.get()));
 	}
 
 }

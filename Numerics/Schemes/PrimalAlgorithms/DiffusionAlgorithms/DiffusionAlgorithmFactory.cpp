@@ -5,13 +5,14 @@
 
 #include "Configuration/ModelConfiguration.hpp"
 
-#include "Numerics/Mesh/Grid.hpp"
+//#include "Numerics/Mesh/Grid.hpp"
+#include "Glacier/Glacier.hpp"
 
 #include <iostream>
 
 namespace N_Mathematics {
 
-	PrimalAlgorithm* DiffusionAlgorithmFactory::make(const std::shared_ptr<Grid>& H, N_Configuration::Component* aDiffusionAlgo)
+	PrimalAlgorithm* DiffusionAlgorithmFactory::make(std::shared_ptr<N_Glacier::Glacier>& aGlacier, N_Configuration::Component* aDiffusionAlgo)
 	{
 		if (aDiffusionAlgo)
 		{

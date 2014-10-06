@@ -25,7 +25,12 @@ namespace N_Physics {
 		PhysicsModel();
 		~PhysicsModel();
 
+		//PhysicsModel(const PhysicsModel& rhs);
+		//PhysicsModel& operator=(const PhysicsModel& rhs);
+		
 	private:
+		//static PhysicsModel* _instance;
+	
 		std::shared_ptr<MassBalance> _MassBalance;
 		std::shared_ptr<Rheology>    _Rheology;
 		std::shared_ptr<SlidingLaw>  _SlidingLaw;
