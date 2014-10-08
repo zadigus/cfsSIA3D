@@ -7,8 +7,8 @@
 
 namespace N_Mathematics {
 
-	HeavisideProjectionAlgorithm::HeavisideProjectionAlgorithm(N_Configuration::Component* aProjectionAlgo, std::shared_ptr<N_Glacier::Glacier>& aGlacier)
-		: PrimalAlgorithm(aProjectionAlgo, aGlacier)
+	HeavisideProjectionAlgorithm::HeavisideProjectionAlgorithm(N_Configuration::Component* aProjectionAlgo) //, std::shared_ptr<N_Glacier::Glacier>& aGlacier)
+		: PrimalAlgorithm(aProjectionAlgo) //, aGlacier)
 	{
 
 	}

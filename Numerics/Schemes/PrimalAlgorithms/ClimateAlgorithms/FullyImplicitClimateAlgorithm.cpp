@@ -7,8 +7,8 @@
 
 namespace N_Mathematics {
 
-	FullyImplicitClimateAlgorithm::FullyImplicitClimateAlgorithm(N_Configuration::Component* aClimateAlgo, std::shared_ptr<N_Glacier::Glacier>& aGlacier)
-		: PrimalAlgorithm(aClimateAlgo, aGlacier)
+	FullyImplicitClimateAlgorithm::FullyImplicitClimateAlgorithm(N_Configuration::Component* aClimateAlgo/*, std::shared_ptr<N_Glacier::Glacier>& aGlacier*/)
+		: PrimalAlgorithm(aClimateAlgo/*, aGlacier*/)
 	{
 
 	}
