@@ -9,5 +9,5 @@ INCLUDE_DIRECTORIES(
 
 FILE(GLOB src RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "*.cpp" "*.hpp")
 
-ADD_EXECUTABLE(cfsSIA3D ${src})
-TARGET_LINK_LIBRARIES(cfsSIA3D Mesh Utility Physics)
+ADD_EXECUTABLE(backend ${src})
+TARGET_LINK_LIBRARIES(backend Mesh Utility Glacier)

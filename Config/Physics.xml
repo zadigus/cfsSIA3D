@@ -25,4 +25,9 @@
 	<param:Parameter name="A">0.1</param:Parameter> <!-- rate factor in bar^{-1}*a^{-n} -->
 </m:Component>
 
+<m:Component name="Geometry">
+	<param:Parameter name="bed">e:\cfsSIA3D-src\data\muragl\bed.grid</param:Parameter> 
+	<param:Parameter name="surface">e:\cfsSIA3D-src\data\muragl\surfinit.grid</param:Parameter> 
+</m:Component>
+
 </m:Model>

@@ -4,10 +4,12 @@
 #include "Configuration/AppConfiguration.hpp"
 #include "Configuration/ModelConfiguration.hpp"
 #include "Configuration/PhysicsCoreConfiguration.hpp"
-#include "Physics/PhysicsModel.hpp"
+#include "Glacier/Glacier.hpp"
+#include "Glacier/GlacierComponents/Geometry/Geometry.hpp"
+#include "Numerics/Mesh/Grid.hpp"
 #include <memory>
 
-int main(int argc, char* argv[]) // TODO: I need a front-end and a back-end
+int main(int argc, char* argv[]) // TODO: I need a front-end and a back-end; use decorator pattern to decorate the backend with the frontend
 {
 	if (argc != 2)
 	{
@@ -15,7 +17,7 @@ int main(int argc, char* argv[]) // TODO: I need a front-end and a back-end
 		return 1;
 	}
 
-	std::cout << "Hello World!" << std::endl;
+	/*std::cout << "Hello World!" << std::endl;
 
 	Grid g1, g2(10, 10, 1.0, 1.0);
 
@@ -23,7 +25,7 @@ int main(int argc, char* argv[]) // TODO: I need a front-end and a back-end
 	std::cout << "size = " << v.size() << std::endl;
 
 	v.resize(2);
-	std::cout << "size = " << v.size() << std::endl;
+	std::cout << "size = " << v.size() << std::endl;*/
 
 	try
 	{
@@ -36,7 +38,7 @@ int main(int argc, char* argv[]) // TODO: I need a front-end and a back-end
 		N_Configuration::AppConfiguration::Parameter_sequence fileNames(appConf->Parameter());
 		for (N_Configuration::AppConfiguration::Parameter_const_iterator it = fileNames.begin(); it != fileNames.end(); ++it)
 		{
-			std::cout << it->name() << ", " << *it << std::endl;
+			//std::cout << it->name() << ", " << *it << std::endl;
 			if (!std::strcmp(it->name().c_str(), "Physics"))
 				physConf = N_Configuration::Model(*it);
 			if (!std::strcmp(it->name().c_str(), "PhysicsCore"))
@@ -45,9 +47,11 @@ int main(int argc, char* argv[]) // TODO: I need a front-end and a back-end
 				mathConf = N_Configuration::Model(*it);
 		}
 
-		N_Physics::PhysicsModel::getInstance().init(physConf, physCoreConf);
-
-		//std::shared_ptr<N_Physics::PhysicsModel> pm(&N_Physics::PhysicsModel::getInstance()); // that doesn't work because the dtor is private
+		N_Glacier::Glacier& g = N_Glacier::Glacier::getInstance();
+		g.init(physConf, physCoreConf);
+		//g.G()->print();
+		//g.H()->Set(10);
+		//g.G()->print();
 
 	}
 	catch (const xml_schema::exception& e)

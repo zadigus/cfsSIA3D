@@ -1,0 +1,47 @@
+\documentclass[a4paper, 12pt]{article}
+
+\usepackage{color, graphicx}
+\usepackage{vmargin}
+\setmarginsrb{1cm}{1.5cm}{2.5cm}{0.5cm}{0.25cm}{0.5cm}{0cm}{.75cm}
+
+\title{Halfar's glacier}
+
+\begin{document}
+\maketitle
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{HalfarConvergence-semi-1.png}
+\caption{Discrepancy between the exact solution and the computed estimation of the Halfar glacier's surface topography in the semi-implicit forward scheme over a time frame of $1~\mathrm{a}$ with varying time and space steps. }
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{HalfarConvergence-semi-10.png}
+\caption{Discrepancy between the exact solution and the computed estimation of the Halfar glacier's surface topography in the semi-implicit forward scheme over a time frame of $10~\mathrm{a}$ with varying time and space steps. }
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{HalfarConvergence-fully-1.png}
+\caption{Discrepancy between the exact solution and the computed estimation of the Halfar glacier's surface topography in the fully-implicit forward scheme over a time frame of $1~\mathrm{a}$ with varying time and space steps. }
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{HalfarConvergence-fully-10.png}
+\caption{Discrepancy between the exact solution and the computed estimation of the Halfar glacier's surface topography in the fully-implicit forward scheme over a time frame of $10~\mathrm{a}$ with varying time and space steps. }
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{profiles-semi.pdf}
+\caption{Glacier profiles over both time frames ($1$ and $10~\mathrm{a}$) in the semi-implicit forward scheme with various time and space steps. }
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{profiles-fully.pdf}
+\caption{Glacier profiles over both time frames ($1$ and $10~\mathrm{a}$) in the fully-implicit forward scheme with various time and space steps. }
+\end{figure}
+
+\end{document}

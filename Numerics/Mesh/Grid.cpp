@@ -26,6 +26,7 @@ Grid::Grid(std::string fileName)
 
 	if (ist)
 	{
+		std::cout << "Opening file " << fileName << std::endl; // TODO: log that in a file
 		int bufferSize(512);
 		
 		// Read grid header
@@ -53,9 +54,9 @@ Grid::Grid(std::string fileName)
 		_Data.Reset(Nx(), Ny());
 
 		// Read data
-		for (unsigned int j(Ny() - 1); j >= 0; j--)
+		for (int j(Ny() - 1); j >= 0; --j) // doesn't work with unsigned int because 0 - 1 = -1 is not defined ...
 		{
-			for (unsigned int i(0); i < Nx(); i++)
+			for (int i(0); i < Nx(); ++i)
 			{
 				ist >> _Data(i, j);
 			}
@@ -74,7 +75,7 @@ Grid::Grid(std::string fileName)
 Grid::~Grid()
 //==============================================================================
 {
-
+	//std::cout << "Grid::DTOR" << std::endl;
 }
 
 //==============================================================================
@@ -91,7 +92,9 @@ Grid::Grid(const Grid & g) // a copy constructor creates a new object from an ol
 Grid& Grid::operator=(const Grid& g) // an assignment operator overwrites an existing object
 //==============================================================================
 {
-	assert(g._Coords == _Coords);
+	//assert(g._Coords == _Coords);
+	_Coords = g._Coords;
+	_NoData = g._NoData;
 	_Data = g._Data;
 	return *this;
 }

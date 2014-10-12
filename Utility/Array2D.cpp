@@ -27,8 +27,11 @@ Array2D::Array2D(const Array2D& right) // produce a new object
 
 Array2D& Array2D::operator=(const Array2D& right) // set an existing object
 {
-	assert(_Nx == right._Nx);
-	assert(_Ny == right._Ny);
+	//assert(_Nx == right._Nx);
+	//assert(_Ny == right._Ny);
+
+	_Nx = right._Nx;
+	_Ny = right._Ny;
 
 	_Data.reset(new double[_Nx*_Ny]);
 	double* source(right._Data.get());

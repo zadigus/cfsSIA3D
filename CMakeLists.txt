@@ -14,7 +14,7 @@ INCLUDE(Macros)
 #MESSAGE("Found Epetra = ${Trilinos_FOUND}, ${Trilinos_INCLUDE_DIRS}, ${Epetra_LIBRARIES}, ${Belos_LIBRARIES}")
 
 ADD_SUBDIRECTORY(Applications)
-ADD_SUBDIRECTORY(Physics)
+ADD_SUBDIRECTORY(Glacier)
 ADD_SUBDIRECTORY(Numerics)
 ADD_SUBDIRECTORY(Utility)
 ADD_SUBDIRECTORY(Configuration)

@@ -20,6 +20,9 @@ class Grid{
 		Grid(const Grid &);
 		Grid& operator=(const Grid &);
 
+		//void Set(double dx) { _Coords.Dx = dx; }
+
+
 		// Getters
 		unsigned int Nx() const		{ return _Coords.Nx; }
 		unsigned int Ny() const		{ return _Coords.Ny; }
