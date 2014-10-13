@@ -5,7 +5,7 @@
 
 namespace N_Glacier {
 
-	GradELA::GradELA(std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams, N_Configuration::Component* aComponent)
+	GradELA::GradELA(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams, N_Configuration::Component* aComponent)
 		: MassBalance(aPhysCoreParams, aComponent)
 		, _ELA(_parameters.find("ELA") != _parameters.end() ? std::stod(_parameters["ELA"]) : 0)
 		, _m1(_parameters.find("m1") != _parameters.end() ? std::stod(_parameters["m1"]) : 0)

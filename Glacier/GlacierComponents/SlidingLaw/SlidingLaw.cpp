@@ -46,9 +46,9 @@ namespace N_Glacier {
 
 	void SlidingLaw::Stagger(unsigned int n)
 	{ // n is Glen's exponent
-		for (unsigned int i = 1; i < _sl->Nx(); i++)
-		for (unsigned int j = 1; j < _sl->Ny(); j++) // convert to consistent units and project onto staggered grid
-			(*_sl)(i, j) = (pow((*_sc)(i, j)*1e-5, n) + pow((*_sc)(i - 1, j)*1e-5, n) + pow((*_sc)(i, j - 1)*1e-5, n) + pow((*_sc)(i - 1, j - 1)*1e-5, n)) / 4.;
+		for (unsigned int i = 1; i < _sl->Nx(); ++i)
+			for (unsigned int j = 1; j < _sl->Ny(); ++j) // convert to consistent units and project onto staggered grid
+				(*_sl)(i, j) = (pow((*_sc)(i, j)*1e-5, n) + pow((*_sc)(i - 1, j)*1e-5, n) + pow((*_sc)(i, j - 1)*1e-5, n) + pow((*_sc)(i - 1, j - 1)*1e-5, n)) / 4.;
 	}
 
 	// Access to class members

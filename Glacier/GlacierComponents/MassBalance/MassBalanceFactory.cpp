@@ -12,7 +12,7 @@
 
 namespace N_Glacier {
 
-	MassBalance* MassBalanceFactory::make(std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams, N_Configuration::Component* aMassBalance)
+	MassBalance* MassBalanceFactory::make(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams, N_Configuration::Component* aMassBalance)
 	{ // TODO: print a notification about the chosen massbalance type; add general PhysicalComponent::_name and print() members like with packages
 		if (aMassBalance && aPhysCoreParams)
 		{

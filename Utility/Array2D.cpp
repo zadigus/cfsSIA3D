@@ -64,7 +64,7 @@ Array2D& Array2D::operator+=(const Array2D& right)
 {
 	assert(right._Nx == _Nx);
 	assert(right._Ny == _Ny);
-	for (int i(0); i < _Nx*_Ny; i++)
+	for (int i(0); i < _Nx*_Ny; ++i)
 		_Data[i] += right._Data[i];
 	return *this;
 }
@@ -73,14 +73,14 @@ Array2D& Array2D::operator-=(const Array2D& right)
 {
 	assert(right._Nx == _Nx);
 	assert(right._Ny == _Ny);
-	for (int i(0); i < _Nx*_Ny; i++)
+	for (int i(0); i < _Nx*_Ny; ++i)
 		_Data[i] -= right._Data[i];
 	return *this;
 }
 
 Array2D& Array2D::operator*=(double c)
 {
-	for (int i(0); i < _Nx*_Ny; i++)
+	for (int i(0); i < _Nx*_Ny; ++i)
 		_Data[i] *= c;
 	return *this;
 }

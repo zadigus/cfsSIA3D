@@ -13,7 +13,7 @@ namespace N_Glacier {
 
 	class Rheology : public GlacierComponent {
 	public:
-		Rheology(std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams, N_Configuration::Component* aComponent = nullptr);
+		Rheology(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams, N_Configuration::Component* aComponent = nullptr);
 		virtual ~Rheology();
 
 		// Setter

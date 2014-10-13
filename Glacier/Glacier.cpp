@@ -21,12 +21,19 @@
 
 namespace N_Glacier {
 
-	//Glacier* Glacier::_instance = nullptr;
-
-	Glacier& Glacier::getInstance()
+	/*Glacier& Glacier::getInstance() 
 	{
 		static Glacier instance;
-		//_instance = &instance;
+		return instance;
+	}*/
+
+	std::shared_ptr<Glacier>& Glacier::getInstance()
+	{
+		static std::shared_ptr<Glacier> instance = nullptr;
+		if (!instance)
+		{
+			instance.reset(new Glacier);
+		}
 		return instance;
 	}
 
@@ -44,21 +51,7 @@ namespace N_Glacier {
 
 	}
 
-	/*Glacier::Glacier(const Glacier& rhs)
-	{
-		_instance = rhs._instance;
-	}
-
-	Glacier& Glacier::operator= (const Glacier& rhs)
-	{
-		if (this != &rhs)
-		{
-			_instance = rhs._instance;
-		}
-		return *this;
-	}*/
-
-	void Glacier::init(std::unique_ptr<N_Configuration::ModelConfiguration>& aPhysConf, std::unique_ptr<N_Configuration::PhysicsCoreConfiguration>& aPhysCoreConf)
+	void Glacier::init(const std::unique_ptr<N_Configuration::ModelConfiguration>& aPhysConf, const std::unique_ptr<N_Configuration::PhysicsCoreConfiguration>& aPhysCoreConf)
 	{
 		std::unique_ptr<PhysicsCoreParams> physCore(new PhysicsCoreParams(aPhysCoreConf));
 
@@ -82,7 +75,6 @@ namespace N_Glacier {
 			{
 				_Geometry.reset(GeometryFactory::make(&(*it)));
 			}
-
 			else
 			{
 				std::cerr << "Unknown component " << it->name()->c_str() << "." << std::endl;
@@ -92,13 +84,10 @@ namespace N_Glacier {
 		// Check configuration
 		if (!_MassBalance)
 		{
-			//std::cout << "Setting MassBalance to zero." << std::endl;
-			//_MassBalance.reset(new ZeroMB);
 			_MassBalance.reset(MassBalanceFactory::make());
 		}
 		if (!_SlidingLaw)
 		{
-			//std::cout << "Setting SlidingLaw to zero." << std::endl;
 			_SlidingLaw.reset(SlidingLawFactory::make());
 		}
 		if (!_Rheology)
@@ -123,9 +112,18 @@ namespace N_Glacier {
 		return _Geometry->H();
 	}
 
-	//std::shared_ptr<Grid> Glacier::s()
-	//{
-	//	return _Geometry->s();
-	//}
-
 }
+
+/*Glacier::Glacier(const Glacier& rhs)
+{
+_instance = rhs._instance;
+}
+
+Glacier& Glacier::operator= (const Glacier& rhs)
+{
+if (this != &rhs)
+{
+_instance = rhs._instance;
+}
+return *this;
+}*/

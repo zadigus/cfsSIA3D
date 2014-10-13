@@ -13,8 +13,7 @@ namespace N_Glacier {
 	// Interface class for mass-balance data
 	class MassBalance : public GlacierComponent {
 	public:
-		MassBalance(std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams, N_Configuration::Component* aComponent = nullptr);
-		//MassBalance();
+		MassBalance(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams, N_Configuration::Component* aComponent = nullptr);
 		virtual ~MassBalance();
 
 		// Routines to be interfaced

@@ -12,7 +12,7 @@ namespace N_Glacier {
 	class ConstantMB : public MassBalance {
 	public:
 		// Constructor / destructor
-		ConstantMB(std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams, N_Configuration::Component* aComponent = nullptr);
+		ConstantMB(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams, N_Configuration::Component* aComponent = nullptr);
 		virtual ~ConstantMB();
 
 		const double operator()(const double x, const double y, const double b, const double H);

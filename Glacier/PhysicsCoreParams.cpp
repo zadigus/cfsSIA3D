@@ -4,10 +4,10 @@
 
 namespace N_Glacier {
 
-	PhysicsCoreParams::PhysicsCoreParams(std::unique_ptr<N_Configuration::PhysicsCoreConfiguration>& aPhysicsCoreConf)
+	PhysicsCoreParams::PhysicsCoreParams(const std::unique_ptr<N_Configuration::PhysicsCoreConfiguration>& aPhysicsCoreConf)
 	{
 		N_Configuration::PhysicsCoreConfiguration::Parameter_sequence paramSeq = aPhysicsCoreConf->Parameter();
-		for (N_Configuration::PhysicsCoreConfiguration::Parameter_const_iterator it = paramSeq.begin(); it != paramSeq.end(); it++)
+		for (N_Configuration::PhysicsCoreConfiguration::Parameter_const_iterator it = paramSeq.begin(); it != paramSeq.end(); ++it)
 		{
 			_parameters.emplace(it->name(), (*it));
 		}

@@ -178,9 +178,9 @@ std::ostream& operator<<(std::ostream& ost, Grid& g)
 
 	ost.precision(4);
 	double tmp(0.);
-	for (unsigned int j(g.Ny() - 1); j >= 0; j--)
+	for (int j(g.Ny() - 1); j >= 0; --j) // cannot use unsigned int here because -1 is not defined
 	{
-		for (unsigned int i(0); i<g.Nx(); i++)
+		for (int i(0); i<g.Nx(); ++i)
 		{ 
 			tmp = g(i, j); assert(!std::isnan(tmp));
 			ost << std::fixed << std::setw(10) << tmp << " "; // Forgetting about formatting makes this operation faster
@@ -221,7 +221,7 @@ const double Grid::operator()(const double x, const double y)
 	// determine the farthest point from w (linear interpolation on a plane requires only 3 vectors)
 	double tmp(0), min(std::numeric_limits<double>::max()), max(0), minVal(0);
 	std::vector<std::vector<double>>::iterator erase_pos;
-	for (std::vector<std::vector<double>>::iterator it = bounds.begin(); it != bounds.end(); it++)
+	for (std::vector<std::vector<double>>::iterator it = bounds.begin(); it != bounds.end(); ++it)
 	{
 		tmp = N_MathUtils::EuclideanDistance(*it, w, 2);
 		if (tmp > max) // find element with maximal distance to the considered point w
@@ -263,9 +263,9 @@ void Grid::XYZ(std::string fileName){
 	
 	if (ofs)
 	{
-		for (unsigned int i(0); i < Nx(); i++)
+		for (unsigned int i(0); i < Nx(); ++i)
 		{
-			for (unsigned int j(0); j < Ny(); j++)
+			for (unsigned int j(0); j < Ny(); ++j)
 			{
 				ofs << X(i) << "\t" << Y(j) << "\t" << std::setprecision(4) << (*this)(i, j) << std::endl;
 			}
@@ -284,8 +284,8 @@ void Grid::XYZ(std::string fileName){
 double Grid::Max() {
 //==============================================================================
 	double m(_Data(0, 0)), tmp(0.);
-	for (unsigned int k(0); k<Nx(); k++) {
-		for (unsigned int j(0); j<Ny(); j++) {
+	for (unsigned int k(0); k<Nx(); ++k) {
+		for (unsigned int j(0); j<Ny(); ++j) {
 			tmp = _Data(k, j);
 			if (tmp > m) m = tmp;
 		}
@@ -297,8 +297,8 @@ double Grid::Max() {
 double Grid::Min() {
 //==============================================================================
 	double m(_Data(0, 0)), tmp(0.);
-	for (unsigned int k(0); k<Nx(); k++) {
-		for (unsigned int j(0); j<Ny(); j++) {
+	for (unsigned int k(0); k<Nx(); ++k) {
+		for (unsigned int j(0); j<Ny(); ++j) {
 			tmp = _Data(k, j);
 			if (tmp < m) m = tmp;
 		}
@@ -325,9 +325,9 @@ void Grid::Refine(double rx, double ry)
 		y = 0.0; j = 0;
 		while (y < Ymax) {
 			(*this)(i, j) = tmp(x, y);
-			y += Dy(); j++;
+			y += Dy(); ++j;
 		}
-		x += Dx(); i++;
+		x += Dx(); ++i;
 	}
 }
 

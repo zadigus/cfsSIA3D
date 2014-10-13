@@ -6,7 +6,7 @@
 
 namespace N_Glacier {
 
-	Rheology* RheologyFactory::make(std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams, N_Configuration::Component* aRheology)
+	Rheology* RheologyFactory::make(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams, N_Configuration::Component* aRheology)
 	{
 		return new Rheology(aPhysCoreParams, aRheology);
 	}

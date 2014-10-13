@@ -16,7 +16,7 @@ namespace N_Glacier {
 	{
 		public:
 			// factory methods
-			static MassBalance* make(std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams = std::unique_ptr<PhysicsCoreParams>(nullptr), N_Configuration::Component* aMassBalance = nullptr);
+			static MassBalance* make(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams = std::unique_ptr<PhysicsCoreParams>(nullptr), N_Configuration::Component* aMassBalance = nullptr);
 		};
 
 }

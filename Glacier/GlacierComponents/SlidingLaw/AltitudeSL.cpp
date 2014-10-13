@@ -30,9 +30,9 @@ namespace N_Glacier {
 	{
 		assert(C() >= 0);
 		if (C() > 0) {
-			for (unsigned int i = 0; i < bed.Nx(); i++)
+			for (unsigned int i = 0; i < bed.Nx(); ++i)
 			{
-				for (unsigned int j = 0; j<bed.Ny(); j++)
+				for (unsigned int j = 0; j<bed.Ny(); ++j)
 				{
 					(*_sc)(i, j) = 0;
 					if (Z() - bed(i, j) > 0)

@@ -16,7 +16,7 @@ namespace N_Glacier {
 	{
 	public:
 		// factory method
-		static Rheology* make(std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams = std::unique_ptr<PhysicsCoreParams>(nullptr), N_Configuration::Component* aRheology = nullptr);
+		static Rheology* make(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams = std::unique_ptr<PhysicsCoreParams>(nullptr), N_Configuration::Component* aRheology = nullptr);
 	};
 }
 

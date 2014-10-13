@@ -12,7 +12,7 @@ namespace N_MathUtils
 		if (!n)
 			n = v1.size();
 		double d(0);
-		for (unsigned int i(0); i < n; i++)
+		for (unsigned int i(0); i < n; ++i)
 			d += (v1[i] - v2[i])*(v1[i] - v2[i]);
 		return std::sqrt(d);
 	}

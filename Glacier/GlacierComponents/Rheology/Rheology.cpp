@@ -7,7 +7,7 @@
 
 namespace N_Glacier {
 
-	Rheology::Rheology(std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams, N_Configuration::Component* aComponent)
+	Rheology::Rheology(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams, N_Configuration::Component* aComponent)
 		: GlacierComponent(aComponent)
 		, _A(_parameters.find("A") != _parameters.end() ? std::stod(_parameters["A"]) : 0)
 		, _n(_parameters.find("n") != _parameters.end() ? std::stod(_parameters["n"]) : 0)

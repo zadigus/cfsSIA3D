@@ -47,11 +47,13 @@ int main(int argc, char* argv[]) // TODO: I need a front-end and a back-end; use
 				mathConf = N_Configuration::Model(*it);
 		}
 
-		N_Glacier::Glacier& g = N_Glacier::Glacier::getInstance();
-		g.init(physConf, physCoreConf);
+		//N_Glacier::Glacier& g = N_Glacier::Glacier::getInstance();
+		//g.init(physConf, physCoreConf);
 		//g.G()->print();
 		//g.H()->Set(10);
 		//g.G()->print();
+
+		N_Glacier::Glacier::getInstance()->init(physConf, physCoreConf);
 
 	}
 	catch (const xml_schema::exception& e)
