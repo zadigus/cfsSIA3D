@@ -54,11 +54,11 @@ Grid::Grid(std::string fileName)
 		_Data.Reset(Nx(), Ny());
 
 		// Read data
-		for (int j(Ny() - 1); j >= 0; --j) // doesn't work with unsigned int because 0 - 1 = -1 is not defined ...
+		for (unsigned int j(Ny()); j >= 1; --j) // that trick is used (finish with j = 1 instead of 0) because it doesn't work with 0 with unsigned ints
 		{
-			for (int i(0); i < Nx(); ++i)
+			for (unsigned int i(1); i <= Nx(); ++i)
 			{
-				ist >> _Data(i, j);
+				ist >> _Data(i-1, j-1);
 			}
 		}
 
@@ -178,11 +178,11 @@ std::ostream& operator<<(std::ostream& ost, Grid& g)
 
 	ost.precision(4);
 	double tmp(0.);
-	for (int j(g.Ny() - 1); j >= 0; --j) // cannot use unsigned int here because -1 is not defined
+	for (unsigned int j(g.Ny()); j >= 1; --j) // go from 1 to Ny because -1 is positive when considered as an unsigned int
 	{
-		for (int i(0); i<g.Nx(); ++i)
+		for (unsigned int i(1); i <= g.Nx(); ++i)
 		{ 
-			tmp = g(i, j); assert(!std::isnan(tmp));
+			tmp = g(i, j); assert(!std::isnan(tmp)); 
 			ost << std::fixed << std::setw(10) << tmp << " "; // Forgetting about formatting makes this operation faster
 		}
 	}

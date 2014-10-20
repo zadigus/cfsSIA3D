@@ -4,10 +4,11 @@
 #include "Utility/Math.hpp"
 #include "Glacier/Glacier.hpp"
 #include "Configuration/ModelConfiguration.hpp"
+#include "NumericsCoreParams.hpp"
 
 namespace N_Mathematics {
 
-	HeavisideProjectionAlgorithm::HeavisideProjectionAlgorithm(N_Configuration::Component* aProjectionAlgo)
+	HeavisideProjectionAlgorithm::HeavisideProjectionAlgorithm(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, N_Configuration::Component* aProjectionAlgo)
 		: PrimalAlgorithm(aProjectionAlgo) 
 		, _H(_glacier->H())
 	{

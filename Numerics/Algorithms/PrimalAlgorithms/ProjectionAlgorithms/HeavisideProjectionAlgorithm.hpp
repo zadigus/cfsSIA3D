@@ -11,10 +11,12 @@ namespace N_Configuration {
 
 namespace N_Mathematics {
 
+	class NumericsCoreParams;
+
 	class HeavisideProjectionAlgorithm : public PrimalAlgorithm
 	{
 		public:
-			HeavisideProjectionAlgorithm(N_Configuration::Component* aProjectionAlgo);
+			HeavisideProjectionAlgorithm(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, N_Configuration::Component* aProjectionAlgo);
 			virtual ~HeavisideProjectionAlgorithm();
 
 			virtual void Run();

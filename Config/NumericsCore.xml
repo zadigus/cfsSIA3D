@@ -4,7 +4,7 @@
             xsi:schemaLocation="http://www.ruag.com/ModelCoreConfiguration ModelCoreConfiguration.xsd" 
             xmlns:m="http://www.ruag.com/ModelCoreConfiguration"
 						xmlns:param="http://www.ruag.com/Parameter"> 
-	<param:Parameter name="g">9.81</param:Parameter>   <!-- gravitational acceleration in m/s^2 -->
-	<param:Parameter name="rho_i">910</param:Parameter> <!-- ice density in kg/m^3 -->
-	<param:Parameter name="rho_w">1000</param:Parameter> <!-- water density in kg/m^3 -->
+	
+	<param:Parameter name="dt">0.01</param:Parameter>   <!-- time step in a -->
+
 </m:ModelCore>

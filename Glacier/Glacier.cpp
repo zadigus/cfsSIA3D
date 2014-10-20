@@ -2,7 +2,7 @@
 #include "PhysicsCoreParams.hpp"
 
 #include <iostream>
-#include "Configuration/PhysicsCoreConfiguration.hpp"
+#include "Configuration/ModelCoreConfiguration.hpp"
 #include "Configuration/ModelConfiguration.hpp"
 #include "Numerics/Mesh/Grid.hpp"
 
@@ -51,7 +51,7 @@ namespace N_Glacier {
 
 	}
 
-	void Glacier::init(const std::unique_ptr<N_Configuration::ModelConfiguration>& aPhysConf, const std::unique_ptr<N_Configuration::PhysicsCoreConfiguration>& aPhysCoreConf)
+	void Glacier::init(const std::unique_ptr<N_Configuration::ModelConfiguration>& aPhysConf, const std::unique_ptr<N_Configuration::ModelCoreConfiguration>& aPhysCoreConf)
 	{
 		std::unique_ptr<PhysicsCoreParams> physCore(new PhysicsCoreParams(aPhysCoreConf));
 

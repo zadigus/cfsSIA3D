@@ -15,6 +15,8 @@ namespace N_Configuration {
 
 namespace N_Mathematics {
 
+	class NumericsCoreParams;
+
 	/*
 	 *  This class solves H^{l+1} - H^{l} = Dt * B(H^{l+1}) for H^{l+1} with a Newton method
 	 */
@@ -22,7 +24,7 @@ namespace N_Mathematics {
 	class FullyImplicitClimateAlgorithm : public PrimalAlgorithm
 	{
 		public:
-			FullyImplicitClimateAlgorithm(N_Configuration::Component* aClimateAlgo); 
+			FullyImplicitClimateAlgorithm(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, N_Configuration::Component* aClimateAlgo);
 			virtual ~FullyImplicitClimateAlgorithm();
 
 			virtual void Run();
@@ -41,9 +43,12 @@ namespace N_Mathematics {
 			// Newton parameters
 			double _err;
 			double _tol;
-			double _updt;
-			double _F;
-			double _Fp;
+			double _updt; // opposite of Newton iteration update = -(x^{k+1}-x^{k}) = F / Fp
+			double _F; // value of the function of which we seek the zero
+			double _Fp; // value of the derivative of F
+
+			// Numerics parameters
+			double _dt;
 	};
 
 }

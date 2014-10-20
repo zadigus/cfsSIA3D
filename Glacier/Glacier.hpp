@@ -7,7 +7,7 @@ class Grid;
 
 namespace N_Configuration {
 	class ModelConfiguration;
-	class PhysicsCoreConfiguration;
+	class ModelCoreConfiguration;
 }
 
 namespace N_Glacier {
@@ -25,7 +25,7 @@ namespace N_Glacier {
 		//static Glacier& getInstance();
 		static std::shared_ptr<Glacier>& getInstance();
 		// implement the construction of the physics components with the various factories
-		void init(const std::unique_ptr<N_Configuration::ModelConfiguration>& aPhysConf, const std::unique_ptr<N_Configuration::PhysicsCoreConfiguration>& aPhysCoreConf);
+		void init(const std::unique_ptr<N_Configuration::ModelConfiguration>& aPhysConf, const std::unique_ptr<N_Configuration::ModelCoreConfiguration>& aPhysCoreConf);
 
 		// Getters
 		std::shared_ptr<MassBalance> B();

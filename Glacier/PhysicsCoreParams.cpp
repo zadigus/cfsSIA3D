@@ -1,13 +1,13 @@
 #include "PhysicsCoreParams.hpp"
 
-#include "Configuration/PhysicsCoreConfiguration.hpp"
+#include "Configuration/ModelCoreConfiguration.hpp"
 
 namespace N_Glacier {
 
-	PhysicsCoreParams::PhysicsCoreParams(const std::unique_ptr<N_Configuration::PhysicsCoreConfiguration>& aPhysicsCoreConf)
+	PhysicsCoreParams::PhysicsCoreParams(const std::unique_ptr<N_Configuration::ModelCoreConfiguration>& aPhysicsCoreConf)
 	{
-		N_Configuration::PhysicsCoreConfiguration::Parameter_sequence paramSeq = aPhysicsCoreConf->Parameter();
-		for (N_Configuration::PhysicsCoreConfiguration::Parameter_const_iterator it = paramSeq.begin(); it != paramSeq.end(); ++it)
+		N_Configuration::ModelCoreConfiguration::Parameter_sequence paramSeq = aPhysicsCoreConf->Parameter();
+		for (N_Configuration::ModelCoreConfiguration::Parameter_const_iterator it = paramSeq.begin(); it != paramSeq.end(); ++it)
 		{
 			_parameters.emplace(it->name(), (*it));
 		}

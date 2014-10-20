@@ -9,6 +9,7 @@
 						
 	<param:Parameter name="Physics">e:\cfsSIA3D-src\Config\Physics.xml</param:Parameter>
 	<param:Parameter name="PhysicsCore">e:\cfsSIA3D-src\Config\PhysicsCore.xml</param:Parameter>
-	<param:Parameter name="Maths">e:\cfsSIA3D-src\Config\Primal.xml</param:Parameter>
+	<param:Parameter name="Numerics">e:\cfsSIA3D-src\Config\Primal.xml</param:Parameter>
+	<param:Parameter name="NumericsCore">e:\cfsSIA3D-src\Config\NumericsCore.xml</param:Parameter>
 	
 </a:App>

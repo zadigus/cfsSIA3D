@@ -1,18 +1,18 @@
 <?xml version="1.0" ?>
 <xsd:schema xmlns:param="http://www.ruag.com/Parameter"
-						targetNamespace="http://www.ruag.com/PhysicsCoreConfiguration"
-						xmlns:physcore="http://www.ruag.com/PhysicsCoreConfiguration"
+						targetNamespace="http://www.ruag.com/ModelCoreConfiguration"
+						xmlns:modcore="http://www.ruag.com/ModelCoreConfiguration"
             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 						elementFormDefault="qualified">
 	<xsd:import schemaLocation="Parameter.xsd" namespace="http://www.ruag.com/Parameter"/>
 	
-	<xsd:complexType name="PhysicsCoreConfiguration"> 
+	<xsd:complexType name="ModelCoreConfiguration"> 
 		<xsd:sequence>
 			<xsd:element ref="param:Parameter" minOccurs="0" maxOccurs="unbounded"/>
 		</xsd:sequence>
 	</xsd:complexType>
 
-	<xsd:element name="PhysicsCore" type="physcore:PhysicsCoreConfiguration"> 
+	<xsd:element name="ModelCore" type="modcore:ModelCoreConfiguration"> 
 		<xsd:annotation>
       <xsd:documentation>
         TODO: Write documentation

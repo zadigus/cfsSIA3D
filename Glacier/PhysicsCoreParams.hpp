@@ -6,14 +6,14 @@
 #include <string>
 
 namespace N_Configuration {
-	class PhysicsCoreConfiguration;
+	class ModelCoreConfiguration;
 }
 
 namespace N_Glacier {
 
 	struct PhysicsCoreParams
 	{
-		PhysicsCoreParams(const std::unique_ptr<N_Configuration::PhysicsCoreConfiguration>& aPhysicsCoreConf);
+		PhysicsCoreParams(const std::unique_ptr<N_Configuration::ModelCoreConfiguration>& aPhysicsCoreConf);
 
 		double g();     // gravitational acceleration [m/s^2]
 		double rho_i(); // ice density [kg/m^3]

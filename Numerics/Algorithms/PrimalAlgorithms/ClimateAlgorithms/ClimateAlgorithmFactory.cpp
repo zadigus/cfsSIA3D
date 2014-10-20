@@ -4,15 +4,13 @@
 #include "DumbAlgorithm.hpp"
 
 #include "Configuration/ModelConfiguration.hpp"
-
-//#include "Numerics/Mesh/Grid.hpp"
-//#include "Glacier/Glacier.hpp"
+#include "NumericsCoreParams.hpp"
 
 #include <iostream>
 
 namespace N_Mathematics {
 
-	PrimalAlgorithm* ClimateAlgorithmFactory::make(N_Configuration::Component* aClimateAlgo)
+	PrimalAlgorithm* ClimateAlgorithmFactory::make(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, N_Configuration::Component* aClimateAlgo)
 	{
 		if (aClimateAlgo)
 		{
@@ -20,7 +18,7 @@ namespace N_Mathematics {
 			{
 				if (!std::strcmp(aClimateAlgo->type()->c_str(), "FullyImplicit"))
 				{
-					return new FullyImplicitClimateAlgorithm(aClimateAlgo); 
+					return new FullyImplicitClimateAlgorithm(aNumCoreParams, aClimateAlgo); 
 				}
 			}
 			else // no ClimateAlgo type provided => default algo

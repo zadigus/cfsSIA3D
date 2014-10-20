@@ -4,12 +4,13 @@
 #include "DumbAlgorithm.hpp"
 
 #include "Configuration/ModelConfiguration.hpp"
+#include "NumericsCoreParams.hpp"
 
 #include <iostream>
 
 namespace N_Mathematics {
 
-	PrimalAlgorithm* ProjectionAlgorithmFactory::make(N_Configuration::Component* aProjectionAlgo)
+	PrimalAlgorithm* ProjectionAlgorithmFactory::make(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, N_Configuration::Component* aProjectionAlgo)
 	{
 		if (aProjectionAlgo)
 		{
@@ -17,7 +18,7 @@ namespace N_Mathematics {
 			{
 				if (!std::strcmp(aProjectionAlgo->type()->c_str(), "Heaviside"))
 				{
-					return new HeavisideProjectionAlgorithm(aProjectionAlgo);
+					return new HeavisideProjectionAlgorithm(aNumCoreParams, aProjectionAlgo);
 				}
 			}
 			else // no ProjctionAlgo type provided => default algo

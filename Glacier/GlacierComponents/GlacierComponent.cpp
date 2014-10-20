@@ -1,6 +1,6 @@
 #include "GlacierComponent.hpp"
 
-#include "Configuration/PhysicsCoreConfiguration.hpp"
+#include "Configuration/ModelCoreConfiguration.hpp"
 #include "Configuration/ModelConfiguration.hpp"
 #include <iostream>
 

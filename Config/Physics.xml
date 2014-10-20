@@ -4,13 +4,6 @@
             xmlns:m="http://www.ruag.com/ModelConfiguration"
 						xmlns:param="http://www.ruag.com/Parameter"> 
 
-<!--m:Component name="MassBalance" type="acamela">
-	<param:Parameter name="ac">0.1</param:Parameter>
-	<param:Parameter name="am">0.005</param:Parameter>
-	<param:Parameter name="ELA">2700</param:Parameter>
-	<param:Parameter name="eps">0.1</param:Parameter>
-</m:Component-->
-
 <m:Component name="MassBalance" type="GradELA">
 	<param:Parameter name="m1">0.1</param:Parameter>
 	<param:Parameter name="m2">0.005</param:Parameter>

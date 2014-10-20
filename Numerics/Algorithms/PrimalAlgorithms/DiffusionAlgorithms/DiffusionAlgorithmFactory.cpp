@@ -4,12 +4,13 @@
 #include "DumbAlgorithm.hpp"
 
 #include "Configuration/ModelConfiguration.hpp"
+#include "NumericsCoreParams.hpp"
 
 #include <iostream>
 
 namespace N_Mathematics {
 
-	PrimalAlgorithm* DiffusionAlgorithmFactory::make(N_Configuration::Component* aDiffusionAlgo)
+	PrimalAlgorithm* DiffusionAlgorithmFactory::make(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, N_Configuration::Component* aDiffusionAlgo)
 	{
 		if (aDiffusionAlgo)
 		{
@@ -17,7 +18,7 @@ namespace N_Mathematics {
 			{
 				if (!std::strcmp(aDiffusionAlgo->type()->c_str(), "SemiImplicit"))
 				{
-					return new SemiImplicitDiffusionAlgorithm(aDiffusionAlgo);
+					return new SemiImplicitDiffusionAlgorithm(aNumCoreParams, aDiffusionAlgo);
 				}
 			}
 			else // no DiffusionAlgo type provided => default algo

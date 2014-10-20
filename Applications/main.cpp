@@ -3,7 +3,7 @@
 
 #include "Configuration/AppConfiguration.hpp"
 #include "Configuration/ModelConfiguration.hpp"
-#include "Configuration/PhysicsCoreConfiguration.hpp"
+#include "Configuration/ModelCoreConfiguration.hpp"
 #include "Glacier/Glacier.hpp"
 #include "Glacier/GlacierComponents/Geometry/Geometry.hpp"
 #include "Numerics/Mesh/Grid.hpp"
@@ -32,8 +32,9 @@ int main(int argc, char* argv[]) // TODO: I need a front-end and a back-end; use
 		std::unique_ptr<N_Configuration::AppConfiguration> appConf(N_Configuration::App(argv[1]));
 
 		std::unique_ptr<N_Configuration::ModelConfiguration> physConf;
-		std::unique_ptr<N_Configuration::PhysicsCoreConfiguration> physCoreConf;
-		std::unique_ptr<N_Configuration::ModelConfiguration> mathConf;
+		std::unique_ptr<N_Configuration::ModelCoreConfiguration> physCoreConf;
+		std::unique_ptr<N_Configuration::ModelConfiguration> numericsConf;
+		std::unique_ptr<N_Configuration::ModelCoreConfiguration> numericsCoreConf;
 
 		N_Configuration::AppConfiguration::Parameter_sequence fileNames(appConf->Parameter());
 		for (N_Configuration::AppConfiguration::Parameter_const_iterator it = fileNames.begin(); it != fileNames.end(); ++it)
@@ -42,9 +43,11 @@ int main(int argc, char* argv[]) // TODO: I need a front-end and a back-end; use
 			if (!std::strcmp(it->name().c_str(), "Physics"))
 				physConf = N_Configuration::Model(*it);
 			if (!std::strcmp(it->name().c_str(), "PhysicsCore"))
-				physCoreConf = N_Configuration::PhysicsCore(*it);
-			if (!std::strcmp(it->name().c_str(), "Maths"))
-				mathConf = N_Configuration::Model(*it);
+				physCoreConf = N_Configuration::ModelCore(*it);
+			if (!std::strcmp(it->name().c_str(), "Numerics"))
+				numericsConf = N_Configuration::Model(*it);
+			if (!std::strcmp(it->name().c_str(), "NumericsCore"))
+				numericsCoreConf = N_Configuration::ModelCore(*it);
 		}
 
 		//N_Glacier::Glacier& g = N_Glacier::Glacier::getInstance();
