@@ -9,18 +9,18 @@ namespace N_Configuration {
 	class Component;
 }
 
-//namespace N_Glacier {
-//	class Glacier;
-//}
-
 namespace N_Mathematics {
 
 	class PrimalAlgorithm;
 
+	/*
+	 *  The diffusion algorithms solve the discretized version of dH/dt = grad(D*grad(s))
+	 */
+
 	class DiffusionAlgorithmFactory
 	{
 	public:
-		static PrimalAlgorithm* make(/*std::shared_ptr<N_Glacier::Glacier>& aGlacier, */N_Configuration::Component* aDiffusionAlgo = nullptr); // TODO: make aDiffusionAlgo const
+		static PrimalAlgorithm* make(N_Configuration::Component* aDiffusionAlgo = nullptr); // TODO: make aDiffusionAlgo const
 	};
 
 }

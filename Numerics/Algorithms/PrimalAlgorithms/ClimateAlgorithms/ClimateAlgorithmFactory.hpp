@@ -17,6 +17,10 @@ namespace N_Mathematics {
 
 	class PrimalAlgorithm;
 
+	/*
+	 *  The ClimateAlgorithms solve the discretized version of dH/dt = B
+	 */
+
 	class ClimateAlgorithmFactory 
 	{
 		public:

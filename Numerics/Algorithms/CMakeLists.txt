@@ -1,4 +1,4 @@
-PROJECT(Schemes)
+PROJECT(Algorithms)
 
 ADD_SUBDIRECTORY(PrimalAlgorithms)
 
@@ -14,9 +14,9 @@ INCLUDE_DIRECTORIES(
 
 FILE(GLOB src RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "*.cpp" "*.hpp")
 
-ADD_LIBRARY(Schemes ${src})
+ADD_LIBRARY(Algorithms ${src})
 
-TARGET_LINK_LIBRARIES(Schemes 
+TARGET_LINK_LIBRARIES(Algorithms
 	PrimalAlgorithms
 	Configuration
 	${XERCES_LIBRARIES}
