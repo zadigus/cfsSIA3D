@@ -1,6 +1,6 @@
 MACRO (XSD2CPPCLASS xsd_file)
 	GET_FILENAME_COMPONENT(xsd_base_name "${xsd_file}" NAME_WE)
-	SET(xsd_file_path ${CONFIG_PATH}/${xsd_file})
+	SET(xsd_file_path ${XSD_CONFIG_PATH}/${xsd_file})
 	SET(HPP_SUFFIX "hpp")
 	SET(CPP_SUFFIX "cpp")
 
