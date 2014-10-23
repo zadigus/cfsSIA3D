@@ -115,7 +115,7 @@ Grid operator+(Grid& left, Grid& right)
 	assert(left._Coords == right._Coords);
 	Grid out(left);
 	out += right;
-	return out;
+	return out; // TODO: this could be: Grid(left) += right
 }
 
 //==============================================================================

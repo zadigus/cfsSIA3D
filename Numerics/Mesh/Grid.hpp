@@ -12,8 +12,8 @@
 class Grid{
 	public: 
 		// Constructors / destructors
-		Grid(unsigned int = 0, unsigned int = 0, double = 0, double = 0, double = 0, double = 0);
-		Grid(std::string);
+		Grid(unsigned int Nx = 0, unsigned int Ny = 0, double Dx = 0, double Dy = 0, double Xll = 0, double Yll = 0);
+		Grid(std::string FileName);
 		~Grid();
 
 		// Copy constructor and assignment operator
@@ -47,7 +47,7 @@ class Grid{
 		Grid& operator*=(double c);
 		Grid operator*(const double c);
 
-		friend Grid operator+(Grid&, Grid&);
+		friend Grid operator+(Grid&, Grid&); // TODO: see Scott Meyers, this doesn't need to be a friend operation
 		friend Grid operator-(Grid&, Grid&);
 
 		friend std::ostream& operator<<(std::ostream&, Grid&);
