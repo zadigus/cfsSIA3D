@@ -21,7 +21,7 @@ namespace N_Mathematics {
 			virtual ~PrimalAlgorithm();
 
 			virtual void Run() = 0; 
-
+      
 		protected:
 			std::shared_ptr<N_Glacier::Glacier> _glacier;
 			std::map<std::string, std::string> _parameters;

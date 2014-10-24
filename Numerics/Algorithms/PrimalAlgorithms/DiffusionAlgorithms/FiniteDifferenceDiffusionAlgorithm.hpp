@@ -30,8 +30,11 @@ namespace N_Mathematics {
 		protected:
 			// Compute the diffusivity D
 			virtual void Diffusivity() = 0;
+			// Compute the matrix elements
 			virtual void ComputeElements() = 0;
 
+			// Access the ice thickness
+			double& H(unsigned int i, unsigned int j);
 			// compute norm of gradient of grid in the staggered grid; corresponds to alpha in the papers, which is |grad s|
 			double StaggeredGradSurfNorm(unsigned int i, unsigned int j, const std::shared_ptr<Grid>& H);
 
@@ -49,13 +52,19 @@ namespace N_Mathematics {
 			int _Ny;
 			double _Dx;
 
-			// Linear system
-			std::vector<int> _r, _c;
+			// CSR data
+			std::vector<int> _nnz, _cols;
 			std::vector<double> _A_values;
 			std::vector<double> _b_values;
 
-			std::auto_ptr<LinSyst> _LinSyst;
+			// Linear system
+			std::unique_ptr<LinSyst> _LinSyst;
 	};
+	
+	inline double& FiniteDifferenceDiffusionAlgorithm::H(unsigned int i, unsigned int j)
+	{
+		return _H(i, j);
+	}
 
 }
 
