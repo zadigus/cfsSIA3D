@@ -6,7 +6,7 @@
 class Array2D {
 public:
 	// Constructor / destructor
-	Array2D(int=0, int=0);
+	Array2D(int Nrows=0, int Ncols=0);
 	~Array2D();
 
 	// Copy constructor / assignment operator
@@ -23,16 +23,17 @@ public:
 	Array2D& operator+=(const Array2D&);
 	Array2D& operator-=(const Array2D&);
 	Array2D& operator*=(double);
-	Array2D operator*(const double);
 
-	friend Array2D operator+(const Array2D&, const Array2D&);
-	friend Array2D operator-(const Array2D&, const Array2D&);
-
-	void Reset(int, int);
+	void Reset(int Nrows, int Ncols);
 private:
 	int _Nx;
 	int _Ny;
 	std::unique_ptr<double[]> _Data;
 };
+
+Array2D operator+(const Array2D&, const Array2D&);
+Array2D operator-(const Array2D&, const Array2D&);
+Array2D operator*(const Array2D&, double); // this is exactly the same Array2D operator*(double rhs)
+Array2D operator*(double, const Array2D&); 
 
 #endif

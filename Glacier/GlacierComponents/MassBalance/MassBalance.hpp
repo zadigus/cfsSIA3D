@@ -1,7 +1,8 @@
 #ifndef MASSBALANCE_H_
 #define MASSBALANCE_H_
 
-#include "GlacierComponent.hpp"
+#include "Glacier/GlacierComponents/GlacierComponent.hpp"
+//#include "GlacierComponent.hpp"
 
 class Grid;
 

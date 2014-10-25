@@ -1,7 +1,7 @@
 #ifndef SLIDINGLAW_H_
 #define SLIDINGLAW_H_
 
-#include "GlacierComponent.hpp"
+#include "Glacier/GlacierComponents/GlacierComponent.hpp"
 
 #include <memory>
 #include <vector>

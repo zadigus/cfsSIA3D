@@ -1,7 +1,7 @@
 #ifndef RHEOLOGY_H_
 #define RHEOLOGY_H_
 
-#include "GlacierComponent.hpp"
+#include "Glacier/GlacierComponents/GlacierComponent.hpp"
 
 #include <string>
 #include <vector>

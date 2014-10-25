@@ -87,21 +87,34 @@ Array2D& Array2D::operator*=(double c)
 
 Array2D operator+(const Array2D& left, const Array2D& right)
 {
-	Array2D out(left);
-	out += right;
-	return out;
+	//Array2D out(left);
+	//out += right;
+	//return out;
+	return Array2D(left) += right;
 }
 
 Array2D operator-(const Array2D& left, const Array2D& right)
 {
-	Array2D out(left);
+	/*Array2D out(left);
 	out -= right;
-	return out;
+	return out;*/
+	return Array2D(left) -= right;
 }
 
-Array2D Array2D::operator*(const double c)
+Array2D operator*(const Array2D& lhs, double rhs)
 {
-	Array2D out(*this);
-	out *= c;
-	return out;
+	return Array2D(lhs) *= rhs;
 }
+
+Array2D operator*(double lhs, const Array2D& rhs)
+{
+	return Array2D(rhs) *= lhs;
+}
+
+/*Array2D Array2D::operator*(const double c)
+{
+	//Array2D out(*this);
+	//out *= c;
+	//return out;
+	return Array2D(*this) *= c;
+}*/

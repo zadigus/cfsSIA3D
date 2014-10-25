@@ -32,10 +32,6 @@ namespace N_Mathematics {
 		private:
 			// Compute the diffusivity D
 			void Diffusivity();
-
-		private:
-			// Diffusivity
-			std::shared_ptr<Grid> _D;
 	};
 
 }

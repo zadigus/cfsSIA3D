@@ -100,63 +100,6 @@ Grid& Grid::operator=(const Grid& g) // an assignment operator overwrites an exi
 }
 
 //==============================================================================
-Grid& Grid::operator+=(Grid& right) 
-//==============================================================================
-{
-	assert(_Coords == right._Coords);
-	_Data += right._Data;
-	return *this;
-}
-
-//==============================================================================
-Grid operator+(Grid& left, Grid& right) 
-//==============================================================================
-{
-	assert(left._Coords == right._Coords);
-	Grid out(left);
-	out += right;
-	return out; // TODO: this could be: Grid(left) += right
-}
-
-//==============================================================================
-Grid& Grid::operator-=(Grid& right)
-//==============================================================================
-{
-	assert(_Coords == right._Coords);
-	_Data -= right._Data;
-	return *this;
-}
-
-//==============================================================================
-Grid operator-(Grid& left, Grid& right)
-//==============================================================================
-{
-	assert(left._Coords == right._Coords);
-
-	Grid out(left);
-	out -= right;
-
-	return out;
-}
-
-//==============================================================================
-Grid& Grid::operator*=(double c)
-//==============================================================================
-{
-	_Data *= c;
-	return *this;
-}
-
-//==============================================================================
-Grid Grid::operator*(const double c)
-//==============================================================================
-{
-	Grid out(*this);
-	out *= c;
-	return out;
-}
-
-//==============================================================================
 void Grid::Clear()
 //==============================================================================
 {
@@ -354,3 +297,84 @@ double Grid::StaggeredGradNorm(unsigned int i, unsigned int j) {
 	return sqrt(((*this)(i,     j) - (*this)(i - 1, j - 1))*((*this)(i,     j) - (*this)(i - 1, j - 1))
 		        + ((*this)(i, j - 1) - (*this)(i - 1,     j))*((*this)(i, j - 1) - (*this)(i - 1,     j))) / (std::sqrt(2)*Dx());
 }
+
+//==============================================================================
+Grid& Grid::operator+=(const Grid& right)
+//==============================================================================
+{
+	assert(_Coords == right._Coords);
+	_Data += right._Data;
+	return *this;
+}
+
+//==============================================================================
+Grid& Grid::operator-=(const Grid& right)
+//==============================================================================
+{
+	assert(_Coords == right._Coords);
+	_Data -= right._Data;
+	return *this;
+}
+
+//==============================================================================
+Grid& Grid::operator*=(double c)
+//==============================================================================
+{
+	_Data *= c;
+	return *this;
+}
+
+Grid operator+(const Grid& lhs, const Grid& rhs)
+{
+	return Grid(lhs) += rhs;
+}
+
+Grid operator-(const Grid& lhs, const Grid& rhs)
+{
+	return Grid(lhs) -= rhs;
+}
+
+Grid operator*(const Grid& lhs, double rhs)
+{
+	return Grid(lhs) *= rhs;
+}
+
+Grid operator*(double lhs, const Grid& rhs)
+{
+	return Grid(rhs) *= lhs;
+}
+
+/*//==============================================================================
+Grid operator+(Grid& left, Grid& right)
+//==============================================================================
+{
+	assert(left._Coords == right._Coords);
+	Grid out(left);
+	out += right;
+	return out; // TODO: this could be: Grid(left) += right
+	return Grid(left) += right;
+}
+
+//==============================================================================
+Grid operator-(Grid& left, Grid& right)
+//==============================================================================
+{
+	assert(left._Coords == right._Coords);
+
+	Grid out(left);
+	out -= right;
+
+	return out;
+	return Grid(left) -= right;
+}
+
+
+//==============================================================================
+Grid Grid::operator*(const double c)
+//==============================================================================
+{
+	Grid out(*this);
+	out *= c;
+	return out;
+	return Grid(*this) *= c;
+}*/

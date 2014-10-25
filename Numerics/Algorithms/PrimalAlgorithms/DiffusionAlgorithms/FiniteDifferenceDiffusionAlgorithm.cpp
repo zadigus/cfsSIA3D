@@ -14,30 +14,51 @@
 
 namespace N_Mathematics {
 
-	FiniteDifferenceDiffusionAlgorithm::FiniteDifferenceDiffusionAlgorithm(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, N_Configuration::Component* aDiffusionAlgo) 
-		: PrimalAlgorithm(aDiffusionAlgo)
-		, _b(N_Glacier::Glacier::getInstance()->b())
-		, _H(N_Glacier::Glacier::getInstance()->H())
+	FiniteDifferenceDiffusionAlgorithm::FiniteDifferenceDiffusionAlgorithm(/*const std::unique_ptr<NumericsCoreParams>& aNumCoreParams,*/ N_Configuration::Component* aDiffusionAlgo) 
+		: FiniteDifferencePrimalAlgorithm(aDiffusionAlgo)
 		, _Rh(N_Glacier::Glacier::getInstance()->Rh())
 		, _Sl(N_Glacier::Glacier::getInstance()->Sl())
-		, _Nx(_H->Nx())
-		, _Ny(_H->Ny())
-		, _Dx(_H->Dx())
-		, _LinSyst(new LinSyst(_Nx*_Ny)) // TODO: give the Component's parameters too? 
+		, _D(new Grid(_Nx, _Ny, _Dx, _H->Dy()))
+		//, _LinSyst(new LinSyst(_Nx*_Ny)) // TODO: give the Component's parameters too? 
 	{
-		assert(_Dx == _H->Dy());
+		//assert(_Dx == _H->Dy()); // TODO: enforce that somewhere else
 	}
 
 	FiniteDifferenceDiffusionAlgorithm::~FiniteDifferenceDiffusionAlgorithm()
 	{
 
 	}
-
+	
 	double FiniteDifferenceDiffusionAlgorithm::StaggeredGradSurfNorm(unsigned int i, unsigned int j, const std::shared_ptr<Grid>& H) {
 		// because this function is also used in the FullyImplicit version
 		assert(i - 1 >= 0); assert(j - 1 >= 0); assert(i < _Nx); assert(j < _Ny);
-		return sqrt(((*_b)(i, j) + (*H)(i, j) - (*_b)(i - 1, j - 1) - (*H)(i - 1, j - 1))*((*_b)(i, j) + (*H)(i, j) - (*_b)(i - 1, j - 1) - (*H)(i - 1, j - 1))
-			+ ((*_b)(i, j - 1) + (*H)(i, j - 1) - (*_b)(i - 1, j) - (*H)(i - 1, j))*((*_b)(i, j - 1) + (*H)(i, j - 1) - (*_b)(i - 1, j) - (*H)(i - 1, j))) / (sqrt(2)*_Dx);
+		return sqrt((b(i, j    ) + (*H)(i, j    ) - b(i - 1, j - 1) - (*H)(i - 1, j - 1))*(b(i, j    ) + (*H)(i, j    ) - b(i - 1, j - 1) - (*H)(i - 1, j - 1))
+							+ (b(i, j - 1) + (*H)(i, j - 1) - b(i - 1, j    ) - (*H)(i - 1, j    ))*(b(i, j - 1) + (*H)(i, j - 1) - b(i - 1, j    ) - (*H)(i - 1, j    ))) / (sqrt(2)*_Dx);
+	}
+
+	double& FiniteDifferenceDiffusionAlgorithm::D(unsigned int i, unsigned int j)
+	{
+		return (*_D)(i, j);
+	}
+
+	double FiniteDifferenceDiffusionAlgorithm::Gamma()
+	{
+		return _Rh->Gamma();
+	}
+
+	double FiniteDifferenceDiffusionAlgorithm::rhogn()
+	{
+		return _Rh->rhogn();
+	}
+
+	double FiniteDifferenceDiffusionAlgorithm::n()
+	{
+		return _Rh->n();
+	}
+
+	double  FiniteDifferenceDiffusionAlgorithm::Sl(unsigned int i, unsigned int j)
+	{
+		return (*_Sl)(i, j);
 	}
 
 }

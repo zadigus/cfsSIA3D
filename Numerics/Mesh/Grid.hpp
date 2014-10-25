@@ -36,19 +36,19 @@ class Grid{
 
 		// Data handling
 		void Clear();
-		void Refine(double);
-		void Refine(double, double);
+		void Refine(double ratio);
+		void Refine(double ratioX, double ratioY);
 
 		double& operator()(const unsigned int i, const unsigned int j) { return _Data(i, j); }
 		const double operator()(const double x, const double y);
 
-		Grid& operator+=(Grid&);
-		Grid& operator-=(Grid&);
+		Grid& operator+=(const Grid&);
+		Grid& operator-=(const Grid&);
 		Grid& operator*=(double c);
-		Grid operator*(const double c);
+		//Grid operator*(const double c);
 
-		friend Grid operator+(Grid&, Grid&); // TODO: see Scott Meyers, this doesn't need to be a friend operation
-		friend Grid operator-(Grid&, Grid&);
+		//friend Grid operator+(Grid&, Grid&); 
+		//friend Grid operator-(Grid&, Grid&);
 
 		friend std::ostream& operator<<(std::ostream&, Grid&);
 
@@ -69,5 +69,10 @@ class Grid{
 		double      _NoData;          // no data value
 		Array2D       _Data;          // values at the grid points
 };
+
+Grid operator+(const Grid&, const Grid&);
+Grid operator-(const Grid&, const Grid&);
+Grid operator*(const Grid&, double);
+Grid operator*(double, const Grid&);
 
 #endif /* GRID_H_ */
