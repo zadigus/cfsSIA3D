@@ -26,11 +26,11 @@ namespace N_Glacier {
 		//void Export(Grid& b, Grid& H, std::string fileName);
 
 		// units transformation: convert quantity Q from meter water equivalent to meter ice equivalent
-		double water2ice(double Q) { return Q * _rho_water / _rho_ice; } // TODO: double-check that formula
+		double water2ice(double Q) { return Q * m_rho_water / m_rho_ice; } // TODO: double-check that formula
 
 	private:
-		double _rho_ice; // ice density
-		double _rho_water; // water density
+		double m_rho_ice; // ice density
+		double m_rho_water; // water density
 	};
 
 }

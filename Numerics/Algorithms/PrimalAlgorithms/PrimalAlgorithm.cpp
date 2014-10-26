@@ -8,7 +8,7 @@
 namespace N_Mathematics {
 
 	PrimalAlgorithm::PrimalAlgorithm(N_Configuration::Component* aComponent)
-		: _glacier(N_Glacier::Glacier::getInstance())
+		: m_glacier(N_Glacier::Glacier::getInstance())
 	{ 
 		if (aComponent)
 		{
@@ -16,7 +16,7 @@ namespace N_Mathematics {
 			for (N_Configuration::Component::Parameter_const_iterator it = params.begin(); it != params.end(); ++it)
 			{
 				//std::cout << it->name() << ", " << (*it) << std::endl; // TODO: write in a log file
-				_parameters.emplace(it->name(), (*it));
+				m_parameters.emplace(it->name(), (*it));
 			}
 		}
 	}

@@ -22,30 +22,30 @@ namespace N_Mathematics {
 			void Clear();
 
 		protected:
-			unsigned int _MS;
-			std::vector<unsigned int>    _NonZeroes;
-			std::vector<unsigned int>       _ColIdx;
-			std::vector<double>             _Values;
+			unsigned int m_MS;
+			std::vector<unsigned int>    m_NonZeroes;
+			std::vector<unsigned int>       m_ColIdx;
+			std::vector<double>             m_Values;
 	};
 
 	inline unsigned int Matrix::MS()
 	{
-		return _MS;
+		return m_MS;
 	}
 
 	inline void Matrix::InsertNonZeroes(unsigned int nnz)
 	{
-		_NonZeroes.push_back(nnz);
+		m_NonZeroes.push_back(nnz);
 	}
 
 	inline void Matrix::InsertColIdx(unsigned int colIdx)
 	{
-		_ColIdx.push_back(colIdx);
+		m_ColIdx.push_back(colIdx);
 	}
 
 	inline void Matrix::InsertValue(double val)
 	{
-		_Values.push_back(val);
+		m_Values.push_back(val);
 	}
 
 }

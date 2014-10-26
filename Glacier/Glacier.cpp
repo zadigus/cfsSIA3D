@@ -13,19 +13,12 @@
 #include "GlacierComponents/Geometry/GeometryFactory.hpp"
 
 // Physical components
-//#include "GlacierComponents/GlacierComponent.hpp"
 #include "GlacierComponents/MassBalance/MassBalance.hpp"
 #include "GlacierComponents/Rheology/Rheology.hpp"
 #include "GlacierComponents/SlidingLaw/SlidingLaw.hpp"
 #include "GlacierComponents/Geometry/Geometry.hpp"
 
 namespace N_Glacier {
-
-	/*Glacier& Glacier::getInstance() 
-	{
-		static Glacier instance;
-		return instance;
-	}*/
 
 	std::shared_ptr<Glacier>& Glacier::getInstance()
 	{
@@ -38,10 +31,10 @@ namespace N_Glacier {
 	}
 
 	Glacier::Glacier()
-		: _MassBalance(NULL)
-		, _Rheology(NULL)
-		, _SlidingLaw(NULL)
-		, _Geometry(NULL)
+		: m_MassBalance(NULL)
+		, m_Rheology(NULL)
+		, m_SlidingLaw(NULL)
+		, m_Geometry(NULL)
 	{
 
 	}
@@ -61,19 +54,19 @@ namespace N_Glacier {
 		{
 			if (!it->name()->compare("MassBalance"))
 			{ // doesn't work with ==
-				_MassBalance.reset(MassBalanceFactory::make(physCore, &(*it)));
+				m_MassBalance.reset(MassBalanceFactory::make(physCore, &(*it)));
 			}
 			else if (!it->name()->compare("Rheology"))
 			{
-				_Rheology.reset(RheologyFactory::make(physCore, &(*it)));
+				m_Rheology.reset(RheologyFactory::make(physCore, &(*it)));
 			}
 			else if (!it->name()->compare("SlidingLaw"))
 			{
-				_SlidingLaw.reset(SlidingLawFactory::make(&(*it)));
+				m_SlidingLaw.reset(SlidingLawFactory::make(&(*it)));
 			}
 			else if (!it->name()->compare("Geometry"))
 			{
-				_Geometry.reset(GeometryFactory::make(&(*it)));
+				m_Geometry.reset(GeometryFactory::make(&(*it)));
 			}
 			else
 			{
@@ -82,20 +75,20 @@ namespace N_Glacier {
 		}
 
 		// Check configuration
-		if (!_MassBalance)
+		if (!m_MassBalance)
 		{
-			_MassBalance.reset(MassBalanceFactory::make());
+			m_MassBalance.reset(MassBalanceFactory::make());
 		}
-		if (!_SlidingLaw)
+		if (!m_SlidingLaw)
 		{
-			_SlidingLaw.reset(SlidingLawFactory::make());
+			m_SlidingLaw.reset(SlidingLawFactory::make());
 		}
-		if (!_Rheology)
+		if (!m_Rheology)
 		{ // nothing can happen without a rheology
 			std::cerr << "Missing compulsory rheology component." << std::endl;
 			exit(EXIT_FAILURE);
 		}
-		if (!_Geometry)
+		if (!m_Geometry)
 		{
 			std::cerr << "Missing compulsory geometry component." << std::endl;
 			exit(EXIT_FAILURE);
@@ -104,26 +97,22 @@ namespace N_Glacier {
 
 	std::shared_ptr<Grid> Glacier::b()
 	{
-		return _Geometry->b();
+		return m_Geometry->b();
 	}
 
 	std::shared_ptr<Grid> Glacier::H()
 	{
-		return _Geometry->H();
+		return m_Geometry->H();
+	}
+
+	std::shared_ptr<Grid> Glacier::gradbx()
+	{
+		return m_Geometry->gradbx();
+	}
+
+	std::shared_ptr<Grid> Glacier::gradby()
+	{
+		return m_Geometry->gradby();
 	}
 
 }
-
-/*Glacier::Glacier(const Glacier& rhs)
-{
-_instance = rhs._instance;
-}
-
-Glacier& Glacier::operator= (const Glacier& rhs)
-{
-if (this != &rhs)
-{
-_instance = rhs._instance;
-}
-return *this;
-}*/

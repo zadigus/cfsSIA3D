@@ -7,10 +7,10 @@ namespace N_Glacier {
 
 	GradELA::GradELA(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams, N_Configuration::Component* aComponent)
 		: MassBalance(aPhysCoreParams, aComponent)
-		, _ELA(_parameters.find("ELA") != _parameters.end() ? std::stod(_parameters["ELA"]) : 0)
-		, _m1(_parameters.find("m1") != _parameters.end() ? std::stod(_parameters["m1"]) : 0)
-		, _m2(_parameters.find("m2") != _parameters.end() ? std::stod(_parameters["m2"]) : 0)
-		, _eps(_parameters.find("eps") != _parameters.end() ? std::stod(_parameters["eps"]) : 0)
+		, m_ELA(m_parameters.find("ELA") != m_parameters.end() ? std::stod(m_parameters["ELA"]) : 0)
+		, m_m1(m_parameters.find("m1") != m_parameters.end() ? std::stod(m_parameters["m1"]) : 0)
+		, m_m2(m_parameters.find("m2") != m_parameters.end() ? std::stod(m_parameters["m2"]) : 0)
+		, m_eps(m_parameters.find("eps") != m_parameters.end() ? std::stod(m_parameters["eps"]) : 0)
 	{
 
 	}

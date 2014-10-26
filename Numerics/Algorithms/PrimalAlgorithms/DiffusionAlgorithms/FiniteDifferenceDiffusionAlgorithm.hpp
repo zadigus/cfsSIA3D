@@ -28,7 +28,7 @@ namespace N_Mathematics {
 
 		protected:
 			// Compute the diffusivity D
-			virtual void Diffusivity() = 0;
+			virtual void ComputeDiffusivity() = 0;
 			// Compute the matrix elements
 			virtual void BuildLinSyst() = 0;
 			// compute norm of gradient of grid in the staggered grid; corresponds to alpha in the papers, which is |grad s|
@@ -44,15 +44,15 @@ namespace N_Mathematics {
 
 		protected:
 			// Physics models
-			std::shared_ptr<N_Glacier::Rheology>   _Rh;
-			std::shared_ptr<N_Glacier::SlidingLaw> _Sl;
+			std::shared_ptr<N_Glacier::Rheology>   m_Rh;
+			std::shared_ptr<N_Glacier::SlidingLaw> m_Sl;
 
 			// Linear system
-			std::unique_ptr<LinSyst> _LinSyst;
+			std::unique_ptr<LinSyst> m_LinSyst;
 
 		private:
 			// Diffusivity
-			std::unique_ptr<Grid> _D;
+			std::unique_ptr<Grid> m_D;
 	};
 }
 

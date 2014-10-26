@@ -10,9 +10,9 @@
 
 //==============================================================================
 Grid::Grid(unsigned int ncols, unsigned int nrows, double dx, double dy, double xl, double yl)
-	: _Coords(ncols, nrows, dx, dy, xl, yl)
-	, _NoData(-9999)
-	, _Data(ncols, nrows)
+	: m_Coords(ncols, nrows, dx, dy, xl, yl)
+	, m_NoData(-9999)
+	, m_Data(ncols, nrows)
 //==============================================================================
 {
 
@@ -43,22 +43,22 @@ Grid::Grid(std::string fileName)
 			exit(1);
 		}
 
-		_Coords.Nx = (unsigned int) tmpx; _Coords.Ny = (unsigned int) tmpy;
+		m_Coords.Nx = (unsigned int) tmpx; m_Coords.Ny = (unsigned int) tmpy;
 
-		ist.getline(line, bufferSize); sscanf(line, "%*s %lf", &_Coords.Xll);
-		ist.getline(line, bufferSize); sscanf(line, "%*s %lf", &_Coords.Yll);
-		ist.getline(line, bufferSize); sscanf(line, "%*s %lf", &_Coords.Dx);
-		ist.getline(line, bufferSize); sscanf(line, "%*s %lf", &_NoData);
-		_Coords.Dy = _Coords.Dx;
+		ist.getline(line, bufferSize); sscanf(line, "%*s %lf", &m_Coords.Xll);
+		ist.getline(line, bufferSize); sscanf(line, "%*s %lf", &m_Coords.Yll);
+		ist.getline(line, bufferSize); sscanf(line, "%*s %lf", &m_Coords.Dx);
+		ist.getline(line, bufferSize); sscanf(line, "%*s %lf", &m_NoData);
+		m_Coords.Dy = m_Coords.Dx;
 
-		_Data.Reset(Nx(), Ny());
+		m_Data.Reset(Nx(), Ny());
 
 		// Read data
 		for (unsigned int j(Ny()); j >= 1; --j) // that trick is used (finish with j = 1 instead of 0) because it doesn't work with 0 with unsigned ints
 		{
 			for (unsigned int i(1); i <= Nx(); ++i)
 			{
-				ist >> _Data(i-1, j-1);
+				ist >> m_Data(i-1, j-1);
 			}
 		}
 
@@ -80,9 +80,9 @@ Grid::~Grid()
 
 //==============================================================================
 Grid::Grid(const Grid & g) // a copy constructor creates a new object from an old one
-	: _Coords(g._Coords)
-	, _NoData(g._NoData)
-	, _Data(g._Data)
+	: m_Coords(g.m_Coords)
+	, m_NoData(g.m_NoData)
+	, m_Data(g.m_Data)
 //==============================================================================
 {
 
@@ -93,9 +93,9 @@ Grid& Grid::operator=(const Grid& g) // an assignment operator overwrites an exi
 //==============================================================================
 {
 	//assert(g._Coords == _Coords);
-	_Coords = g._Coords;
-	_NoData = g._NoData;
-	_Data = g._Data;
+	m_Coords = g.m_Coords;
+	m_NoData = g.m_NoData;
+	m_Data = g.m_Data;
 	return *this;
 }
 
@@ -103,7 +103,7 @@ Grid& Grid::operator=(const Grid& g) // an assignment operator overwrites an exi
 void Grid::Clear()
 //==============================================================================
 {
-	_Data();
+	m_Data();
 }
 
 //==============================================================================
@@ -117,7 +117,7 @@ std::ostream& operator<<(std::ostream& ost, Grid& g)
 	ost << "XLLCORNER\t"    << g.Xll() << "\n"
 		  << "YLLCORNER\t"    << g.Yll() << "\n"
 		  << "CELLSIZE\t"     << g.Dx()  << "\n"
-			<< "NODATA_value\t" << g._NoData << std::endl;
+			<< "NODATA_value\t" << g.m_NoData << std::endl;
 
 	ost.precision(4);
 	double tmp(0.);
@@ -226,10 +226,10 @@ void Grid::XYZ(std::string fileName){
 //==============================================================================
 double Grid::Max() {
 //==============================================================================
-	double m(_Data(0, 0)), tmp(0.);
+	double m(m_Data(0, 0)), tmp(0.);
 	for (unsigned int k(0); k<Nx(); ++k) {
 		for (unsigned int j(0); j<Ny(); ++j) {
-			tmp = _Data(k, j);
+			tmp = m_Data(k, j);
 			if (tmp > m) m = tmp;
 		}
 	}
@@ -239,10 +239,10 @@ double Grid::Max() {
 //==============================================================================
 double Grid::Min() {
 //==============================================================================
-	double m(_Data(0, 0)), tmp(0.);
+	double m(m_Data(0, 0)), tmp(0.);
 	for (unsigned int k(0); k<Nx(); ++k) {
 		for (unsigned int j(0); j<Ny(); ++j) {
-			tmp = _Data(k, j);
+			tmp = m_Data(k, j);
 			if (tmp < m) m = tmp;
 		}
 	}
@@ -258,10 +258,10 @@ void Grid::Refine(double rx, double ry)
 {
 	Grid tmp(*this);
 	double Xmax(X(Nx())), Ymax(Y(Ny()));
-	_Coords.Dx /= rx;
-	_Coords.Dy /= ry;
-	_Coords.Nx *= rx; 
-	_Coords.Ny *= ry;
+	m_Coords.Dx /= rx;
+	m_Coords.Dy /= ry;
+	m_Coords.Nx *= rx; 
+	m_Coords.Ny *= ry;
 
 	double x(0.0), y(0.0); unsigned int i(0), j(0);
 	while (x < Xmax) {
@@ -302,8 +302,8 @@ double Grid::StaggeredGradNorm(unsigned int i, unsigned int j) {
 Grid& Grid::operator+=(const Grid& right)
 //==============================================================================
 {
-	assert(_Coords == right._Coords);
-	_Data += right._Data;
+	assert(m_Coords == right.m_Coords);
+	m_Data += right.m_Data;
 	return *this;
 }
 
@@ -311,8 +311,8 @@ Grid& Grid::operator+=(const Grid& right)
 Grid& Grid::operator-=(const Grid& right)
 //==============================================================================
 {
-	assert(_Coords == right._Coords);
-	_Data -= right._Data;
+	assert(m_Coords == right.m_Coords);
+	m_Data -= right.m_Data;
 	return *this;
 }
 
@@ -320,7 +320,7 @@ Grid& Grid::operator-=(const Grid& right)
 Grid& Grid::operator*=(double c)
 //==============================================================================
 {
-	_Data *= c;
+	m_Data *= c;
 	return *this;
 }
 

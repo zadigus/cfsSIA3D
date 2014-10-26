@@ -13,19 +13,17 @@ namespace N_Configuration {
 
 namespace N_Mathematics {
 
-	//class NumericsCoreParams;
-
 	class FiniteDifferenceClimateAlgorithm : public FiniteDifferencePrimalAlgorithm
 	{
 		public:
-			FiniteDifferenceClimateAlgorithm(/*const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, */N_Configuration::Component* aClimateAlgo);
+			FiniteDifferenceClimateAlgorithm(N_Configuration::Component* aClimateAlgo);
 			virtual ~FiniteDifferenceClimateAlgorithm();
 
 			virtual void Run() = 0;
 
 		protected:
 			// Glacier mass-balance
-			std::shared_ptr<N_Glacier::MassBalance> _B;
+			std::shared_ptr<N_Glacier::MassBalance> m_B;
 	};
 }
 

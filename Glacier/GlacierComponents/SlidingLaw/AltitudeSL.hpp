@@ -10,17 +10,16 @@ namespace N_Glacier {
 	class AltitudeSL : public SlidingLaw {
 	public:
 		AltitudeSL(N_Configuration::Component* aComponent = nullptr);
-		//AltitudeSL();
 		virtual ~AltitudeSL();
 
 	protected:
 		virtual void Fill(Grid& fs, unsigned int n);
-		virtual double Z() { return _Z; }
-		virtual double C() { return _C; }
+		virtual double Z() { return m_Z; }
+		virtual double C() { return m_C; }
 
 	protected:
-		double _Z; // Zsl, in m
-		double _C; // C, in bar^{-1}*a^{-1/n}, n is Glen's exponent
+		double m_Z; // Zsl, in m
+		double m_C; // C, in bar^{-1}*a^{-1/n}, n is Glen's exponent
 
 	};
 }

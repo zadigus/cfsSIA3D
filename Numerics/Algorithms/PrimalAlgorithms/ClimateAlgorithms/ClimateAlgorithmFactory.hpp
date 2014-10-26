@@ -3,8 +3,6 @@
 
 #include <memory>
 
-//class Grid;
-
 namespace N_Configuration {
 	class Component;
 }

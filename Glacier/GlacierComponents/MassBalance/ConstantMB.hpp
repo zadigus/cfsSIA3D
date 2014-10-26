@@ -22,7 +22,7 @@ namespace N_Glacier {
 		double dB(double b, double H3, double H2); // dBdH(b, Hn, H)
 
 	protected:
-		std::unique_ptr<Grid> _mb;
+		std::unique_ptr<Grid> m_mb;
 	};
 
 }

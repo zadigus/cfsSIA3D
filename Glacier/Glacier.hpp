@@ -22,7 +22,6 @@ namespace N_Glacier {
 	public:
 		~Glacier(); // for shared_ptr to be able to destroy the instance
 
-		//static Glacier& getInstance();
 		static std::shared_ptr<Glacier>& getInstance();
 		// implement the construction of the physics components with the various factories
 		void init(const std::unique_ptr<N_Configuration::ModelConfiguration>& aPhysConf, const std::unique_ptr<N_Configuration::ModelCoreConfiguration>& aPhysCoreConf);
@@ -34,43 +33,40 @@ namespace N_Glacier {
 		std::shared_ptr<Geometry>    G();
 		std::shared_ptr<Grid>        b();
 		std::shared_ptr<Grid>        H();
+		std::shared_ptr<Grid>        gradbx();
+		std::shared_ptr<Grid>        gradby();
 
 	private:
 		Glacier();
-
-		//Glacier(const Glacier& rhs); // TODO: that must be defined because we must not be able to copy a Singleton?
-		//Glacier& operator=(const Glacier& rhs);
 		
 	private:
-		//static Glacier* _instance;
-	
 		// Physics
-		std::shared_ptr<MassBalance> _MassBalance;
-		std::shared_ptr<Rheology>    _Rheology;
-		std::shared_ptr<SlidingLaw>  _SlidingLaw;
+		std::shared_ptr<MassBalance> m_MassBalance;
+		std::shared_ptr<Rheology>    m_Rheology;
+		std::shared_ptr<SlidingLaw>  m_SlidingLaw;
 
 		// Geometry
-		std::shared_ptr<Geometry>    _Geometry;
+		std::shared_ptr<Geometry>    m_Geometry;
 	};
 
 	inline std::shared_ptr<MassBalance> Glacier::B()
 	{
-		return _MassBalance;
+		return m_MassBalance;
 	}
 
 	inline std::shared_ptr<Rheology>    Glacier::Rh()
 	{
-		return _Rheology;
+		return m_Rheology;
 	}
 
 	inline std::shared_ptr<SlidingLaw>  Glacier::Sl()
 	{
-		return _SlidingLaw;
+		return m_SlidingLaw;
 	}
 
 	inline std::shared_ptr<Geometry>  Glacier::G()
 	{
-		return _Geometry;
+		return m_Geometry;
 	}
 
 }

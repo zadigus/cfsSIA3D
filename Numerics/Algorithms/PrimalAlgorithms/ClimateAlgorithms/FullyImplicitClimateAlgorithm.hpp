@@ -30,17 +30,17 @@ namespace N_Mathematics {
 
 		private:
 			// Newton iterate
-			std::unique_ptr<Grid> _Hn;
+			std::unique_ptr<Grid> m_Hn;
 
 			// Newton parameters
-			double _err;
-			double _tol;
-			double _updt; // opposite of Newton iteration update = -(x^{k+1}-x^{k}) = F / Fp
-			double _F; // value of the function of which we seek the zero
-			double _Fp; // value of the derivative of F
+			double m_err;
+			double m_tol;
+			double m_updt; // opposite of Newton iteration update = -(x^{k+1}-x^{k}) = F / Fp
+			double m_F; // value of the function of which we seek the zero
+			double m_Fp; // value of the derivative of F
 
 			// Numerics parameters
-			double _dt;
+			double m_dt;
 	};
 }
 

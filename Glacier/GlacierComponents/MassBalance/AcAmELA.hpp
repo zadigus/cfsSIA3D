@@ -22,16 +22,16 @@ namespace N_Glacier {
 			virtual double dB(double b, double H3, double H2); // dBdH(b, Hn, H)
 
 		protected:
-			double ELA() { return _ELA; }
-			double  ac() { return _ac; }
-			double  am() { return _am; }
-			double eps() { return _eps; }
+			double ELA() { return m_ELA; }
+			double  ac() { return m_ac; }
+			double  am() { return m_am; }
+			double eps() { return m_eps; }
 
 		protected:
-			double _ELA;
-			double  _ac;
-			double  _am;
-			double _eps;
+			double m_ELA;
+			double  m_ac;
+			double  m_am;
+			double m_eps;
 	};
 
 }

@@ -17,7 +17,7 @@ namespace N_Mathematics {
 
 		double dt();     // time step [a]
 
-		std::map<std::string, std::string> _parameters;
+		std::map<std::string, std::string> m_parameters;
 	};
 
 }

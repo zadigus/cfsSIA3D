@@ -7,8 +7,8 @@ namespace N_Glacier {
 
 	MassBalance::MassBalance(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams, N_Configuration::Component* aComponent)
 		: GlacierComponent(aComponent)
-		, _rho_ice(aPhysCoreParams->rho_i())
-		, _rho_water(aPhysCoreParams->rho_w())
+		, m_rho_ice(aPhysCoreParams->rho_i())
+		, m_rho_water(aPhysCoreParams->rho_w())
 	{
 
 	}

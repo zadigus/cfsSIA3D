@@ -15,7 +15,7 @@
 
 namespace N_Mathematics {
 
-	LinSyst* LinSystFactory::make(unsigned int MS, N_Configuration::Component* aLinSyst) // TODO: make use of SubComponents
+	LinSyst* LinSystFactory::make(N_Configuration::Component* aLinSyst) // TODO: make use of SubComponents
 	{
 		if (aLinSyst)
 		{
@@ -26,14 +26,14 @@ namespace N_Mathematics {
 				if (!std::strcmp(aLinSyst->type()->c_str(), "PETSc"))
 				{
 
-					return new PETScLinSyst(MS, aLinSyst); 
+					return new PETScLinSyst(aLinSyst); 
 				}
 #endif
 
 #ifdef USE_TRILINOS
 				if (!std::strcmp(aLinSyst->type()->c_str(), "Belos"))
 				{
-					return new BelosLinSyst(MS, aLinSyst); 
+					return new BelosLinSyst(aLinSyst); 
 				}
 #endif
 
@@ -43,13 +43,13 @@ namespace N_Mathematics {
 			else // no LinSyst type provided => default LinSyst
 			{
 				std::cerr << "Linear system type not provided." << std::endl; // TODO: write that in a log file
-				return new BelosLinSyst(MS); // TODO: put the iml++/sp++ linsyst 
+				return new BelosLinSyst(); // TODO: put the iml++/sp++ linsyst 
 			}
 		}
 		else // LinSyst sub-component not provided => default LinSyst
 		{
 			std::cerr << "Linear system not provided." << std::endl;
-			return new BelosLinSyst(MS); // TODO: put the iml++/sp++ linsyst 
+			return new BelosLinSyst(); // TODO: put the iml++/sp++ linsyst 
 		}
 	}
 

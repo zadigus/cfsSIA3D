@@ -10,17 +10,12 @@ namespace N_Glacier {
 
 	AltitudeSL::AltitudeSL(N_Configuration::Component* aComponent)
 		: SlidingLaw(aComponent)
-		, _Z(_parameters.find("Z") != _parameters.end() ? std::stod(_parameters["Z"]) : 0)
-		, _C(_parameters.find("C") != _parameters.end() ? std::stod(_parameters["C"]) : 0)
+		, m_Z(m_parameters.find("Z") != m_parameters.end() ? std::stod(m_parameters["Z"]) : 0)
+		, m_C(m_parameters.find("C") != m_parameters.end() ? std::stod(m_parameters["C"]) : 0)
 	{
 		
 	}
-
-	/*AltitudeSL::AltitudeSL() : SlidingLaw()
-	{
-
-	}*/
-
+	
 	AltitudeSL::~AltitudeSL()
 	{
 
@@ -34,9 +29,9 @@ namespace N_Glacier {
 			{
 				for (unsigned int j = 0; j<bed.Ny(); ++j)
 				{
-					(*_sc)(i, j) = 0;
+					(*m_sc)(i, j) = 0;
 					if (Z() - bed(i, j) > 0)
-						(*_sc)(i, j) = C() * pow(Z() - bed(i, j), 1. / n); // sliding at the grid points
+						(*m_sc)(i, j) = C() * pow(Z() - bed(i, j), 1. / n); // sliding at the grid points
 				}
 			}
 		}

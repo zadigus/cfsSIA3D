@@ -10,9 +10,9 @@
 
 namespace N_Mathematics {
 
-	FiniteDifferenceClimateAlgorithm::FiniteDifferenceClimateAlgorithm(/*const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, */N_Configuration::Component* aClimateAlgo) 
+	FiniteDifferenceClimateAlgorithm::FiniteDifferenceClimateAlgorithm(N_Configuration::Component* aClimateAlgo) 
 		: FiniteDifferencePrimalAlgorithm(aClimateAlgo)
-		, _B(_glacier->B())
+		, m_B(_glacier->B())
 	{
 		
 	}

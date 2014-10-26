@@ -14,8 +14,8 @@ public:
 	Array2D& operator=(const Array2D&);
 
 	// Getters
-	int Nx() const { return _Nx; }
-	int Ny() const { return _Ny; }
+	int Nx() const { return m_Nx; }
+	int Ny() const { return m_Ny; }
 	double& operator()(const int, const int);
 
 	// Data handling
@@ -26,9 +26,9 @@ public:
 
 	void Reset(int Nrows, int Ncols);
 private:
-	int _Nx;
-	int _Ny;
-	std::unique_ptr<double[]> _Data;
+	int m_Nx;
+	int m_Ny;
+	std::unique_ptr<double[]> m_Data;
 };
 
 Array2D operator+(const Array2D&, const Array2D&);

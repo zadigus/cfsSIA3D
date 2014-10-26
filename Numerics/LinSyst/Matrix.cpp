@@ -2,7 +2,7 @@
 
 namespace N_Mathematics {
 
-	Matrix::Matrix(unsigned int MS) : _MS(MS)
+	Matrix::Matrix(unsigned int MS) : m_MS(MS)
 	{
 
 	}
@@ -14,9 +14,9 @@ namespace N_Mathematics {
 
 	void Matrix::Clear()
 	{
-		_NonZeroes.clear();
-		_ColIdx.clear();
-		_Values.clear();
+		m_NonZeroes.clear();
+		m_ColIdx.clear();
+		m_Values.clear();
 	}
 
 }

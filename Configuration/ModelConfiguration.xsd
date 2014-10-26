@@ -1,20 +1,29 @@
 <?xml version="1.0" ?>
 
-<xsd:schema xmlns:param="http://www.cjcaesar.ch/Parameter"
+<!-- xmlns:param="http://www.cjcaesar.ch/Parameter" -->
+
+<xsd:schema 
+						xmlns:subc="http://www.cjcaesar.ch/SubComponent"
 						targetNamespace="http://www.cjcaesar.ch/ModelConfiguration"
 						xmlns:mconf="http://www.cjcaesar.ch/ModelConfiguration"
             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 						elementFormDefault="qualified">
 						
-	<xsd:import schemaLocation="Parameter.xsd" namespace="http://www.cjcaesar.ch/Parameter"/>
-	
+	<!--xsd:import schemaLocation="Parameter.xsd" namespace="http://www.cjcaesar.ch/Parameter"/-->
+	<xsd:import schemaLocation="SubComponent.xsd" namespace="http://www.cjcaesar.ch/SubComponent"/>
+		
 	<xsd:complexType name="ModelConfiguration"> <!-- TODO: define the components more precisely; for example, define a MassBalance component to hold either ac, am, ELA, eps, OR m1, m2, ELA, eps, OR etc. -->
 		<xsd:sequence>
 			<xsd:element name="Component" maxOccurs="unbounded">
 				<xsd:complexType>
-					<xsd:sequence>
+					<!--xsd:sequence>
 						<xsd:element ref="param:Parameter" minOccurs="0" maxOccurs="unbounded"/>
+					</xsd:sequence-->
+					
+					<xsd:sequence>
+						<xsd:element ref="subc:SubComponent" minOccurs="0" maxOccurs="unbounded"/>
 					</xsd:sequence>
+					
 					<xsd:attribute name="type" type="xsd:string"/>
 					<xsd:attribute name="name" type="xsd:string"/>
 				</xsd:complexType>

@@ -7,9 +7,9 @@
 
 namespace N_Mathematics {
 
-	LinSyst::LinSyst(unsigned int MS, N_Configuration::Component* aLinSyst)
-		: _A(nullptr)
-		, _b(nullptr)
+	LinSyst::LinSyst(N_Configuration::Component* aLinSyst)
+		: m_A(nullptr)
+		, m_b(nullptr)
 	{
 	
 	}
@@ -21,8 +21,17 @@ namespace N_Mathematics {
 
 	unsigned int LinSyst::MS()
 	{
-		return _A->MS();
+		return m_A->MS();
 	}
 	
+	void LinSyst::SetMatrix(std::unique_ptr<Matrix> Mat)
+	{
+		m_A.reset(Mat.release());
+	}
+
+	void LinSyst::SetRHS(std::unique_ptr<Vector> RHS)
+	{
+		m_b.reset(RHS.release());
+	}
 
 }

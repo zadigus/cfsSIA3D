@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <m:Model
 						xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-            xsi:schemaLocation="http://www.cjcaesar.ch/ModelConfiguration ModelConfiguration.xsd" 
+            xsi:schemaLocation="http://www.cjcaesar.ch/ModelConfiguration ..\Configuration\ModelConfiguration.xsd" 
             xmlns:m="http://www.cjcaesar.ch/ModelConfiguration"
 						xmlns:param="http://www.cjcaesar.ch/Parameter"> 
 
-<m:Component name="Diffusion"  type="SemiImplicit"/> <!-- add e.g. parameters for the linear system -->
+<m:Component name="Diffusion"  type="SemiImplicit"> <!-- add e.g. parameters for the linear system -->
+	<!--SubComponent name="LinearSystem" type="Belos">
+	
+	</SubComponent-->
+</m:Component>
 
 <m:Component name="Climate"    type="FullyImplicit"> 
 	<param:Parameter name="tol">1e-6</param:Parameter>

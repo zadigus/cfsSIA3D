@@ -9,13 +9,13 @@ namespace N_Glacier {
 
 	Rheology::Rheology(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams, N_Configuration::Component* aComponent)
 		: GlacierComponent(aComponent)
-		, _A(_parameters.find("A") != _parameters.end() ? std::stod(_parameters["A"]) : 0)
-		, _n(_parameters.find("n") != _parameters.end() ? std::stod(_parameters["n"]) : 0)
-		, _rho(aPhysCoreParams->rho_i())
-		, _g(aPhysCoreParams->g())
+		, m_A(m_parameters.find("A") != m_parameters.end() ? std::stod(m_parameters["A"]) : 0)
+		, m_n(m_parameters.find("n") != m_parameters.end() ? std::stod(m_parameters["n"]) : 0)
+		, m_rho(aPhysCoreParams->rho_i())
+		, m_g(aPhysCoreParams->g())
 	{
 
-		_rhogn = pow(_rho*_g, n());
+		m_rhogn = pow(m_rho*m_g, n());
 		UpdateGamma();
 		assert(0 < n() && n() <= 3);
 	}
@@ -27,12 +27,12 @@ namespace N_Glacier {
 
 	void Rheology::UpdateGamma()
 	{ // Gamma in consistent units
-		_Gamma = 2 * A() *_rhogn / (n() + 2);
+		m_Gamma = 2 * A() *m_rhogn / (n() + 2);
 	}
 
 	double Rheology::A()
 	{
-		return _A * pow(1e-5, n());
+		return m_A * pow(1e-5, n());
 	}
 
 }

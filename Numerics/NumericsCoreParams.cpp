@@ -9,14 +9,14 @@ namespace N_Mathematics {
 		N_Configuration::ModelCoreConfiguration::Parameter_sequence paramSeq = aNumericsCoreConf->Parameter();
 		for (N_Configuration::ModelCoreConfiguration::Parameter_const_iterator it = paramSeq.begin(); it != paramSeq.end(); ++it)
 		{
-			_parameters.emplace(it->name(), (*it));
+			m_parameters.emplace(it->name(), (*it));
 		}
 	}
 
 	double NumericsCoreParams::dt()
 	{
-		std::map<std::string, std::string>::iterator it(_parameters.find("dt"));
-		return it != _parameters.end() ? std::stod(it->second) : 0.001;
+		std::map<std::string, std::string>::iterator it(m_parameters.find("dt"));
+		return it != m_parameters.end() ? std::stod(it->second) : 0.001;
 	}
 
 }

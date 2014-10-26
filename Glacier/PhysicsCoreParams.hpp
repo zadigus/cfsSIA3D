@@ -19,7 +19,7 @@ namespace N_Glacier {
 		double rho_i(); // ice density [kg/m^3]
 		double rho_w(); // water density [kg/m^3]
 
-		std::map<std::string, std::string> _parameters;
+		std::map<std::string, std::string> m_parameters;
 	};
 
 }

@@ -9,8 +9,8 @@
 namespace N_Glacier {
 
 	GlacierComponent::GlacierComponent(N_Configuration::Component* aComponent) 
-		: _name(aComponent != nullptr ? aComponent->name()->c_str() : "")
-		, _type(aComponent != nullptr ? (aComponent->type().present() ? aComponent->type()->c_str() : "") : "")
+		: m_name(aComponent != nullptr ? aComponent->name()->c_str() : "")
+		, m_type(aComponent != nullptr ? (aComponent->type().present() ? aComponent->type()->c_str() : "") : "")
 	{
 		//std::cout << "Component " << _name; // TODO: write in log file
 		//if (!_type.empty())
@@ -23,14 +23,14 @@ namespace N_Glacier {
 			for (N_Configuration::Component::Parameter_const_iterator it = params.begin(); it != params.end(); ++it)
 			{
 				//std::cout << it->name() << ", " << (*it) << std::endl; // TODO: write in log file
-				_parameters.emplace(it->name(), (*it));
+				m_parameters.emplace(it->name(), (*it));
 			}
 		}
 	}
 
 	GlacierComponent::~GlacierComponent()
 	{
-		_parameters.clear();
+		m_parameters.clear();
 	}
 
 }

@@ -4,15 +4,9 @@
 #include <memory>
 #include "PrimalAlgorithm.hpp"
 
-//class Grid;
-
 namespace N_Configuration {
 	class Component;
 }
-
-//namespace N_Glacier {
-	//class Glacier;
-//}
 
 namespace N_Mathematics {
 

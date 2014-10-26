@@ -31,6 +31,10 @@ namespace N_Mathematics {
 			virtual void BuildLinSyst();
 			// Compute the diffusivity D
 			void ComputeDiffusivity();
+
+		private:
+			double m_C1; // dt / (2 dx)
+			double m_C2; // dt / (2 dx^2)
 	};
 
 }

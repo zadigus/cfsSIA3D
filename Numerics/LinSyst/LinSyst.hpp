@@ -18,30 +18,20 @@ namespace N_Mathematics {
 	 */
 	class LinSyst {
 		public:
-			explicit LinSyst(unsigned int MS, N_Configuration::Component* aLinSyst = nullptr); // TODO: define SUBComponents (e.g. for Component Diffusion, define SubComponent LinSyst)
+			explicit LinSyst(N_Configuration::Component* aLinSyst = nullptr); // TODO: define SUBComponents (e.g. for Component Diffusion, define SubComponent LinSyst)
 			virtual ~LinSyst();
 
 			virtual const Vector& Solve() = 0;
 
 			// Getters
 			unsigned int MS();
-			std::shared_ptr<Matrix> Mat();
-			std::shared_ptr<Vector> RHS();
+			void SetMatrix(std::unique_ptr<Matrix> Mat);
+			void SetRHS(std::unique_ptr<Vector> RHS);
 
 		protected:
-			std::shared_ptr<Matrix> _A;
-			std::shared_ptr<Vector> _b;
+			std::unique_ptr<Matrix> m_A;
+			std::unique_ptr<Vector> m_b;
 	};
-
-	inline std::shared_ptr<Matrix> LinSyst::Mat()
-	{
-		return _A;
-	}
-
-	inline std::shared_ptr<Vector> LinSyst::RHS()
-	{
-		return _b;
-	}
 
 }
 

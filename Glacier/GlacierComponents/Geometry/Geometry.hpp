@@ -2,7 +2,6 @@
 #define GEOMETRY_H_
 
 #include "Glacier/GlacierComponents/GlacierComponent.hpp"
-//#include "GlacierComponent.hpp"
 #include "Numerics/Mesh/Grid.hpp"
 
 #include <iostream>
@@ -19,22 +18,34 @@ namespace N_Glacier {
 			
 			std::shared_ptr<Grid> b();
 			std::shared_ptr<Grid> H();
-
-			//void print() { std::cout << "H.Dx = " << _H->Dx() << std::endl; }
+			std::shared_ptr<Grid> gradbx();
+			std::shared_ptr<Grid> gradby();
 
 		private:
-			std::shared_ptr<Grid> _b; // bedrock topography
-			std::shared_ptr<Grid> _H; // ice thickness
+			std::shared_ptr<Grid> m_b; // bedrock topography
+			std::shared_ptr<Grid> m_H; // ice thickness
+			std::shared_ptr<Grid> m_gradbx; // gradients of the bedrock topography wrt to x
+			std::shared_ptr<Grid> m_gradby; // wrt to y
 	};
 	
 	inline std::shared_ptr<Grid> Geometry::b()
 	{
-		return _b;
+		return m_b;
 	}
 
 	inline std::shared_ptr<Grid> Geometry::H()
 	{
-		return _H;
+		return m_H;
+	}
+
+	inline std::shared_ptr<Grid> Geometry::gradbx()
+	{
+		return m_gradbx;
+	}
+
+	inline std::shared_ptr<Grid> Geometry::gradby()
+	{
+		return m_gradby;
 	}
 
 }

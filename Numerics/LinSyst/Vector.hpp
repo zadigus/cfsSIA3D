@@ -16,18 +16,18 @@ namespace N_Mathematics {
 			void Clear();
 
 		protected:
-			unsigned int _MS;
-			std::vector<double> _Values;
+			unsigned int m_MS;
+			std::vector<double> m_Values;
 	};
 
 	inline unsigned int Vector::MS()
 	{
-		return _MS;
+		return m_MS;
 	}
 
 	inline void Vector::InsertValue(double val)
 	{
-		_Values.push_back(val);
+		m_Values.push_back(val);
 	}
 
 }

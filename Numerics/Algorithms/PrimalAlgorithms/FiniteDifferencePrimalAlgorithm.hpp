@@ -16,7 +16,7 @@ namespace N_Mathematics {
 	class FiniteDifferencePrimalAlgorithm : public PrimalAlgorithm
 	{
 		public:
-			FiniteDifferencePrimalAlgorithm(/*const std::unique_ptr<NumericsCoreParams>& aNumCoreParams,*/ N_Configuration::Component* aFiniteDifferenceAlgo);
+			FiniteDifferencePrimalAlgorithm(N_Configuration::Component* aFiniteDifferenceAlgo);
 			virtual ~FiniteDifferencePrimalAlgorithm();
 
 			virtual void Run() = 0;
@@ -25,19 +25,23 @@ namespace N_Mathematics {
 			// Access the geometry in a "natural" way
 			double& H(unsigned int i, unsigned int j); // read & write
 			double b(unsigned int i, unsigned int j);  // read only
+			double gradbx(unsigned int i, unsigned int j);
+			double gradby(unsigned int i, unsigned int j);
 
 		protected:
 			// Ice thickness
-			std::shared_ptr<Grid> _H;
+			std::shared_ptr<Grid> m_H;
 
 			// Numerics parameters
-			int _Nx;
-			int _Ny;
-			double _Dx;
+			int m_Nx;
+			int m_Ny;
+			double m_Dx;
 
 		private:
 			// Bedrock topography
-			std::shared_ptr<Grid> _b;
+			std::shared_ptr<Grid> m_b;
+			std::shared_ptr<Grid> m_gradbx;
+			std::shared_ptr<Grid> m_gradby;
 	};
 
 }

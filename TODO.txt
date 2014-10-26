@@ -1,0 +1,3 @@
+* Incorporate SubComponents everywhere; maybe define a "General" SubComponent
+	- in the code
+	- in the xml configuration files

@@ -7,7 +7,7 @@ namespace N_Glacier {
 
 	ConstantMB::ConstantMB(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams, N_Configuration::Component* aComponent)
 		: MassBalance(aPhysCoreParams, aComponent)
-		, _mb(new Grid(_parameters["grid"])) 
+		, m_mb(new Grid(m_parameters["grid"])) 
 	{
 
 	}
@@ -20,7 +20,7 @@ namespace N_Glacier {
 	const double ConstantMB::operator()(const double x, const double y, const double b, const double H)
 	{
 		// only depends on surface altitude
-		return (*_mb)(x, y);
+		return (*m_mb)(x, y);
 	}
 
 	const double ConstantMB::operator()(const double b, const double H3, const double H2)

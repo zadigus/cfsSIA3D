@@ -13,7 +13,7 @@ namespace N_Mathematics {
 	class PETScLinSyst : public LinSyst
 	{
 		public:
-			PETScLinSyst(unsigned int MS, N_Configuration::Component* aLinSyst = nullptr); // TODO: think about what default parameters to set when no config exists
+			PETScLinSyst(N_Configuration::Component* aLinSyst = nullptr); // TODO: think about what default parameters to set when no config exists
 			~PETScLinSyst();
 
 			// Solving linear system
@@ -26,11 +26,11 @@ namespace N_Mathematics {
 			void 	Restore(double *x) 	{ VecRestoreArray(_X, &x); }*/
 
 		private:
-			Vec _b, _X;
-			Mat _A;
-			KSP _solver;
+			Vec m_b, m_X;
+			Mat m_A;
+			KSP m_Solver;
 			
-			KSPConvergedReason _reason;
+			KSPConvergedReason m_Reason;
 	};
 
 }

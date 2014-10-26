@@ -24,22 +24,22 @@ class Grid{
 
 
 		// Getters
-		unsigned int Nx() const		{ return _Coords.Nx; }
-		unsigned int Ny() const		{ return _Coords.Ny; }
-		double Dx()	const 				{ return _Coords.Dx; }
-		double Dy()	const 				{ return _Coords.Dy; }
-		double Xll() const 				{ return _Coords.Xll; }
-		double Yll() const				{ return _Coords.Yll; }
+		unsigned int Nx() const		{ return m_Coords.Nx; }
+		unsigned int Ny() const		{ return m_Coords.Ny; }
+		double Dx()	const 				{ return m_Coords.Dx; }
+		double Dy()	const 				{ return m_Coords.Dy; }
+		double Xll() const 				{ return m_Coords.Xll; }
+		double Yll() const				{ return m_Coords.Yll; }
 		double  X(unsigned int i) const		{ return Xll() + i*Dx(); } // Local coordinates
 		double  Y(unsigned int j) const		{ return Yll() + j*Dy(); }
-		bool IsData(unsigned int i, unsigned int j) { return (_Data(i, j) != _NoData); }
+		bool IsData(unsigned int i, unsigned int j) { return (m_Data(i, j) != m_NoData); }
 
 		// Data handling
 		void Clear();
 		void Refine(double ratio);
 		void Refine(double ratioX, double ratioY);
 
-		double& operator()(const unsigned int i, const unsigned int j) { return _Data(i, j); }
+		double& operator()(const unsigned int i, const unsigned int j) { return m_Data(i, j); }
 		const double operator()(const double x, const double y);
 
 		Grid& operator+=(const Grid&);
@@ -65,9 +65,9 @@ class Grid{
 		double Max();
 
 	private:
-		SpaceParams _Coords;
-		double      _NoData;          // no data value
-		Array2D       _Data;          // values at the grid points
+		SpaceParams m_Coords;
+		double      m_NoData;          // no data value
+		Array2D       m_Data;          // values at the grid points
 };
 
 Grid operator+(const Grid&, const Grid&);

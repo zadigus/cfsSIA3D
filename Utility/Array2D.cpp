@@ -3,9 +3,9 @@
 #include <cassert>
 
 Array2D::Array2D(int Nx, int Ny)
-: _Nx(Nx)
-, _Ny(Ny)
-,	_Data(new double[Nx*Ny]()) // initialize with zeroes
+: m_Nx(Nx)
+, m_Ny(Ny)
+,	m_Data(new double[Nx*Ny]()) // initialize with zeroes
 {
 
 }
@@ -16,72 +16,69 @@ Array2D::~Array2D()
 }
 
 Array2D::Array2D(const Array2D& right) // produce a new object
-: _Nx(right._Nx)
-, _Ny(right._Ny)
-, _Data(new double[_Nx*_Ny])
+: m_Nx(right.m_Nx)
+, m_Ny(right.m_Ny)
+, m_Data(new double[m_Nx*m_Ny])
 {
-	double* source(right._Data.get());
-	double* dest(_Data.get());
-	std::copy(source, source + _Nx*_Ny, dest);
+	double* source(right.m_Data.get());
+	double* dest(m_Data.get());
+	std::copy(source, source + m_Nx*m_Ny, dest);
 }
 
 Array2D& Array2D::operator=(const Array2D& right) // set an existing object
 {
-	//assert(_Nx == right._Nx);
-	//assert(_Ny == right._Ny);
+	m_Nx = right.m_Nx;
+	m_Ny = right.m_Ny;
 
-	_Nx = right._Nx;
-	_Ny = right._Ny;
-
-	_Data.reset(new double[_Nx*_Ny]);
-	double* source(right._Data.get());
-	double* dest(_Data.get());
-	std::copy(source, source + _Nx*_Ny, dest);
+	m_Data.reset(new double[m_Nx*m_Ny]);
+	double* source(right.m_Data.get());
+	double* dest(m_Data.get());
+	std::copy(source, source + m_Nx*m_Ny, dest);
 
 	return *this;
 }
 
 void Array2D::Reset(int Nx, int Ny)
 {
-	_Nx = Nx;
-	_Ny = Ny;
-	_Data.reset(new double[_Nx*_Ny]());
+	m_Nx = Nx;
+	m_Ny = Ny;
+	m_Data.reset(new double[m_Nx*m_Ny]());
 }
 
 void Array2D::operator()()
 {
-	_Data.reset(new double[_Nx*_Ny]()); // reset with zeroes 
+	m_Data.reset(new double[m_Nx*m_Ny]()); // reset with zeroes 
 }
 
 double& Array2D::operator()(const int i, const int j)
 {
 	assert(0 <= i); assert(0 <= j);
-	assert(i < _Nx); assert(j < _Ny);
-	return _Data[i*_Ny + j];
+	assert(i < m_Nx); assert(j < m_Ny);
+	return m_Data[i*m_Ny + j];
 }
 
 Array2D& Array2D::operator+=(const Array2D& right)
 {
-	assert(right._Nx == _Nx);
-	assert(right._Ny == _Ny);
-	for (int i(0); i < _Nx*_Ny; ++i)
-		_Data[i] += right._Data[i];
+	assert(right.m_Nx == m_Nx);
+	assert(right.m_Ny == m_Ny);
+	for (int i(0); i < m_Nx*m_Ny; ++i)
+		m_Data[i] += right.m_Data[i];
 	return *this;
 }
 
 Array2D& Array2D::operator-=(const Array2D& right)
 {
-	assert(right._Nx == _Nx);
-	assert(right._Ny == _Ny);
-	for (int i(0); i < _Nx*_Ny; ++i)
-		_Data[i] -= right._Data[i];
+	assert(right.m_Nx == m_Nx);
+	assert(right.m_Ny == m_Ny);
+	for (int i(0); i < m_Nx*m_Ny; ++i)
+		m_Data[i] -= right.m_Data[i];
 	return *this;
 }
 
 Array2D& Array2D::operator*=(double c)
 {
-	for (int i(0); i < _Nx*_Ny; ++i)
-		_Data[i] *= c;
+	for (int i(0); i < m_Nx*m_Ny; ++i)
+		m_Data[i] *= c;
 	return *this;
 }
 

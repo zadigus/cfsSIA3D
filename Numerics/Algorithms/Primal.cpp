@@ -16,19 +16,16 @@
 
 namespace N_Mathematics {
 
-	//Primal* Primal::_instance = nullptr;
-
 	Primal& Primal::getInstance() 
 	{
 		static Primal instance;
-		//_instance = &instance;
 		return instance;
 	}
 
 	Primal::Primal()
-		: _DiffusionAlgo(nullptr)
-		, _ClimateAlgo(nullptr)
-		, _ProjectionAlgo(nullptr)
+		: m_DiffusionAlgo(nullptr)
+		, m_ClimateAlgo(nullptr)
+		, m_ProjectionAlgo(nullptr)
 	{
 		
 	}
@@ -38,20 +35,6 @@ namespace N_Mathematics {
 
 	}
 
-	/*Primal::Primal(const Primal& rhs)
-	{
-		_instance = rhs._instance;
-	}
-
-	Primal& Primal::operator= (const Primal& rhs)
-	{
-		if (this != &rhs)
-		{
-			_instance = rhs._instance;
-		}
-		return *this;
-	}*/
-
 	void Primal::init(std::unique_ptr<N_Configuration::ModelConfiguration>& aMathConf, std::shared_ptr<N_Glacier::Glacier>& aGlacier)
 	{
 		N_Configuration::ModelConfiguration::Component_sequence compSeq(aMathConf->Component());
@@ -60,15 +43,15 @@ namespace N_Mathematics {
 			std::cout << "Math::Component " << it->name() << std::endl;
 			if (!std::strcmp(it->name()->c_str(), "Diffusion"))
 			{
-				_DiffusionAlgo.reset(DiffusionAlgorithmFactory::make(/*aGlacier, */&(*it))); 
+				m_DiffusionAlgo.reset(DiffusionAlgorithmFactory::make(&(*it))); 
 			}
 			else if (!std::strcmp(it->name()->c_str(), "Climate"))
 			{
-				_ClimateAlgo.reset(ClimateAlgorithmFactory::make(/*aGlacier, */&(*it)));
+				m_ClimateAlgo.reset(ClimateAlgorithmFactory::make(&(*it)));
 			}
 			else if (!std::strcmp(it->name()->c_str(), "Projection"))
 			{
-				_ProjectionAlgo.reset(ProjectionAlgorithmFactory::make(/*aGlacier, */&(*it)));
+				m_ProjectionAlgo.reset(ProjectionAlgorithmFactory::make(&(*it)));
 			}
 			else
 			{
@@ -77,38 +60,38 @@ namespace N_Mathematics {
 		}
 
 		// Check configuration
-		if (!_DiffusionAlgo)
+		if (!m_DiffusionAlgo)
 		{
-			_DiffusionAlgo.reset(DiffusionAlgorithmFactory::make(/*aGlacier*/));
+			m_DiffusionAlgo.reset(DiffusionAlgorithmFactory::make());
 		}
-		if (!_ClimateAlgo)
+		if (!m_ClimateAlgo)
 		{
-			_ClimateAlgo.reset(ClimateAlgorithmFactory::make(/*aGlacier*/));
+			m_ClimateAlgo.reset(ClimateAlgorithmFactory::make());
 		}
-		if (!_ProjectionAlgo)
+		if (!m_ProjectionAlgo)
 		{
-			_ProjectionAlgo.reset(ProjectionAlgorithmFactory::make(/*aGlacier*/));
+			m_ProjectionAlgo.reset(ProjectionAlgorithmFactory::make());
 		}
 
 		// Add glacier reference
-		_DiffusionAlgo->setGlacierRef(aGlacier);
-		_ClimateAlgo->setGlacierRef(aGlacier);
-		_ProjectionAlgo->setGlacierRef(aGlacier);
+		m_DiffusionAlgo->setGlacierRef(aGlacier);
+		m_ClimateAlgo->setGlacierRef(aGlacier);
+		m_ProjectionAlgo->setGlacierRef(aGlacier);
 	}
 
 	void Primal::Diffusion()
 	{
-		_DiffusionAlgo->Run(); // TODO: that should update the ice thickness
+		m_DiffusionAlgo->Run(); 
 	}
 
 	void Primal::Climate()
 	{
-		_ClimateAlgo->Run();
+		m_ClimateAlgo->Run();
 	}
 
 	void Primal::Projection()
 	{
-		_ProjectionAlgo->Run();
+		m_ProjectionAlgo->Run();
 	}
 
 }

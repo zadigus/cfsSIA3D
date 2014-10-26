@@ -16,10 +16,10 @@ namespace N_Glacier {
 			virtual ~GradELA();
 
 			// Getters
-			double ELA(){ return _ELA; } 
-			double m1() { return _m1; }  
-			double m2() { return _m2; }  
-			double eps(){ return _eps; } 
+			double ELA(){ return m_ELA; } 
+			double m1() { return m_m1; }  
+			double m2() { return m_m2; }  
+			double eps(){ return m_eps; } 
 
 			virtual const double operator()(const double x, const double y, const double b, const double H);
 
@@ -27,10 +27,10 @@ namespace N_Glacier {
 			virtual const double operator()(const double b, const double H3, const double H2); // B(b, Hn, H)
 			virtual double dB(double b, double H3, double H2); // dBdH(b, Hn, H)
 		protected:
-			double _ELA; // equilibrium line altitude [m]
-			double  _m1; // melting rate below ELA [w.e. / a]
-			double  _m2; // melting rate above ELA; m2<=m1 [w.e. / a]
-			double _eps; // regularization parameter
+			double m_ELA; // equilibrium line altitude [m]
+			double  m_m1; // melting rate below ELA [w.e. / a]
+			double  m_m2; // melting rate above ELA; m2<=m1 [w.e. / a]
+			double m_eps; // regularization parameter
 	};
 
 }

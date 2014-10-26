@@ -9,12 +9,10 @@ namespace N_Configuration {
 
 namespace N_Mathematics {
 
-	//class NumericsCoreParams;
-
 	class FiniteDifferenceProjectionAlgorithm : public FiniteDifferencePrimalAlgorithm
 	{
 		public:
-			FiniteDifferenceProjectionAlgorithm(/*const std::unique_ptr<NumericsCoreParams>& aNumCoreParams,*/ N_Configuration::Component* aProjectionAlgo);
+			FiniteDifferenceProjectionAlgorithm(N_Configuration::Component* aProjectionAlgo);
 			virtual ~FiniteDifferenceProjectionAlgorithm();
 
 			virtual void Run() = 0;

@@ -8,18 +8,11 @@ namespace N_Glacier {
 
 	SlidingLaw::SlidingLaw(N_Configuration::Component* aSlidingLaw)
 		: GlacierComponent(aSlidingLaw)
-		, _sl(nullptr)
-		, _sc(nullptr)
+		, m_sl(nullptr)
+		, m_sc(nullptr)
 	{
 
 	}
-
-	/*SlidingLaw::SlidingLaw()
-		: _sl(nullptr)
-		, _sc(nullptr)
-	{
-
-	}*/
 
 	SlidingLaw::~SlidingLaw()
 	{
@@ -35,8 +28,8 @@ namespace N_Glacier {
 
 	void SlidingLaw::Init(const Grid& bed)
 	{
-		_sl.reset(new Grid(bed.Nx(), bed.Ny(), bed.Dx(), bed.Dy()));
-		_sc.reset(new Grid(bed.Nx(), bed.Ny(), bed.Dx(), bed.Dy()));
+		m_sl.reset(new Grid(bed.Nx(), bed.Ny(), bed.Dx(), bed.Dy()));
+		m_sc.reset(new Grid(bed.Nx(), bed.Ny(), bed.Dx(), bed.Dy()));
 	}
 
 	void SlidingLaw::Fill(Grid& bed, unsigned int n)
@@ -46,26 +39,26 @@ namespace N_Glacier {
 
 	void SlidingLaw::Stagger(unsigned int n)
 	{ // n is Glen's exponent
-		for (unsigned int i = 1; i < _sl->Nx(); ++i)
-			for (unsigned int j = 1; j < _sl->Ny(); ++j) // convert to consistent units and project onto staggered grid
-				(*_sl)(i, j) = (pow((*_sc)(i, j)*1e-5, n) + pow((*_sc)(i - 1, j)*1e-5, n) + pow((*_sc)(i, j - 1)*1e-5, n) + pow((*_sc)(i - 1, j - 1)*1e-5, n)) / 4.;
+		for (unsigned int i = 1; i < m_sl->Nx(); ++i)
+			for (unsigned int j = 1; j < m_sl->Ny(); ++j) // convert to consistent units and project onto staggered grid
+				(*m_sl)(i, j) = (pow((*m_sc)(i, j)*1e-5, n) + pow((*m_sc)(i - 1, j)*1e-5, n) + pow((*m_sc)(i, j - 1)*1e-5, n) + pow((*m_sc)(i - 1, j - 1)*1e-5, n)) / 4.;
 	}
 
 	// Access to class members
 	const double& SlidingLaw::operator()(const unsigned int i, const unsigned int j) const
 	{
 		// access to staggered grid
-		return (*_sl)(i, j);
+		return (*m_sl)(i, j);
 	}
 
 	void SlidingLaw::Export(std::string fileName) const
 	{
-		_sc->Export(fileName);
+		m_sc->Export(fileName);
 	}
 
 	void SlidingLaw::ExportSL(std::string fileName) const
 	{
-		_sl->Export(fileName);
+		m_sl->Export(fileName);
 	}
 
 }

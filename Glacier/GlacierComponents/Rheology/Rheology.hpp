@@ -20,21 +20,21 @@ namespace N_Glacier {
 		//void Set(unsigned int i, double val);
 
 		// Access to rheological quantities
-		double n() { return _n; } // Glen exponent
+		double n() { return m_n; } // Glen exponent
 		double A(); // rate factor in Pa^{-n}*a^{-1}
-		double rhogn() const { return _rhogn; }
-		double Gamma() const { return _Gamma; }
+		double rhogn() const { return m_rhogn; }
+		double Gamma() const { return m_Gamma; }
 
 	protected:
 		void UpdateGamma();
 
 	private:
-		double			  _A; // rate factor [bar^{-n} a^{-1}]
-		double				_n; // Glen exponent [no units]
-		double	    _rho; // ice density [kg/m^3]
-		double	      _g; // gravitational acceleration [m/s^2]
-		double    _rhogn; // (rho*g)^n
-		double    _Gamma; // Gamma = 2A(rho g)^n/(n+2)
+		double			  m_A; // rate factor [bar^{-n} a^{-1}]
+		double				m_n; // Glen exponent [no units]
+		double	    m_rho; // ice density [kg/m^3]
+		double	      m_g; // gravitational acceleration [m/s^2]
+		double    m_rhogn; // (rho*g)^n
+		double    m_Gamma; // Gamma = 2A(rho g)^n/(n+2)
 	};
 
 }

@@ -32,20 +32,14 @@ namespace N_Mathematics {
 			void Projection();					// enforce H >= 0
 
 		private:
-			//static Primal* _instance;
-
 			// Ctor/Dtor
 			Primal(); 
 			~Primal();
 
-			// Copy ctor / assignment operator
-			/*Primal(const Primal& rhs);
-			Primal& operator=(const Primal& rhs);*/
-
 			// Strategy pattern
-			std::unique_ptr<PrimalAlgorithm>     _DiffusionAlgo;
-			std::unique_ptr<PrimalAlgorithm>       _ClimateAlgo;
-			std::unique_ptr<PrimalAlgorithm>    _ProjectionAlgo;
+			std::unique_ptr<PrimalAlgorithm>     m_DiffusionAlgo;
+			std::unique_ptr<PrimalAlgorithm>       m_ClimateAlgo;
+			std::unique_ptr<PrimalAlgorithm>    m_ProjectionAlgo;
 	};
 
 }

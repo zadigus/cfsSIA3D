@@ -18,7 +18,7 @@ namespace N_Glacier {
 
 	void ConstantSL::Init(const Grid& bed)
 	{
-		_sc.reset(new Grid(_parameters["grid"])); 
-		_sl.reset(new Grid(_sc->Nx(), _sc->Ny(), _sc->Dx(), _sc->Dy()));
+		m_sc.reset(new Grid(m_parameters["grid"])); 
+		m_sl.reset(new Grid(m_sc->Nx(), m_sc->Ny(), m_sc->Dx(), m_sc->Dy()));
 	}
 }

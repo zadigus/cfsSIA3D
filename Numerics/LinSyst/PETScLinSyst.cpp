@@ -9,45 +9,45 @@
 
 namespace N_Mathematics {
 
-	PETScLinSyst::PETScLinSyst(unsigned int MS, N_Configuration::Component* aLinSyst)
-		: LinSyst(MS, aLinSyst)
+	PETScLinSyst::PETScLinSyst(N_Configuration::Component* aLinSyst)
+		: LinSyst(aLinSyst)
 	{
-		/*VecCreateSeq(PETSC_COMM_SELF, _MS, &_X); 
-		KSPCreate(PETSC_COMM_SELF, &_solver);
-		KSPSetType(_solver, KSPPREONLY);
+		/*VecCreateSeq(PETSC_COMM_SELF, m_MS, &m_X); 
+		KSPCreate(PETSC_COMM_SELF, &m_Solver);
+		KSPSetType(m_Solver, KSPPREONLY);
 		PC pc; 
-		KSPGetPC(_solver, &pc); 
+		KSPGetPC(m_Solver, &pc); 
 		PCSetType(pc, PCLU);*/
 	}
 
 	PETScLinSyst::~PETScLinSyst() {
 		//if (_RHSValues.size()) {
-			//VecDestroy(&_X);
-			//			KSPDestroy(&_solver); // TODO: why can't I destroy this here?
+			//VecDestroy(&m_X);
+			//			KSPDestroy(&m_Solver); // TODO: why can't I destroy this here?
 		//}
 	}
 
 	/*void PETScLinSyst::SetIterative() { // TODO: that must come in the ctor
-		KSPSetType(_solver, KSPGMRES);
-		KSPGMRESSetRestart(_solver, 1500);
-		KSPSetTolerances(_solver, 1e-5, PETSC_DEFAULT, 1e10, 1500);
-		KSPGMRESSetOrthogonalization(_solver, KSPGMRESModifiedGramSchmidtOrthogonalization);
-		PC pc; KSPGetPC(_solver, &pc); PCSetType(pc, PCILU);
+		KSPSetType(m_Solver, KSPGMRES);
+		KSPGMRESSetRestart(m_Solver, 1500);
+		KSPSetTolerances(m_Solver, 1e-5, PETSC_DEFAULT, 1e10, 1500);
+		KSPGMRESSetOrthogonalization(m_Solver, KSPGMRESModifiedGramSchmidtOrthogonalization);
+		PC pc; KSPGetPC(m_Solver, &pc); PCSetType(pc, PCILU);
 	}*/
 
 	const Vector& PETScLinSyst::Solve() {
-		//MatCreateSeqAIJWithArrays(PETSC_COMM_SELF, _MS, _MS, &_NonZeroes[0], &_ColIdx[0], &_MatValues[0], &_A); // builds the matrix with CSR format and values
-		//VecCreateSeqWithArray(PETSC_COMM_SELF, 1, _MS, &_RHSValues[0], &_b); // builds the vector 
+		//MatCreateSeqAIJWithArrays(PETSC_COMM_SELF, m_MS, m_MS, &m_NonZeroes[0], &m_ColIdx[0], &m_MatValues[0], &m_A); // builds the matrix with CSR format and values
+		//VecCreateSeqWithArray(PETSC_COMM_SELF, 1, m_MS, &m_RHSValues[0], &m_b); // builds the vector 
 
 		//// Solves the linear system
-		//KSPSetOperators(_solver, _A, _A, SAME_NONZERO_PATTERN);
-		//KSPSolve(_solver, _b, _X);
-		//KSPGetConvergedReason(_solver, &_reason);
-		//if (_reason <= 0) {
-		//	std::cerr << "KSPSolve diverged with reason " << _reason << std::endl; // TODO: write that in a log file
+		//KSPSetOperators(m_Solver, m_A, m_A, SAME_NONZERO_PATTERN);
+		//KSPSolve(m_Solver, m_b, m_X);
+		//KSPGetConvergedReason(m_Solver, &m_Reason);
+		//if (m_Reason <= 0) {
+		//	std::cerr << "KSPSolve diverged with reason " << m_Reason << std::endl; // TODO: write that in a log file
 		//	exit(1);
 		//}
-		//MatDestroy(&_A); VecDestroy(&_b);
+		//MatDestroy(&m_A); VecDestroy(&m_b);
 
 		// TODO: return a vector of doubles please
 		return Vector(MS());

@@ -18,7 +18,7 @@ namespace N_Mathematics {
 	class LinSystFactory 
 	{
 		public:
-			static LinSyst* make(unsigned int MS, N_Configuration::Component* aLinSyst);
+			static LinSyst* make(N_Configuration::Component* aLinSyst);
 	};
 
 }

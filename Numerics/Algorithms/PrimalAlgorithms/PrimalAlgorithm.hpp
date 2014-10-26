@@ -25,8 +25,8 @@ namespace N_Mathematics {
 			virtual void Run() = 0; 
       
 		protected:
-			std::shared_ptr<N_Glacier::Glacier> _glacier;
-			std::map<std::string, std::string> _parameters;
+			std::shared_ptr<N_Glacier::Glacier> m_glacier;
+			std::map<std::string, std::string> m_parameters;
 	};
 
 }

@@ -9,8 +9,8 @@
 
 namespace N_Mathematics {
 
-	BelosLinSyst::BelosLinSyst(unsigned int MS, N_Configuration::Component* aLinSyst)
-		: LinSyst(MS, aLinSyst)
+	BelosLinSyst::BelosLinSyst(N_Configuration::Component* aLinSyst)
+		: LinSyst(aLinSyst)
 	{
 		/*VecCreateSeq(PETSC_COMM_SELF, _MS, &_X); 
 		KSPCreate(PETSC_COMM_SELF, &_solver);

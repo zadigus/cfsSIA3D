@@ -10,13 +10,13 @@ namespace N_Mathematics {
 
 	FullyImplicitClimateAlgorithm::FullyImplicitClimateAlgorithm(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, N_Configuration::Component* aClimateAlgo)
 		: FiniteDifferenceClimateAlgorithm(aClimateAlgo)
-		, _Hn(new Grid(*_H)) // initialization of Newton process
-		, _err(1)
-		, _tol(_parameters.find("tol") != _parameters.end() ? std::stod(_parameters["tol"]) : 1e-6)
-		, _updt(0) 
-		, _F(0) 
-		, _Fp(0) 
-		, _dt(aNumCoreParams->dt())
+		, m_Hn(new Grid(*m_H)) // initialization of Newton process
+		, m_err(1)
+		, m_tol(m_parameters.find("tol") != m_parameters.end() ? std::stod(m_parameters["tol"]) : 1e-6)
+		, m_updt(0) 
+		, m_F(0) 
+		, m_Fp(0) 
+		, m_dt(aNumCoreParams->dt())
 	{
 
 	}
@@ -28,25 +28,25 @@ namespace N_Mathematics {
 
 	void FullyImplicitClimateAlgorithm::Run()
 	{
-		while (_err > _tol) {
-			_err = 0;
-			for (unsigned int i(0); i<_Nx; ++i) {
-				for (unsigned int j(0); j<_Ny; ++j) { // TODO: try to write that as a linear system?
+		while (m_err > m_tol) {
+			m_err = 0;
+			for (unsigned int i(0); i<m_Nx; ++i) {
+				for (unsigned int j(0); j<m_Ny; ++j) { // TODO: try to write that as a linear system?
 					// TODO: integrate constantMB; it should be possible to access B with x, y too
-					_F = Hn(i, j) - H(i, j) - _dt*(*_B)(b(i, j), Hn(i, j), H(i, j)); 
-					_Fp = 1 - _dt*_B->dB(b(i, j), Hn(i, j), H(i, j)); // derivative of mass balance wrt glacier surface
-					_updt = _F / _Fp; Hn(i, j) -= _updt;
-					if (fabs(_updt) > _err) _err = fabs(_updt);
+					m_F = Hn(i, j) - H(i, j) - m_dt*(*m_B)(b(i, j), Hn(i, j), H(i, j)); 
+					m_Fp = 1 - _dt*m_B->dB(b(i, j), Hn(i, j), H(i, j)); // derivative of mass balance wrt glacier surface
+					m_updt = m_F / m_Fp; Hn(i, j) -= m_updt;
+					if (fabs(m_updt) > m_err) m_err = fabs(m_updt);
 				}
 			}
 		}
 
-		*_H = *_Hn;
+		*m_H = *m_Hn;
 	}
 
 	double& FullyImplicitClimateAlgorithm::Hn(unsigned int i, unsigned int j)
 	{
-		return (*_Hn)(i, j);
+		return (*m_Hn)(i, j);
 	}
 
 }
