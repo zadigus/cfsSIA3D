@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <m:ModelCore xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-            xsi:schemaLocation="http://www.ruag.com/ModelCoreConfiguration ModelCoreConfiguration.xsd" 
-            xmlns:m="http://www.ruag.com/ModelCoreConfiguration"
-						xmlns:param="http://www.ruag.com/Parameter"> 
+            xsi:schemaLocation="http://www.cjcaesar.ch/ModelCoreConfiguration ModelCoreConfiguration.xsd" 
+            xmlns:m="http://www.cjcaesar.ch/ModelCoreConfiguration"
+						xmlns:param="http://www.cjcaesar.ch/Parameter"> 
 	<param:Parameter name="g">9.81</param:Parameter>   <!-- gravitational acceleration in m/s^2 -->
 	<param:Parameter name="rho_i">910</param:Parameter> <!-- ice density in kg/m^3 -->
 	<param:Parameter name="rho_w">1000</param:Parameter> <!-- water density in kg/m^3 -->

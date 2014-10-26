@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <m:ModelCore xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-            xsi:schemaLocation="http://www.ruag.com/ModelCoreConfiguration ModelCoreConfiguration.xsd" 
-            xmlns:m="http://www.ruag.com/ModelCoreConfiguration"
-						xmlns:param="http://www.ruag.com/Parameter"> 
+            xsi:schemaLocation="http://www.cjcaesar.ch/ModelCoreConfiguration ModelCoreConfiguration.xsd" 
+            xmlns:m="http://www.cjcaesar.ch/ModelCoreConfiguration"
+						xmlns:param="http://www.cjcaesar.ch/Parameter"> 
 	
 	<param:Parameter name="dt">0.01</param:Parameter>   <!-- time step in a -->
 

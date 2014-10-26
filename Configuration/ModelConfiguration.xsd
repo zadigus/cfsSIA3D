@@ -1,12 +1,12 @@
 <?xml version="1.0" ?>
 
-<xsd:schema xmlns:param="http://www.ruag.com/Parameter"
-						targetNamespace="http://www.ruag.com/ModelConfiguration"
-						xmlns:mconf="http://www.ruag.com/ModelConfiguration"
+<xsd:schema xmlns:param="http://www.cjcaesar.ch/Parameter"
+						targetNamespace="http://www.cjcaesar.ch/ModelConfiguration"
+						xmlns:mconf="http://www.cjcaesar.ch/ModelConfiguration"
             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 						elementFormDefault="qualified">
 						
-	<xsd:import schemaLocation="Parameter.xsd" namespace="http://www.ruag.com/Parameter"/>
+	<xsd:import schemaLocation="Parameter.xsd" namespace="http://www.cjcaesar.ch/Parameter"/>
 	
 	<xsd:complexType name="ModelConfiguration"> <!-- TODO: define the components more precisely; for example, define a MassBalance component to hold either ac, am, ELA, eps, OR m1, m2, ELA, eps, OR etc. -->
 		<xsd:sequence>

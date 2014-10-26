@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <m:Model
 						xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-            xsi:schemaLocation="http://www.ruag.com/ModelConfiguration ModelConfiguration.xsd" 
-            xmlns:m="http://www.ruag.com/ModelConfiguration"
-						xmlns:param="http://www.ruag.com/Parameter"> 
+            xsi:schemaLocation="http://www.cjcaesar.ch/ModelConfiguration ModelConfiguration.xsd" 
+            xmlns:m="http://www.cjcaesar.ch/ModelConfiguration"
+						xmlns:param="http://www.cjcaesar.ch/Parameter"> 
 
 <m:Component name="Diffusion"  type="SemiImplicit"/> <!-- add e.g. parameters for the linear system -->
 

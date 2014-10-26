@@ -1,10 +1,10 @@
 <?xml version="1.0" ?>
-<xsd:schema xmlns:param="http://www.ruag.com/Parameter"
-						targetNamespace="http://www.ruag.com/ModelCoreConfiguration"
-						xmlns:modcore="http://www.ruag.com/ModelCoreConfiguration"
+<xsd:schema xmlns:param="http://www.cjcaesar.ch/Parameter"
+						targetNamespace="http://www.cjcaesar.ch/ModelCoreConfiguration"
+						xmlns:modcore="http://www.cjcaesar.ch/ModelCoreConfiguration"
             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 						elementFormDefault="qualified">
-	<xsd:import schemaLocation="Parameter.xsd" namespace="http://www.ruag.com/Parameter"/>
+	<xsd:import schemaLocation="Parameter.xsd" namespace="http://www.cjcaesar.ch/Parameter"/>
 	
 	<xsd:complexType name="ModelCoreConfiguration"> 
 		<xsd:sequence>

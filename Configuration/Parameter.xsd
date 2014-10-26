@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<xsd:schema targetNamespace="http://www.ruag.com/Parameter"
+<xsd:schema targetNamespace="http://www.cjcaesar.ch/Parameter"
 						xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 						elementFormDefault="qualified">
 	<xsd:element name="Parameter">

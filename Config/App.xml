@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <a:App
 						xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-            xsi:schemaLocation="http://www.ruag.com/AppConfiguration AppConfiguration.xsd" 
-            xmlns:a="http://www.ruag.com/AppConfiguration"
-						xmlns:param="http://www.ruag.com/Parameter"> 
+            xsi:schemaLocation="http://www.cjcaesar.ch/AppConfiguration AppConfiguration.xsd" 
+            xmlns:a="http://www.cjcaesar.ch/AppConfiguration"
+						xmlns:param="http://www.cjcaesar.ch/Parameter"> 
 
 	<!-- TODO: allow these files to be written relative to some bin path -->
 						
