@@ -23,8 +23,8 @@ namespace N_Mathematics {
 
 		protected:
 			// Access the geometry in a "natural" way
-			double& H(unsigned int i, unsigned int j);
-			double& b(unsigned int i, unsigned int j);
+			double& H(unsigned int i, unsigned int j); // read & write
+			double b(unsigned int i, unsigned int j);  // read only
 
 		protected:
 			// Ice thickness

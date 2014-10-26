@@ -5,6 +5,7 @@
 #include "Glacier/GlacierComponents/Rheology/Rheology.hpp"
 #include "Glacier/GlacierComponents/SlidingLaw/SlidingLaw.hpp"
 
+#include "Numerics/LinSyst/LinSystFactory.hpp"
 #include "Numerics/LinSyst/LinSyst.hpp"
 
 #include "Configuration/ModelConfiguration.hpp"
@@ -14,14 +15,16 @@
 
 namespace N_Mathematics {
 
-	FiniteDifferenceDiffusionAlgorithm::FiniteDifferenceDiffusionAlgorithm(/*const std::unique_ptr<NumericsCoreParams>& aNumCoreParams,*/ N_Configuration::Component* aDiffusionAlgo) 
+	FiniteDifferenceDiffusionAlgorithm::FiniteDifferenceDiffusionAlgorithm(N_Configuration::Component* aDiffusionAlgo) 
 		: FiniteDifferencePrimalAlgorithm(aDiffusionAlgo)
 		, _Rh(N_Glacier::Glacier::getInstance()->Rh())
 		, _Sl(N_Glacier::Glacier::getInstance()->Sl())
 		, _D(new Grid(_Nx, _Ny, _Dx, _H->Dy()))
 		//, _LinSyst(new LinSyst(_Nx*_Ny)) // TODO: give the Component's parameters too? 
+		, _LinSyst(nullptr)
 	{
 		//assert(_Dx == _H->Dy()); // TODO: enforce that somewhere else
+		_LinSyst.reset(LinSystFactory::make(_Nx*_Ny, aDiffusionAlgo)); // TODO: give it sub-component LinSyst of component Diffusion
 	}
 
 	FiniteDifferenceDiffusionAlgorithm::~FiniteDifferenceDiffusionAlgorithm()

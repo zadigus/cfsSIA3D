@@ -26,12 +26,11 @@ namespace N_Mathematics {
 
 			virtual void Run();
 
-		protected:
-			virtual void ComputeElements();
-
 		private:
+			// Compute the CSR values of the linear system
+			virtual void BuildLinSyst();
 			// Compute the diffusivity D
-			void Diffusivity();
+			void ComputeDiffusivity();
 	};
 
 }

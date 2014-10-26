@@ -9,6 +9,14 @@ FIND_PACKAGE(Trilinos 11.4 REQUIRED PATHS ${TRILINOS_PATH}/lib/cmake/Trilinos ${
 FIND_PACKAGE(Xerces 3.1 REQUIRED)
 FIND_PACKAGE(Xsd 4.0 REQUIRED)
 
+OPTION(
+	USE_TRILINOS "Use Trilinos library for the solution of linear systems"
+)
+
+OPTION(
+	USE_PETSC "Use PETSc library for the solution of linear systems"
+)
+
 INCLUDE(Macros)
 
 #MESSAGE("Found Epetra = ${Trilinos_FOUND}, ${Trilinos_INCLUDE_DIRS}, ${Epetra_LIBRARIES}, ${Belos_LIBRARIES}")

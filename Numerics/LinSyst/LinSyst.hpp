@@ -2,27 +2,46 @@
 #define LINSYST_HPP_
 
 #include <vector>
+#include <memory>
+
+namespace N_Configuration {
+	class Component;
+}
 
 namespace N_Mathematics {
 
+	class Matrix;
+	class Vector;
+
 	/*
-	 * Abstract class for a linear system
+	 * Abstract class for a linear system A * x = b
 	 */
 	class LinSyst {
 		public:
-			explicit LinSyst(int MS);
+			explicit LinSyst(unsigned int MS, N_Configuration::Component* aLinSyst = nullptr); // TODO: define SUBComponents (e.g. for Component Diffusion, define SubComponent LinSyst)
 			virtual ~LinSyst();
 
-			virtual void AssembleMatrix(/*const std::vector<int>& aNonZeroes, const std::vector<int>& aColIdx, const std::vector<double>& aMatValues*/) = 0;
-			virtual void AssembleRHS(/*const std::vector<double>& aRHSValues*/) = 0;
-			virtual const std::vector<double>& Solve() = 0;
+			virtual const Vector& Solve() = 0;
+
+			// Getters
+			unsigned int MS();
+			std::shared_ptr<Matrix> Mat();
+			std::shared_ptr<Vector> RHS();
 
 		protected:
-			std::vector<int>    _NonZeroes; // TODO: create a CSR structure?
-			std::vector<int>       _ColIdx;
-			std::vector<double> _MatValues;
-			std::vector<double> _RHSValues;
+			std::shared_ptr<Matrix> _A;
+			std::shared_ptr<Vector> _b;
 	};
+
+	inline std::shared_ptr<Matrix> LinSyst::Mat()
+	{
+		return _A;
+	}
+
+	inline std::shared_ptr<Vector> LinSyst::RHS()
+	{
+		return _b;
+	}
 
 }
 

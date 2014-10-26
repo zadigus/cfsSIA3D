@@ -14,6 +14,8 @@ namespace N_Glacier {
 
 namespace N_Mathematics {
 
+	// TODO: every output to the console (or the GUI) should be performed by means of the Observer Pattern
+
 	class PrimalAlgorithm
 	{
 		public:

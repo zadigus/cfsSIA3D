@@ -1,4 +1,4 @@
-#include "PETScLinSyst.hpp"
+#include "BelosLinSyst.hpp"
 
 #include "Matrix.hpp"
 #include "Vector.hpp"
@@ -9,7 +9,7 @@
 
 namespace N_Mathematics {
 
-	PETScLinSyst::PETScLinSyst(unsigned int MS, N_Configuration::Component* aLinSyst)
+	BelosLinSyst::BelosLinSyst(unsigned int MS, N_Configuration::Component* aLinSyst)
 		: LinSyst(MS, aLinSyst)
 	{
 		/*VecCreateSeq(PETSC_COMM_SELF, _MS, &_X); 
@@ -20,7 +20,7 @@ namespace N_Mathematics {
 		PCSetType(pc, PCLU);*/
 	}
 
-	PETScLinSyst::~PETScLinSyst() {
+	BelosLinSyst::~BelosLinSyst() {
 		//if (_RHSValues.size()) {
 			//VecDestroy(&_X);
 			//			KSPDestroy(&_solver); // TODO: why can't I destroy this here?
@@ -35,7 +35,7 @@ namespace N_Mathematics {
 		PC pc; KSPGetPC(_solver, &pc); PCSetType(pc, PCILU);
 	}*/
 
-	const Vector& PETScLinSyst::Solve() {
+	const Vector& BelosLinSyst::Solve() {
 		//MatCreateSeqAIJWithArrays(PETSC_COMM_SELF, _MS, _MS, &_NonZeroes[0], &_ColIdx[0], &_MatValues[0], &_A); // builds the matrix with CSR format and values
 		//VecCreateSeqWithArray(PETSC_COMM_SELF, 1, _MS, &_RHSValues[0], &_b); // builds the vector 
 

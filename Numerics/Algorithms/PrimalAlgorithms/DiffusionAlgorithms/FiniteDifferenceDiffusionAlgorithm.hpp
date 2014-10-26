@@ -16,13 +16,12 @@ namespace N_Configuration {
 
 namespace N_Mathematics {
 
-	//class NumericsCoreParams;
 	class LinSyst;
 
 	class FiniteDifferenceDiffusionAlgorithm : public FiniteDifferencePrimalAlgorithm
 	{
 		public:
-			FiniteDifferenceDiffusionAlgorithm(/*const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, */N_Configuration::Component* aDiffusionAlgo);
+			FiniteDifferenceDiffusionAlgorithm(N_Configuration::Component* aDiffusionAlgo);
 			virtual ~FiniteDifferenceDiffusionAlgorithm();
 
 			virtual void Run() = 0;
@@ -31,7 +30,7 @@ namespace N_Mathematics {
 			// Compute the diffusivity D
 			virtual void Diffusivity() = 0;
 			// Compute the matrix elements
-			virtual void ComputeElements() = 0;
+			virtual void BuildLinSyst() = 0;
 			// compute norm of gradient of grid in the staggered grid; corresponds to alpha in the papers, which is |grad s|
 			double StaggeredGradSurfNorm(unsigned int i, unsigned int j, const std::shared_ptr<Grid>& H);
 			// Access to _D in a more "natural" way
@@ -53,7 +52,7 @@ namespace N_Mathematics {
 
 		private:
 			// Diffusivity
-			std::shared_ptr<Grid> _D;
+			std::unique_ptr<Grid> _D;
 	};
 }
 
