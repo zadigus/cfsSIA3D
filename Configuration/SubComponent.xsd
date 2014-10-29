@@ -11,7 +11,7 @@
 			<xsd:sequence>
 				<xsd:element ref="param:Parameter" minOccurs="0" maxOccurs="unbounded"/>
 			</xsd:sequence>
-			<xsd:attribute name="type" type="xsd:string"/>
+			<xsd:attribute name="name" type="xsd:string"/>
 		</xsd:complexType>
 	</xsd:element>
 	

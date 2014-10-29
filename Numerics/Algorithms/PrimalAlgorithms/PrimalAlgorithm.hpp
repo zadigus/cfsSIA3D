@@ -1,6 +1,8 @@
 #ifndef PRIMALALGORITHM_HPP_
 #define PRIMALALGORITHM_HPP_
 
+#include "ModelComponent/ModelComponent.hpp"
+
 #include <memory>
 #include <map>
 
@@ -16,7 +18,8 @@ namespace N_Mathematics {
 
 	// TODO: every output to the console (or the GUI) should be performed by means of the Observer Pattern
 
-	class PrimalAlgorithm
+	// Interface class for a general numerics component
+	class PrimalAlgorithm : public ModelComponent
 	{
 		public:
 			PrimalAlgorithm(N_Configuration::Component* aComponent);
@@ -26,7 +29,6 @@ namespace N_Mathematics {
       
 		protected:
 			std::shared_ptr<N_Glacier::Glacier> m_glacier;
-			std::map<std::string, std::string> m_parameters;
 	};
 
 }

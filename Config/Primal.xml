@@ -3,6 +3,7 @@
 						xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
             xsi:schemaLocation="http://www.cjcaesar.ch/ModelConfiguration ..\Configuration\ModelConfiguration.xsd" 
             xmlns:m="http://www.cjcaesar.ch/ModelConfiguration"
+						xmlns:subc="http://www.cjcaesar.ch/SubComponent"
 						xmlns:param="http://www.cjcaesar.ch/Parameter"> 
 
 <m:Component name="Diffusion"  type="SemiImplicit"> <!-- add e.g. parameters for the linear system -->
@@ -12,7 +13,9 @@
 </m:Component>
 
 <m:Component name="Climate"    type="FullyImplicit"> 
-	<param:Parameter name="tol">1e-6</param:Parameter>
+	<subc:SubComponent name="Newton">
+		<param:Parameter name="tol">1e-6</param:Parameter>
+	</subc:SubComponent>
 </m:Component>
 
 <m:Component name="Projection" type="Heaviside"/> 

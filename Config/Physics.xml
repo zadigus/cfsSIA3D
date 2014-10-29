@@ -2,25 +2,32 @@
 <m:Model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
             xsi:schemaLocation="http://www.cjcaesar.ch/ModelConfiguration ..\Configuration\ModelConfiguration.xsd" 
             xmlns:m="http://www.cjcaesar.ch/ModelConfiguration"
+						xmlns:subc="http://www.cjcaesar.ch/SubComponent"
 						xmlns:param="http://www.cjcaesar.ch/Parameter"> 
 
 <m:Component name="MassBalance" type="GradELA">
-	<param:Parameter name="m1">0.1</param:Parameter>
-	<param:Parameter name="m2">0.005</param:Parameter>
-	<param:Parameter name="ELA">2700</param:Parameter>
-	<param:Parameter name="eps">0.1</param:Parameter>
+	<subc:SubComponent name="General">
+		<param:Parameter name="m1">0.1</param:Parameter>
+		<param:Parameter name="m2">0.005</param:Parameter>
+		<param:Parameter name="ELA">2700</param:Parameter>
+		<param:Parameter name="eps">0.1</param:Parameter>
+	</subc:SubComponent>
 </m:Component>
 
 <m:Component name="SlidingLaw"/>
 
 <m:Component name="Rheology">
-	<param:Parameter name="n">3</param:Parameter>   <!-- Glen's exponent -->
-	<param:Parameter name="A">0.1</param:Parameter> <!-- rate factor in bar^{-1}*a^{-n} -->
+	<subc:SubComponent name="General">
+		<param:Parameter name="n">3</param:Parameter>   <!-- Glen's exponent -->
+		<param:Parameter name="A">0.1</param:Parameter> <!-- rate factor in bar^{-1}*a^{-n} -->
+	</subc:SubComponent>
 </m:Component>
 
 <m:Component name="Geometry">
-	<param:Parameter name="bed">e:\cfsSIA3D-src\data\muragl\bed.grid</param:Parameter> 
-	<param:Parameter name="surface">e:\cfsSIA3D-src\data\muragl\surfinit.grid</param:Parameter> 
+	<subc:SubComponent name="General">
+		<param:Parameter name="bed">e:\cfsSIA3D-src\data\muragl\bed.grid</param:Parameter> 
+		<param:Parameter name="surface">e:\cfsSIA3D-src\data\muragl\surfinit.grid</param:Parameter> 
+	</subc:SubComponent>
 </m:Component>
 
 </m:Model>

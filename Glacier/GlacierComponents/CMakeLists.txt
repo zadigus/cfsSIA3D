@@ -20,4 +20,5 @@ ADD_LIBRARY(GlacierComponents ${src})
 TARGET_LINK_LIBRARIES(GlacierComponents
 	${XERCES_LIBRARIES}
 	Configuration
+	ModelComponent
 )
