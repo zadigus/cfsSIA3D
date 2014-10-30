@@ -48,7 +48,7 @@ namespace N_Mathematics {
 		while (m_err > m_tol) {
 			m_err = 0;
 			for (unsigned int i(0); i<m_Nx; ++i) {
-				for (unsigned int j(0); j<m_Ny; ++j) { // TODO: try to write that as a linear system?
+				for (unsigned int j(0); j<m_Ny; ++j) {
 					// TODO: integrate constantMB; it should be possible to access B with x, y too
 					m_F = Hn(i, j) - H(i, j) - m_dt*(*m_B)(b(i, j), Hn(i, j), H(i, j)); 
 					m_Fp = 1 - m_dt*m_B->dB(b(i, j), Hn(i, j), H(i, j)); // derivative of mass balance wrt glacier surface

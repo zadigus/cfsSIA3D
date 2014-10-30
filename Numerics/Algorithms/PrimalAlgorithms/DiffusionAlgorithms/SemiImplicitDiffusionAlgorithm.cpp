@@ -31,9 +31,8 @@ namespace N_Mathematics {
 	
 	void SemiImplicitDiffusionAlgorithm::Run()
 	{
-		// must build the LinSyst
-		// must solve the LinSyst
-		// must convert the Vector into a Grid
+		AssembleLinSyst();
+		SolveLinSyst(); // TODO: must also convert the Vector into a Grid
 	}
 
 	void SemiImplicitDiffusionAlgorithm::ComputeDiffusivity() 
@@ -50,7 +49,7 @@ namespace N_Mathematics {
 		}
 	}
 
-	void SemiImplicitDiffusionAlgorithm::BuildLinSyst()
+	void SemiImplicitDiffusionAlgorithm::AssembleLinSyst()
 	{ 
 		ComputeDiffusivity();
 		
@@ -122,7 +121,12 @@ namespace N_Mathematics {
 
 		m_LinSyst->SetMatrix(std::move(A)); // need to move, because unique_ptr can't be copied
 		m_LinSyst->SetRHS(std::move(rhs));
+	}
 
+	void SemiImplicitDiffusionAlgorithm::SolveLinSyst()
+	{
+		const N_Mathematics::Vector solution(m_LinSyst->Solve());
+		// TODO: convert Vector to Grid and put the data into m_H
 	}
 
 }

@@ -7,7 +7,7 @@
 
 namespace N_Mathematics {
 
-	LinSyst::LinSyst(N_Configuration::Component* aLinSyst)
+	LinSyst::LinSyst(N_Configuration::SubComponent* aLinSyst)
 		: m_A(nullptr)
 		, m_b(nullptr)
 	{

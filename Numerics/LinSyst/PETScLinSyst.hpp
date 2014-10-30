@@ -6,6 +6,10 @@
 #include "LinSyst.hpp"
 #include "petsc.h"
 
+namespace N_Configuration {
+	class SubComponent;
+}
+
 namespace N_Mathematics {
 
 	// Linear system using the PETSc library
@@ -13,7 +17,7 @@ namespace N_Mathematics {
 	class PETScLinSyst : public LinSyst
 	{
 		public:
-			PETScLinSyst(N_Configuration::Component* aLinSyst = nullptr); // TODO: think about what default parameters to set when no config exists
+			PETScLinSyst(N_Configuration::SubComponent* aLinSyst = nullptr); // TODO: think about what default parameters to set when no config exists
 			~PETScLinSyst();
 
 			// Solving linear system

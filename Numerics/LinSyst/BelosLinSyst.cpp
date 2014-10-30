@@ -9,7 +9,7 @@
 
 namespace N_Mathematics {
 
-	BelosLinSyst::BelosLinSyst(N_Configuration::Component* aLinSyst)
+	BelosLinSyst::BelosLinSyst(N_Configuration::SubComponent* aLinSyst)
 		: LinSyst(aLinSyst)
 	{
 		/*VecCreateSeq(PETSC_COMM_SELF, _MS, &_X); 

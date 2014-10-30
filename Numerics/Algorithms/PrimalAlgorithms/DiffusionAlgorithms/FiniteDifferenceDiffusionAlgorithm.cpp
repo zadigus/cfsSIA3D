@@ -20,10 +20,20 @@ namespace N_Mathematics {
 		, m_Rh(N_Glacier::Glacier::getInstance()->Rh())
 		, m_Sl(N_Glacier::Glacier::getInstance()->Sl())
 		, m_D(new Grid(m_Nx, m_Ny, m_Dx, m_H->Dy()))
-		, m_LinSyst(nullptr) // TODO: give the Component's parameters too? 
+		, m_LinSyst(nullptr) 
 	{
 		//assert(_Dx == _H->Dy()); // TODO: enforce that somewhere else
-		m_LinSyst.reset(LinSystFactory::make(aDiffusionAlgo)); // TODO: give it sub-component LinSyst of component Diffusion
+		if (aDiffusionAlgo)
+		{
+			N_Configuration::Component::SubComponent_sequence subComponents(aDiffusionAlgo->SubComponent());
+			for (N_Configuration::Component::SubComponent_iterator it(subComponents.begin()); it != subComponents.end(); ++it)
+			{
+				if (!strcmp(it->name()->c_str(), "LinearSystem"))
+				{
+					m_LinSyst.reset(LinSystFactory::make(&(*it)));
+				}
+			}
+		}
 	}
 
 	FiniteDifferenceDiffusionAlgorithm::~FiniteDifferenceDiffusionAlgorithm()
@@ -31,7 +41,8 @@ namespace N_Mathematics {
 
 	}
 	
-	double FiniteDifferenceDiffusionAlgorithm::StaggeredGradSurfNorm(unsigned int i, unsigned int j, const std::shared_ptr<Grid>& H) {
+	double FiniteDifferenceDiffusionAlgorithm::StaggeredGradSurfNorm(unsigned int i, unsigned int j, const std::shared_ptr<Grid>& H) 
+	{
 		// because this function is also used in the FullyImplicit version
 		assert(i - 1 >= 0); assert(j - 1 >= 0); assert(i < m_Nx); assert(j < m_Ny);
 		return sqrt((b(i, j    ) + (*H)(i, j    ) - b(i - 1, j - 1) - (*H)(i - 1, j - 1))*(b(i, j    ) + (*H)(i, j    ) - b(i - 1, j - 1) - (*H)(i - 1, j - 1))

@@ -28,9 +28,11 @@ namespace N_Mathematics {
 
 		private:
 			// Compute the CSR values of the linear system
-			virtual void BuildLinSyst();
+			virtual void AssembleLinSyst();
 			// Compute the diffusivity D
 			void ComputeDiffusivity();
+			// Solve the linear system
+			void SolveLinSyst();
 
 		private:
 			double m_C1; // dt / (2 dx)

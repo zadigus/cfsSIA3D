@@ -6,6 +6,10 @@
 #include "LinSyst.hpp"
 //#include "petsc.h"
 
+namespace N_Configuration {
+	class SubComponent;
+}
+
 namespace N_Mathematics {
 
 	// Linear system using the Trilinos::Belos library
@@ -13,7 +17,7 @@ namespace N_Mathematics {
 	class BelosLinSyst : public LinSyst
 	{
 		public:
-			BelosLinSyst(N_Configuration::Component* aLinSyst = nullptr); // TODO: think about what default parameters to set when no config exists
+			BelosLinSyst(N_Configuration::SubComponent* aLinSyst = nullptr); // TODO: think about what default parameters to set when no config exists
 			~BelosLinSyst();
 
 			/*// Access to class members

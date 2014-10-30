@@ -4,7 +4,7 @@
 #include <memory>
 
 namespace N_Configuration {
-	class Component; // TODO: use SubComponents here
+	class SubComponent; 
 }
 
 namespace N_Mathematics {
@@ -18,7 +18,7 @@ namespace N_Mathematics {
 	class LinSystFactory 
 	{
 		public:
-			static LinSyst* make(N_Configuration::Component* aLinSyst);
+			static LinSyst* make(N_Configuration::SubComponent* aLinSyst);
 	};
 
 }

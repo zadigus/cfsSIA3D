@@ -5,7 +5,7 @@
 #include <memory>
 
 namespace N_Configuration {
-	class Component;
+	class SubComponent;
 }
 
 namespace N_Mathematics {
@@ -18,7 +18,7 @@ namespace N_Mathematics {
 	 */
 	class LinSyst {
 		public:
-			explicit LinSyst(N_Configuration::Component* aLinSyst = nullptr); // TODO: define SUBComponents (e.g. for Component Diffusion, define SubComponent LinSyst)
+			explicit LinSyst(N_Configuration::SubComponent* aLinSyst = nullptr);
 			virtual ~LinSyst();
 
 			virtual const Vector& Solve() = 0;
