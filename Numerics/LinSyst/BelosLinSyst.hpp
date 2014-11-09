@@ -27,7 +27,7 @@ namespace N_Mathematics {
 
 			// Solving linear system
 			//void SetIterative();
-			const Vector& Solve();
+			void Solve();
 
 		private:
 		/*	Vec _b, _X;

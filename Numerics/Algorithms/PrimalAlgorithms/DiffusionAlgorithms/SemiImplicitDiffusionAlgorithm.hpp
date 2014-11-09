@@ -33,6 +33,8 @@ namespace N_Mathematics {
 			void ComputeDiffusivity();
 			// Solve the linear system
 			void SolveLinSyst();
+			// Update the ice thickness
+			void UpdateThickness();
 
 		private:
 			double m_C1; // dt / (2 dx)

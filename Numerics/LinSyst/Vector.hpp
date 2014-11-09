@@ -2,6 +2,9 @@
 #define MATHEMATICS_VECTOR_HPP_
 
 #include <vector>
+#include <memory>
+
+class Grid;
 
 namespace N_Mathematics {
 
@@ -11,9 +14,13 @@ namespace N_Mathematics {
 			Vector(unsigned int MS);
 			virtual ~Vector();
 
+			double operator[](unsigned int i);
+
 			unsigned int MS();
 			void InsertValue(double val);
 			void Clear();
+
+			void toGrid(std::shared_ptr<Grid>& aGrid);
 
 		protected:
 			unsigned int m_MS;
@@ -28,6 +35,11 @@ namespace N_Mathematics {
 	inline void Vector::InsertValue(double val)
 	{
 		m_Values.push_back(val);
+	}
+
+	inline double Vector::operator[](unsigned int i)
+	{
+		return m_Values.at(i);
 	}
 
 }

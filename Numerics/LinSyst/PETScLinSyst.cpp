@@ -35,7 +35,7 @@ namespace N_Mathematics {
 		PC pc; KSPGetPC(m_Solver, &pc); PCSetType(pc, PCILU);
 	}*/
 
-	const Vector& PETScLinSyst::Solve() {
+	void PETScLinSyst::Solve() {
 		//MatCreateSeqAIJWithArrays(PETSC_COMM_SELF, m_MS, m_MS, &m_NonZeroes[0], &m_ColIdx[0], &m_MatValues[0], &m_A); // builds the matrix with CSR format and values
 		//VecCreateSeqWithArray(PETSC_COMM_SELF, 1, m_MS, &m_RHSValues[0], &m_b); // builds the vector 
 
@@ -50,7 +50,7 @@ namespace N_Mathematics {
 		//MatDestroy(&m_A); VecDestroy(&m_b);
 
 		// TODO: return a vector of doubles please
-		return Vector(MS());
+		//return Vector(MS());
 	}
 
 }

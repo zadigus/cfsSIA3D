@@ -32,7 +32,8 @@ namespace N_Mathematics {
 	void SemiImplicitDiffusionAlgorithm::Run()
 	{
 		AssembleLinSyst();
-		SolveLinSyst(); // TODO: must also convert the Vector into a Grid
+		SolveLinSyst();
+		UpdateThickness();
 	}
 
 	void SemiImplicitDiffusionAlgorithm::ComputeDiffusivity() 
@@ -58,9 +59,9 @@ namespace N_Mathematics {
 		std::unique_ptr<Vector> rhs(new Vector(m_Nx*m_Ny));
 		std::unique_ptr<Matrix> A(new Matrix(m_Nx*m_Ny));
 		
-		for (int i(0); i < m_Nx; ++i) 
+		for (int i(0); i < m_Nx; ++i)  // TODO: maybe fill the matrix in the same order as the Grid ctor; it will be easier to do the conversion between Vector and Grid
 		{
-			for (int j (0); j < m_Ny; ++j)
+			for (int j (0); j < m_Ny; ++j) // must use ints here instead of unsigned ints because e.g. i-1 is checked
 			{
 				A->InsertNonZeroes(idx);
 																						 val = D(i, j        ) * (-gradbx(i, j)     - gradby(i, j));
@@ -125,8 +126,12 @@ namespace N_Mathematics {
 
 	void SemiImplicitDiffusionAlgorithm::SolveLinSyst()
 	{
-		const N_Mathematics::Vector solution(m_LinSyst->Solve());
-		// TODO: convert Vector to Grid and put the data into m_H
+		m_LinSyst->Solve();
+	}
+
+	void SemiImplicitDiffusionAlgorithm::UpdateThickness()
+	{
+		m_LinSyst->getSolution().toGrid(m_H);
 	}
 
 }

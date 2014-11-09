@@ -1,8 +1,10 @@
 #ifndef LINSYST_HPP_
 #define LINSYST_HPP_
 
-#include <vector>
+//#include <vector>
 #include <memory>
+
+#include "Numerics/LinSyst/Vector.hpp"
 
 namespace N_Configuration {
 	class SubComponent;
@@ -21,12 +23,13 @@ namespace N_Mathematics {
 			explicit LinSyst(N_Configuration::SubComponent* aLinSyst = nullptr);
 			virtual ~LinSyst();
 
-			virtual const Vector& Solve() = 0;
+			virtual void Solve() = 0;
 
-			// Getters
+			// Getters / Setters
 			unsigned int MS();
 			void SetMatrix(std::unique_ptr<Matrix> Mat);
 			void SetRHS(std::unique_ptr<Vector> RHS);
+			Vector getSolution();
 
 		protected:
 			std::unique_ptr<Matrix> m_A;
