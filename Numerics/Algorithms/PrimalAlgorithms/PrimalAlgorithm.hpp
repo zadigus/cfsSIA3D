@@ -22,7 +22,7 @@ namespace N_Mathematics {
 	class PrimalAlgorithm : public ModelComponent
 	{
 		public:
-			PrimalAlgorithm(N_Configuration::Component* aComponent);
+			PrimalAlgorithm(N_Configuration::Component* aComponent); // , const std::shared_ptr<N_Glacier::Glacier>& aGlacier);
 			virtual ~PrimalAlgorithm();
 
 			virtual void Run() = 0; 

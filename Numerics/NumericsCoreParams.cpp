@@ -19,4 +19,16 @@ namespace N_Mathematics {
 		return it != m_parameters.end() ? std::stod(it->second) : 0.001;
 	}
 
+	double NumericsCoreParams::ti()
+	{
+		std::map<std::string, std::string>::iterator it(m_parameters.find("ti"));
+		return it != m_parameters.end() ? std::stod(it->second) : 0;
+	}
+
+	double NumericsCoreParams::tf()
+	{
+		std::map<std::string, std::string>::iterator it(m_parameters.find("tf"));
+		return it != m_parameters.end() ? std::stod(it->second) : 0;
+	}
+
 }

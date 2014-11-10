@@ -30,7 +30,7 @@ namespace N_Mathematics {
 			// Compute the diffusivity D
 			virtual void ComputeDiffusivity() = 0;
 			// Compute the matrix elements
-			virtual void BuildLinSyst() = 0;
+			virtual void AssembleLinSyst() = 0;
 			// compute norm of gradient of grid in the staggered grid; corresponds to alpha in the papers, which is |grad s|
 			double StaggeredGradSurfNorm(unsigned int i, unsigned int j, const std::shared_ptr<Grid>& H);
 			// Access to _D in a more "natural" way

@@ -51,7 +51,7 @@ namespace N_Mathematics {
 	}
 
 	void SemiImplicitDiffusionAlgorithm::AssembleLinSyst()
-	{ 
+	{ // must be filled in accordance with Vector2Grid
 		ComputeDiffusivity();
 		
 		unsigned int idx(0), I(0); 
@@ -59,7 +59,7 @@ namespace N_Mathematics {
 		std::unique_ptr<Vector> rhs(new Vector(m_Nx*m_Ny));
 		std::unique_ptr<Matrix> A(new Matrix(m_Nx*m_Ny));
 		
-		for (int i(0); i < m_Nx; ++i)  // TODO: maybe fill the matrix in the same order as the Grid ctor; it will be easier to do the conversion between Vector and Grid
+		for (int i(0); i < m_Nx; ++i) 
 		{
 			for (int j (0); j < m_Ny; ++j) // must use ints here instead of unsigned ints because e.g. i-1 is checked
 			{
@@ -131,7 +131,7 @@ namespace N_Mathematics {
 
 	void SemiImplicitDiffusionAlgorithm::UpdateThickness()
 	{
-		m_LinSyst->getSolution().toGrid(m_H);
+		Vector2Grid(m_LinSyst->getSolution(), m_H);
 	}
 
 }

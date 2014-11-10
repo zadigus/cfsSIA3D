@@ -6,13 +6,15 @@
 #include "Configuration/ModelConfiguration.hpp"
 #include "NumericsCoreParams.hpp"
 
+#include "Numerics/LinSyst/Vector.hpp"
+
 #include <cassert>
 
 namespace N_Mathematics {
 
 	FiniteDifferencePrimalAlgorithm::FiniteDifferencePrimalAlgorithm(N_Configuration::Component* aFiniteDifferenceAlgo) 
 		: PrimalAlgorithm(aFiniteDifferenceAlgo)
-		, m_H(N_Glacier::Glacier::getInstance()->H())
+		, m_H(m_glacier->H())
 		, m_Nx(m_H->Nx())
 		, m_Ny(m_H->Ny())
 		, m_Dx(m_H->Dx())
@@ -26,6 +28,20 @@ namespace N_Mathematics {
 	FiniteDifferencePrimalAlgorithm::~FiniteDifferencePrimalAlgorithm()
 	{
 
+	}
+
+	void FiniteDifferencePrimalAlgorithm::Vector2Grid(const Vector& aVector, const std::shared_ptr<Grid>& aGrid)
+	{
+		// TODO: log that the default Vector2Grid conversion is used
+		unsigned int I(0);
+
+		for (unsigned int i(0); i < aGrid->Nx(); ++i)   // by default, we go from 0 and end with Nx/Ny
+		{
+			for (unsigned int j(0); j < aGrid->Ny(); ++j)
+			{
+				(*aGrid)(i, j) = aVector[I++];
+			}
+		}
 	}
 
 	double& FiniteDifferencePrimalAlgorithm::H(unsigned int i, unsigned int j)

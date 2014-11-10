@@ -14,13 +14,13 @@ namespace N_Mathematics {
 			Vector(unsigned int MS);
 			virtual ~Vector();
 
-			double operator[](unsigned int i);
+			double operator[](unsigned int i) const;
 
 			unsigned int MS();
 			void InsertValue(double val);
 			void Clear();
 
-			void toGrid(std::shared_ptr<Grid>& aGrid);
+			//void toGrid(std::shared_ptr<Grid>& aGrid);
 
 		protected:
 			unsigned int m_MS;
@@ -37,7 +37,7 @@ namespace N_Mathematics {
 		m_Values.push_back(val);
 	}
 
-	inline double Vector::operator[](unsigned int i)
+	inline double Vector::operator[](unsigned int i) const
 	{
 		return m_Values.at(i);
 	}
