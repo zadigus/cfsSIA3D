@@ -2,6 +2,7 @@
 #define ARRAY2D_H_
 
 #include <memory>
+#include <vector>
 
 class Array2D {
 public:
@@ -28,7 +29,8 @@ public:
 private:
 	int m_Nx;
 	int m_Ny;
-	std::unique_ptr<double[]> m_Data;
+	//std::unique_ptr<double[]> m_Data;
+	std::vector<double> m_Data;
 };
 
 Array2D operator+(const Array2D&, const Array2D&);
