@@ -20,7 +20,7 @@ public:
 	double& operator()(const int, const int);
 
 	// Data handling
-	void operator()();
+	//void operator()(); // TODO: this is dangerous
 	Array2D& operator+=(const Array2D&);
 	Array2D& operator-=(const Array2D&);
 	Array2D& operator*=(double);
@@ -29,7 +29,6 @@ public:
 private:
 	int m_Nx;
 	int m_Ny;
-	//std::unique_ptr<double[]> m_Data;
 	std::vector<double> m_Data;
 };
 
