@@ -22,7 +22,7 @@ Array2D::Array2D(const Array2D& right) // produce a new object
 {
 	double* source(right.m_Data.get());
 	double* dest(m_Data.get());
-	std::copy(source, source + m_Nx*m_Ny, dest);
+	std::copy(source, source + m_Nx*m_Ny, dest); // TODO: use STL range algorithm which can avoid doing a loop as it is done in the std::copy
 }
 
 Array2D& Array2D::operator=(const Array2D& right) // set an existing object
