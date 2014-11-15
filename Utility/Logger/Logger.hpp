@@ -8,7 +8,14 @@
 
 #include "Log.hpp"
 
-#define LOG_TRC(msg) Logger::getInstance().trace(msg, __FUNCSIG__, __FILE__, __LINE__) // TODO: that mode must write "ENTERING function ..." / "LEAVING fucntion"
+#define LOG_TRC(msg) Logger::getInstance().trace(msg, __FUNCSIG__, __FILE__, __LINE__) 
+// TODO: that mode must write "ENTERING function ..." / "LEAVING fucntion"
+/*#define LOG_TRC tracer_t _token(__func__)
+struct tracer_t {
+    char const* fname;
+    tracer_t(char const* fname_): fname(fname_) { printin(fname); }
+    ~tracer_t() { printout(fname); }
+}*/
 #define LOG_INF(msg) Logger::getInstance().info(msg, __FUNCSIG__, __FILE__, __LINE__)
 #define LOG_WRN(msg) Logger::getInstance().warning(msg, __FUNCSIG__, __FILE__, __LINE__)
 #define LOG_ERR(msg) Logger::getInstance().error(msg, __FUNCSIG__, __FILE__, __LINE__)
