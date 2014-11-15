@@ -5,7 +5,6 @@
 #include <string>
 #include <map>
 #include <fstream>
-//#include <iostream>
 
 #include "Log.hpp"
 
@@ -40,16 +39,13 @@ class Logger
 
 	private:
 		std::map<std::string, unsigned int> m_VerboseLevels;
-		//std::string m_FileName; // TODO: allow for log output in the console too
-		std::ofstream m_Stream;
+		std::ofstream m_Stream; // TODO: allow for log output in the console too
 
 		// Strategy pattern for the Logs
 		std::unique_ptr<Log> m_TRCLog;
 		std::unique_ptr<Log> m_INFLog;
 		std::unique_ptr<Log> m_WRNLog;
 		std::unique_ptr<Log> m_ERRLog;
-
-		// TODO: handle date + displaying of FUNCSIGN and such things
 };
 
 inline void Logger::trace(std::string aMessage, std::string aFctSig, std::string aFileName, int aLineNb)
