@@ -38,10 +38,13 @@ Array2D& Array2D::operator=(const Array2D& right) // set an existing object
 {
 	m_Nx = Nx;
 	m_Ny = Ny;
-	m_Data.reset(new double[m_Nx*m_Ny]());
-}
 
-void Array2D::operator()()
+	//m_Data.
+
+	m_Data.reset(new double[m_Nx*m_Ny]());
+}*/
+
+/*void Array2D::operator()()
 {
 	m_Data.reset(new double[m_Nx*m_Ny]()); // reset with zeroes 
 }*/

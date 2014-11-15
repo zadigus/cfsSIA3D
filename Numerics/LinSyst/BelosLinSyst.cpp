@@ -49,8 +49,7 @@ namespace N_Mathematics {
 		//}
 		//MatDestroy(&_A); VecDestroy(&_b);
 
-		// TODO: return a vector of doubles please
-		//return Vector(MS());
+		// TODO: fill m_X
 	}
 
 }

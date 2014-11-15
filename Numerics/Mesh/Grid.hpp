@@ -35,7 +35,7 @@ class Grid{
 		bool IsData(unsigned int i, unsigned int j) { return (m_Data(i, j) != m_NoData); }
 
 		// Data handling
-		void Clear();
+		//void Clear();
 		void Refine(double ratio);
 		void Refine(double ratioX, double ratioY);
 

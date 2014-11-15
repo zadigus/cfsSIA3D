@@ -29,12 +29,33 @@ namespace N_Mathematics {
 			unsigned int MS();
 			void SetMatrix(std::unique_ptr<Matrix> Mat);
 			void SetRHS(std::unique_ptr<Vector> RHS);
-			Vector getSolution();
+			std::shared_ptr<Vector> getSolution();
 
 		protected:
 			std::unique_ptr<Matrix> m_A;
 			std::unique_ptr<Vector> m_b;
+			std::shared_ptr<Vector> m_X;
 	};
+
+	inline unsigned int LinSyst::MS()
+	{
+		return m_A->MS();
+	}
+
+	inline void LinSyst::SetMatrix(std::unique_ptr<Matrix> Mat)
+	{
+		m_A.reset(Mat.release());
+	}
+
+	inline void LinSyst::SetRHS(std::unique_ptr<Vector> RHS)
+	{
+		m_b.reset(RHS.release());
+	}
+
+	inline std::shared_ptr<Vector> LinSyst::getSolution()
+	{
+		return m_X;
+	}
 
 }
 

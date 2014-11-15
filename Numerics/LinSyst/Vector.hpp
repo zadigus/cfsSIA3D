@@ -20,8 +20,6 @@ namespace N_Mathematics {
 			void InsertValue(double val);
 			void Clear();
 
-			//void toGrid(std::shared_ptr<Grid>& aGrid);
-
 		protected:
 			unsigned int m_MS;
 			std::vector<double> m_Values;

@@ -131,7 +131,7 @@ namespace N_Mathematics {
 
 	void SemiImplicitDiffusionAlgorithm::UpdateThickness()
 	{
-		Vector2Grid(m_LinSyst->getSolution(), m_H);
+		Vector2Grid(m_LinSyst->getSolution(), m_H); 
 	}
 
 }

@@ -7,6 +7,7 @@
 #include "Glacier/Glacier.hpp"
 #include "Glacier/GlacierComponents/Geometry/Geometry.hpp"
 #include "Numerics/Mesh/Grid.hpp"
+#include "Utility/Logger/Logger.hpp"
 #include <memory>
 
 int main(int argc, char* argv[]) // TODO: I need a front-end and a back-end; use decorator pattern to decorate the backend with the frontend
@@ -35,6 +36,7 @@ int main(int argc, char* argv[]) // TODO: I need a front-end and a back-end; use
 		std::unique_ptr<N_Configuration::ModelCoreConfiguration> physCoreConf;
 		std::unique_ptr<N_Configuration::ModelConfiguration> numericsConf;
 		std::unique_ptr<N_Configuration::ModelCoreConfiguration> numericsCoreConf;
+		std::unique_ptr<N_Configuration::AppConfiguration> loggerConf;
 
 		N_Configuration::AppConfiguration::Parameter_sequence fileNames(appConf->Parameter());
 		for (N_Configuration::AppConfiguration::Parameter_const_iterator it = fileNames.begin(); it != fileNames.end(); ++it)
@@ -48,15 +50,17 @@ int main(int argc, char* argv[]) // TODO: I need a front-end and a back-end; use
 				numericsConf = N_Configuration::Model(*it);
 			if (!std::strcmp(it->name().c_str(), "NumericsCore"))
 				numericsCoreConf = N_Configuration::ModelCore(*it);
+			if (!std::strcmp(it->name().c_str(), "Logger"))
+				loggerConf = N_Configuration::App(*it);
 		}
 
-		//N_Glacier::Glacier& g = N_Glacier::Glacier::getInstance();
-		//g.init(physConf, physCoreConf);
-		//g.G()->print();
-		//g.H()->Set(10);
-		//g.G()->print();
+		Logger::getInstance().init(loggerConf);
+
+		LOG_WRN("Ho du con");
 
 		N_Glacier::Glacier::getInstance()->init(physConf, physCoreConf);
+
+		LOG_ERR("Alors connard, tu fais moins le mariole hein ?");
 
 	}
 	catch (const xml_schema::exception& e)

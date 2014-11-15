@@ -10,6 +10,7 @@ namespace N_Mathematics {
 	LinSyst::LinSyst(N_Configuration::SubComponent* aLinSyst)
 		: m_A(nullptr)
 		, m_b(nullptr)
+		, m_X(nullptr)
 	{
 	
 	}
@@ -32,6 +33,11 @@ namespace N_Mathematics {
 	void LinSyst::SetRHS(std::unique_ptr<Vector> RHS)
 	{
 		m_b.reset(RHS.release());
+	}
+
+	std::shared_ptr<Vector> LinSyst::getSolution()
+	{
+		return m_X;
 	}
 
 }

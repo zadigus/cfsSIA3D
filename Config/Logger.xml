@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<a:App
+						xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+            xsi:schemaLocation="http://www.cjcaesar.ch/AppConfiguration ..\Configuration\AppConfiguration.xsd" 
+            xmlns:a="http://www.cjcaesar.ch/AppConfiguration"
+						xmlns:param="http://www.cjcaesar.ch/Parameter"> 
+
+	<!-- TODO: allow these files to be written relative to some bin path -->
+						
+	<param:Parameter name="FileName">e:\cfsSIA3D-src\Log\backend.log</param:Parameter>
+	<param:Parameter name="Mode">WRN</param:Parameter>
+	
+</a:App>

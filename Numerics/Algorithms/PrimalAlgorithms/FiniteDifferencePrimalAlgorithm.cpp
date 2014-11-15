@@ -30,7 +30,7 @@ namespace N_Mathematics {
 
 	}
 
-	void FiniteDifferencePrimalAlgorithm::Vector2Grid(const Vector& aVector, const std::shared_ptr<Grid>& aGrid)
+	void FiniteDifferencePrimalAlgorithm::Vector2Grid(const std::shared_ptr<Vector>& aVector, const std::shared_ptr<Grid>& aGrid)
 	{
 		// TODO: log that the default Vector2Grid conversion is used
 		unsigned int I(0);
@@ -39,7 +39,7 @@ namespace N_Mathematics {
 		{
 			for (unsigned int j(0); j < aGrid->Ny(); ++j)
 			{
-				(*aGrid)(i, j) = aVector[I++];
+				(*aGrid)(i, j) = (*aVector)[I++];
 			}
 		}
 	}

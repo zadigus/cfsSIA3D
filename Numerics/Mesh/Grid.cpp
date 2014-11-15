@@ -51,7 +51,8 @@ Grid::Grid(std::string fileName)
 		ist.getline(line, bufferSize); sscanf(line, "%*s %lf", &m_NoData);
 		m_Coords.Dy = m_Coords.Dx;
 
-		m_Data.Reset(Nx(), Ny());
+		//m_Data.Reset(Nx(), Ny());
+		m_Data = Array2D(Nx(), Ny());
 
 		// Read data
 		for (unsigned int j(Ny()); j >= 1; --j) // that trick is used (finish with j = 1 instead of 0) because it doesn't work with 0 with unsigned ints
@@ -99,12 +100,12 @@ Grid& Grid::operator=(const Grid& g) // an assignment operator overwrites an exi
 	return *this;
 }
 
-//==============================================================================
+/*//==============================================================================
 void Grid::Clear()
 //==============================================================================
 {
 	m_Data();
-}
+}*/
 
 //==============================================================================
 std::ostream& operator<<(std::ostream& ost, Grid& g)

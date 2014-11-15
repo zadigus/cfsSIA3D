@@ -20,7 +20,6 @@ public:
 	double& operator()(const int, const int);
 
 	// Data handling
-	//void operator()(); // TODO: this is dangerous
 	Array2D& operator+=(const Array2D&);
 	Array2D& operator-=(const Array2D&);
 	Array2D& operator*=(double);
