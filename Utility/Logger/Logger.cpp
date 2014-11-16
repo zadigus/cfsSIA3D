@@ -13,8 +13,8 @@ Logger::Logger()
 , m_ERRLog(new OFFLog)
 {
 	m_VerboseLevels.emplace("TRC", 0);
-	m_VerboseLevels.emplace("WRN", 1);
-	m_VerboseLevels.emplace("INF", 2);
+	m_VerboseLevels.emplace("INF", 1);
+	m_VerboseLevels.emplace("WRN", 2);
 	m_VerboseLevels.emplace("ERR", 3);
 }
 
@@ -42,6 +42,7 @@ void Logger::init(const std::unique_ptr<N_Configuration::AppConfiguration>& aLog
 		if (!strcmp(it->name().c_str(), "Mode"))
 		{
 			std::string mode(*it);
+
 			switch (m_VerboseLevels[mode])
 			{
 				case 0:

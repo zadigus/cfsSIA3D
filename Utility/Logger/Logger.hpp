@@ -54,22 +54,22 @@ class Logger
 
 inline void Logger::trace(std::string aMessage, std::string aFctSig, std::string aFileName, int aLineNb)
 {
-	m_Stream << m_TRCLog->message(coreMessage(aFctSig, aFileName, aLineNb) + " : " + aMessage) << std::endl;
+	m_Stream << m_TRCLog->message(coreMessage(aFctSig, aFileName, aLineNb) + " : " + aMessage + "\n");
 }
 
 inline void Logger::info(std::string aMessage, std::string aFctSig, std::string aFileName, int aLineNb)
 {
-	m_Stream << m_INFLog->message(coreMessage(aFctSig, aFileName, aLineNb) + " : " + aMessage) << std::endl;
+	m_Stream << m_INFLog->message(coreMessage(aFctSig, aFileName, aLineNb) + " : " + aMessage + "\n");
 }
 
 inline void Logger::warning(std::string aMessage, std::string aFctSig, std::string aFileName, int aLineNb)
 {
-	m_Stream << m_WRNLog->message(coreMessage(aFctSig, aFileName, aLineNb) + " : " + aMessage) << std::endl;
+	m_Stream << m_WRNLog->message(coreMessage(aFctSig, aFileName, aLineNb) + " : " + aMessage + "\n");
 }
 
 inline void Logger::error(std::string aMessage, std::string aFctSig, std::string aFileName, int aLineNb)
 {
-	m_Stream << m_ERRLog->message(coreMessage(aFctSig, aFileName, aLineNb) + " : " + aMessage) << std::endl;
+	m_Stream << m_ERRLog->message(coreMessage(aFctSig, aFileName, aLineNb) + " : " + aMessage + "\n");
 }
 
 #endif
