@@ -1,12 +1,10 @@
 #include "ProjectionAlgorithmFactory.hpp"
-
+#include "Utility/Logger/Logger.hpp"
 #include "HeavisideProjectionAlgorithm.hpp"
 #include "DumbAlgorithm.hpp"
 
 #include "Configuration/ModelConfiguration.hpp"
 #include "NumericsCoreParams.hpp"
-
-#include <iostream>
 
 namespace N_Mathematics {
 
@@ -18,18 +16,19 @@ namespace N_Mathematics {
 			{
 				if (!std::strcmp(aProjectionAlgo->type()->c_str(), "Heaviside"))
 				{
+					LOG_INF("Setting 'Heaviside' projection algorithm.");
 					return new HeavisideProjectionAlgorithm(aNumCoreParams, aProjectionAlgo);
 				}
 			}
 			else // no ProjctionAlgo type provided => default algo
 			{
-				std::cerr << "Projection algorithm type not provided." << std::endl;
+				LOG_ERR("Projection algorithm type not provided.");
 				return new DumbAlgorithm();
 			}
 		}
 		else // ProjectionAlgo component not provided => default algo
 		{
-			std::cerr << "Projection algorithm type not provided." << std::endl;
+			LOG_ERR("Projection algorithm type not provided.");
 			return new DumbAlgorithm();
 		}
 	}

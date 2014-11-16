@@ -7,6 +7,7 @@
 #include <limits>
 
 #include "Utility/Math.hpp"
+#include "Utility/Logger/Logger.hpp"
 
 //==============================================================================
 Grid::Grid(unsigned int ncols, unsigned int nrows, double dx, double dy, double xl, double yl)
@@ -26,7 +27,7 @@ Grid::Grid(std::string fileName)
 
 	if (ist)
 	{
-		std::cout << "Opening file " << fileName << std::endl; // TODO: log that in a file
+		LOG_INF("Opening file " << fileName);
 		int bufferSize(512);
 		
 		// Read grid header
@@ -38,9 +39,9 @@ Grid::Grid(std::string fileName)
 		assert(tmpx != 0); assert(tmpy != 0);
 
 		if (!N_MathUtils::isInteger(tmpx) || !N_MathUtils::isInteger(tmpy)) {
-			std::cerr << "ncols / nrows not integer in grid file" << std::endl;
-			std::cerr << "ncols, nrows = " << tmpx << "\t" << tmpy << std::endl;
-			exit(1);
+			LOG_ERR("ncols / nrows not integer in grid file");
+			LOG_ERR("ncols, nrows = " << tmpx << "\t" << tmpy);
+			exit(EXIT_FAILURE);
 		}
 
 		m_Coords.Nx = (unsigned int) tmpx; m_Coords.Ny = (unsigned int) tmpy;
@@ -51,7 +52,6 @@ Grid::Grid(std::string fileName)
 		ist.getline(line, bufferSize); sscanf(line, "%*s %lf", &m_NoData);
 		m_Coords.Dy = m_Coords.Dx;
 
-		//m_Data.Reset(Nx(), Ny());
 		m_Data = Array2D(Nx(), Ny());
 
 		// Read data
@@ -67,8 +67,8 @@ Grid::Grid(std::string fileName)
 	}
 	else
 	{
-		std::cerr << "Could not construct grid object because file " << fileName << " does not exist." << std::endl;
-		exit(1);
+		LOG_ERR("Could not construct grid object because file " << fileName << " does not exist.");
+		exit(EXIT_FAILURE);
 	}
 }
 
@@ -146,8 +146,8 @@ const double Grid::operator()(const double x, const double y)
 
 	if (j >= Ny() || i >= Nx()) // floor rounding guarantees i <= Nx-1 and j <= Ny-1
 	{
-		std::cerr << "Point to be interpolated outside the grid (i, j) = (" << i << "," << j << ")" << std::endl;
-		exit(1);
+		LOG_ERR("Point to be interpolated outside the grid (i, j) = (" << i << "," << j << ")");
+		exit(EXIT_FAILURE);
 	}
 
 	// this is to deal with the case where w lies at the top or right boundary of the grid
@@ -219,8 +219,8 @@ void Grid::XYZ(std::string fileName){
 	}
 	else
 	{
-		std::cerr << "Cannot write into file " << fileName << std::endl;
-		exit(1);
+		LOG_ERR("Cannot write into file " << fileName);
+		exit(EXIT_FAILURE);
 	}
 }
 

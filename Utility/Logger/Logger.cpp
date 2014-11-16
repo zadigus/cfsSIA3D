@@ -3,16 +3,12 @@
 #include "Configuration/AppConfiguration.hpp"
 
 #include <iostream>
-//#include <fstream>
-
 
 Logger::Logger()
-: m_TRCLog(new OFFLog)
-, m_INFLog(new OFFLog)
+: m_INFLog(new OFFLog)
 , m_WRNLog(new OFFLog)
 , m_ERRLog(new OFFLog)
 {
-	m_VerboseLevels.emplace("TRC", 0);
 	m_VerboseLevels.emplace("INF", 1);
 	m_VerboseLevels.emplace("WRN", 2);
 	m_VerboseLevels.emplace("ERR", 3);
@@ -45,8 +41,6 @@ void Logger::init(const std::unique_ptr<N_Configuration::AppConfiguration>& aLog
 
 			switch (m_VerboseLevels[mode])
 			{
-				case 0:
-					m_TRCLog.reset(new TRCLog);
 				case 1:
 					m_INFLog.reset(new INFLog);
 				case 2:

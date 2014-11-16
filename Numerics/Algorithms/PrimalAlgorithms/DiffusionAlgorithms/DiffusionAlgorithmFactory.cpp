@@ -1,12 +1,10 @@
 #include "DiffusionAlgorithmFactory.hpp"
-
+#include "Utility/Logger/Logger.hpp"
 #include "SemiImplicitDiffusionAlgorithm.hpp"
 #include "DumbAlgorithm.hpp"
 
 #include "Configuration/ModelConfiguration.hpp"
 #include "NumericsCoreParams.hpp"
-
-#include <iostream>
 
 namespace N_Mathematics {
 
@@ -18,18 +16,19 @@ namespace N_Mathematics {
 			{
 				if (!std::strcmp(aDiffusionAlgo->type()->c_str(), "SemiImplicit"))
 				{
+					LOG_INF("Setting SemiImplicit diffusion algorithm.");
 					return new SemiImplicitDiffusionAlgorithm(aNumCoreParams, aDiffusionAlgo);
 				}
 			}
 			else // no DiffusionAlgo type provided => default algo
 			{
-				std::cerr << "Diffusion algorithm type not provided." << std::endl; // TODO: log that
+				LOG_ERR("Diffusion algorithm type not provided.");
 				return new DumbAlgorithm();
 			}
 		}
 		else // DiffusionAlgo component not provided => default algo
 		{
-			std::cerr << "Diffusion algorithm not provided." << std::endl; // TODO: log that
+			LOG_ERR("Diffusion algorithm not provided.");
 			return new DumbAlgorithm();
 		}
 	}

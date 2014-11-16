@@ -8,6 +8,6 @@
 	<!-- TODO: allow these files to be written relative to some bin path -->
 						
 	<param:Parameter name="FileName">e:\cfsSIA3D-src\Log\backend.log</param:Parameter>
-	<param:Parameter name="Mode">ERR</param:Parameter>
+	<param:Parameter name="Mode">WRN</param:Parameter>
 	
 </a:App>

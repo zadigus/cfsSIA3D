@@ -1,4 +1,5 @@
 #include "MassBalanceFactory.hpp"
+#include "Utility/Logger/Logger.hpp"
 
 #include "AcAmELA.hpp"
 #include "GradELA.hpp"
@@ -8,43 +9,43 @@
 #include "Configuration/ModelConfiguration.hpp"
 #include "PhysicsCoreParams.hpp"
 
-#include <iostream>
 
 namespace N_Glacier {
 
 	MassBalance* MassBalanceFactory::make(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams, N_Configuration::Component* aMassBalance)
-	{ // TODO: print a notification about the chosen massbalance type; add general PhysicalComponent::_name and print() members like with packages
-		// TODO: create a class for logging purposes
+	{ 
 		if (aMassBalance && aPhysCoreParams)
 		{
 			if (aMassBalance->type().present())
 			{
-				//if (aMassBalance->type()->compare("ACAMELA")) {
 				if (!std::strcmp(aMassBalance->type()->c_str(), "AcAmELA")) {
+					LOG_INF("Setting MassBalance AcAmELA");
 					return new AcAmELA(aPhysCoreParams, aMassBalance);
 				}
-				//else if (aMassBalance->type()->compare("GRADELA")) {
 				else if (!std::strcmp(aMassBalance->type()->c_str(), "GradELA")) {
+					LOG_INF("Setting MassBalance GradELA");
 					return new GradELA(aPhysCoreParams, aMassBalance);
 				}
-				//else if (aMassBalance->type()->compare("CONSTANT"))
 				else if (!std::strcmp(aMassBalance->type()->c_str(), "Constant"))
+				{
+					LOG_INF("Setting MassBalance Constant");
 					return new ConstantMB(aPhysCoreParams, aMassBalance);
+				}
 				else
 				{
-					std::cout << "Unknown type " << aMassBalance->type() << ". Setting MassBalance to zero." << std::endl;
+					LOG_WRN("Unknown type " << aMassBalance->type() << ". Setting MassBalance to zero.");
 					return new ZeroMB(); // if unknown, then set B = 0
 				}
 			}
 			else
 			{
-				std::cout << "Type not specified. Setting MassBalance to zero." << std::endl;
+				LOG_WRN("Type not specified. Setting MassBalance to zero.");
 				return new ZeroMB(); // if type not set, then set B = 0
 			}
 		}
 		else
 		{
-			std::cout << "No configuration provided. Setting MassBalance to zero." << std::endl;
+			LOG_WRN("No configuration provided. Setting MassBalance to zero.");
 			return new ZeroMB();
 		}
 	}

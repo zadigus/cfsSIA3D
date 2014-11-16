@@ -1,6 +1,8 @@
 #include "Glacier.hpp"
 #include "PhysicsCoreParams.hpp"
 
+#include "Utility/Logger/Logger.hpp"
+
 #include <iostream>
 #include "Configuration/ModelCoreConfiguration.hpp"
 #include "Configuration/ModelConfiguration.hpp"
@@ -70,7 +72,7 @@ namespace N_Glacier {
 			}
 			else
 			{
-				std::cerr << "Unknown component " << it->name()->c_str() << "." << std::endl;
+				LOG_ERR("Unknown component " << it->name()->c_str());
 			}
 		}
 
@@ -85,12 +87,12 @@ namespace N_Glacier {
 		}
 		if (!m_Rheology)
 		{ // nothing can happen without a rheology
-			std::cerr << "Missing compulsory rheology component." << std::endl;
+			LOG_ERR("Missing compulsory rheology component.");
 			exit(EXIT_FAILURE);
 		}
 		if (!m_Geometry)
 		{
-			std::cerr << "Missing compulsory geometry component." << std::endl;
+			LOG_ERR("Missing compulsory geometry component.");
 			exit(EXIT_FAILURE);
 		}
 	}

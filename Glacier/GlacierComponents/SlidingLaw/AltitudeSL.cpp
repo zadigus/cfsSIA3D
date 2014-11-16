@@ -1,5 +1,5 @@
 #include "AltitudeSL.hpp"
-
+#include "Utility/Logger/Logger.hpp"
 #include <cassert>
 #include <cmath>
 
@@ -13,7 +13,8 @@ namespace N_Glacier {
 		, m_Z(m_parameters.find("Z") != m_parameters.end() ? std::stod(m_parameters["Z"]) : 0)
 		, m_C(m_parameters.find("C") != m_parameters.end() ? std::stod(m_parameters["C"]) : 0)
 	{
-		
+		LOG_INF("Z = " << Z());
+		LOG_INF("C = " << C());
 	}
 	
 	AltitudeSL::~AltitudeSL()

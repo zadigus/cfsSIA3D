@@ -1,12 +1,10 @@
 #include "ClimateAlgorithmFactory.hpp"
-
+#include "Utility/Logger/Logger.hpp"
 #include "FullyImplicitClimateAlgorithm.hpp"
 #include "DumbAlgorithm.hpp"
 
 #include "Configuration/ModelConfiguration.hpp"
 #include "NumericsCoreParams.hpp"
-
-#include <iostream>
 
 namespace N_Mathematics {
 
@@ -18,18 +16,19 @@ namespace N_Mathematics {
 			{
 				if (!std::strcmp(aClimateAlgo->type()->c_str(), "FullyImplicit"))
 				{
+					LOG_INF("Setting FullyImplicit climate algorithm.");
 					return new FullyImplicitClimateAlgorithm(aNumCoreParams, aClimateAlgo); 
 				}
 			}
 			else // no ClimateAlgo type provided => default algo
 			{
-				std::cerr << "Climate algorithm type not provided." << std::endl;
+				LOG_ERR("Climate algorithm type not provided.");
 				return new DumbAlgorithm();
 			}
 		}
 		else // ClimateAlgo component not provided => default algo
 		{
-			std::cerr << "Climate algorithm not provided." << std::endl;
+			LOG_ERR("Climate algorithm not provided.");
 			return new DumbAlgorithm();
 		}
 	}

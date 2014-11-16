@@ -1,4 +1,5 @@
 #include "AcAmELA.hpp"
+#include "Utility/Logger/Logger.hpp"
 #include "Utility/Math.hpp"
 #include "Configuration/ModelConfiguration.hpp"
 #include "PhysicsCoreParams.hpp"
@@ -12,7 +13,10 @@ namespace N_Glacier {
 		, m_am(std::stod(m_parameters["am"]))
 		, m_eps(std::stod(m_parameters["eps"]))
 	{
-	
+		LOG_INF("ELA = " << ELA());
+		LOG_INF("ac  = " << ac());
+		LOG_INF("am  = " << am());
+		LOG_INF("eps = " << eps());
 	}
 
 	AcAmELA::~AcAmELA()

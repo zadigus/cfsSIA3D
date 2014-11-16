@@ -1,5 +1,5 @@
 #include "ConstantSL.hpp"
-
+#include "Utility/Logger/Logger.hpp"
 #include "Numerics/Mesh/Grid.hpp"
 #include "Configuration/ModelConfiguration.hpp"
 
@@ -8,7 +8,7 @@ namespace N_Glacier {
 	ConstantSL::ConstantSL(N_Configuration::Component* aComponent)
 		: SlidingLaw(aComponent)
 	{
-		
+		LOG_INF("Grid file name " << m_parameters["grid"]);
 	}
 
 	ConstantSL::~ConstantSL()

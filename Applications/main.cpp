@@ -41,7 +41,6 @@ int main(int argc, char* argv[]) // TODO: I need a front-end and a back-end; use
 		N_Configuration::AppConfiguration::Parameter_sequence fileNames(appConf->Parameter());
 		for (N_Configuration::AppConfiguration::Parameter_const_iterator it = fileNames.begin(); it != fileNames.end(); ++it)
 		{
-			//std::cout << it->name() << ", " << *it << std::endl;
 			if (!std::strcmp(it->name().c_str(), "Physics"))
 				physConf = N_Configuration::Model(*it);
 			if (!std::strcmp(it->name().c_str(), "PhysicsCore"))
@@ -56,12 +55,7 @@ int main(int argc, char* argv[]) // TODO: I need a front-end and a back-end; use
 
 		Logger::getInstance().init(loggerConf);
 
-		LOG_WRN("Ho du con");
-
 		N_Glacier::Glacier::getInstance()->init(physConf, physCoreConf);
-
-		LOG_ERR("Alors connard, tu fais moins le mariole hein ?");
-
 	}
 	catch (const xml_schema::exception& e)
 	{

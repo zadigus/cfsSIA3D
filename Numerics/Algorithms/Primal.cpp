@@ -1,5 +1,5 @@
 #include "Primal.hpp"
-
+#include "Utility/Logger/Logger.hpp"
 #include "Configuration/ModelConfiguration.hpp"
 
 #include "PrimalAlgorithms/PrimalAlgorithm.hpp"
@@ -8,9 +8,6 @@
 #include "PrimalAlgorithms/ClimateAlgorithms/ClimateAlgorithmFactory.hpp"
 #include "PrimalAlgorithms/DiffusionAlgorithms/DiffusionAlgorithmFactory.hpp"
 #include "PrimalAlgorithms/ProjectionAlgorithms/ProjectionAlgorithmFactory.hpp"
-
-// Glacier
-//#include "Glacier/Glacier.hpp"
 
 #include "NumericsCoreParams.hpp"
 
@@ -38,7 +35,7 @@ namespace N_Mathematics {
 
 	}
 
-	void Primal::init(std::unique_ptr<N_Configuration::ModelConfiguration>& aMathConf, const std::unique_ptr<NumericsCoreParams>& aNumCoreParams) //, std::shared_ptr<N_Glacier::Glacier>& aGlacier)
+	void Primal::init(std::unique_ptr<N_Configuration::ModelConfiguration>& aMathConf, const std::unique_ptr<NumericsCoreParams>& aNumCoreParams)
 	{
 		m_dt = aNumCoreParams->dt();
 		m_ti = aNumCoreParams->ti();
@@ -47,7 +44,8 @@ namespace N_Mathematics {
 		N_Configuration::ModelConfiguration::Component_sequence compSeq(aMathConf->Component());
 		for (N_Configuration::ModelConfiguration::Component_iterator it = compSeq.begin(); it != compSeq.end(); ++it) // TODO: use a const_iterator
 		{
-			std::cout << "Math::Component " << it->name() << std::endl;
+			LOG_INF("Math::Component " << it->name());
+
 			if (!std::strcmp(it->name()->c_str(), "Diffusion"))
 			{
 				m_DiffusionAlgo.reset(DiffusionAlgorithmFactory::make(aNumCoreParams, &(*it)));
@@ -62,7 +60,7 @@ namespace N_Mathematics {
 			}
 			else
 			{
-				std::cerr << "Mathematics component " << it->name()->c_str() << " unknown." << std::endl;
+				LOG_ERR("Mathematics component " << it->name()->c_str() << " unknown.");
 			}
 		}
 
@@ -79,21 +77,14 @@ namespace N_Mathematics {
 		{
 			m_ProjectionAlgo.reset(ProjectionAlgorithmFactory::make());
 		}
-
-		// Add glacier reference
-		//m_DiffusionAlgo->setGlacierRef(aGlacier); // TODO: that can't be done that late
-		//m_ClimateAlgo->setGlacierRef(aGlacier);
-		//m_ProjectionAlgo->setGlacierRef(aGlacier);
 	}
 
 	void Primal::Run()
 	{
-		// TODO: I need a ti and a tf here!!!
 		double currentTime(m_ti);
-		//unsigned int l(0); // TODO: probably not necessary
 		while (currentTime < m_tf)
 		{
-			Iterate(); // l++);
+			Iterate();
 			currentTime += m_dt;
 		}
 	}

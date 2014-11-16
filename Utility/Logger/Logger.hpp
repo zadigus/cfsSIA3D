@@ -5,20 +5,28 @@
 #include <string>
 #include <map>
 #include <fstream>
+#include <sstream>
 
 #include "Log.hpp"
 
-#define LOG_TRC(msg) Logger::getInstance().trace(msg, __FUNCSIG__, __FILE__, __LINE__) 
-// TODO: that mode must write "ENTERING function ..." / "LEAVING fucntion"
-/*#define LOG_TRC tracer_t _token(__func__)
-struct tracer_t {
-    char const* fname;
-    tracer_t(char const* fname_): fname(fname_) { printin(fname); }
-    ~tracer_t() { printout(fname); }
-}*/
-#define LOG_INF(msg) Logger::getInstance().info(msg, __FUNCSIG__, __FILE__, __LINE__)
-#define LOG_WRN(msg) Logger::getInstance().warning(msg, __FUNCSIG__, __FILE__, __LINE__)
-#define LOG_ERR(msg) Logger::getInstance().error(msg, __FUNCSIG__, __FILE__, __LINE__)
+#define LOG_INF(msg) \
+	{ \
+	std::stringstream tmp; \
+	tmp << msg; \
+	Logger::getInstance().info(tmp, __FUNCTION__); \
+	}
+#define LOG_WRN(msg) \
+	{ \
+	std::stringstream tmp; \
+	tmp << msg; \
+	Logger::getInstance().warning(tmp, __FUNCTION__); \
+	}
+#define LOG_ERR(msg) \
+	{ \
+	std::stringstream tmp; \
+	tmp << msg; \
+	Logger::getInstance().error(tmp, __FUNCSIG__, __FILE__, __LINE__); \
+	}
 
 namespace N_Configuration {
 	class AppConfiguration;
@@ -32,16 +40,15 @@ class Logger
 		static Logger& getInstance();
 		void init(const std::unique_ptr<N_Configuration::AppConfiguration>& aLoggerConf); 
 
-		void trace(std::string aMessage, std::string aFctSig, std::string aFileName, int aLineNb);
-		void info(std::string aMessage, std::string aFctSig, std::string aFileName, int aLineNb);
-		void warning(std::string aMessage, std::string aFctSig, std::string aFileName, int aLineNb);
-		void error(std::string aMessage, std::string aFctSig, std::string aFileName, int aLineNb);
+		void info(std::stringstream& aMessage, std::string aFctSig = std::string(), std::string aFileName = std::string(), int aLineNb = 0);
+		void warning(std::stringstream& aMessage, std::string aFctSig = std::string(), std::string aFileName = std::string(), int aLineNb = 0);
+		void error(std::stringstream& aMessage, std::string aFctSig = std::string(), std::string aFileName = std::string(), int aLineNb = 0);
 
 	private:
 		Logger();
 		~Logger();
 	
-		std::string coreMessage(std::string aFctSig, std::string aFileName, int aLineNb);
+		std::string coreMessage(std::string aFctSig = std::string(), std::string aFileName = std::string(), int aLineNb = 0);
 		std::string getDate();
 
 	private:
@@ -49,30 +56,24 @@ class Logger
 		std::ofstream m_Stream; // TODO: allow for log output in the console too
 
 		// Strategy pattern for the Logs
-		std::unique_ptr<Log> m_TRCLog;
 		std::unique_ptr<Log> m_INFLog;
 		std::unique_ptr<Log> m_WRNLog;
 		std::unique_ptr<Log> m_ERRLog;
 };
 
-inline void Logger::trace(std::string aMessage, std::string aFctSig, std::string aFileName, int aLineNb)
+inline void Logger::info(std::stringstream& aMessage, std::string aFctSig, std::string aFileName, int aLineNb)
 {
-	m_Stream << m_TRCLog->message(coreMessage(aFctSig, aFileName, aLineNb) + " : " + aMessage + "\n");
+	m_Stream << m_INFLog->message(coreMessage(aFctSig, aFileName, aLineNb) + " : " + aMessage.str() + "\n");
 }
 
-inline void Logger::info(std::string aMessage, std::string aFctSig, std::string aFileName, int aLineNb)
+inline void Logger::warning(std::stringstream& aMessage, std::string aFctSig, std::string aFileName, int aLineNb)
 {
-	m_Stream << m_INFLog->message(coreMessage(aFctSig, aFileName, aLineNb) + " : " + aMessage + "\n");
+	m_Stream << m_WRNLog->message(coreMessage(aFctSig, aFileName, aLineNb) + " : " + aMessage.str() + "\n");
 }
 
-inline void Logger::warning(std::string aMessage, std::string aFctSig, std::string aFileName, int aLineNb)
+inline void Logger::error(std::stringstream& aMessage, std::string aFctSig, std::string aFileName, int aLineNb)
 {
-	m_Stream << m_WRNLog->message(coreMessage(aFctSig, aFileName, aLineNb) + " : " + aMessage + "\n");
-}
-
-inline void Logger::error(std::string aMessage, std::string aFctSig, std::string aFileName, int aLineNb)
-{
-	m_Stream << m_ERRLog->message(coreMessage(aFctSig, aFileName, aLineNb) + " : " + aMessage + "\n");
+	m_Stream << m_ERRLog->message(coreMessage(aFctSig, aFileName, aLineNb) + " : " + aMessage.str() + "\n");
 }
 
 #endif

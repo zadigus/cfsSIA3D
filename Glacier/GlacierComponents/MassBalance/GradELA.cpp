@@ -1,9 +1,8 @@
 #include "GradELA.hpp"
+#include "Utility/Logger/Logger.hpp"
 #include "Utility/Math.hpp"
 #include "Configuration/ModelConfiguration.hpp"
 #include "PhysicsCoreParams.hpp"
-
-#include <iostream>
 
 namespace N_Glacier {
 
@@ -14,10 +13,10 @@ namespace N_Glacier {
 		, m_m2(m_parameters.find("m2") != m_parameters.end() ? std::stod(m_parameters["m2"]) : 0)
 		, m_eps(m_parameters.find("eps") != m_parameters.end() ? std::stod(m_parameters["eps"]) : 0)
 	{
-		std::cout << "ELA = " << ELA() << std::endl;
-		std::cout << "m1  = " << m1() << std::endl;
-		std::cout << "m2  = " << m2() << std::endl;
-		std::cout << "eps = " << eps() << std::endl;
+		LOG_INF("ELA = " << ELA());
+		LOG_INF("m1  = " << m1());
+		LOG_INF("m2  = " << m2());
+		LOG_INF("eps = " << eps());
 	}
 
 	GradELA::~GradELA()

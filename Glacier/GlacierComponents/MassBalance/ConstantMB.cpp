@@ -1,4 +1,5 @@
 #include "ConstantMB.hpp"
+#include "Utility/Logger/Logger.hpp"
 #include "Configuration/ModelConfiguration.hpp"
 #include "Numerics/Mesh/Grid.hpp"
 #include "PhysicsCoreParams.hpp"
@@ -9,7 +10,7 @@ namespace N_Glacier {
 		: MassBalance(aPhysCoreParams, aComponent)
 		, m_mb(new Grid(m_parameters["grid"])) 
 	{
-
+		LOG_INF("Grid file name " << m_parameters["grid"]);
 	}
 
 	ConstantMB::~ConstantMB()
