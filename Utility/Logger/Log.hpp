@@ -8,10 +8,10 @@
 class Log
 {
 	public:
-		Log(std::string aTag) : m_Tag(aTag) { };
+		Log(const std::string& aTag) : m_Tag(aTag) { };
 		virtual ~Log() { };
 
-		virtual std::string message(std::string aMessage)
+		virtual std::string message(const std::string& aMessage)
 		{
 			return m_Tag + " : " + aMessage;
 		}
@@ -24,30 +24,30 @@ class INFLog : public Log
 {
 	public:
 		INFLog() : Log("@INF") { }
-		virtual ~INFLog() { };
+		virtual ~INFLog() { }
 };
 
 class WRNLog : public Log
 {
 	public:
 		WRNLog() : Log("@WRN") { }
-		virtual ~WRNLog() { };
+		virtual ~WRNLog() { }
 };
 
 class ERRLog : public Log
 {
 	public:
 		ERRLog() : Log("@ERR") { }
-		virtual ~ERRLog() { };
+		virtual ~ERRLog() { }
 };
 
 class OFFLog : public Log
 {
 	public:
 		OFFLog() : Log("") { }
-		virtual ~OFFLog() { };
+		virtual ~OFFLog() { }
 
-		virtual std::string message(std::string aMessage)
+		virtual std::string message(const std::string& aMessage)
 		{
 			return "";
 		}
