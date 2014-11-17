@@ -18,3 +18,4 @@ ADD_SUBDIRECTORY(Algorithms)
 FILE(GLOB src RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.cpp" "*.hpp")
 
 ADD_LIBRARY(Numerics ${src})
+TARGET_LINK_LIBRARIES(Numerics Algorithms)

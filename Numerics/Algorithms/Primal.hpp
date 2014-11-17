@@ -3,24 +3,24 @@
 
 #include <memory>
 
+#include "Utility/Singleton.hpp"
+
 namespace N_Configuration {
 	class ModelConfiguration;
+	class ModelCoreConfiguration;
 }
-
-//namespace N_Glacier {
-//	class Glacier;
-//}
 
 namespace N_Mathematics {
 
 	class PrimalAlgorithm;
 	class NumericsCoreParams;
 
-	class Primal
+	class Primal : public Singleton<Primal>
 	{
+		friend class Singleton<Primal>;
+
 		public:
-			static Primal& getInstance(); 
-			void init(std::unique_ptr<N_Configuration::ModelConfiguration>& aMathConf, const std::unique_ptr<NumericsCoreParams>& aNumCoreParams); // , std::shared_ptr<N_Glacier::Glacier>& aGlacier);
+			void init(std::unique_ptr<N_Configuration::ModelConfiguration>& aMathConf, const std::unique_ptr<N_Configuration::ModelCoreConfiguration>& aNumCoreConf);
 
 			// General purpose
 			void Run(); 								// compute one whole evolution from time ti to time tf
@@ -36,7 +36,7 @@ namespace N_Mathematics {
 			void Climate(); 						// compute step dh/dt = B
 			void Projection();					// enforce H >= 0
 
-			void Iterate(); // int l);					// compute one whole forward iteration consisting of diffusion, accumulation/ablation, projection
+			void Iterate();							// compute one whole forward iteration consisting of diffusion, accumulation/ablation, projection
 		
 		private:
 			// Strategy pattern

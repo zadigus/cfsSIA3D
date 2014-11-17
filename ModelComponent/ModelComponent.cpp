@@ -1,5 +1,5 @@
 #include "ModelComponent.hpp"
-
+#include "Utility/Logger/Logger.hpp"
 #include "Configuration/ModelCoreConfiguration.hpp"
 #include "Configuration/ModelConfiguration.hpp"
 #include <iostream>

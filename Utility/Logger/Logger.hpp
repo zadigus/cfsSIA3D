@@ -7,6 +7,7 @@
 #include <fstream>
 #include <sstream>
 
+#include "Utility/Singleton.hpp"
 #include "Log.hpp"
 
 #define LOG_INF(msg) \
@@ -34,10 +35,11 @@ namespace N_Configuration {
 
 class Log;
 
-class Logger
+class Logger : public Singleton<Logger>
 {
+	friend class Singleton<Logger>;
+
 	public:
-		static Logger& getInstance();
 		void init(const std::unique_ptr<N_Configuration::AppConfiguration>& aLoggerConf); 
 
 		void info(std::stringstream& aMessage, const std::string& aFctSig = std::string(), const std::string& aFileName = std::string(), int aLineNb = 0); // more efficient to pass const string& as only string because no copy ctor is called 
@@ -48,12 +50,12 @@ class Logger
 		Logger();
 		~Logger();
 	
-		std::string coreMessage(const std::string& aFctSig = std::string(), const std::string& aFileName = std::string(), int aLineNb = 0);
-		std::string getDate();
+		std::string coreMessage(const std::string& aFctSig = std::string(), const std::string& aFileName = std::string(), int aLineNb = 0) const;
+		std::string getDate() const;
 
 	private:
 		std::map<std::string, unsigned int> m_VerboseLevels;
-		std::ofstream m_Stream; // TODO: allow for log output in the console too
+		std::ofstream m_Stream; // TODO: allow for log output to the console too
 
 		// Strategy pattern for the Logs
 		std::unique_ptr<Log> m_INFLog;
@@ -61,19 +63,19 @@ class Logger
 		std::unique_ptr<Log> m_ERRLog;
 };
 
-inline void Logger::info(std::stringstream& aMessage, const std::string& aFctSig, const std::string& aFileName, int aLineNb)
+inline void Logger::info(std::stringstream& aMessage, const std::string& aFctSig, const std::string& aFileName, int aLineNb) 
 {
-	m_Stream << m_INFLog->message(coreMessage(aFctSig, aFileName, aLineNb) + " : " + aMessage.str() + "\n");
+	m_Stream << m_INFLog->message(coreMessage(aFctSig, aFileName, aLineNb) + " : " + aMessage.str() + "\n") << std::flush;
 }
 
-inline void Logger::warning(std::stringstream& aMessage, const std::string& aFctSig, const std::string& aFileName, int aLineNb)
+inline void Logger::warning(std::stringstream& aMessage, const std::string& aFctSig, const std::string& aFileName, int aLineNb) 
 {
-	m_Stream << m_WRNLog->message(coreMessage(aFctSig, aFileName, aLineNb) + " : " + aMessage.str() + "\n");
+	m_Stream << m_WRNLog->message(coreMessage(aFctSig, aFileName, aLineNb) + " : " + aMessage.str() + "\n") << std::flush;
 }
 
-inline void Logger::error(std::stringstream& aMessage, const std::string& aFctSig, const std::string& aFileName, int aLineNb)
+inline void Logger::error(std::stringstream& aMessage, const std::string& aFctSig, const std::string& aFileName, int aLineNb) 
 {
-	m_Stream << m_ERRLog->message(coreMessage(aFctSig, aFileName, aLineNb) + " : " + aMessage.str() + "\n");
+	m_Stream << m_ERRLog->message(coreMessage(aFctSig, aFileName, aLineNb) + " : " + aMessage.str() + "\n") << std::flush;
 }
 
 #endif

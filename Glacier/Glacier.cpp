@@ -22,16 +22,6 @@
 
 namespace N_Glacier {
 
-	std::shared_ptr<Glacier>& Glacier::getInstance()
-	{
-		static std::shared_ptr<Glacier> instance = nullptr;
-		if (!instance)
-		{
-			instance.reset(new Glacier);
-		}
-		return instance;
-	}
-
 	Glacier::Glacier()
 		: m_MassBalance(NULL)
 		, m_Rheology(NULL)

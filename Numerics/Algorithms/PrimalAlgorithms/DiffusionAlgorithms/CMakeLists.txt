@@ -13,3 +13,4 @@ INCLUDE_DIRECTORIES(
 FILE(GLOB src RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "*.cpp" "*.hpp")
 
 ADD_LIBRARY(DiffusionAlgorithms ${src})
+TARGET_LINK_LIBRARIES(DiffusionAlgorithms Configuration)

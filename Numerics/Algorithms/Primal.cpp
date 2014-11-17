@@ -1,7 +1,7 @@
 #include "Primal.hpp"
 #include "Utility/Logger/Logger.hpp"
 #include "Configuration/ModelConfiguration.hpp"
-
+#include "Configuration/ModelCoreConfiguration.hpp"
 #include "PrimalAlgorithms/PrimalAlgorithm.hpp"
 
 // Factories
@@ -14,12 +14,6 @@
 #include <iostream>
 
 namespace N_Mathematics {
-
-	Primal& Primal::getInstance() 
-	{
-		static Primal instance;
-		return instance;
-	}
 
 	Primal::Primal()
 		: m_DiffusionAlgo(nullptr)
@@ -35,11 +29,13 @@ namespace N_Mathematics {
 
 	}
 
-	void Primal::init(std::unique_ptr<N_Configuration::ModelConfiguration>& aMathConf, const std::unique_ptr<NumericsCoreParams>& aNumCoreParams)
+	void Primal::init(std::unique_ptr<N_Configuration::ModelConfiguration>& aMathConf, const std::unique_ptr<N_Configuration::ModelCoreConfiguration>& aNumCoreConf)
 	{
-		m_dt = aNumCoreParams->dt();
-		m_ti = aNumCoreParams->ti();
-		m_tf = aNumCoreParams->tf();
+		std::unique_ptr<NumericsCoreParams> numCore(new NumericsCoreParams(aNumCoreConf));
+
+		m_dt = numCore->dt();
+		m_ti = numCore->ti();
+		m_tf = numCore->tf();
 
 		N_Configuration::ModelConfiguration::Component_sequence compSeq(aMathConf->Component());
 		for (N_Configuration::ModelConfiguration::Component_iterator it = compSeq.begin(); it != compSeq.end(); ++it) // TODO: use a const_iterator
@@ -48,15 +44,15 @@ namespace N_Mathematics {
 
 			if (!std::strcmp(it->name()->c_str(), "Diffusion"))
 			{
-				m_DiffusionAlgo.reset(DiffusionAlgorithmFactory::make(aNumCoreParams, &(*it)));
+				m_DiffusionAlgo.reset(DiffusionAlgorithmFactory::make(numCore, &(*it)));
 			}
 			else if (!std::strcmp(it->name()->c_str(), "Climate"))
 			{
-				m_ClimateAlgo.reset(ClimateAlgorithmFactory::make(aNumCoreParams, &(*it)));
+				m_ClimateAlgo.reset(ClimateAlgorithmFactory::make(numCore, &(*it)));
 			}
 			else if (!std::strcmp(it->name()->c_str(), "Projection"))
 			{
-				m_ProjectionAlgo.reset(ProjectionAlgorithmFactory::make(aNumCoreParams, &(*it)));
+				m_ProjectionAlgo.reset(ProjectionAlgorithmFactory::make(numCore, &(*it)));
 			}
 			else
 			{
@@ -89,7 +85,7 @@ namespace N_Mathematics {
 		}
 	}
 
-	void Primal::Iterate() //int l) // TODO: argument l is probably not necessary; let's just store the data in a vector ...
+	void Primal::Iterate() // TODO: argument l is probably not necessary; let's just store the data in a vector ...
 	{
 		Diffusion();
 		Climate();

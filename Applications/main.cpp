@@ -5,33 +5,23 @@
 #include "Configuration/ModelConfiguration.hpp"
 #include "Configuration/ModelCoreConfiguration.hpp"
 #include "Glacier/Glacier.hpp"
-#include "Glacier/GlacierComponents/Geometry/Geometry.hpp"
+#include "Numerics/Algorithms/Primal.hpp"
+//#include "Glacier/GlacierComponents/Geometry/Geometry.hpp"
 #include "Numerics/Mesh/Grid.hpp"
 #include "Utility/Logger/Logger.hpp"
 #include <memory>
 
 int main(int argc, char* argv[]) // TODO: I need a front-end and a back-end; use decorator pattern to decorate the backend with the frontend
-{
+{ // TODO: encapsulate all that here in a BackEnd class
 	if (argc != 2)
 	{
 		std::cerr << "Usage: " << argv[0] << " ConfigFile" << std::endl;
 		return 1;
 	}
 
-	/*std::cout << "Hello World!" << std::endl;
-
-	Grid g1, g2(10, 10, 1.0, 1.0);
-
-	std::vector<double> v(0);
-	std::cout << "size = " << v.size() << std::endl;
-
-	v.resize(2);
-	std::cout << "size = " << v.size() << std::endl;*/
-
 	try
 	{
 		std::unique_ptr<N_Configuration::AppConfiguration> appConf(N_Configuration::App(argv[1]));
-
 		std::unique_ptr<N_Configuration::ModelConfiguration> physConf;
 		std::unique_ptr<N_Configuration::ModelCoreConfiguration> physCoreConf;
 		std::unique_ptr<N_Configuration::ModelConfiguration> numericsConf;
@@ -53,9 +43,9 @@ int main(int argc, char* argv[]) // TODO: I need a front-end and a back-end; use
 				loggerConf = N_Configuration::App(*it);
 		}
 
-		Logger::getInstance().init(loggerConf);
-
-		N_Glacier::Glacier::getInstance()->init(physConf, physCoreConf);
+		Logger::getInstance().init(loggerConf); // TODO: write a Singleton class
+		N_Glacier::Glacier::getInstance().init(physConf, physCoreConf);
+		N_Mathematics::Primal::getInstance().init(numericsConf, numericsCoreConf);
 	}
 	catch (const xml_schema::exception& e)
 	{

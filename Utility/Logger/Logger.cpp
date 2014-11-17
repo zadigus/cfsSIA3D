@@ -19,12 +19,6 @@ Logger::~Logger()
 	m_Stream.close();
 }
 
-Logger& Logger::getInstance() // TODO: write a Singleton class from which every Singleton must inherit!!!! this must be a singleton template
-{
-	static Logger instance;
-	return instance;
-}
-
 void Logger::init(const std::unique_ptr<N_Configuration::AppConfiguration>& aLoggerConf)
 { 
 	N_Configuration::AppConfiguration::Parameter_sequence params(aLoggerConf->Parameter());
@@ -56,7 +50,7 @@ void Logger::init(const std::unique_ptr<N_Configuration::AppConfiguration>& aLog
 	}
 }
 
-std::string Logger::coreMessage(std::string aFctSig, std::string aFileName, int aLineNb)
+std::string Logger::coreMessage(const std::string& aFctSig, const std::string& aFileName, int aLineNb) const
 {
 	std::string tmp("[" + getDate() + "]");
 	if (!aFctSig.empty())
@@ -68,7 +62,7 @@ std::string Logger::coreMessage(std::string aFctSig, std::string aFileName, int 
 	return tmp;
 }
 
-std::string Logger::getDate()
+std::string Logger::getDate() const
 {
 	time_t rawtime;
 	unsigned int dateSize(80);

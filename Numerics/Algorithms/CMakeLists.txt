@@ -19,5 +19,6 @@ ADD_LIBRARY(Algorithms ${src})
 TARGET_LINK_LIBRARIES(Algorithms
 	PrimalAlgorithms
 	Configuration
+	LinSyst
 	${XERCES_LIBRARIES}
 )

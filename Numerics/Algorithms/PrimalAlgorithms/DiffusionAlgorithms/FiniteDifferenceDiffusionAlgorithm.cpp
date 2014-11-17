@@ -17,8 +17,8 @@ namespace N_Mathematics {
 
 	FiniteDifferenceDiffusionAlgorithm::FiniteDifferenceDiffusionAlgorithm(N_Configuration::Component* aDiffusionAlgo) 
 		: FiniteDifferencePrimalAlgorithm(aDiffusionAlgo)
-		, m_Rh(N_Glacier::Glacier::getInstance()->Rh())
-		, m_Sl(N_Glacier::Glacier::getInstance()->Sl())
+		, m_Rh(m_glacier.Rh())
+		, m_Sl(m_glacier.Sl())
 		, m_D(new Grid(m_Nx, m_Ny, m_Dx, m_H->Dy()))
 		, m_LinSyst(nullptr) 
 	{

@@ -3,6 +3,8 @@
 
 #include <memory>
 
+#include "Utility/Singleton.hpp"
+
 class Grid;
 
 namespace N_Configuration {
@@ -17,36 +19,36 @@ namespace N_Glacier {
 	class SlidingLaw;
 	class Geometry;
 
-	class Glacier
+	class Glacier : public Singleton<Glacier>
 	{
-	public:
-		~Glacier(); // for shared_ptr to be able to destroy the instance
+		friend class Singleton<Glacier>;
 
-		static std::shared_ptr<Glacier>& getInstance();
-		// implement the construction of the physics components with the various factories
-		void init(const std::unique_ptr<N_Configuration::ModelConfiguration>& aPhysConf, const std::unique_ptr<N_Configuration::ModelCoreConfiguration>& aPhysCoreConf);
+		public:
+			// implement the construction of the physics components with the various factories
+			void init(const std::unique_ptr<N_Configuration::ModelConfiguration>& aPhysConf, const std::unique_ptr<N_Configuration::ModelCoreConfiguration>& aPhysCoreConf);
 
-		// Getters
-		std::shared_ptr<MassBalance> B();
-		std::shared_ptr<Rheology>    Rh();
-		std::shared_ptr<SlidingLaw>  Sl();
-		std::shared_ptr<Geometry>    G();
-		std::shared_ptr<Grid>        b();
-		std::shared_ptr<Grid>        H();
-		std::shared_ptr<Grid>        gradbx();
-		std::shared_ptr<Grid>        gradby();
+			// Getters
+			std::shared_ptr<MassBalance> B();
+			std::shared_ptr<Rheology>    Rh();
+			std::shared_ptr<SlidingLaw>  Sl();
+			std::shared_ptr<Geometry>    G();
+			std::shared_ptr<Grid>        b();
+			std::shared_ptr<Grid>        H();
+			std::shared_ptr<Grid>        gradbx();
+			std::shared_ptr<Grid>        gradby();
 
-	private:
-		Glacier();
-		
-	private:
-		// Physics
-		std::shared_ptr<MassBalance> m_MassBalance;
-		std::shared_ptr<Rheology>    m_Rheology;
-		std::shared_ptr<SlidingLaw>  m_SlidingLaw;
+		private:
+			Glacier();
+			~Glacier(); 
 
-		// Geometry
-		std::shared_ptr<Geometry>    m_Geometry;
+		private:
+			// Physics
+			std::shared_ptr<MassBalance> m_MassBalance;
+			std::shared_ptr<Rheology>    m_Rheology;
+			std::shared_ptr<SlidingLaw>  m_SlidingLaw;
+
+			// Geometry
+			std::shared_ptr<Geometry>    m_Geometry;
 	};
 
 	inline std::shared_ptr<MassBalance> Glacier::B()

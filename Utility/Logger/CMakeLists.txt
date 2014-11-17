@@ -12,3 +12,4 @@ INCLUDE_DIRECTORIES(
 FILE(GLOB src RELATIVE ${PROJECT_SOURCE_DIR} "*.cpp" "*.hpp")
 
 ADD_LIBRARY(Logger ${src})
+TARGET_LINK_LIBRARIES(Logger Configuration)
