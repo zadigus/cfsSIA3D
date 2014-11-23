@@ -38,6 +38,12 @@ namespace N_Glacier {
 
 	void Glacier::init(const std::unique_ptr<N_Configuration::ModelConfiguration>& aPhysConf, const std::unique_ptr<N_Configuration::ModelCoreConfiguration>& aPhysCoreConf)
 	{
+		if (!aPhysConf)
+		{
+			LOG_ERR("Glacier configuration not specified.");
+			exit(EXIT_FAILURE);
+		}
+
 		std::unique_ptr<PhysicsCoreParams> physCore(new PhysicsCoreParams(aPhysCoreConf));
 
 		// Read configuration
@@ -69,7 +75,7 @@ namespace N_Glacier {
 		// Check configuration
 		if (!m_MassBalance)
 		{
-			m_MassBalance.reset(MassBalanceFactory::make());
+			m_MassBalance.reset(MassBalanceFactory::make(physCore));
 		}
 		if (!m_SlidingLaw)
 		{

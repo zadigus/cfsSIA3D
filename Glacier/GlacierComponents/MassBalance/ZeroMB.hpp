@@ -7,10 +7,12 @@ class Grid;
 
 namespace N_Glacier {
 
+	struct PhysicsCoreParams;
+
 	class ZeroMB : public GradELA {
 	public:
 		// Constructor / destructor
-		ZeroMB();
+		ZeroMB(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams);
 		virtual ~ZeroMB();
 	};
 

@@ -13,7 +13,6 @@ namespace N_Configuration {
 namespace N_Mathematics {
 
 	class PrimalAlgorithm;
-	class NumericsCoreParams;
 
 	class Primal : public Singleton<Primal>
 	{
@@ -23,7 +22,7 @@ namespace N_Mathematics {
 			void init(std::unique_ptr<N_Configuration::ModelConfiguration>& aMathConf, const std::unique_ptr<N_Configuration::ModelCoreConfiguration>& aNumCoreConf);
 
 			// General purpose
-			void Run(); 								// compute one whole evolution from time ti to time tf
+			void run(); 								// compute one whole evolution from time ti to time tf
 			void Store(); 							// store every velocity and ice thickness iterate
 
 		private:

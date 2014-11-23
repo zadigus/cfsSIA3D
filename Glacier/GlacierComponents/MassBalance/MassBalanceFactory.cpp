@@ -34,19 +34,19 @@ namespace N_Glacier {
 				else
 				{
 					LOG_WRN("Unknown type " << aMassBalance->type() << ". Setting MassBalance to zero.");
-					return new ZeroMB(); // if unknown, then set B = 0
+					return new ZeroMB(aPhysCoreParams); // if unknown, then set B = 0
 				}
 			}
 			else
 			{
 				LOG_WRN("Type not specified. Setting MassBalance to zero.");
-				return new ZeroMB(); // if type not set, then set B = 0
+				return new ZeroMB(aPhysCoreParams); // if type not set, then set B = 0
 			}
 		}
 		else
 		{
 			LOG_WRN("No configuration provided. Setting MassBalance to zero.");
-			return new ZeroMB();
+			return new ZeroMB(aPhysCoreParams);
 		}
 	}
 

@@ -4,7 +4,7 @@
 #include "DumbAlgorithm.hpp"
 
 #include "Configuration/ModelConfiguration.hpp"
-#include "NumericsCoreParams.hpp"
+#include "Algorithms/NumericsCoreParams.hpp"
 
 namespace N_Mathematics {
 
@@ -26,11 +26,10 @@ namespace N_Mathematics {
 				return new DumbAlgorithm();
 			}
 		}
-		else // ProjectionAlgo component not provided => default algo
-		{
-			LOG_ERR("Projection algorithm type not provided.");
-			return new DumbAlgorithm();
-		}
+		
+		// ProjectionAlgo component not provided => default algo
+		LOG_ERR("Projection algorithm type not provided.");
+		return new DumbAlgorithm();
 	}
 
 }

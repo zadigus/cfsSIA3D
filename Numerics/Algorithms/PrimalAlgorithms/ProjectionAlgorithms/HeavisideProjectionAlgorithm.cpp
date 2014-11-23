@@ -3,7 +3,7 @@
 #include "Numerics/Mesh/Grid.hpp"
 #include "Utility/Math.hpp"
 #include "Configuration/ModelConfiguration.hpp"
-#include "NumericsCoreParams.hpp"
+#include "Algorithms/NumericsCoreParams.hpp"
 
 namespace N_Mathematics {
 
@@ -18,7 +18,7 @@ namespace N_Mathematics {
 
 	}
 
-	void HeavisideProjectionAlgorithm::Run()
+	void HeavisideProjectionAlgorithm::run()
 	{
 		for(unsigned int i(0); i < m_Nx; ++i) // prefix increment operator is more efficient
 			for(unsigned int j(0); j < m_Ny; ++j)

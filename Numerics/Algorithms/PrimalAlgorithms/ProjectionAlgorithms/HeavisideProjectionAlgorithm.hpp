@@ -11,7 +11,7 @@ namespace N_Configuration {
 
 namespace N_Mathematics {
 
-	class NumericsCoreParams;
+	struct NumericsCoreParams;
 
 	class HeavisideProjectionAlgorithm : public FiniteDifferenceProjectionAlgorithm
 	{
@@ -19,7 +19,7 @@ namespace N_Mathematics {
 			HeavisideProjectionAlgorithm(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, N_Configuration::Component* aProjectionAlgo);
 			virtual ~HeavisideProjectionAlgorithm();
 
-			virtual void Run();
+			virtual void run();
 	};
 
 }

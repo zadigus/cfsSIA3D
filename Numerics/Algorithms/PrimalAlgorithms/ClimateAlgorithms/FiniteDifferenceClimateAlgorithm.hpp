@@ -19,7 +19,7 @@ namespace N_Mathematics {
 			FiniteDifferenceClimateAlgorithm(N_Configuration::Component* aClimateAlgo);
 			virtual ~FiniteDifferenceClimateAlgorithm();
 
-			virtual void Run() = 0;
+			virtual void run() = 0;
 
 		protected:
 			// Glacier mass-balance

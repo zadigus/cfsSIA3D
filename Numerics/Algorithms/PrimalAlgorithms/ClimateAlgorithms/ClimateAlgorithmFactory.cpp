@@ -4,7 +4,7 @@
 #include "DumbAlgorithm.hpp"
 
 #include "Configuration/ModelConfiguration.hpp"
-#include "NumericsCoreParams.hpp"
+#include "Algorithms/NumericsCoreParams.hpp"
 
 namespace N_Mathematics {
 
@@ -22,15 +22,14 @@ namespace N_Mathematics {
 			}
 			else // no ClimateAlgo type provided => default algo
 			{
-				LOG_ERR("Climate algorithm type not provided.");
+				LOG_WRN("Climate algorithm type not provided. Setting algorithm that does not nothing.");
 				return new DumbAlgorithm();
 			}
 		}
-		else // ClimateAlgo component not provided => default algo
-		{
-			LOG_ERR("Climate algorithm not provided.");
-			return new DumbAlgorithm();
-		}
+
+		// ClimateAlgo component not provided => default algo
+		LOG_WRN("Climate algorithm not provided. Setting algorithm that does not nothing.");
+		return new DumbAlgorithm();
 	}
 
 }

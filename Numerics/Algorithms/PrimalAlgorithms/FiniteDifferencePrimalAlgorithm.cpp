@@ -5,7 +5,7 @@
 #include "Utility/Logger/Logger.hpp"
 
 #include "Configuration/ModelConfiguration.hpp"
-#include "NumericsCoreParams.hpp"
+#include "Algorithms/NumericsCoreParams.hpp"
 
 #include "Numerics/LinSyst/Vector.hpp"
 

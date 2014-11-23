@@ -13,9 +13,9 @@ ADD_SUBDIRECTORY(Mesh)
 ADD_SUBDIRECTORY(LinSyst)
 ADD_SUBDIRECTORY(Algorithms)
 
-# TODO: find out to make a Numerics.lib
+# TODO: find out how to make a Numerics.lib
 
-FILE(GLOB src RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.cpp" "*.hpp")
+#FILE(GLOB src RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.cpp" "*.hpp")
 
-ADD_LIBRARY(Numerics ${src})
-TARGET_LINK_LIBRARIES(Numerics Algorithms)
+#ADD_LIBRARY(Numerics ${src})
+#TARGET_LINK_LIBRARIES(Numerics Algorithms)

@@ -31,6 +31,12 @@ namespace N_Mathematics {
 
 	void Primal::init(std::unique_ptr<N_Configuration::ModelConfiguration>& aMathConf, const std::unique_ptr<N_Configuration::ModelCoreConfiguration>& aNumCoreConf)
 	{
+		if (!aMathConf)
+		{
+			LOG_ERR("Numerics model configuration not specified.");
+			exit(EXIT_FAILURE);
+		}
+
 		std::unique_ptr<NumericsCoreParams> numCore(new NumericsCoreParams(aNumCoreConf));
 
 		m_dt = numCore->dt();
@@ -38,10 +44,8 @@ namespace N_Mathematics {
 		m_tf = numCore->tf();
 
 		N_Configuration::ModelConfiguration::Component_sequence compSeq(aMathConf->Component());
-		for (N_Configuration::ModelConfiguration::Component_iterator it = compSeq.begin(); it != compSeq.end(); ++it) // TODO: use a const_iterator
+		for (N_Configuration::ModelConfiguration::Component_iterator it = compSeq.begin(); it != compSeq.end(); ++it) 
 		{
-			LOG_INF("Math::Component " << it->name());
-
 			if (!std::strcmp(it->name()->c_str(), "Diffusion"))
 			{
 				m_DiffusionAlgo.reset(DiffusionAlgorithmFactory::make(numCore, &(*it)));
@@ -63,23 +67,24 @@ namespace N_Mathematics {
 		// Check configuration
 		if (!m_DiffusionAlgo)
 		{
-			m_DiffusionAlgo.reset(DiffusionAlgorithmFactory::make());
+			m_DiffusionAlgo.reset(DiffusionAlgorithmFactory::make(numCore));
 		}
 		if (!m_ClimateAlgo)
 		{
-			m_ClimateAlgo.reset(ClimateAlgorithmFactory::make());
+			m_ClimateAlgo.reset(ClimateAlgorithmFactory::make(numCore));
 		}
 		if (!m_ProjectionAlgo)
 		{
-			m_ProjectionAlgo.reset(ProjectionAlgorithmFactory::make());
+			m_ProjectionAlgo.reset(ProjectionAlgorithmFactory::make(numCore));
 		}
 	}
 
-	void Primal::Run()
+	void Primal::run()
 	{
 		double currentTime(m_ti);
 		while (currentTime < m_tf)
 		{
+			//std::cout << currentTime << std::endl;
 			Iterate();
 			currentTime += m_dt;
 		}
@@ -95,17 +100,17 @@ namespace N_Mathematics {
 
 	void Primal::Diffusion()
 	{
-		m_DiffusionAlgo->Run(); 
+		m_DiffusionAlgo->run(); 
 	}
 
 	void Primal::Climate()
 	{
-		m_ClimateAlgo->Run();
+		m_ClimateAlgo->run();
 	}
 
 	void Primal::Projection()
 	{
-		m_ProjectionAlgo->Run();
+		m_ProjectionAlgo->run();
 	}
 
 }

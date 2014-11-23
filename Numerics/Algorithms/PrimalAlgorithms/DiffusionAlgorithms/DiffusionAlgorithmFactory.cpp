@@ -4,7 +4,7 @@
 #include "DumbAlgorithm.hpp"
 
 #include "Configuration/ModelConfiguration.hpp"
-#include "NumericsCoreParams.hpp"
+#include "Algorithms/NumericsCoreParams.hpp"
 
 namespace N_Mathematics {
 
@@ -22,15 +22,14 @@ namespace N_Mathematics {
 			}
 			else // no DiffusionAlgo type provided => default algo
 			{
-				LOG_ERR("Diffusion algorithm type not provided.");
+				LOG_WRN("Diffusion algorithm type not provided. Setting algorithm that does nothing.");
 				return new DumbAlgorithm();
 			}
 		}
-		else // DiffusionAlgo component not provided => default algo
-		{
-			LOG_ERR("Diffusion algorithm not provided.");
-			return new DumbAlgorithm();
-		}
+		
+		// DiffusionAlgo component not provided => default algo
+		LOG_WRN("Diffusion algorithm not provided. Setting algorithm that does not nothing.");
+		return new DumbAlgorithm();
 	}
 
 }

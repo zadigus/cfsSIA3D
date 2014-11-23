@@ -24,7 +24,7 @@ namespace N_Mathematics {
 			FiniteDifferenceDiffusionAlgorithm(N_Configuration::Component* aDiffusionAlgo);
 			virtual ~FiniteDifferenceDiffusionAlgorithm();
 
-			virtual void Run() = 0;
+			virtual void run() = 0;
 
 		protected:
 			// Compute the diffusivity D

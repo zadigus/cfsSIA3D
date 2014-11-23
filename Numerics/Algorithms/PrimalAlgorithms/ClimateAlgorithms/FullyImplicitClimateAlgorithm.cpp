@@ -4,7 +4,7 @@
 #include "Numerics/Mesh/Grid.hpp"
 
 #include "Glacier/GlacierComponents/MassBalance/MassBalance.hpp"
-#include "NumericsCoreParams.hpp"
+#include "Algorithms/NumericsCoreParams.hpp"
 
 namespace N_Mathematics {
 
@@ -43,7 +43,7 @@ namespace N_Mathematics {
 
 	}
 
-	void FullyImplicitClimateAlgorithm::Run()
+	void FullyImplicitClimateAlgorithm::run()
 	{
 		while (m_err > m_tol) {
 			m_err = 0;

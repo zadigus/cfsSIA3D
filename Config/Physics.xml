@@ -5,14 +5,14 @@
 						xmlns:subc="http://www.cjcaesar.ch/SubComponent"
 						xmlns:param="http://www.cjcaesar.ch/Parameter"> 
 
-<m:Component name="MassBalance" type="GradELA">
+<!--m:Component name="MassBalance" type="GradELA">
 	<subc:SubComponent name="General">
 		<param:Parameter name="m1">0.1</param:Parameter>
 		<param:Parameter name="m2">0.005</param:Parameter>
 		<param:Parameter name="ELA">2700</param:Parameter>
 		<param:Parameter name="eps">0.1</param:Parameter>
 	</subc:SubComponent>
-</m:Component>
+</m:Component-->
 
 <m:Component name="SlidingLaw"/>
 

@@ -22,3 +22,6 @@ TARGET_LINK_LIBRARIES(Algorithms
 	LinSyst
 	${XERCES_LIBRARIES}
 )
+
+FILE(GLOB includes RELATIVE "${PROJECT_SOURCE_DIR}" "*.hpp")
+INSTALL(FILES ${includes}	DESTINATION ${CMAKE_SOURCE_DIR}/include/Numerics/Algorithms)

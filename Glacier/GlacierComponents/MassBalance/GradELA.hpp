@@ -11,8 +11,7 @@ namespace N_Glacier {
 	class GradELA : public MassBalance {
 		public:
 			// Constructor / destructor
-			GradELA(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams = std::unique_ptr<PhysicsCoreParams>(nullptr), N_Configuration::Component* aComponent = nullptr);
-			//GradELA();
+			GradELA(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams, N_Configuration::Component* aComponent = nullptr);
 			virtual ~GradELA();
 
 			// Getters

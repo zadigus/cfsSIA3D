@@ -11,8 +11,6 @@ namespace N_Configuration {
 
 namespace N_Mathematics {
 
-	//class NumericsCoreParams;
-
 	class Vector;
 
 	class FiniteDifferencePrimalAlgorithm : public PrimalAlgorithm
@@ -21,7 +19,7 @@ namespace N_Mathematics {
 			FiniteDifferencePrimalAlgorithm(N_Configuration::Component* aFiniteDifferenceAlgo);
 			virtual ~FiniteDifferencePrimalAlgorithm();
 
-			virtual void Run() = 0;
+			virtual void run() = 0;
 
 		protected:
 			// Access the geometry in a "natural" way
@@ -38,8 +36,8 @@ namespace N_Mathematics {
 			std::shared_ptr<Grid> m_H;
 
 			// Numerics parameters
-			int m_Nx;
-			int m_Ny;
+			unsigned int m_Nx;
+			unsigned int m_Ny;
 			double m_Dx;
 
 		private:

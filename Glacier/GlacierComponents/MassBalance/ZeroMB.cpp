@@ -4,7 +4,8 @@
 
 namespace N_Glacier {
 
-	ZeroMB::ZeroMB()
+	ZeroMB::ZeroMB(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams)
+		: GradELA(aPhysCoreParams)
 	{
 		// the parameters are not defined in the map, hence set to zero by default
 	}

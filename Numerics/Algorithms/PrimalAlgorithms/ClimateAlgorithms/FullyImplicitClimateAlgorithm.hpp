@@ -11,7 +11,7 @@ namespace N_Configuration {
 
 namespace N_Mathematics {
 
-	class NumericsCoreParams;
+	struct NumericsCoreParams;
 
 	/*
 	 *  This class solves H^{l+1} - H^{l} = Dt * B(H^{l+1}) for H^{l+1} with a Newton method
@@ -23,7 +23,7 @@ namespace N_Mathematics {
 			FullyImplicitClimateAlgorithm(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, N_Configuration::Component* aClimateAlgo);
 			virtual ~FullyImplicitClimateAlgorithm();
 
-			virtual void Run();
+			virtual void run();
 
 		protected:
 			double& Hn(unsigned int i, unsigned int j);

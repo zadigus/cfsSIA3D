@@ -1,11 +1,17 @@
 #include "NumericsCoreParams.hpp"
-
+#include "Utility/Logger/Logger.hpp"
 #include "Configuration/ModelCoreConfiguration.hpp"
 
 namespace N_Mathematics {
 
 	NumericsCoreParams::NumericsCoreParams(const std::unique_ptr<N_Configuration::ModelCoreConfiguration>& aNumericsCoreConf)
 	{
+		if (!aNumericsCoreConf)
+		{
+			LOG_ERR("Numerics core parameters not specified.");
+			exit(EXIT_FAILURE);
+		}
+
 		N_Configuration::ModelCoreConfiguration::Parameter_sequence paramSeq = aNumericsCoreConf->Parameter();
 		for (N_Configuration::ModelCoreConfiguration::Parameter_const_iterator it = paramSeq.begin(); it != paramSeq.end(); ++it)
 		{

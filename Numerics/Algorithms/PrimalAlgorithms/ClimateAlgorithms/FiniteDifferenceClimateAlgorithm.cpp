@@ -4,7 +4,7 @@
 #include "Glacier/GlacierComponents/MassBalance/MassBalance.hpp"
 
 #include "Configuration/ModelConfiguration.hpp"
-#include "NumericsCoreParams.hpp"
+#include "Algorithms/NumericsCoreParams.hpp"
 
 #include <cassert>
 

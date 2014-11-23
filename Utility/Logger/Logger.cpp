@@ -21,6 +21,12 @@ Logger::~Logger()
 
 void Logger::init(const std::unique_ptr<N_Configuration::AppConfiguration>& aLoggerConf)
 { 
+	if (!aLoggerConf)
+	{
+		std::cerr << "Logger configuration not specified." << std::endl;
+		exit(EXIT_FAILURE);
+	}
+
 	N_Configuration::AppConfiguration::Parameter_sequence params(aLoggerConf->Parameter());
 	for (N_Configuration::AppConfiguration::Parameter_const_iterator it(params.begin()); it != params.end(); ++it)
 	{

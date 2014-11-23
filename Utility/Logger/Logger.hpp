@@ -26,7 +26,7 @@
 	{ \
 	std::stringstream tmp; \
 	tmp << msg; \
-	Logger::getInstance().error(tmp, __FUNCSIG__, __FILE__, __LINE__); \
+	Logger::getInstance().error(tmp, __FUNCTION__, __FILE__, __LINE__); \
 	}
 
 namespace N_Configuration {

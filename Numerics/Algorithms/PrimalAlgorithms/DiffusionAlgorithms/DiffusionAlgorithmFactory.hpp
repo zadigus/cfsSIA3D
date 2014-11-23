@@ -3,8 +3,6 @@
 
 #include <memory>
 
-//class Grid;
-
 namespace N_Configuration {
 	class Component;
 }
@@ -12,7 +10,7 @@ namespace N_Configuration {
 namespace N_Mathematics {
 
 	class PrimalAlgorithm;
-	class NumericsCoreParams;
+	struct NumericsCoreParams;
 
 	/*
 	 *  The diffusion algorithms solve the discretized version of dH/dt = grad(D*grad(s))
@@ -21,7 +19,7 @@ namespace N_Mathematics {
 	class DiffusionAlgorithmFactory
 	{
 	public:
-		static PrimalAlgorithm* make(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams = std::unique_ptr<NumericsCoreParams>(nullptr), N_Configuration::Component* aDiffusionAlgo = nullptr); // TODO: make aDiffusionAlgo const
+		static PrimalAlgorithm* make(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, N_Configuration::Component* aDiffusionAlgo = nullptr); // TODO: make aDiffusionAlgo const
 	};
 
 }

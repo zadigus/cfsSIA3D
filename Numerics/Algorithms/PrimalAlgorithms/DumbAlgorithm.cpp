@@ -16,7 +16,7 @@ namespace N_Mathematics {
 
 	}
 
-	void DumbAlgorithm::Run()
+	void DumbAlgorithm::run()
 	{
 		// Do nothing
 	}

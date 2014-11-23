@@ -15,7 +15,7 @@ namespace N_Mathematics {
 			FiniteDifferenceProjectionAlgorithm(N_Configuration::Component* aProjectionAlgo);
 			virtual ~FiniteDifferenceProjectionAlgorithm();
 
-			virtual void Run() = 0;
+			virtual void run() = 0;
 	};
 }
 

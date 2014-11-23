@@ -9,7 +9,7 @@
 #include "Numerics/LinSyst/LinSyst.hpp"
 
 #include "Configuration/ModelConfiguration.hpp"
-#include "NumericsCoreParams.hpp"
+#include "Algorithms/NumericsCoreParams.hpp"
 
 #include <cassert>
 

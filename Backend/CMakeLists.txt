@@ -1,0 +1,13 @@
+PROJECT(BackendApp)
+
+INCLUDE_DIRECTORIES(
+	${PROJECT_SOURCE_DIR}/..
+	${PROJECT_BINARY_DIR}/..
+	${XERCES_INCLUDE_DIRS}
+	${XSD_INCLUDE_DIRS}
+)
+
+FILE(GLOB src RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "*.cpp" "*.hpp")
+
+ADD_EXECUTABLE(BackendApp ${src})
+TARGET_LINK_LIBRARIES(BackendApp Mesh Utility Glacier Algorithms LinSyst Configuration)

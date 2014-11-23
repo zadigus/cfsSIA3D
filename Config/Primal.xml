@@ -6,17 +6,17 @@
 						xmlns:subc="http://www.cjcaesar.ch/SubComponent"
 						xmlns:param="http://www.cjcaesar.ch/Parameter"> 
 
-<m:Component name="Diffusion"  type="SemiImplicit"> <!-- add e.g. parameters for the linear system -->
-	<!--SubComponent name="LinearSystem" type="Belos">
-	
-	</SubComponent-->
+<!--m:Component name="Diffusion"  type="SemiImplicit"> 
+	<subc:SubComponent name="LinearSystem">
+		<param:Parameter name="type">Belos</param:Parameter>
+	</subc:SubComponent>
 </m:Component>
 
 <m:Component name="Climate"    type="FullyImplicit"> 
 	<subc:SubComponent name="Newton">
 		<param:Parameter name="tol">1e-6</param:Parameter>
 	</subc:SubComponent>
-</m:Component>
+</m:Component-->
 
 <m:Component name="Projection" type="Heaviside"/> 
 

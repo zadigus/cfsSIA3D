@@ -45,10 +45,6 @@ class Grid{
 		Grid& operator+=(const Grid&);
 		Grid& operator-=(const Grid&);
 		Grid& operator*=(double c);
-		//Grid operator*(const double c);
-
-		//friend Grid operator+(Grid&, Grid&); 
-		//friend Grid operator-(Grid&, Grid&);
 
 		friend std::ostream& operator<<(std::ostream&, Grid&);
 

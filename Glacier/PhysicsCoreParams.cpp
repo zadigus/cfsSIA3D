@@ -1,11 +1,19 @@
 #include "PhysicsCoreParams.hpp"
 
+#include "Utility/Logger/Logger.hpp"
+
 #include "Configuration/ModelCoreConfiguration.hpp"
 
 namespace N_Glacier {
 
 	PhysicsCoreParams::PhysicsCoreParams(const std::unique_ptr<N_Configuration::ModelCoreConfiguration>& aPhysicsCoreConf)
 	{
+		if (!aPhysicsCoreConf)
+		{
+			LOG_ERR("Physics core configuration not specified.");
+			exit(EXIT_FAILURE);
+		}
+
 		N_Configuration::ModelCoreConfiguration::Parameter_sequence paramSeq = aPhysicsCoreConf->Parameter();
 		for (N_Configuration::ModelCoreConfiguration::Parameter_const_iterator it = paramSeq.begin(); it != paramSeq.end(); ++it)
 		{

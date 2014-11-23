@@ -16,7 +16,7 @@ namespace N_Configuration {
 
 namespace N_Mathematics {
 
-	class NumericsCoreParams;
+	struct NumericsCoreParams;
 
 	class SemiImplicitDiffusionAlgorithm : public FiniteDifferenceDiffusionAlgorithm
 	{
@@ -24,7 +24,7 @@ namespace N_Mathematics {
 			SemiImplicitDiffusionAlgorithm(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, N_Configuration::Component* aDiffusionAlgo);
 			virtual ~SemiImplicitDiffusionAlgorithm();
 
-			virtual void Run();
+			virtual void run();
 
 		private:
 			// Compute the CSR values of the linear system

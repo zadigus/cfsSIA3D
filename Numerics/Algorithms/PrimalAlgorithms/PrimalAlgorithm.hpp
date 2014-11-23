@@ -25,7 +25,7 @@ namespace N_Mathematics {
 			PrimalAlgorithm(N_Configuration::Component* aComponent); 
 			virtual ~PrimalAlgorithm();
 
-			virtual void Run() = 0; 
+			virtual void run() = 0; 
       
 		protected:
 			//std::shared_ptr<N_Glacier::Glacier> m_glacier;

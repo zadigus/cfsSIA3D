@@ -126,7 +126,7 @@ std::ostream& operator<<(std::ostream& ost, Grid& g)
 	{
 		for (unsigned int i(1); i <= g.Nx(); ++i)
 		{ 
-			tmp = g(i, j); assert(!std::isnan(tmp)); 
+			tmp = g(i-1, j-1); assert(!std::isnan(tmp)); 
 			ost << std::fixed << std::setw(10) << tmp << " "; // Forgetting about formatting makes this operation faster
 		}
 	}
@@ -261,7 +261,7 @@ void Grid::Refine(double rx, double ry)
 	double Xmax(X(Nx())), Ymax(Y(Ny()));
 	m_Coords.Dx /= rx;
 	m_Coords.Dy /= ry;
-	m_Coords.Nx *= rx; 
+	m_Coords.Nx *= rx; // TODO: that doesn't really make sense; this is not compatible with the definition of Dx and Dy! this will lead to loss of data or undefined data
 	m_Coords.Ny *= ry;
 
 	double x(0.0), y(0.0); unsigned int i(0), j(0);
@@ -344,38 +344,3 @@ Grid operator*(double lhs, const Grid& rhs)
 {
 	return Grid(rhs) *= lhs;
 }
-
-/*//==============================================================================
-Grid operator+(Grid& left, Grid& right)
-//==============================================================================
-{
-	assert(left._Coords == right._Coords);
-	Grid out(left);
-	out += right;
-	return out; // TODO: this could be: Grid(left) += right
-	return Grid(left) += right;
-}
-
-//==============================================================================
-Grid operator-(Grid& left, Grid& right)
-//==============================================================================
-{
-	assert(left._Coords == right._Coords);
-
-	Grid out(left);
-	out -= right;
-
-	return out;
-	return Grid(left) -= right;
-}
-
-
-//==============================================================================
-Grid Grid::operator*(const double c)
-//==============================================================================
-{
-	Grid out(*this);
-	out *= c;
-	return out;
-	return Grid(*this) *= c;
-}*/

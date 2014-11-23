@@ -10,7 +10,7 @@
 #include "Numerics/LinSyst/Matrix.hpp"
 
 #include "Configuration/ModelConfiguration.hpp"
-#include "NumericsCoreParams.hpp"
+#include "Algorithms/NumericsCoreParams.hpp"
 
 #include <cassert>
 
@@ -29,7 +29,7 @@ namespace N_Mathematics {
 
 	}
 	
-	void SemiImplicitDiffusionAlgorithm::Run()
+	void SemiImplicitDiffusionAlgorithm::run()
 	{
 		AssembleLinSyst();
 		SolveLinSyst();

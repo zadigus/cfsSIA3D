@@ -15,7 +15,7 @@ namespace N_Mathematics {
 		public:
 			DumbAlgorithm(/*std::shared_ptr<N_Glacier::Glacier>& aGlacier*/);
 			virtual ~DumbAlgorithm();
-			virtual void Run(); 
+			virtual void run(); 
 	};
 
 }

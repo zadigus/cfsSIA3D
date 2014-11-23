@@ -11,7 +11,7 @@ namespace N_Configuration {
 namespace N_Mathematics {
 
 	class PrimalAlgorithm;
-	class NumericsCoreParams;
+	struct NumericsCoreParams;
 
 	/*
 	 *  The projection algorithms ensure the positivity of the ice thickness
@@ -20,7 +20,7 @@ namespace N_Mathematics {
 	class ProjectionAlgorithmFactory
 	{
 	public:
-		static PrimalAlgorithm* make(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams = std::unique_ptr<NumericsCoreParams>(nullptr), N_Configuration::Component* aProjectionAlgo = nullptr);
+		static PrimalAlgorithm* make(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, N_Configuration::Component* aProjectionAlgo = nullptr);
 	};
 
 }
