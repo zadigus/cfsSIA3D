@@ -14,14 +14,19 @@ INCLUDE_DIRECTORIES(
 
 FILE(GLOB src RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "*.cpp" "*.hpp")
 
-ADD_LIBRARY(Algorithms ${src})
+ADD_LIBRARY(${PROJECT_NAME} ${src})
 
-TARGET_LINK_LIBRARIES(Algorithms
+TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 	PrimalAlgorithms
 	Configuration
 	LinSyst
+	ClimateAlgorithms
+	DiffusionAlgorithms
+	ProjectionAlgorithms
 	${XERCES_LIBRARIES}
 )
 
 FILE(GLOB includes RELATIVE "${PROJECT_SOURCE_DIR}" "*.hpp")
-INSTALL(FILES ${includes}	DESTINATION ${CMAKE_SOURCE_DIR}/include/Numerics/Algorithms)
+INSTALL(FILES ${includes}	DESTINATION ${CMAKE_INSTALL_PREFIX}/include/Numerics/${PROJECT_NAME})
+INSTALL(TARGETS ${PROJECT_NAME}
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/)

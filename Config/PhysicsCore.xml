@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <m:ModelCore xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-            xsi:schemaLocation="http://www.cjcaesar.ch/ModelCoreConfiguration ..\Configuration\ModelCoreConfiguration.xsd" 
+            xsi:schemaLocation="http://www.cjcaesar.ch/ModelCoreConfiguration ../Configuration/ModelCoreConfiguration.xsd" 
             xmlns:m="http://www.cjcaesar.ch/ModelCoreConfiguration"
 						xmlns:param="http://www.cjcaesar.ch/Parameter"> 
 	<param:Parameter name="g">9.81</param:Parameter>   <!-- gravitational acceleration in m/s^2 -->

@@ -12,8 +12,10 @@ INCLUDE_DIRECTORIES(
 
 FILE(GLOB src RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "*.cpp" "*.hpp")
 
-ADD_LIBRARY(DiffusionAlgorithms ${src})
-TARGET_LINK_LIBRARIES(DiffusionAlgorithms Configuration)
+ADD_LIBRARY(${PROJECT_NAME} ${src})
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} Configuration LinSyst)
 
 FILE(GLOB includes RELATIVE "${PROJECT_SOURCE_DIR}" "*.hpp")
-INSTALL(FILES ${includes}	DESTINATION ${CMAKE_SOURCE_DIR}/include/Numerics/Algorithms/PrimalAlgorithms/DiffusionAlgorithms)
+INSTALL(FILES ${includes}	DESTINATION ${CMAKE_INSTALL_PREFIX}/include/Numerics/Algorithms/PrimalAlgorithms/${PROJECT_NAME})
+INSTALL(TARGETS ${PROJECT_NAME}
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/)

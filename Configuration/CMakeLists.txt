@@ -14,3 +14,9 @@ XSD2CPPCLASS(SubComponent.xsd "http://www.cjcaesar.ch/SubComponent=N_Configurati
 XSD2CPPCLASS(AppConfiguration.xsd "http://www.cjcaesar.ch/AppConfiguration=N_Configuration" "http://www.cjcaesar.ch/Parameter=N_Configuration" "http://www.cjcaesar.ch/SubComponent=N_Configuration")
 
 ADD_LIBRARY(Configuration ${src})
+
+FILE(GLOB includes RELATIVE "${PROJECT_SOURCE_DIR}" "*.xsd")
+INSTALL(FILES ${includes}	DESTINATION ${CMAKE_INSTALL_PREFIX}/Configuration/)
+
+FILE(GLOB includes RELATIVE "${PROJECT_SOURCE_DIR}" "../Config/*.xml")
+INSTALL(FILES ${includes}	DESTINATION ${CMAKE_INSTALL_PREFIX}/Config/)

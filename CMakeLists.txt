@@ -18,6 +18,32 @@ FIND_PACKAGE(Xsd 4.0 REQUIRED)
 
 IF(USE_TRILINOS)
 	FIND_PACKAGE(Trilinos 11.4 REQUIRED PATHS ${TRILINOS_PATH}/lib/cmake/Trilinos ${TRILINOS_PATH})
+	IF(Trilinos_FOUND)
+   MESSAGE("\nFound Trilinos!  Here are the details: ")
+   MESSAGE("   Trilinos_DIR = ${Trilinos_DIR}")
+   MESSAGE("   Trilinos_VERSION = ${Trilinos_VERSION}")
+   MESSAGE("   Trilinos_PACKAGE_LIST = ${Trilinos_PACKAGE_LIST}")
+   MESSAGE("   Trilinos_LIBRARIES = ${Trilinos_LIBRARIES}")
+   MESSAGE("   Trilinos_INCLUDE_DIRS = ${Trilinos_INCLUDE_DIRS}")
+   MESSAGE("   Trilinos_TPL_LIST = ${Trilinos_TPL_LIST}")
+   MESSAGE("   Trilinos_TPL_INCLUDE_DIRS = ${Trilinos_TPL_INCLUDE_DIRS}")
+   MESSAGE("   Trilinos_TPL_LIBRARIES = ${Trilinos_TPL_LIBRARIES}")
+   MESSAGE("   Trilinos_BUILD_SHARED_LIBS = ${Trilinos_BUILD_SHARED_LIBS}")
+   MESSAGE("   Trilinos_CXX_COMPILER = ${Trilinos_CXX_COMPILER}")
+   MESSAGE("   Trilinos_C_COMPILER = ${Trilinos_C_COMPILER}")
+   MESSAGE("   Trilinos_Fortran_COMPILER = ${Trilinos_Fortran_COMPILER}")
+   MESSAGE("   Trilinos_CXX_COMPILER_FLAGS = ${Trilinos_CXX_COMPILER_FLAGS}")
+   MESSAGE("   Trilinos_C_COMPILER_FLAGS = ${Trilinos_C_COMPILER_FLAGS}")
+   MESSAGE("   Trilinos_Fortran_COMPILER_FLAGS =
+     ${Trilinos_Fortran_COMPILER_FLAGS}")
+   MESSAGE("   Trilinos_LINKER = ${Trilinos_LINKER}")
+   MESSAGE("   Trilinos_EXTRA_LD_FLAGS = ${Trilinos_EXTRA_LD_FLAGS}")
+   MESSAGE("   Trilinos_AR = ${Trilinos_AR}")
+   MESSAGE("End of Trilinos details\n")
+	ELSE()
+	  MESSAGE(FATAL_ERROR "Could not find Trilinos!")
+	ENDIF()
+
 ENDIF(USE_TRILINOS)
 
 IF(USE_PETSC)
@@ -26,9 +52,13 @@ ENDIF(USE_PETSC)
 
 INCLUDE(Macros)
 
+ADD_DEFINITIONS(
+    -std=c++11 
+)
+
 #SET(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib) 
-SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
-SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
+#SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_INSTALL_PREFIX}/bin)
+#SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_INSTALL_PREFIX}/lib)
 
 #MESSAGE("Found Epetra = ${Trilinos_FOUND}, ${Trilinos_INCLUDE_DIRS}, ${Epetra_LIBRARIES}, ${Belos_LIBRARIES}")
 
@@ -38,3 +68,5 @@ ADD_SUBDIRECTORY(Numerics)
 ADD_SUBDIRECTORY(Utility)
 ADD_SUBDIRECTORY(Configuration)
 ADD_SUBDIRECTORY(ModelComponent)
+
+INSTALL(DIRECTORY DESTINATION ${CMAKE_INSTALL_PREFIX}/Log)

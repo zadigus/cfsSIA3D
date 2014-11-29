@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <m:Model
 						xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-            xsi:schemaLocation="http://www.cjcaesar.ch/ModelConfiguration ..\Configuration\ModelConfiguration.xsd" 
+            xsi:schemaLocation="http://www.cjcaesar.ch/ModelConfiguration ../Configuration/ModelConfiguration.xsd" 
             xmlns:m="http://www.cjcaesar.ch/ModelConfiguration"
 						xmlns:subc="http://www.cjcaesar.ch/SubComponent"
 						xmlns:param="http://www.cjcaesar.ch/Parameter"> 

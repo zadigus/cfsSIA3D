@@ -13,8 +13,10 @@ INCLUDE_DIRECTORIES(
 
 FILE(GLOB src RELATIVE "${PROJECT_SOURCE_DIR}" "*.cpp" "*.hpp")
 
-ADD_LIBRARY(ProjectionAlgorithms ${src})
-TARGET_LINK_LIBRARIES(ProjectionAlgorithms Configuration)
+ADD_LIBRARY(${PROJECT_NAME} ${src})
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} Configuration PrimalAlgorithms)
 
 FILE(GLOB includes RELATIVE "${PROJECT_SOURCE_DIR}" "*.hpp")
-INSTALL(FILES ${includes}	DESTINATION ${CMAKE_SOURCE_DIR}/include/Numerics/Algorithms/PrimalAlgorithms/ProjectionAlgorithms)
+INSTALL(FILES ${includes}	DESTINATION ${CMAKE_INSTALL_PREFIX}/include/Numerics/Algorithms/PrimalAlgorithms/${PROJECT_NAME})
+INSTALL(TARGETS ${PROJECT_NAME}
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/)
