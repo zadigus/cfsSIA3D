@@ -1,11 +1,13 @@
 #include "BelosLinSyst.hpp"
+#include "Utility/Logger/Logger.hpp"
 
-#include "Matrix.hpp"
-#include "Vector.hpp"
-
+// Configuration
 #include "Configuration/ModelConfiguration.hpp"
 
-#include <iostream>
+// Epetra
+#include "EpetraVector.hpp"
+#include "EpetraMatrix.hpp"
+#include "Epetra_CrsMatrix.h"
 
 namespace N_Mathematics {
 
@@ -35,7 +37,35 @@ namespace N_Mathematics {
 		PC pc; KSPGetPC(_solver, &pc); PCSetType(pc, PCILU);
 	}*/
 
-	void BelosLinSyst::Solve() {
+	int BelosLinSyst::MS()
+	{
+		return m_A->MS();
+	}
+
+	std::shared_ptr<IMatrix> BelosLinSyst::getMatrix()
+	{
+		return m_A;
+	}
+
+	std::shared_ptr<IVector> BelosLinSyst::getRHS()
+	{
+		return m_b;
+	}
+
+	std::shared_ptr<IVector> BelosLinSyst::getSolution()
+	{
+		return m_X;
+	}
+
+	void BelosLinSyst::setCrs(std::vector<int>&& aNnz, std::vector<int>&& aColIdx)
+	{
+		m_A.reset(new EpetraMatrix(std::move(aNnz), std::move(aColIdx))); 
+		m_b.reset(new EpetraVector(m_A->get()->OperatorRangeMap()));
+		m_X.reset(new EpetraVector(m_A->get()->OperatorDomainMap()));
+	}
+
+	void BelosLinSyst::solve() 
+	{
 		//MatCreateSeqAIJWithArrays(PETSC_COMM_SELF, _MS, _MS, &_NonZeroes[0], &_ColIdx[0], &_MatValues[0], &_A); // builds the matrix with CSR format and values
 		//VecCreateSeqWithArray(PETSC_COMM_SELF, 1, _MS, &_RHSValues[0], &_b); // builds the vector 
 

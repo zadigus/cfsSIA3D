@@ -1,10 +1,7 @@
 #ifndef BELOSLINSYST_H_
 #define BELOSLINSYST_H_
 
-#include <vector>
-
 #include "LinSyst.hpp"
-//#include "petsc.h"
 
 namespace N_Configuration {
 	class SubComponent;
@@ -14,11 +11,20 @@ namespace N_Mathematics {
 
 	// Linear system using the Trilinos::Belos library
 
+	class EpetraVector;
+	class EpetraMatrix;
+	class IVector;
+
 	class BelosLinSyst : public LinSyst
 	{
 		public:
-			BelosLinSyst(N_Configuration::SubComponent* aLinSyst = nullptr); // TODO: think about what default parameters to set when no config exists
+			BelosLinSyst(N_Configuration::SubComponent* aLinSyst);
 			~BelosLinSyst();
+
+			void setCrs(std::vector<int>&& aNnz, std::vector<int>&& aColIdx);
+
+			std::shared_ptr<IMatrix> getMatrix();
+			std::shared_ptr<IVector> getRHS();
 
 			/*// Access to class members
 			int 	MS() 					{ return _MS; }
@@ -27,9 +33,16 @@ namespace N_Mathematics {
 
 			// Solving linear system
 			//void SetIterative();
-			void Solve();
+			void solve();
+
+			int MS();
+			std::shared_ptr<IVector> getSolution();
 
 		private:
+			std::shared_ptr<EpetraMatrix> m_A;
+			std::shared_ptr<EpetraVector> m_b;
+			std::shared_ptr<EpetraVector> m_X;
+
 		/*	Vec _b, _X;
 			Mat _A;
 			KSP _solver;

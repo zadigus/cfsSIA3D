@@ -1,0 +1,11 @@
+PROJECT(TestApp)
+
+INCLUDE_DIRECTORIES(
+	${PROJECT_SOURCE_DIR}/..
+	${PROJECT_BINARY_DIR}/..
+)
+
+FILE(GLOB src RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "*.cpp" "*.hpp")
+
+ADD_EXECUTABLE(${PROJECT_NAME} ${src})
+#TARGET_LINK_LIBRARIES(${PROJECT_NAME} Mesh Utility Glacier Algorithms LinSyst Configuration)

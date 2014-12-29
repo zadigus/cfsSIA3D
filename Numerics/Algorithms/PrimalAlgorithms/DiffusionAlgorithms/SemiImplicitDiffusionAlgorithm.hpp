@@ -24,17 +24,18 @@ namespace N_Mathematics {
 			SemiImplicitDiffusionAlgorithm(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, N_Configuration::Component* aDiffusionAlgo);
 			virtual ~SemiImplicitDiffusionAlgorithm();
 
-			virtual void run();
+			//virtual void run();
 
 		private:
+			void setCrs();
 			// Compute the CSR values of the linear system
-			void AssembleLinSyst();
+			void assembleLinSyst();
 			// Compute the diffusivity D
-			void ComputeDiffusivity();
+			void computeDiffusivity();
 			// Solve the linear system
-			void SolveLinSyst();
+			//void solveLinSyst();
 			// Update the ice thickness
-			void UpdateThickness();
+			void updateThickness();
 
 		private:
 			double m_C1; // dt / (2 dx)

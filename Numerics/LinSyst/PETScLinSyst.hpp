@@ -17,7 +17,7 @@ namespace N_Mathematics {
 	class PETScLinSyst : public LinSyst
 	{
 		public:
-			PETScLinSyst(N_Configuration::SubComponent* aLinSyst = nullptr); // TODO: think about what default parameters to set when no config exists
+			PETScLinSyst(N_Configuration::SubComponent* aLinSyst, int aMS);
 			~PETScLinSyst();
 
 			// Solving linear system

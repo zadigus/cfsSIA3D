@@ -24,20 +24,29 @@ namespace N_Mathematics {
 			FiniteDifferenceDiffusionAlgorithm(N_Configuration::Component* aDiffusionAlgo);
 			virtual ~FiniteDifferenceDiffusionAlgorithm();
 
-			virtual void run() = 0;
-
+			virtual void run();
+			
 		protected:
-			// Compute the diffusivity D
-			virtual void ComputeDiffusivity() = 0;
-			// Compute the matrix elements
-			virtual void AssembleLinSyst() = 0;
-			// compute norm of gradient of grid in the staggered grid; corresponds to alpha in the papers, which is |grad s|
-			double StaggeredGradSurfNorm(unsigned int i, unsigned int j, const std::shared_ptr<Grid>& H);
-			// Access to _D in a more "natural" way
-			double& D(unsigned int i, unsigned int j);
-			double  Sl(unsigned int i, unsigned int j);
+			/*
+			 * Linear system setup
+			 */
+			virtual void setCrs() = 0;
 
-			// Getters
+			/*
+			 * Linear system resolution
+			 */ 
+			virtual void computeDiffusivity() = 0;
+			virtual void assembleLinSyst() = 0;
+			void solveLinSyst();
+			void updateThickness();
+
+			/*
+			 * Utility methods
+			 */
+			// compute norm of gradient of grid in the staggered grid; corresponds to alpha in the papers, which is |grad s|
+			double staggeredGradSurfNorm(unsigned int i, unsigned int j, const std::shared_ptr<Grid>& H);
+			double& D(unsigned int i, unsigned int j); // diffusivity
+			double  Sl(unsigned int i, unsigned int j);// sliding
 			double Gamma();
 			double rhogn();
 			double n();

@@ -25,8 +25,8 @@
 
 <m:Component name="Geometry">
 	<subc:SubComponent name="General">
-		<param:Parameter name="bed">e:\cfsSIA3D-src\data\muragl\bed.grid</param:Parameter> 
-		<param:Parameter name="surface">e:\cfsSIA3D-src\data\muragl\surfinit.grid</param:Parameter> 
+		<param:Parameter name="bed">..\data\muragl\bed.grid</param:Parameter> 
+		<param:Parameter name="surface">..\data\muragl\surfinit.grid</param:Parameter> 
 	</subc:SubComponent>
 </m:Component>
 

@@ -11,7 +11,7 @@ namespace N_Configuration {
 
 namespace N_Mathematics {
 
-	class Vector;
+	class IVector;
 
 	class FiniteDifferencePrimalAlgorithm : public PrimalAlgorithm
 	{
@@ -29,7 +29,7 @@ namespace N_Mathematics {
 			double gradby(unsigned int i, unsigned int j);
 
 			// convert a Vector into a Grid
-			virtual void Vector2Grid(const std::shared_ptr<Vector>& aVector, const std::shared_ptr<Grid>& aGrid); // can't be a Grid ctor, because the behavior of this method depends on how users fill their matrix
+			virtual void Vector2Grid(const std::shared_ptr<IVector>& aVector, const std::shared_ptr<Grid>& aGrid); // can't be a Grid ctor, because the behavior of this method depends on how users fill their matrix
 
 		protected:
 			// Ice thickness

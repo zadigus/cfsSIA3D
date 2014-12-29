@@ -34,6 +34,8 @@ namespace N_Mathematics {
 				}
 			}
 		}
+
+		setCrs(); // TODO: do NOT call virtual functions in a ctor
 	}
 
 	FiniteDifferenceDiffusionAlgorithm::~FiniteDifferenceDiffusionAlgorithm()
@@ -41,7 +43,7 @@ namespace N_Mathematics {
 
 	}
 	
-	double FiniteDifferenceDiffusionAlgorithm::StaggeredGradSurfNorm(unsigned int i, unsigned int j, const std::shared_ptr<Grid>& H) 
+	double FiniteDifferenceDiffusionAlgorithm::staggeredGradSurfNorm(unsigned int i, unsigned int j, const std::shared_ptr<Grid>& H) 
 	{
 		// because this function is also used in the FullyImplicit version
 		assert(i - 1 >= 0); assert(j - 1 >= 0); assert(i < m_Nx); assert(j < m_Ny);
@@ -69,9 +71,26 @@ namespace N_Mathematics {
 		return m_Rh->n();
 	}
 
-	double  FiniteDifferenceDiffusionAlgorithm::Sl(unsigned int i, unsigned int j)
+	double FiniteDifferenceDiffusionAlgorithm::Sl(unsigned int i, unsigned int j)
 	{
 		return (*m_Sl)(i, j);
+	}
+
+	void FiniteDifferenceDiffusionAlgorithm::solveLinSyst()
+	{
+		m_LinSyst->solve();
+	}
+
+	void FiniteDifferenceDiffusionAlgorithm::updateThickness()
+	{
+		Vector2Grid(m_LinSyst->getSolution(), m_H);
+	}
+
+	void FiniteDifferenceDiffusionAlgorithm::run()
+	{
+		assembleLinSyst();
+		solveLinSyst();
+		updateThickness();
 	}
 
 }
