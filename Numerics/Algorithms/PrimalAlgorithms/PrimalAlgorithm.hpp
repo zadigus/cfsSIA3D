@@ -28,7 +28,6 @@ namespace N_Mathematics {
 			virtual void run() = 0; 
       
 		protected:
-			//std::shared_ptr<N_Glacier::Glacier> m_glacier;
 			N_Glacier::Glacier& m_glacier;
 	};
 

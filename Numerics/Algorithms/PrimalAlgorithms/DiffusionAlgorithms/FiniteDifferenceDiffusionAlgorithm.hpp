@@ -26,17 +26,17 @@ namespace N_Mathematics {
 
 			virtual void run();
 			
-		protected:
 			/*
-			 * Linear system setup
-			 */
+			* Linear system setup
+			*/
 			virtual void setCrs() = 0;
 
+		protected:
 			/*
 			 * Linear system resolution
 			 */ 
 			virtual void computeDiffusivity() = 0;
-			virtual void assembleLinSyst() = 0;
+			virtual void fillLinSyst() = 0;
 			void solveLinSyst();
 			void updateThickness();
 

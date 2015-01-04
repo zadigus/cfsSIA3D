@@ -1,6 +1,7 @@
 #include "EpetraMatrix.hpp"
 
 #include <numeric>
+#include <ostream>
 
 // Epetra
 #include "Epetra_SerialComm.h"
@@ -63,6 +64,13 @@ namespace N_Mathematics {
 	int EpetraMatrix::setRow(int aRowNb, const std::vector<double>& aValues, const std::vector<int>& aColIdx)
 	{
 		return m_Data->ReplaceGlobalValues(aRowNb, aValues.size(), &aValues[0], &aColIdx[0]);
+	}
+
+	void EpetraMatrix::print(std::string aFileName)
+	{
+		std::ofstream ofs(aFileName.c_str(), std::ios_base::app);
+		m_Data->Print(ofs);
+		ofs.close();
 	}
 
 }

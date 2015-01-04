@@ -11,8 +11,6 @@
 
 #include "NumericsCoreParams.hpp"
 
-#include <iostream>
-
 namespace N_Mathematics {
 
 	Primal::Primal()
@@ -84,7 +82,7 @@ namespace N_Mathematics {
 		double currentTime(m_ti);
 		while (currentTime < m_tf)
 		{
-			//std::cout << currentTime << std::endl;
+			LOG_INF("Current time : " << currentTime);
 			Iterate();
 			currentTime += m_dt;
 		}

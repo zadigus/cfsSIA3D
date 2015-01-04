@@ -7,6 +7,6 @@
 	
 	<param:Parameter name="dt">0.01</param:Parameter>   <!-- time step in a -->
 	<param:Parameter name="ti">2000</param:Parameter>   <!-- initial time in a -->
-	<param:Parameter name="tf">2007</param:Parameter>   <!-- final time in a -->
+	<param:Parameter name="tf">2000.01</param:Parameter>   <!-- final time in a -->
 
 </m:ModelCore>

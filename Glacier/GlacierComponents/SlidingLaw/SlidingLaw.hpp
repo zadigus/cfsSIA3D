@@ -15,7 +15,7 @@ namespace N_Glacier {
 		SlidingLaw(N_Configuration::Component* aSlidingLaw = nullptr);
 		virtual ~SlidingLaw();
 
-		void Generate(Grid&, unsigned int); // TODO: double-check that this routine is always called in the code (after the constructor)
+		void Generate(const Grid& aBedrock, double aGlenExp);
 
 		// Access to class members
 		const double& operator()(const unsigned int, const unsigned int) const;
@@ -26,10 +26,9 @@ namespace N_Glacier {
 
 	protected:
 		// Compute the sliding coefficient on the staggered grid
-		virtual void Init(const Grid&); // initialization of _sl and _sc
-		virtual void Fill(Grid&, unsigned int); // the sliding coefficient depends on the bedrock topography
-		virtual void Stagger(unsigned int); // build staggered grid
-		// TODO: double check with Grid::Staggered
+		virtual void Init(const Grid& aBedrock); // initialization of _sl and _sc
+		virtual void Fill(const Grid& aBedrock, double aGlenExp); // the sliding coefficient depends on the bedrock topography
+		virtual void Stagger(double aGlenExp); // build staggered grid
 
 	protected:
 		std::unique_ptr<Grid> 	m_sl; // staggered sliding coefficients, , corresponds to (sc * 1e-5)^n.Staggered()

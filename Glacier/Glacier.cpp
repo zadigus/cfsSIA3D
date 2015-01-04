@@ -3,7 +3,6 @@
 
 #include "Utility/Logger/Logger.hpp"
 
-#include <iostream>
 #include "Configuration/ModelCoreConfiguration.hpp"
 #include "Configuration/ModelConfiguration.hpp"
 #include "Numerics/Mesh/Grid.hpp"
@@ -91,6 +90,9 @@ namespace N_Glacier {
 			LOG_ERR("Missing compulsory geometry component.");
 			exit(EXIT_FAILURE);
 		}
+
+		// Resolve the sliding law dependence on the geometry and the rheology
+		m_SlidingLaw->Generate(*b(), m_Rheology->n());
 	}
 
 	std::shared_ptr<Grid> Glacier::b()

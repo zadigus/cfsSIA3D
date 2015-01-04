@@ -23,6 +23,8 @@ namespace N_Mathematics {
 			virtual int setRow(int aRowNb, const std::vector<double>& aValues, const std::vector<int>& aColIdx) = 0;
 
 			virtual int MS() = 0;
+
+			virtual void print(std::string aFileName) = 0;
 	};
 
 }

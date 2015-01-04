@@ -23,6 +23,7 @@ namespace N_Mathematics {
 			
 			std::shared_ptr<Epetra_CrsMatrix> get();
 			int MS();
+			void print(std::string aFileName);
 
 		private:
 			std::shared_ptr<Epetra_CrsMatrix> m_Data;

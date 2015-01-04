@@ -19,7 +19,7 @@ namespace N_Glacier {
 
 	}
 
-	void SlidingLaw::Generate(Grid& fs, unsigned int n)
+	void SlidingLaw::Generate(const Grid& fs, double n)
 	{
 		Init(fs);
 		Fill(fs, n);
@@ -32,12 +32,12 @@ namespace N_Glacier {
 		m_sc.reset(new Grid(bed.Nx(), bed.Ny(), bed.Dx(), bed.Dy()));
 	}
 
-	void SlidingLaw::Fill(Grid& bed, unsigned int n)
+	void SlidingLaw::Fill(const Grid& bed, double n)
 	{
 
 	}
 
-	void SlidingLaw::Stagger(unsigned int n)
+	void SlidingLaw::Stagger(double n)
 	{ // n is Glen's exponent
 		for (unsigned int i = 1; i < m_sl->Nx(); ++i)
 			for (unsigned int j = 1; j < m_sl->Ny(); ++j) // convert to consistent units and project onto staggered grid

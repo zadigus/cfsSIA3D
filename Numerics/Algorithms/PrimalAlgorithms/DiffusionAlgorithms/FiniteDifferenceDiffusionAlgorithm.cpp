@@ -1,5 +1,6 @@
 #include "FiniteDifferenceDiffusionAlgorithm.hpp"
 
+#include "Utility/Logger/Logger.hpp"
 #include "Glacier/Glacier.hpp"
 #include "Numerics/Mesh/Grid.hpp"
 #include "Glacier/GlacierComponents/Rheology/Rheology.hpp"
@@ -30,12 +31,11 @@ namespace N_Mathematics {
 			{
 				if (!strcmp(it->name()->c_str(), "LinearSystem"))
 				{
+					LOG_INF("Setting diffusion algorithm's linear system.");
 					m_LinSyst.reset(LinSystFactory::make(&(*it)));
 				}
 			}
 		}
-
-		setCrs(); // TODO: do NOT call virtual functions in a ctor
 	}
 
 	FiniteDifferenceDiffusionAlgorithm::~FiniteDifferenceDiffusionAlgorithm()
@@ -88,7 +88,7 @@ namespace N_Mathematics {
 
 	void FiniteDifferenceDiffusionAlgorithm::run()
 	{
-		assembleLinSyst();
+		fillLinSyst();
 		solveLinSyst();
 		updateThickness();
 	}

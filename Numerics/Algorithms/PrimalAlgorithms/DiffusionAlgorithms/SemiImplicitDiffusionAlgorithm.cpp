@@ -34,8 +34,11 @@ namespace N_Mathematics {
 		LOG_INF("Setting matrix CRS structure");
 
 		unsigned int idx(0), I(0), MS(m_Nx*m_Ny);
-		std::vector<int> nnz(MS+1, 0);
-		std::vector<int> col(5*MS, 0); // penta-diagonal matrix
+		std::vector<int> nnz, col; // (MS + 1, 0);
+		//std::vector<int> col; // (5 * MS, 0); 
+
+		nnz.reserve(MS + 1);
+		col.reserve(5 * MS); // penta-diagonal matrix
 
 		for (int i(0); i < m_Nx; ++i)
 		{
@@ -91,7 +94,7 @@ namespace N_Mathematics {
 		}
 	}
 
-	void SemiImplicitDiffusionAlgorithm::assembleLinSyst()
+	void SemiImplicitDiffusionAlgorithm::fillLinSyst()
 	{ // must be filled in accordance with Vector2Grid
 		computeDiffusivity();
 		
@@ -159,6 +162,9 @@ namespace N_Mathematics {
 				values.clear();
 			}
 		}
+
+		A->print("Matrix.out");
+
 	}
 
 }

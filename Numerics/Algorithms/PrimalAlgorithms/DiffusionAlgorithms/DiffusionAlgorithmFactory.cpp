@@ -17,7 +17,9 @@ namespace N_Mathematics {
 				if (!std::strcmp(aDiffusionAlgo->type()->c_str(), "SemiImplicit"))
 				{
 					LOG_INF("Setting SemiImplicit diffusion algorithm.");
-					return new SemiImplicitDiffusionAlgorithm(aNumCoreParams, aDiffusionAlgo);
+					SemiImplicitDiffusionAlgorithm* sa(new SemiImplicitDiffusionAlgorithm(aNumCoreParams, aDiffusionAlgo));
+					sa->setCrs();
+					return sa;
 				}
 			}
 			else // no DiffusionAlgo type provided => default algo
