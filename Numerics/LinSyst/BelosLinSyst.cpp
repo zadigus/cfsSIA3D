@@ -9,11 +9,26 @@
 #include "EpetraMatrix.hpp"
 #include "Epetra_CrsMatrix.h"
 
+// Ifpack
+#include "Ifpack.h"
+
+// Teuchos
+#include "Teuchos_ParameterList.hpp"
+#include "Teuchos_RCP.hpp"
+
 namespace N_Mathematics {
 
 	BelosLinSyst::BelosLinSyst(N_Configuration::SubComponent* aLinSyst)
 		: LinSyst(aLinSyst)
 	{
+		/*Ifpack factory;
+		std::string precType("ILU");
+		int overlapLvl(0); // useful only for parallel computations
+		Teuchos::RCP<Ifpack_Preconditioner> prec(Teuchos::rcp(factory.Create(precType, m_A->get().get(), overlapLvl))); // TODO: this is probably not a good idea, because A is not yet created; this should be done AFTER setCrs()
+		
+		Teuchos::ParameterList paramList;*/
+
+
 		/*VecCreateSeq(PETSC_COMM_SELF, _MS, &_X); 
 		KSPCreate(PETSC_COMM_SELF, &_solver);
 		KSPSetType(_solver, KSPPREONLY);

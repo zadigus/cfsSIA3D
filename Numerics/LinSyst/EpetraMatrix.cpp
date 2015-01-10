@@ -19,12 +19,11 @@ namespace N_Mathematics {
 	{
 		int size(aNnz.size() - 1);
 		Epetra_SerialComm comm; // TODO: maybe make this a bit more "parallel-ready"; but the whole code should be upgraded
-		// TODO: that may not work, because comm is destroyed in the end of the ctor
 		Epetra_Map map(size, 0, comm);
 
 		// build up Epetra compatible array of number of non-zeroes; this computes aNnz[i+1]-aNnz[i] for each i
 		std::vector<int> numIdxPerRow(aNnz.size());
-		std::adjacent_difference(aNnz.begin(), aNnz.end(), numIdxPerRow.begin()); // this is slightly less efficient than a for loop but I'm learning STL, so ...
+		std::adjacent_difference(aNnz.begin(), aNnz.end(), numIdxPerRow.begin()); // this is slightly less efficient than a for loop but I'm learning the STL, so ...
 
 		Epetra_CrsGraph graph(Copy, map, &numIdxPerRow[1]); // numIdxPerRow[0] = 0 and is of no use here
 
@@ -41,7 +40,7 @@ namespace N_Mathematics {
 		}
 
 		graph.FillComplete();
-		m_Data.reset(new Epetra_CrsMatrix(Copy, graph)); // TODO: the matrix may not work with a destructed graph (it is destructed in the end of this ctor); this probably work because I chose "Copy" instead of "View"
+		m_Data.reset(new Epetra_CrsMatrix(Copy, graph)); 
 		
 		LOG_INF("Created EpetraMatrix of size " << MS());
 	}
