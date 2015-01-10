@@ -9,7 +9,9 @@ namespace N_Glacier {
 
 	class AltitudeSL : public SlidingLaw {
 	public:
-		AltitudeSL(N_Configuration::Component* aComponent = nullptr);
+		//AltitudeSL(N_Configuration::Component* aComponent = nullptr);
+		AltitudeSL(const N_Configuration::Component& aComponent);
+		AltitudeSL();
 		virtual ~AltitudeSL();
 
 	protected:

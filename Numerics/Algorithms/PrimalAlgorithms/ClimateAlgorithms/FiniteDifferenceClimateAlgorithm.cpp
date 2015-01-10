@@ -10,7 +10,8 @@
 
 namespace N_Mathematics {
 
-	FiniteDifferenceClimateAlgorithm::FiniteDifferenceClimateAlgorithm(N_Configuration::Component* aClimateAlgo) 
+	//FiniteDifferenceClimateAlgorithm::FiniteDifferenceClimateAlgorithm(N_Configuration::Component* aClimateAlgo) 
+	FiniteDifferenceClimateAlgorithm::FiniteDifferenceClimateAlgorithm(const N_Configuration::Component& aClimateAlgo)
 		: FiniteDifferencePrimalAlgorithm(aClimateAlgo)
 		, m_B(m_glacier.B())
 	{

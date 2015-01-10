@@ -5,11 +5,13 @@
 
 #include "Utility/Singleton.hpp"
 
+
 class Grid;
 
 namespace N_Configuration {
 	class ModelConfiguration;
 	class ModelCoreConfiguration;
+	class Component;
 }
 
 namespace N_Glacier {
@@ -18,6 +20,7 @@ namespace N_Glacier {
 	class Rheology;
 	class SlidingLaw;
 	class Geometry;
+	class PhysicsCoreParams;
 
 	class Glacier : public Singleton<Glacier>
 	{
@@ -40,6 +43,9 @@ namespace N_Glacier {
 		private:
 			Glacier();
 			~Glacier(); 
+
+			// Configuration setup
+			void setComponent(N_Configuration::Component aComp, PhysicsCoreParams aCore);
 
 		private:
 			// Physics

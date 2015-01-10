@@ -16,7 +16,8 @@ namespace N_Mathematics {
 	class HeavisideProjectionAlgorithm : public FiniteDifferenceProjectionAlgorithm
 	{
 		public:
-			HeavisideProjectionAlgorithm(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, N_Configuration::Component* aProjectionAlgo);
+			//HeavisideProjectionAlgorithm(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, N_Configuration::Component* aProjectionAlgo);
+			HeavisideProjectionAlgorithm(const NumericsCoreParams& aNumCoreParams, const N_Configuration::Component& aProjectionAlgo);
 			virtual ~HeavisideProjectionAlgorithm();
 
 			virtual void run();

@@ -12,10 +12,12 @@ namespace N_Glacier {
 
 	class SlidingLaw : public GlacierComponent {
 	public:
-		SlidingLaw(N_Configuration::Component* aSlidingLaw = nullptr);
+		//SlidingLaw(N_Configuration::Component* aSlidingLaw = nullptr);
+		SlidingLaw(const N_Configuration::Component& aSlidingLaw);
+		SlidingLaw();
 		virtual ~SlidingLaw();
 
-		void Generate(const Grid& aBedrock, double aGlenExp);
+		void Generate(const Grid& aBedrock, double aGlenExp); // that method must be called outside the ctor, because it calls virtual methods
 
 		// Access to class members
 		const double& operator()(const unsigned int, const unsigned int) const;

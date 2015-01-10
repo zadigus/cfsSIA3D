@@ -21,21 +21,21 @@ namespace N_Glacier {
 		}
 	}
 
-	double PhysicsCoreParams::g()
+	double PhysicsCoreParams::g() const
 	{
-		std::map<std::string, std::string>::iterator it(m_parameters.find("g"));
+		std::map<std::string, std::string>::const_iterator it(m_parameters.find("g"));
 		return it != m_parameters.end() ? std::stod(it->second) : 9.81;
 	}
 
-	double PhysicsCoreParams::rho_w()
+	double PhysicsCoreParams::rho_w() const
 	{
-		std::map<std::string, std::string>::iterator it(m_parameters.find("rho_w"));
+		std::map<std::string, std::string>::const_iterator it(m_parameters.find("rho_w"));
 		return it != m_parameters.end() ? std::stod(it->second) : 1000;
 	}
 
-	double PhysicsCoreParams::rho_i()
+	double PhysicsCoreParams::rho_i() const
 	{
-		std::map<std::string, std::string>::iterator it(m_parameters.find("rho_i"));
+		std::map<std::string, std::string>::const_iterator it(m_parameters.find("rho_i"));
 		return it != m_parameters.end() ? std::stod(it->second) : 910;
 	}
 

@@ -7,7 +7,8 @@
 
 namespace N_Mathematics {
 
-	FiniteDifferenceProjectionAlgorithm::FiniteDifferenceProjectionAlgorithm(N_Configuration::Component* aProjectionAlgo) 
+	//FiniteDifferenceProjectionAlgorithm::FiniteDifferenceProjectionAlgorithm(N_Configuration::Component* aProjectionAlgo) 
+	FiniteDifferenceProjectionAlgorithm::FiniteDifferenceProjectionAlgorithm(const N_Configuration::Component& aProjectionAlgo)
 		: FiniteDifferencePrimalAlgorithm(aProjectionAlgo)
 	{
 		

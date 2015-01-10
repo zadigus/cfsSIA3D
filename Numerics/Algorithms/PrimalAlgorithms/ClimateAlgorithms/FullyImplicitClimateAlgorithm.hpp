@@ -20,7 +20,8 @@ namespace N_Mathematics {
 	class FullyImplicitClimateAlgorithm : public FiniteDifferenceClimateAlgorithm
 	{
 		public:
-			FullyImplicitClimateAlgorithm(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, N_Configuration::Component* aClimateAlgo);
+			//FullyImplicitClimateAlgorithm(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, N_Configuration::Component* aClimateAlgo);
+			FullyImplicitClimateAlgorithm(const NumericsCoreParams& aNumCoreParams, const N_Configuration::Component& aClimateAlgo);
 			virtual ~FullyImplicitClimateAlgorithm();
 
 			virtual void run();

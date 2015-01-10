@@ -8,7 +8,8 @@
 
 namespace N_Glacier {
 
-	Geometry::Geometry(N_Configuration::Component* aComponent)
+	//Geometry::Geometry(N_Configuration::Component* aComponent)
+	Geometry::Geometry(const N_Configuration::Component& aComponent)
 		: GlacierComponent(aComponent)
 		, m_b(new Grid(m_parameters["bed"]))
 		, m_gradbx(new Grid(m_b->Nx(), m_b->Ny(), m_b->Dx(), m_b->Dy(), m_b->Xll(), m_b->Yll()))

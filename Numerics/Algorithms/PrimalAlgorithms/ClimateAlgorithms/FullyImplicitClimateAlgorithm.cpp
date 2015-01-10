@@ -8,21 +8,21 @@
 
 namespace N_Mathematics {
 
-	FullyImplicitClimateAlgorithm::FullyImplicitClimateAlgorithm(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, N_Configuration::Component* aClimateAlgo)
+	//FullyImplicitClimateAlgorithm::FullyImplicitClimateAlgorithm(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, N_Configuration::Component* aClimateAlgo)
+	FullyImplicitClimateAlgorithm::FullyImplicitClimateAlgorithm(const NumericsCoreParams& aNumCoreParams, const N_Configuration::Component& aClimateAlgo)
 		: FiniteDifferenceClimateAlgorithm(aClimateAlgo)
 		, m_Hn(new Grid(*m_H)) // initialization of Newton process
 		, m_err(1)
-		//, m_tol(m_parameters.find("tol") != m_parameters.end() ? std::stod(m_parameters["tol"]) : 1e-6)
 		, m_updt(0) 
 		, m_F(0) 
 		, m_Fp(0) 
-		, m_dt(aNumCoreParams->dt())
+		, m_dt(aNumCoreParams.dt())
 	{
-		if (aClimateAlgo)
-		{
-			N_Configuration::Component::SubComponent_sequence subComponents(aClimateAlgo->SubComponent());
+		//if (aClimateAlgo)
+		//{
+			N_Configuration::Component::SubComponent_sequence subComponents(aClimateAlgo.SubComponent());
 			for (N_Configuration::Component::SubComponent_const_iterator it(subComponents.begin()); it != subComponents.end(); ++it)
-			{
+			{ // TODO: use for_each algorithm
 				if (!strcmp(it->name()->c_str(), "Newton"))
 				{
 					N_Configuration::SubComponent::Parameter_sequence  params(it->Parameter());
@@ -32,7 +32,7 @@ namespace N_Mathematics {
 					}
 				}
 			}
-		}
+		//}
 
 		m_tol = m_parameters.find("tol") != m_parameters.end() ? std::stod(m_parameters["tol"]) : 1e-6;
 

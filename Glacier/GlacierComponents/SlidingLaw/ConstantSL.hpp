@@ -9,7 +9,8 @@ namespace N_Glacier {
 
 	class ConstantSL : public SlidingLaw {
 	public:
-		ConstantSL(N_Configuration::Component* aComponent = nullptr);
+		//ConstantSL(N_Configuration::Component* aComponent = nullptr);
+		ConstantSL(const N_Configuration::Component& aComponent);
 		~ConstantSL();
 	protected:
 		virtual void Init(const Grid&);

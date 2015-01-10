@@ -1,7 +1,7 @@
 #ifndef MODELCOMPONENT_HPP_
 #define MODELCOMPONENT_HPP_
 
-#include <memory>
+//#include <memory>
 #include <string>
 #include <map>
 
@@ -13,7 +13,9 @@ namespace N_Configuration {
 class ModelComponent 
 { 
 	public:
-		ModelComponent(N_Configuration::Component* aComponent = nullptr);
+		//ModelComponent(N_Configuration::Component* aComponent = nullptr);
+		ModelComponent(const N_Configuration::Component& aComponent);
+		ModelComponent();
 		virtual ~ModelComponent();
 
 	protected:

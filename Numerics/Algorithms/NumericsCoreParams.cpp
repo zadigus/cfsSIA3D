@@ -19,21 +19,21 @@ namespace N_Mathematics {
 		}
 	}
 
-	double NumericsCoreParams::dt()
+	double NumericsCoreParams::dt() const
 	{
-		std::map<std::string, std::string>::iterator it(m_parameters.find("dt"));
+		std::map<std::string, std::string>::const_iterator it(m_parameters.find("dt"));
 		return it != m_parameters.end() ? std::stod(it->second) : 0.001;
 	}
 
-	double NumericsCoreParams::ti()
+	double NumericsCoreParams::ti() const
 	{
-		std::map<std::string, std::string>::iterator it(m_parameters.find("ti"));
+		std::map<std::string, std::string>::const_iterator it(m_parameters.find("ti"));
 		return it != m_parameters.end() ? std::stod(it->second) : 0;
 	}
 
-	double NumericsCoreParams::tf()
+	double NumericsCoreParams::tf() const
 	{
-		std::map<std::string, std::string>::iterator it(m_parameters.find("tf"));
+		std::map<std::string, std::string>::const_iterator it(m_parameters.find("tf"));
 		return it != m_parameters.end() ? std::stod(it->second) : 0;
 	}
 

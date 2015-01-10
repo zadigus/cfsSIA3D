@@ -16,7 +16,8 @@
 
 namespace N_Mathematics {
 
-	FiniteDifferenceDiffusionAlgorithm::FiniteDifferenceDiffusionAlgorithm(N_Configuration::Component* aDiffusionAlgo) 
+	//FiniteDifferenceDiffusionAlgorithm::FiniteDifferenceDiffusionAlgorithm(N_Configuration::Component* aDiffusionAlgo) 
+	FiniteDifferenceDiffusionAlgorithm::FiniteDifferenceDiffusionAlgorithm(const N_Configuration::Component& aDiffusionAlgo)
 		: FiniteDifferencePrimalAlgorithm(aDiffusionAlgo)
 		, m_Rh(m_glacier.Rh())
 		, m_Sl(m_glacier.Sl())
@@ -24,18 +25,18 @@ namespace N_Mathematics {
 		, m_LinSyst(nullptr) 
 	{
 		//assert(_Dx == _H->Dy()); // TODO: enforce that somewhere else
-		if (aDiffusionAlgo)
-		{
-			N_Configuration::Component::SubComponent_sequence subComponents(aDiffusionAlgo->SubComponent());
+		/*if (aDiffusionAlgo)
+		{*/
+			N_Configuration::Component::SubComponent_sequence subComponents(aDiffusionAlgo.SubComponent());
 			for (N_Configuration::Component::SubComponent_iterator it(subComponents.begin()); it != subComponents.end(); ++it)
-			{
+			{ // TODO: use the for_each algorithm
 				if (!strcmp(it->name()->c_str(), "LinearSystem"))
 				{
 					LOG_INF("Setting diffusion algorithm's linear system.");
 					m_LinSyst.reset(LinSystFactory::make(&(*it)));
 				}
 			}
-		}
+		//}
 	}
 
 	FiniteDifferenceDiffusionAlgorithm::~FiniteDifferenceDiffusionAlgorithm()

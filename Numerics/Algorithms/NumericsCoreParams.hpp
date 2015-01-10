@@ -15,9 +15,9 @@ namespace N_Mathematics {
 	{
 		NumericsCoreParams(const std::unique_ptr<N_Configuration::ModelCoreConfiguration>& aNumericsCoreConf);
 
-		double dt();     // time step [a]
-		double ti();     // initial time [a]
-		double tf();     // final time [a]
+		double dt() const;     // time step [a]
+		double ti() const;     // initial time [a]
+		double tf() const;     // final time [a]
 
 		std::map<std::string, std::string> m_parameters;
 	};

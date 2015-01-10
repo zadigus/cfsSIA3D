@@ -6,6 +6,10 @@
 
 class Grid;
 
+namespace N_Configuration {
+	class Component;
+}
+
 namespace N_Glacier { 
 
 	//class Component;
@@ -14,7 +18,9 @@ namespace N_Glacier {
 	// Interface class for mass-balance data
 	class MassBalance : public GlacierComponent {
 	public:
-		MassBalance(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams, N_Configuration::Component* aComponent = nullptr);
+		//MassBalance(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams, N_Configuration::Component* aComponent = nullptr);
+		MassBalance(const PhysicsCoreParams& aPhysCoreParams, const N_Configuration::Component& aComponent);
+		MassBalance(const PhysicsCoreParams& aPhysCoreParams);
 		virtual ~MassBalance();
 
 		// Routines to be interfaced

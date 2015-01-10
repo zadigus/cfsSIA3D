@@ -15,9 +15,9 @@ namespace N_Glacier {
 	{
 		PhysicsCoreParams(const std::unique_ptr<N_Configuration::ModelCoreConfiguration>& aPhysicsCoreConf);
 
-		double g();     // gravitational acceleration [m/s^2]
-		double rho_i(); // ice density [kg/m^3]
-		double rho_w(); // water density [kg/m^3]
+		double g()     const; // gravitational acceleration [m/s^2]
+		double rho_i() const; // ice density [kg/m^3]
+		double rho_w() const; // water density [kg/m^3]
 
 		std::map<std::string, std::string> m_parameters;
 	};

@@ -15,7 +15,9 @@ namespace N_Glacier {
 	{
 	public:
 		// factory method
-		static SlidingLaw* make(N_Configuration::Component* aSlidingLaw = nullptr);
+		//static SlidingLaw* make(N_Configuration::Component* aSlidingLaw = nullptr);
+		static SlidingLaw* make(const N_Configuration::Component& aSlidingLaw);
+		static SlidingLaw* make();
 	};
 }
 #endif

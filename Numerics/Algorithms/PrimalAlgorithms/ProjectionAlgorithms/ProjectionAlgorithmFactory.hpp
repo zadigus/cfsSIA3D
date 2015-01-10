@@ -20,7 +20,9 @@ namespace N_Mathematics {
 	class ProjectionAlgorithmFactory
 	{
 	public:
-		static PrimalAlgorithm* make(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, N_Configuration::Component* aProjectionAlgo = nullptr);
+		//static PrimalAlgorithm* make(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, N_Configuration::Component* aProjectionAlgo = nullptr);
+		static PrimalAlgorithm* make(const NumericsCoreParams& aNumCoreParams, const N_Configuration::Component& aProjectionAlgo);
+		static PrimalAlgorithm* make(const NumericsCoreParams& aNumCoreParams);
 	};
 
 }

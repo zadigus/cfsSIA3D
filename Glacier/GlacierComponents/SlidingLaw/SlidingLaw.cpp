@@ -6,8 +6,17 @@
 
 namespace N_Glacier {
 
-	SlidingLaw::SlidingLaw(N_Configuration::Component* aSlidingLaw)
+	//SlidingLaw::SlidingLaw(N_Configuration::Component* aSlidingLaw)
+	SlidingLaw::SlidingLaw(const N_Configuration::Component& aSlidingLaw)
 		: GlacierComponent(aSlidingLaw)
+		, m_sl(nullptr)
+		, m_sc(nullptr)
+	{
+
+	}
+
+	SlidingLaw::SlidingLaw()
+		: GlacierComponent()
 		, m_sl(nullptr)
 		, m_sc(nullptr)
 	{

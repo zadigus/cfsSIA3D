@@ -16,9 +16,10 @@
 
 namespace N_Mathematics {
 
-	SemiImplicitDiffusionAlgorithm::SemiImplicitDiffusionAlgorithm(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, N_Configuration::Component* aDiffusionAlgo) 
+	//SemiImplicitDiffusionAlgorithm::SemiImplicitDiffusionAlgorithm(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, N_Configuration::Component* aDiffusionAlgo) 
+	SemiImplicitDiffusionAlgorithm::SemiImplicitDiffusionAlgorithm(const NumericsCoreParams& aNumCoreParams, const N_Configuration::Component& aDiffusionAlgo)
 		: FiniteDifferenceDiffusionAlgorithm(aDiffusionAlgo)
-		, m_C1(aNumCoreParams->dt() / (2*m_Dx))
+		, m_C1(aNumCoreParams.dt() / (2*m_Dx))
 		, m_C2(m_C1/m_Dx)
 	{
 		

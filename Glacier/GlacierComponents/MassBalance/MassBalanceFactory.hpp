@@ -1,7 +1,7 @@
 #ifndef MASSBALANCEFACTORY_H_
 #define MASSBALANCEFACTORY_H_
 
-#include <memory>
+//#include <memory>
 
 namespace N_Configuration {
 	class Component;
@@ -16,7 +16,9 @@ namespace N_Glacier {
 	{
 		public:
 			// factory methods
-			static MassBalance* make(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams, N_Configuration::Component* aMassBalance = nullptr);
+			/*static MassBalance* make(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams, N_Configuration::Component* aMassBalance = nullptr);*/
+			static MassBalance* make(const PhysicsCoreParams& aPhysCoreParams, const N_Configuration::Component& aMassBalance);
+			static MassBalance* make(const PhysicsCoreParams& aPhysCoreParams);
 		};
 
 }

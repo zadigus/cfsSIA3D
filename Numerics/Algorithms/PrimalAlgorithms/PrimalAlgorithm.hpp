@@ -22,7 +22,8 @@ namespace N_Mathematics {
 	class PrimalAlgorithm : public ModelComponent
 	{
 		public:
-			PrimalAlgorithm(N_Configuration::Component* aComponent); 
+			PrimalAlgorithm(const N_Configuration::Component& aComponent);
+			PrimalAlgorithm();
 			virtual ~PrimalAlgorithm();
 
 			virtual void run() = 0; 

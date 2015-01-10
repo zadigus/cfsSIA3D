@@ -21,7 +21,8 @@ namespace N_Mathematics {
 	class FiniteDifferenceDiffusionAlgorithm : public FiniteDifferencePrimalAlgorithm
 	{
 		public:
-			FiniteDifferenceDiffusionAlgorithm(N_Configuration::Component* aDiffusionAlgo);
+			//FiniteDifferenceDiffusionAlgorithm(N_Configuration::Component* aDiffusionAlgo);
+			FiniteDifferenceDiffusionAlgorithm(const N_Configuration::Component& aDiffusionAlgo);
 			virtual ~FiniteDifferenceDiffusionAlgorithm();
 
 			virtual void run();

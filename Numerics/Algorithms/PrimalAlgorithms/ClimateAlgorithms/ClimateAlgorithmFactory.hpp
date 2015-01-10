@@ -19,7 +19,9 @@ namespace N_Mathematics {
 	class ClimateAlgorithmFactory 
 	{
 		public:
-			static PrimalAlgorithm* make(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, N_Configuration::Component* aClimateAlgo = nullptr);
+			//static PrimalAlgorithm* make(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, N_Configuration::Component* aClimateAlgo = nullptr);
+			static PrimalAlgorithm* make(const NumericsCoreParams& aNumCoreParams, const N_Configuration::Component& aClimateAlgo);
+			static PrimalAlgorithm* make(const NumericsCoreParams& aNumCoreParams);
 	};
 
 }

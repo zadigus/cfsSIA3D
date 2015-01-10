@@ -6,7 +6,7 @@
 namespace N_Mathematics {
 
 	DumbAlgorithm::DumbAlgorithm()
-		: PrimalAlgorithm(nullptr)
+		: PrimalAlgorithm()
 	{
 		
 	}

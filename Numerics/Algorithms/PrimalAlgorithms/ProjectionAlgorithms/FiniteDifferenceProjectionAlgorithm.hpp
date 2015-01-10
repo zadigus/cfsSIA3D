@@ -12,7 +12,8 @@ namespace N_Mathematics {
 	class FiniteDifferenceProjectionAlgorithm : public FiniteDifferencePrimalAlgorithm
 	{
 		public:
-			FiniteDifferenceProjectionAlgorithm(N_Configuration::Component* aProjectionAlgo);
+			//FiniteDifferenceProjectionAlgorithm(N_Configuration::Component* aProjectionAlgo);
+			FiniteDifferenceProjectionAlgorithm(const N_Configuration::Component& aProjectionAlgo);
 			virtual ~FiniteDifferenceProjectionAlgorithm();
 
 			virtual void run() = 0;

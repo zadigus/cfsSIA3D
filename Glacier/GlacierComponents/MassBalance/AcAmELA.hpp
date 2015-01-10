@@ -12,7 +12,8 @@ namespace N_Glacier {
 		public:
 			// Constructor / destructor
 			// TODO: make reference to const std::unique_ptr
-			AcAmELA(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams = std::unique_ptr<PhysicsCoreParams>(nullptr), N_Configuration::Component* aComponent = nullptr); 
+			/*AcAmELA(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams = std::unique_ptr<PhysicsCoreParams>(nullptr), N_Configuration::Component* aComponent = nullptr); */
+			AcAmELA(const PhysicsCoreParams& aPhysCoreParams, const N_Configuration::Component& aComponent);
 			virtual ~AcAmELA();
 
 			virtual const double operator()(const double x, const double y, const double b, const double H);

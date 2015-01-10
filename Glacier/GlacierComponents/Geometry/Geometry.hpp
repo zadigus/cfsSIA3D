@@ -13,7 +13,8 @@ namespace N_Glacier {
 	// Interface class for mass-balance data
 	class Geometry : public GlacierComponent {
 		public:
-			Geometry(N_Configuration::Component* aComponent = nullptr);
+			//Geometry(N_Configuration::Component* aComponent = nullptr);
+			Geometry(const N_Configuration::Component& aComponent);
 			virtual ~Geometry();
 			
 			std::shared_ptr<Grid> b();

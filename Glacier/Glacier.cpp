@@ -1,10 +1,12 @@
 #include "Glacier.hpp"
+
+#include <algorithm>
+#include <functional>
+
 #include "PhysicsCoreParams.hpp"
-
 #include "Utility/Logger/Logger.hpp"
-
-#include "Configuration/ModelCoreConfiguration.hpp"
 #include "Configuration/ModelConfiguration.hpp"
+#include "Configuration/ModelCoreConfiguration.hpp"
 #include "Numerics/Mesh/Grid.hpp"
 
 // Factories
@@ -18,6 +20,8 @@
 #include "GlacierComponents/Rheology/Rheology.hpp"
 #include "GlacierComponents/SlidingLaw/SlidingLaw.hpp"
 #include "GlacierComponents/Geometry/Geometry.hpp"
+
+using namespace std::placeholders;
 
 namespace N_Glacier {
 
@@ -35,6 +39,30 @@ namespace N_Glacier {
 
 	}
 
+	void Glacier::setComponent(N_Configuration::Component aComp, PhysicsCoreParams aCore)
+	{
+		if (!aComp.name()->compare("MassBalance"))
+		{ // doesn't work with ==
+			m_MassBalance.reset(MassBalanceFactory::make(aCore, aComp));
+		}
+		else if (!aComp.name()->compare("Rheology"))
+		{
+			m_Rheology.reset(RheologyFactory::make(aCore, aComp));
+		}
+		else if (!aComp.name()->compare("SlidingLaw"))
+		{
+			m_SlidingLaw.reset(SlidingLawFactory::make(aComp));
+		}
+		else if (!aComp.name()->compare("Geometry"))
+		{
+			m_Geometry.reset(GeometryFactory::make(aComp));
+		}
+		else
+		{
+			LOG_ERR("Unknown component " << aComp.name()->c_str());
+		}
+	}
+
 	void Glacier::init(const std::unique_ptr<N_Configuration::ModelConfiguration>& aPhysConf, const std::unique_ptr<N_Configuration::ModelCoreConfiguration>& aPhysCoreConf)
 	{
 		if (!aPhysConf)
@@ -43,33 +71,11 @@ namespace N_Glacier {
 			exit(EXIT_FAILURE);
 		}
 
-		std::unique_ptr<PhysicsCoreParams> physCore(new PhysicsCoreParams(aPhysCoreConf));
+		PhysicsCoreParams physCore(aPhysCoreConf);
 
 		// Read configuration
 		N_Configuration::ModelConfiguration::Component_sequence compSeq = aPhysConf->Component();
-		for (N_Configuration::ModelConfiguration::Component_iterator it = compSeq.begin(); it != compSeq.end(); it++)
-		{
-			if (!it->name()->compare("MassBalance"))
-			{ // doesn't work with ==
-				m_MassBalance.reset(MassBalanceFactory::make(physCore, &(*it)));
-			}
-			else if (!it->name()->compare("Rheology"))
-			{
-				m_Rheology.reset(RheologyFactory::make(physCore, &(*it)));
-			}
-			else if (!it->name()->compare("SlidingLaw"))
-			{
-				m_SlidingLaw.reset(SlidingLawFactory::make(&(*it)));
-			}
-			else if (!it->name()->compare("Geometry"))
-			{
-				m_Geometry.reset(GeometryFactory::make(&(*it)));
-			}
-			else
-			{
-				LOG_ERR("Unknown component " << it->name()->c_str());
-			}
-		}
+		std::for_each(compSeq.begin(), compSeq.end(), std::bind(&Glacier::setComponent, this, _1, physCore));
 
 		// Check configuration
 		if (!m_MassBalance)

@@ -15,7 +15,8 @@ namespace N_Glacier {
 	{
 		public:
 			// factory methods
-			static Geometry* make(N_Configuration::Component* aGeometry = nullptr);
+			//static Geometry* make(N_Configuration::Component* aGeometry = nullptr);
+			static Geometry* make(const N_Configuration::Component& aGeometry);
 		};
 
 }

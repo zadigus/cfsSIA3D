@@ -16,7 +16,8 @@ namespace N_Mathematics {
 	class FiniteDifferenceClimateAlgorithm : public FiniteDifferencePrimalAlgorithm
 	{
 		public:
-			FiniteDifferenceClimateAlgorithm(N_Configuration::Component* aClimateAlgo);
+			//FiniteDifferenceClimateAlgorithm(N_Configuration::Component* aClimateAlgo);
+			FiniteDifferenceClimateAlgorithm(const N_Configuration::Component& aClimateAlgo);
 			virtual ~FiniteDifferenceClimateAlgorithm();
 
 			virtual void run() = 0;

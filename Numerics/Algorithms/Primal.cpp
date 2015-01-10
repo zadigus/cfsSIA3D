@@ -1,4 +1,8 @@
 #include "Primal.hpp"
+
+#include <algorithm>
+#include <functional>
+
 #include "Utility/Logger/Logger.hpp"
 #include "Configuration/ModelConfiguration.hpp"
 #include "Configuration/ModelCoreConfiguration.hpp"
@@ -10,6 +14,8 @@
 #include "PrimalAlgorithms/ProjectionAlgorithms/ProjectionAlgorithmFactory.hpp"
 
 #include "NumericsCoreParams.hpp"
+
+using namespace std::placeholders;
 
 namespace N_Mathematics {
 
@@ -27,6 +33,26 @@ namespace N_Mathematics {
 
 	}
 
+	void Primal::setComponent(const N_Configuration::Component& aComp, const NumericsCoreParams& aCore)
+	{
+		if (!std::strcmp(aComp.name()->c_str(), "Diffusion"))
+		{
+			m_DiffusionAlgo.reset(DiffusionAlgorithmFactory::make(aCore, aComp));
+		}
+		else if (!std::strcmp(aComp.name()->c_str(), "Climate"))
+		{
+			m_ClimateAlgo.reset(ClimateAlgorithmFactory::make(aCore, aComp));
+		}
+		else if (!std::strcmp(aComp.name()->c_str(), "Projection"))
+		{
+			m_ProjectionAlgo.reset(ProjectionAlgorithmFactory::make(aCore, aComp));
+		}
+		else
+		{
+			LOG_ERR("Mathematics component " << aComp.name()->c_str() << " unknown.");
+		}
+	}
+
 	void Primal::init(std::unique_ptr<N_Configuration::ModelConfiguration>& aMathConf, const std::unique_ptr<N_Configuration::ModelCoreConfiguration>& aNumCoreConf)
 	{
 		if (!aMathConf)
@@ -35,32 +61,14 @@ namespace N_Mathematics {
 			exit(EXIT_FAILURE);
 		}
 
-		std::unique_ptr<NumericsCoreParams> numCore(new NumericsCoreParams(aNumCoreConf));
+		NumericsCoreParams numCore(aNumCoreConf);
 
-		m_dt = numCore->dt();
-		m_ti = numCore->ti();
-		m_tf = numCore->tf();
+		m_dt = numCore.dt();
+		m_ti = numCore.ti();
+		m_tf = numCore.tf();
 
 		N_Configuration::ModelConfiguration::Component_sequence compSeq(aMathConf->Component());
-		for (N_Configuration::ModelConfiguration::Component_iterator it = compSeq.begin(); it != compSeq.end(); ++it) 
-		{
-			if (!std::strcmp(it->name()->c_str(), "Diffusion"))
-			{
-				m_DiffusionAlgo.reset(DiffusionAlgorithmFactory::make(numCore, &(*it)));
-			}
-			else if (!std::strcmp(it->name()->c_str(), "Climate"))
-			{
-				m_ClimateAlgo.reset(ClimateAlgorithmFactory::make(numCore, &(*it)));
-			}
-			else if (!std::strcmp(it->name()->c_str(), "Projection"))
-			{
-				m_ProjectionAlgo.reset(ProjectionAlgorithmFactory::make(numCore, &(*it)));
-			}
-			else
-			{
-				LOG_ERR("Mathematics component " << it->name()->c_str() << " unknown.");
-			}
-		}
+		std::for_each(compSeq.begin(), compSeq.end(), std::bind(&Primal::setComponent, this, _1, numCore));
 
 		// Check configuration
 		if (!m_DiffusionAlgo)

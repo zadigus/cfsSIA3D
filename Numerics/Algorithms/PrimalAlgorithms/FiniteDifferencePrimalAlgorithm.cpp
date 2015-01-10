@@ -13,7 +13,8 @@
 
 namespace N_Mathematics {
 
-	FiniteDifferencePrimalAlgorithm::FiniteDifferencePrimalAlgorithm(N_Configuration::Component* aFiniteDifferenceAlgo) 
+	//FiniteDifferencePrimalAlgorithm::FiniteDifferencePrimalAlgorithm(N_Configuration::Component* aFiniteDifferenceAlgo) 
+	FiniteDifferencePrimalAlgorithm::FiniteDifferencePrimalAlgorithm(const N_Configuration::Component& aFiniteDifferenceAlgo)
 		: PrimalAlgorithm(aFiniteDifferenceAlgo)
 		, m_H(m_glacier.H())
 		, m_Nx(m_H->Nx())

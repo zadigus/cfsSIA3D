@@ -7,12 +7,13 @@
 
 namespace N_Glacier {
 
-	Rheology::Rheology(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams, N_Configuration::Component* aComponent)
+	//Rheology::Rheology(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams, N_Configuration::Component* aComponent)
+	Rheology::Rheology(const PhysicsCoreParams& aPhysCoreParams, const N_Configuration::Component& aComponent)
 		: GlacierComponent(aComponent)
 		, m_A(m_parameters.find("A") != m_parameters.end() ? std::stod(m_parameters["A"]) : 0)
 		, m_n(m_parameters.find("n") != m_parameters.end() ? std::stod(m_parameters["n"]) : 0)
-		, m_rho(aPhysCoreParams->rho_i())
-		, m_g(aPhysCoreParams->g())
+		, m_rho(aPhysCoreParams.rho_i())
+		, m_g(aPhysCoreParams.g())
 	{
 
 		m_rhogn = pow(m_rho*m_g, n());

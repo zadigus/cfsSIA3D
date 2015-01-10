@@ -5,7 +5,8 @@
 
 namespace N_Glacier {
 
-	ConstantSL::ConstantSL(N_Configuration::Component* aComponent)
+	//ConstantSL::ConstantSL(N_Configuration::Component* aComponent)
+	ConstantSL::ConstantSL(const N_Configuration::Component& aComponent)
 		: SlidingLaw(aComponent)
 	{
 		LOG_INF("Grid file name " << m_parameters["grid"]);

@@ -12,7 +12,8 @@ namespace N_Glacier {
 	class ZeroMB : public GradELA {
 	public:
 		// Constructor / destructor
-		ZeroMB(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams);
+		//ZeroMB(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams);
+		ZeroMB(const PhysicsCoreParams& aPhysCoreParams);
 		virtual ~ZeroMB();
 	};
 

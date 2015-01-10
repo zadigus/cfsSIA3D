@@ -16,7 +16,8 @@ namespace N_Mathematics {
 	class FiniteDifferencePrimalAlgorithm : public PrimalAlgorithm
 	{
 		public:
-			FiniteDifferencePrimalAlgorithm(N_Configuration::Component* aFiniteDifferenceAlgo);
+			//FiniteDifferencePrimalAlgorithm(N_Configuration::Component* aFiniteDifferenceAlgo);
+			FiniteDifferencePrimalAlgorithm(const N_Configuration::Component& aFiniteDifferenceAlgo);
 			virtual ~FiniteDifferencePrimalAlgorithm();
 
 			virtual void run() = 0;

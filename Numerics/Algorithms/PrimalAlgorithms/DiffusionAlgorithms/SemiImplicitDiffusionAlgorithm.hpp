@@ -21,7 +21,8 @@ namespace N_Mathematics {
 	class SemiImplicitDiffusionAlgorithm : public FiniteDifferenceDiffusionAlgorithm
 	{
 		public:
-			SemiImplicitDiffusionAlgorithm(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, N_Configuration::Component* aDiffusionAlgo);
+			//SemiImplicitDiffusionAlgorithm(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, N_Configuration::Component* aDiffusionAlgo);
+			SemiImplicitDiffusionAlgorithm(const NumericsCoreParams& aNumCoreParams, const N_Configuration::Component& aDiffusionAlgo);
 			virtual ~SemiImplicitDiffusionAlgorithm();
 
 			void setCrs();

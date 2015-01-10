@@ -7,7 +7,8 @@
 
 namespace N_Mathematics {
 
-	HeavisideProjectionAlgorithm::HeavisideProjectionAlgorithm(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, N_Configuration::Component* aProjectionAlgo)
+	//HeavisideProjectionAlgorithm::HeavisideProjectionAlgorithm(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, N_Configuration::Component* aProjectionAlgo)
+	HeavisideProjectionAlgorithm::HeavisideProjectionAlgorithm(const NumericsCoreParams& aNumCoreParams, const N_Configuration::Component& aProjectionAlgo)
 		: FiniteDifferenceProjectionAlgorithm(aProjectionAlgo) 
 	{
 		

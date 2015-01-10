@@ -8,11 +8,13 @@
 namespace N_Configuration {
 	class ModelConfiguration;
 	class ModelCoreConfiguration;
+	class Component;
 }
 
 namespace N_Mathematics {
 
 	class PrimalAlgorithm;
+	class NumericsCoreParams;
 
 	class Primal : public Singleton<Primal>
 	{
@@ -29,6 +31,9 @@ namespace N_Mathematics {
 			// Ctor/Dtor
 			Primal(); 
 			~Primal();
+
+			// Configuration setup
+			void setComponent(const N_Configuration::Component& aComp, const NumericsCoreParams& aCore);
 
 			// Primal algorithm
 			void Diffusion();						// solve the diffusion step
