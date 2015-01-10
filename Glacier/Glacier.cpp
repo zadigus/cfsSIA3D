@@ -39,7 +39,7 @@ namespace N_Glacier {
 
 	}
 
-	void Glacier::setComponent(N_Configuration::Component aComp, PhysicsCoreParams aCore)
+	void Glacier::setComponent(const N_Configuration::Component& aComp, const PhysicsCoreParams& aCore)
 	{
 		if (!aComp.name()->compare("MassBalance"))
 		{ // doesn't work with ==

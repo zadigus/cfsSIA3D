@@ -45,7 +45,7 @@ namespace N_Glacier {
 			~Glacier(); 
 
 			// Configuration setup
-			void setComponent(N_Configuration::Component aComp, PhysicsCoreParams aCore);
+			void setComponent(const N_Configuration::Component& aComp, const PhysicsCoreParams& aCore);
 
 		private:
 			// Physics
