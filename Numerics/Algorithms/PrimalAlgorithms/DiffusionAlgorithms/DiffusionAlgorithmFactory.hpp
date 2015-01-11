@@ -21,7 +21,7 @@ namespace N_Mathematics {
 	public:
 		//static PrimalAlgorithm* make(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, N_Configuration::Component* aDiffusionAlgo = nullptr); // TODO: make aDiffusionAlgo const
 		static PrimalAlgorithm* make(const NumericsCoreParams& aNumCoreParams, const N_Configuration::Component& aDiffusionAlgo);
-		static PrimalAlgorithm* make(const NumericsCoreParams& aNumCoreParams);
+		//static PrimalAlgorithm* make(const NumericsCoreParams& aNumCoreParams);
 	};
 
 }

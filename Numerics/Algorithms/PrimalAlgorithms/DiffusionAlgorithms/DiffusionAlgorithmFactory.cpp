@@ -35,11 +35,11 @@ namespace N_Mathematics {
 		//return new DumbAlgorithm();
 	}
 
-	PrimalAlgorithm* DiffusionAlgorithmFactory::make(const NumericsCoreParams& aNumCoreParams)
-	{
-		// DiffusionAlgo component not provided => default algo
-		LOG_WRN("Diffusion algorithm not provided. Setting algorithm that does not nothing.");
-		return new DumbAlgorithm();
-	}
+	//PrimalAlgorithm* DiffusionAlgorithmFactory::make(const NumericsCoreParams& aNumCoreParams)
+	//{
+	//	// DiffusionAlgo component not provided => default algo
+	//	LOG_WRN("Diffusion algorithm not provided. Setting algorithm that does not nothing.");
+	//	return new DumbAlgorithm();
+	//}
 
 }

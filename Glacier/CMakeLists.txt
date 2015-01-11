@@ -22,6 +22,7 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 	Rheology
 	SlidingLaw
 	Geometry
+	#Utility
 )
 
 FILE(GLOB includes RELATIVE "${PROJECT_SOURCE_DIR}" "*.hpp")

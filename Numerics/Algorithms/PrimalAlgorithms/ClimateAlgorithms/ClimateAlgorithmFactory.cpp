@@ -33,11 +33,11 @@ namespace N_Mathematics {
 		//return new DumbAlgorithm();
 	}
 
-	PrimalAlgorithm* ClimateAlgorithmFactory::make(const NumericsCoreParams& aNumCoreParams)
-	{
-		// ClimateAlgo component not provided => default algo
-		LOG_WRN("Climate algorithm not provided. Setting algorithm that does not nothing.");
-		return new DumbAlgorithm();
-	}
+	//PrimalAlgorithm* ClimateAlgorithmFactory::make(const NumericsCoreParams& aNumCoreParams)
+	//{
+	//	// ClimateAlgo component not provided => default algo
+	//	LOG_WRN("Climate algorithm not provided. Setting algorithm that does not nothing.");
+	//	return new DumbAlgorithm();
+	//}
 
 }

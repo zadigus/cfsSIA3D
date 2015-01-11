@@ -1,8 +1,13 @@
 #include "Logger.hpp"
 
+#include <algorithm>
+#include <functional>
+
 #include "Configuration/AppConfiguration.hpp"
 
 #include <iostream>
+
+using namespace std::placeholders;
 
 Logger::Logger()
 : m_INFLog(new OFFLog)
@@ -19,6 +24,33 @@ Logger::~Logger()
 	m_Stream.close();
 }
 
+void Logger::applyParameter(const N_Configuration::Parameter& aParam)
+{
+	if (!strcmp(aParam.name().c_str(), "FileName"))
+	{
+		m_Stream.open(aParam.data(), std::ios::out); // TODO: see if that's cool; it may be better to close the file and use an append mode
+	}
+
+	if (!strcmp(aParam.name().c_str(), "Mode"))
+	{
+		std::string mode(aParam.data());
+
+		switch (m_VerboseLevels[mode])
+		{
+		case 1:
+			m_INFLog.reset(new INFLog);
+		case 2:
+			m_WRNLog.reset(new WRNLog);
+		case 3:
+			m_ERRLog.reset(new ERRLog);
+			break;
+		default:
+			std::cerr << "Unknown Logger mode" << std::endl;
+			exit(EXIT_FAILURE);
+		}
+	}
+}
+
 void Logger::init(const std::unique_ptr<N_Configuration::AppConfiguration>& aLoggerConf)
 { 
 	if (!aLoggerConf)
@@ -28,32 +60,7 @@ void Logger::init(const std::unique_ptr<N_Configuration::AppConfiguration>& aLog
 	}
 
 	N_Configuration::AppConfiguration::Parameter_sequence params(aLoggerConf->Parameter());
-	for (N_Configuration::AppConfiguration::Parameter_const_iterator it(params.begin()); it != params.end(); ++it)
-	{
-		if (!strcmp(it->name().c_str(), "FileName"))
-		{
-			m_Stream.open(*it, std::ios::out); // TODO: see if that's cool; it may be better to close the file and use an append mode
-		}
-
-		if (!strcmp(it->name().c_str(), "Mode"))
-		{
-			std::string mode(*it);
-
-			switch (m_VerboseLevels[mode])
-			{
-				case 1:
-					m_INFLog.reset(new INFLog);
-				case 2:
-					m_WRNLog.reset(new WRNLog);
-				case 3:
-					m_ERRLog.reset(new ERRLog);
-					break;
-				default:
-					std::cerr << "Unknown Logger mode" << std::endl;
-					exit(EXIT_FAILURE);
-			}
-		}
-	}
+	std::for_each(params.begin(), params.end(), std::bind(&Logger::applyParameter, this, _1));
 }
 
 std::string Logger::coreMessage(const std::string& aFctSig, const std::string& aFileName, int aLineNb) const

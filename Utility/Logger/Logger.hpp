@@ -31,6 +31,7 @@
 
 namespace N_Configuration {
 	class AppConfiguration;
+	class Parameter;
 }
 
 class Log;
@@ -50,6 +51,8 @@ class Logger : public Singleton<Logger>
 		Logger();
 		~Logger();
 	
+		void applyParameter(const N_Configuration::Parameter& aParam);
+
 		std::string coreMessage(const std::string& aFctSig = std::string(), const std::string& aFileName = std::string(), int aLineNb = 0) const;
 		std::string getDate() const;
 

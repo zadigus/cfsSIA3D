@@ -24,6 +24,7 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 	DiffusionAlgorithms
 	ProjectionAlgorithms
 	${XERCES_LIBRARIES}
+	#Utility
 )
 
 FILE(GLOB includes RELATIVE "${PROJECT_SOURCE_DIR}" "*.hpp")

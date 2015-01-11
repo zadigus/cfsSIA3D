@@ -18,12 +18,6 @@ namespace N_Mathematics {
 	{
 		if (aLinSyst)
 		{
-			/*N_Configuration::SubComponent::Parameter_sequence params(aLinSyst->Parameter());
-			for (N_Configuration::SubComponent::Parameter_iterator it(params.begin()); it != params.end(); ++it)
-			{
-
-			}*/
-
 			if (aLinSyst->type().present())
 			{
 

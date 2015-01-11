@@ -1,14 +1,17 @@
 #include "FullyImplicitClimateAlgorithm.hpp"
 
+#include <functional>
+
 #include "Configuration/ModelConfiguration.hpp"
 #include "Numerics/Mesh/Grid.hpp"
 
 #include "Glacier/GlacierComponents/MassBalance/MassBalance.hpp"
 #include "Algorithms/NumericsCoreParams.hpp"
 
+using namespace std::placeholders;
+
 namespace N_Mathematics {
 
-	//FullyImplicitClimateAlgorithm::FullyImplicitClimateAlgorithm(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, N_Configuration::Component* aClimateAlgo)
 	FullyImplicitClimateAlgorithm::FullyImplicitClimateAlgorithm(const NumericsCoreParams& aNumCoreParams, const N_Configuration::Component& aClimateAlgo)
 		: FiniteDifferenceClimateAlgorithm(aClimateAlgo)
 		, m_Hn(new Grid(*m_H)) // initialization of Newton process
@@ -18,23 +21,15 @@ namespace N_Mathematics {
 		, m_Fp(0) 
 		, m_dt(aNumCoreParams.dt())
 	{
-		//if (aClimateAlgo)
-		//{
-			N_Configuration::Component::SubComponent_sequence subComponents(aClimateAlgo.SubComponent());
-			for (N_Configuration::Component::SubComponent_const_iterator it(subComponents.begin()); it != subComponents.end(); ++it)
-			{ // TODO: use for_each algorithm
-				if (!strcmp(it->name()->c_str(), "Newton"))
-				{
-					N_Configuration::SubComponent::Parameter_sequence  params(it->Parameter());
-					for (N_Configuration::SubComponent::Parameter_const_iterator it(params.begin()); it != params.end(); ++it)
-					{
-						m_parameters.emplace(it->name(), (*it));
-					}
-				}
-			}
-		//}
+		N_Configuration::Component::SubComponent_sequence subComponents(aClimateAlgo.SubComponent());
+		N_Configuration::Component::SubComponent_iterator it(std::find_if(subComponents.begin(), subComponents.end(), IsSubComponent("Newton")));
+		if (it != subComponents.end())
+		{
+			N_Configuration::SubComponent::Parameter_sequence  params(it->Parameter());
+			std::for_each(params.begin(), params.end(), std::bind(&FullyImplicitClimateAlgorithm::setParameter, this, _1));
+		}
 
-		m_tol = m_parameters.find("tol") != m_parameters.end() ? std::stod(m_parameters["tol"]) : 1e-6;
+		m_tol = m_Parameters.find("tol") != m_Parameters.end() ? std::stod(m_Parameters["tol"]) : 1e-6;
 
 	}
 
@@ -50,7 +45,7 @@ namespace N_Mathematics {
 			for (unsigned int i(0); i<m_Nx; ++i) {
 				for (unsigned int j(0); j<m_Ny; ++j) {
 					// TODO: integrate constantMB; it should be possible to access B with x, y too
-					m_F = Hn(i, j) - H(i, j) - m_dt*(*m_B)(b(i, j), Hn(i, j), H(i, j)); 
+					m_F = Hn(i, j) - H(i, j) - m_dt*(*m_B)(b(i, j), Hn(i, j), H(i, j));  // TODO: access through glacier member -> no need to give b and H any more; find a solution for Hn
 					m_Fp = 1 - m_dt*m_B->dB(b(i, j), Hn(i, j), H(i, j)); // derivative of mass balance wrt glacier surface
 					m_updt = m_F / m_Fp; Hn(i, j) -= m_updt;
 					if (fabs(m_updt) > m_err) m_err = fabs(m_updt);

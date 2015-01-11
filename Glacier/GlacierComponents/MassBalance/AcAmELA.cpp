@@ -9,10 +9,10 @@ namespace N_Glacier {
 	//AcAmELA::AcAmELA(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams, N_Configuration::Component* aComponent)
 	AcAmELA::AcAmELA(const PhysicsCoreParams& aPhysCoreParams, const N_Configuration::Component& aComponent)
 		: MassBalance(aPhysCoreParams, aComponent)
-		, m_ELA(std::stod(m_parameters["ELA"]))
-		, m_ac(std::stod(m_parameters["ac"]))
-		, m_am(std::stod(m_parameters["am"]))
-		, m_eps(std::stod(m_parameters["eps"]))
+		, m_ELA(std::stod(m_Parameters.at("ELA")))
+		, m_ac(std::stod(m_Parameters.at("ac")))
+		, m_am(std::stod(m_Parameters.at("am")))
+		, m_eps(std::stod(m_Parameters.at("eps")))
 	{
 		LOG_INF("ELA = " << ELA());
 		LOG_INF("ac  = " << ac());

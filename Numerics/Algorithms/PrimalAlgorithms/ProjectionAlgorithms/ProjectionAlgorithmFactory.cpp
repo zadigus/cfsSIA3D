@@ -33,11 +33,11 @@ namespace N_Mathematics {
 		//return new DumbAlgorithm();
 	}
 
-	PrimalAlgorithm* ProjectionAlgorithmFactory::make(const NumericsCoreParams& aNumCoreParams)
-	{
-		// ProjectionAlgo component not provided => default algo
-		LOG_ERR("Projection algorithm type not provided.");
-		return new DumbAlgorithm();
-	}
+	//PrimalAlgorithm* ProjectionAlgorithmFactory::make(const NumericsCoreParams& aNumCoreParams)
+	//{
+	//	// ProjectionAlgo component not provided => default algo
+	//	LOG_ERR("Projection algorithm type not provided.");
+	//	return new DumbAlgorithm();
+	//}
 
 }

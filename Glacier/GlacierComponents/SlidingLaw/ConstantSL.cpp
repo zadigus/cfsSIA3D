@@ -5,11 +5,10 @@
 
 namespace N_Glacier {
 
-	//ConstantSL::ConstantSL(N_Configuration::Component* aComponent)
 	ConstantSL::ConstantSL(const N_Configuration::Component& aComponent)
 		: SlidingLaw(aComponent)
 	{
-		LOG_INF("Grid file name " << m_parameters["grid"]);
+		LOG_INF("Grid file name " << m_Parameters.at("grid"));
 	}
 
 	ConstantSL::~ConstantSL()
@@ -19,7 +18,7 @@ namespace N_Glacier {
 
 	void ConstantSL::Init(const Grid& bed)
 	{
-		m_sc.reset(new Grid(m_parameters["grid"])); 
+		m_sc.reset(new Grid(m_Parameters.at("grid"))); 
 		m_sl.reset(new Grid(m_sc->Nx(), m_sc->Ny(), m_sc->Dx(), m_sc->Dy()));
 	}
 }

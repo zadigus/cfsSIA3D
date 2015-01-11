@@ -8,11 +8,12 @@
 
 namespace N_Glacier {
 
-	//AltitudeSL::AltitudeSL(N_Configuration::Component* aComponent)
 	AltitudeSL::AltitudeSL(const N_Configuration::Component& aComponent)
 		: SlidingLaw(aComponent)
-		, m_Z(m_parameters.find("Z") != m_parameters.end() ? std::stod(m_parameters["Z"]) : 0)
-		, m_C(m_parameters.find("C") != m_parameters.end() ? std::stod(m_parameters["C"]) : 0)
+		//, m_Z(m_Parameters.find("Z") != m_Parameters.end() ? std::stod(m_Parameters["Z"]) : 0)
+		//, m_C(m_Parameters.find("C") != m_Parameters.end() ? std::stod(m_Parameters["C"]) : 0)
+		, m_Z(std::stod(m_Parameters.at("Z")))
+		, m_C(std::stod(m_Parameters.at("C")))
 	{
 		LOG_INF("Z = " << Z());
 		LOG_INF("C = " << C());

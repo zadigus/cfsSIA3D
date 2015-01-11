@@ -16,13 +16,13 @@
 
 namespace N_Mathematics {
 
-	//SemiImplicitDiffusionAlgorithm::SemiImplicitDiffusionAlgorithm(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, N_Configuration::Component* aDiffusionAlgo) 
 	SemiImplicitDiffusionAlgorithm::SemiImplicitDiffusionAlgorithm(const NumericsCoreParams& aNumCoreParams, const N_Configuration::Component& aDiffusionAlgo)
 		: FiniteDifferenceDiffusionAlgorithm(aDiffusionAlgo)
 		, m_C1(aNumCoreParams.dt() / (2*m_Dx))
 		, m_C2(m_C1/m_Dx)
 	{
-		
+		// TODO: read further parameters here (see FullyImplicitClimateAlgorithm)
+
 	}
 
 	SemiImplicitDiffusionAlgorithm::~SemiImplicitDiffusionAlgorithm()
@@ -36,7 +36,6 @@ namespace N_Mathematics {
 
 		unsigned int idx(0), I(0), MS(m_Nx*m_Ny);
 		std::vector<int> nnz, col; // (MS + 1, 0);
-		//std::vector<int> col; // (5 * MS, 0); 
 
 		nnz.reserve(MS + 1);
 		col.reserve(5 * MS); // penta-diagonal matrix

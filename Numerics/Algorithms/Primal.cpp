@@ -7,6 +7,7 @@
 #include "Configuration/ModelConfiguration.hpp"
 #include "Configuration/ModelCoreConfiguration.hpp"
 #include "PrimalAlgorithms/PrimalAlgorithm.hpp"
+#include "PrimalAlgorithms/DumbAlgorithm.hpp"
 
 // Factories
 #include "PrimalAlgorithms/ClimateAlgorithms/ClimateAlgorithmFactory.hpp"
@@ -25,7 +26,7 @@ namespace N_Mathematics {
 		, m_ProjectionAlgo(nullptr)
 		, m_dt(0)
 	{
-		
+	
 	}
 
 	Primal::~Primal()
@@ -73,15 +74,18 @@ namespace N_Mathematics {
 		// Check configuration
 		if (!m_DiffusionAlgo)
 		{
-			m_DiffusionAlgo.reset(DiffusionAlgorithmFactory::make(numCore));
+			LOG_WRN("Diffusion algorithm not provided. Setting algorithm that does not nothing.");
+			m_DiffusionAlgo.reset(new DumbAlgorithm());
 		}
 		if (!m_ClimateAlgo)
 		{
-			m_ClimateAlgo.reset(ClimateAlgorithmFactory::make(numCore));
+			LOG_WRN("Climate algorithm not provided. Setting algorithm that does not nothing.");
+			m_ClimateAlgo.reset(new DumbAlgorithm());
 		}
 		if (!m_ProjectionAlgo)
 		{
-			m_ProjectionAlgo.reset(ProjectionAlgorithmFactory::make(numCore));
+			LOG_WRN("Projection algorithm not provided. Setting algorithm that does not nothing.");
+			m_ProjectionAlgo.reset(new DumbAlgorithm());
 		}
 	}
 

@@ -9,10 +9,10 @@ namespace N_Glacier {
 	//GradELA::GradELA(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams, N_Configuration::Component* aComponent)
 	GradELA::GradELA(const PhysicsCoreParams& aPhysCoreParams, const N_Configuration::Component& aComponent)
 		: MassBalance(aPhysCoreParams, aComponent)
-		, m_ELA(m_parameters.find("ELA") != m_parameters.end() ? std::stod(m_parameters["ELA"]) : 0)
-		, m_m1(m_parameters.find("m1") != m_parameters.end() ? std::stod(m_parameters["m1"]) : 0)
-		, m_m2(m_parameters.find("m2") != m_parameters.end() ? std::stod(m_parameters["m2"]) : 0)
-		, m_eps(m_parameters.find("eps") != m_parameters.end() ? std::stod(m_parameters["eps"]) : 0)
+		, m_ELA(std::stod(m_Parameters.at("ELA")))
+		, m_m1(std::stod(m_Parameters.at("m1")))
+		, m_m2(std::stod(m_Parameters.at("m2")))
+		, m_eps(std::stod(m_Parameters.at("eps")))
 	{
 		LOG_INF("ELA = " << ELA());
 		LOG_INF("m1  = " << m1());

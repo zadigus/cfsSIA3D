@@ -52,7 +52,6 @@ namespace N_Mathematics {
 			double m_dt; // time step
 			double m_ti; // initial time
 			double m_tf; // final time
-			
 	};
 
 }
