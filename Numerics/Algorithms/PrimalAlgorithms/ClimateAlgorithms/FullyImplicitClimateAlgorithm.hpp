@@ -29,6 +29,9 @@ namespace N_Mathematics {
 		protected:
 			double& Hn(unsigned int i, unsigned int j);
 
+        private:
+            void setAlgorithmComponent(const N_Configuration::SubComponent& aSubComponent); // TODO: define this more generically
+
 		private:
 			// Newton iterate
 			std::unique_ptr<Grid> m_Hn;

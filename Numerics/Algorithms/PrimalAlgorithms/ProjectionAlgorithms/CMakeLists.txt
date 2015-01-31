@@ -9,12 +9,13 @@ INCLUDE_DIRECTORIES(
 	${CMAKE_CURRENT_BINARY_DIR}/../../../..
 	${XSD_INCLUDE_DIRS}
 	${XERCES_INCLUDE_DIRS}
+  ${Teuchos_INCLUDE_DIRS}
 )
 
 FILE(GLOB src RELATIVE "${PROJECT_SOURCE_DIR}" "*.cpp" "*.hpp")
 
 ADD_LIBRARY(${PROJECT_NAME} ${src})
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} Configuration PrimalAlgorithms)
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} Configuration PrimalAlgorithms ${Teuchos_LIBRARIES})
 
 FILE(GLOB includes RELATIVE "${PROJECT_SOURCE_DIR}" "*.hpp")
 INSTALL(FILES ${includes}	DESTINATION ${CMAKE_INSTALL_PREFIX}/include/Numerics/Algorithms/PrimalAlgorithms/${PROJECT_NAME})

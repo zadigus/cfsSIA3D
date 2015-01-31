@@ -15,7 +15,11 @@ ModelComponent::ModelComponent(const N_Configuration::Component& aComponent)
 { 
 
 	N_Configuration::Component::SubComponent_sequence subComponents(aComponent.SubComponent());
-	N_Configuration::Component::SubComponent_iterator it(std::find_if(subComponents.begin(), subComponents.end(), IsSubComponent("General")));
+    N_Configuration::Component::SubComponent_iterator it(std::find_if(subComponents.begin(),
+                                                                      subComponents.end(),
+                                                                      [] (const N_Configuration::SubComponent& aSubComponent) -> bool {
+                                                                            return !aSubComponent.name()->compare("General");
+                                                                        }));
 	if (it != subComponents.end())
 	{
 		N_Configuration::SubComponent::Parameter_sequence  params(it->Parameter());

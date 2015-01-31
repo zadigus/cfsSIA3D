@@ -1,5 +1,6 @@
 #include "FullyImplicitClimateAlgorithm.hpp"
 
+#include <algorithm>
 #include <functional>
 
 #include "Configuration/ModelConfiguration.hpp"
@@ -22,12 +23,17 @@ namespace N_Mathematics {
 		, m_dt(aNumCoreParams.dt())
 	{
 		N_Configuration::Component::SubComponent_sequence subComponents(aClimateAlgo.SubComponent());
-		N_Configuration::Component::SubComponent_iterator it(std::find_if(subComponents.begin(), subComponents.end(), IsSubComponent("Newton")));
-		if (it != subComponents.end())
-		{
-			N_Configuration::SubComponent::Parameter_sequence  params(it->Parameter());
-			std::for_each(params.begin(), params.end(), std::bind(&FullyImplicitClimateAlgorithm::setParameter, this, _1));
-		}
+
+
+
+//		N_Configuration::Component::SubComponent_iterator it(std::find_if(subComponents.begin(), subComponents.end(), IsSubComponent("Newton")));
+//		if (it != subComponents.end())
+//		{
+//			N_Configuration::SubComponent::Parameter_sequence  params(it->Parameter());
+//			std::for_each(params.begin(), params.end(), std::bind(&FullyImplicitClimateAlgorithm::setParameter, this, _1));
+//		}
+
+        std::for_each(subComponents.begin(), subComponents.end(), std::bind(&FullyImplicitClimateAlgorithm::setAlgorithmComponent, this, _1));
 
 		m_tol = m_Parameters.find("tol") != m_Parameters.end() ? std::stod(m_Parameters["tol"]) : 1e-6;
 
@@ -37,6 +43,15 @@ namespace N_Mathematics {
 	{
 
 	}
+
+    void FullyImplicitClimateAlgorithm::setAlgorithmComponent(const N_Configuration::SubComponent& aSubComponent)
+    {
+        if(!aSubComponent.name()->compare("Newton"))
+        {
+            N_Configuration::SubComponent::Parameter_sequence  params(aSubComponent.Parameter());
+            std::for_each(params.begin(), params.end(), std::bind(&FullyImplicitClimateAlgorithm::setParameter, this, _1));
+        }
+    }
 
 	void FullyImplicitClimateAlgorithm::run()
 	{

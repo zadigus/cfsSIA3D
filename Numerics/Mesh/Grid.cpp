@@ -93,7 +93,6 @@ Grid::Grid(const Grid & g) // a copy constructor creates a new object from an ol
 Grid& Grid::operator=(const Grid& g) // an assignment operator overwrites an existing object
 //==============================================================================
 {
-	//assert(g._Coords == _Coords);
 	m_Coords = g.m_Coords;
 	m_NoData = g.m_NoData;
 	m_Data = g.m_Data;

@@ -1,2 +1,0 @@
-#cmakedefine USE_PETSC
-#cmakedefine USE_TRILINOS

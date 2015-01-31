@@ -12,6 +12,7 @@ namespace N_Glacier {
 
 namespace N_Configuration {
 	class Component;
+    class SubComponent;
 }
 
 namespace N_Mathematics {
@@ -51,6 +52,9 @@ namespace N_Mathematics {
 			double Gamma();
 			double rhogn();
 			double n();
+
+        private:
+            void setAlgorithmComponent(const N_Configuration::SubComponent& aSubComponent);
 
 		protected:
 			// Physics models

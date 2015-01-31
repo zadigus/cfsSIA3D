@@ -5,31 +5,31 @@ INCLUDE_DIRECTORIES(
 	${PROJECT_BINARY_DIR}
 )
 
-CONFIGURE_FILE(
-  "${PROJECT_SOURCE_DIR}/LinSystConfig.hpp.in"
-  "${PROJECT_BINARY_DIR}/LinSystConfig.hpp"
-)
+#CONFIGURE_FILE(
+#  "${PROJECT_SOURCE_DIR}/LinSystConfig.hpp.in"
+#  "${PROJECT_BINARY_DIR}/LinSystConfig.hpp"
+#)
 
 FILE(GLOB src RELATIVE "${PROJECT_SOURCE_DIR}" "*.cpp" "*.hpp")
-FILE(GLOB Belos_src RELATIVE "${PROJECT_SOURCE_DIR}" "Belos*.cpp" "Belos*.hpp")
-FILE(GLOB PETSc_src RELATIVE "${PROJECT_SOURCE_DIR}" "PETSc*.cpp" "PETSc*.hpp")
+#FILE(GLOB Belos_src RELATIVE "${PROJECT_SOURCE_DIR}" "Belos*.cpp" "Belos*.hpp")
+#FILE(GLOB PETSc_src RELATIVE "${PROJECT_SOURCE_DIR}" "PETSc*.cpp" "PETSc*.hpp")
 
 # Remove possibly non-compilable sources (because no library available)
-FOREACH(f ${Belos_src} ${PETSc_src})
-	LIST(REMOVE_ITEM src ${f})
-ENDFOREACH()
+#FOREACH(f ${Belos_src} ${PETSc_src})
+#	LIST(REMOVE_ITEM src ${f})
+#ENDFOREACH()
 
-IF(USE_TRILINOS) # TODO: check that TRILINOS exists
-	LIST(APPEND src ${Belos_src})
+#IF(USE_TRILINOS) # TODO: check that TRILINOS exists
+#	LIST(APPEND src ${Belos_src})
   INCLUDE_DIRECTORIES(${Belos_INCLUDE_DIRS})
   LIST(APPEND EXTRA_LIBS ${Belos_LIBRARIES})
-ENDIF(USE_TRILINOS)
+#ENDIF(USE_TRILINOS)
 
-IF(USE_PETSC) # TODO: check that PETSC exists
-LIST(APPEND src ${PETSc_src})
-	INCLUDE_DIRECTORIES(${PETSC_INCLUDES})
-	LIST(APPEND EXTRA_LIBS ${PETSC_LIBRARIES})
-ENDIF(USE_PETSC)
+#IF(USE_PETSC) # TODO: check that PETSC exists
+#LIST(APPEND src ${PETSc_src})
+#	INCLUDE_DIRECTORIES(${PETSC_INCLUDES})
+#	LIST(APPEND EXTRA_LIBS ${PETSC_LIBRARIES})
+#ENDIF(USE_PETSC)
 
 ADD_LIBRARY(${PROJECT_NAME} ${src})
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${EXTRA_LIBS} Configuration)

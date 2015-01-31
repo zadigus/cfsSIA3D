@@ -1,18 +1,23 @@
 #include "SemiImplicitDiffusionAlgorithm.hpp"
 
-#include "Utility/Logger/Logger.hpp"
-
+// Glacier
 #include "Glacier/Glacier.hpp"
 #include "Numerics/Mesh/Grid.hpp"
 #include "Glacier/GlacierComponents/Rheology/Rheology.hpp"
 #include "Glacier/GlacierComponents/SlidingLaw/SlidingLaw.hpp"
 
+// Linear system
 #include "Numerics/LinSyst/LinSyst.hpp"
-#include "Numerics/LinSyst/IVector.hpp"
-#include "Numerics/LinSyst/IMatrix.hpp"
+#include "Teuchos_RCP.hpp"
+#include "Epetra_CrsMatrix.h"
+#include "Epetra_Vector.h"
 
+// Configuration
 #include "Configuration/ModelConfiguration.hpp"
 #include "Algorithms/NumericsCoreParams.hpp"
+
+// Logger
+#include "Utility/Logger/Logger.hpp"
 
 namespace N_Mathematics {
 
@@ -35,7 +40,7 @@ namespace N_Mathematics {
 		LOG_INF("Setting matrix CRS structure");
 
 		unsigned int idx(0), I(0), MS(m_Nx*m_Ny);
-		std::vector<int> nnz, col; // (MS + 1, 0);
+        std::vector<int> nnz, col;
 
 		nnz.reserve(MS + 1);
 		col.reserve(5 * MS); // penta-diagonal matrix
@@ -106,19 +111,19 @@ namespace N_Mathematics {
 		colIdx.reserve(5);
 		values.reserve(5);
 
-		std::shared_ptr<IVector> rhs(m_LinSyst->getRHS());
-		std::shared_ptr<IMatrix> A(m_LinSyst->getMatrix());
+        Teuchos::RCP<Epetra_Vector>    rhs(m_LinSyst->getRHS());
+        Teuchos::RCP<Epetra_CrsMatrix> A  (m_LinSyst->getMatrix());
 
 		for (int i(0); i < m_Nx; ++i) 
 		{
 			for (int j (0); j < m_Ny; ++j) // must use ints here instead of unsigned ints because e.g. i-1 is checked
 			{
-																						val  = D(i, j        ) * (-gradbx(i, j)     - gradby(i, j));
+                                                                    val  = D(i, j        ) * (-gradbx(i, j)     - gradby(i, j));
 				if (j + 1 < m_Ny) 									val += D(i, j + 1    ) * (-gradbx(i, j)     + gradby(i, j + 1));
 				if (i + 1 < m_Nx) 									val += D(i + 1, j    ) * (-gradby(i, j)     + gradbx(i + 1, j));
 				if (i + 1 < m_Nx && j + 1 < m_Ny) 	val += D(i + 1, j + 1) * (+gradbx(i + 1, j) + gradby(i, j + 1));
 				val *= m_C1; val += H(i, j);
-				(*rhs)[I] = val;
+                (*rhs)[I] = val;
 
 				if (i - 1 >= 0) { // (i-1, j)
 					colIdx.push_back(I - m_Ny); // distance from (i-1, j) to (i, j) is -Ny
@@ -156,15 +161,18 @@ namespace N_Mathematics {
 					values.push_back(val);
 				}
 				
-				A->setRow(I, values, colIdx);
+//				A->setRow(I, values, colIdx);
+                A->ReplaceGlobalValues(I, values.size(), &values[0], &colIdx[0]);
+
 				I++;
 				colIdx.clear();
 				values.clear();
 			}
 		}
 
-		A->print("Matrix.out");
-
+        std::ofstream ofs("Matrix.out", std::ios_base::app);
+        A->Print(ofs);
+        ofs.close();
 	}
 
 }

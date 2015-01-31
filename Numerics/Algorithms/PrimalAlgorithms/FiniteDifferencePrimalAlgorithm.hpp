@@ -3,15 +3,17 @@
 
 #include "PrimalAlgorithm.hpp"
 
+#include "Teuchos_RCP.hpp"
+
 class Grid;
 
 namespace N_Configuration {
 	class Component;
 }
 
-namespace N_Mathematics {
+class Epetra_Vector;
 
-	class IVector;
+namespace N_Mathematics {
 
 	class FiniteDifferencePrimalAlgorithm : public PrimalAlgorithm
 	{
@@ -30,7 +32,7 @@ namespace N_Mathematics {
 			double gradby(unsigned int i, unsigned int j);
 
 			// convert a Vector into a Grid
-			virtual void Vector2Grid(const std::shared_ptr<IVector>& aVector, const std::shared_ptr<Grid>& aGrid); // can't be a Grid ctor, because the behavior of this method depends on how users fill their matrix
+            virtual void Vector2Grid(const Teuchos::RCP<Epetra_Vector>& aVector, const std::shared_ptr<Grid>& aGrid); // can't be a Grid ctor, because the behavior of this method depends on how users fill their matrix
 
 		protected:
 			// Ice thickness

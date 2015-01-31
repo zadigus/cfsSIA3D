@@ -6,13 +6,17 @@
 #include "Glacier/GlacierComponents/Rheology/Rheology.hpp"
 #include "Glacier/GlacierComponents/SlidingLaw/SlidingLaw.hpp"
 
-#include "Numerics/LinSyst/LinSystFactory.hpp"
+//#include "Numerics/LinSyst/LinSystFactory.hpp"
 #include "Numerics/LinSyst/LinSyst.hpp"
 
 #include "Configuration/ModelConfiguration.hpp"
 #include "Algorithms/NumericsCoreParams.hpp"
 
+#include <algorithm>
+#include <functional>
 #include <cassert>
+
+using namespace std::placeholders;
 
 namespace N_Mathematics {
 
@@ -25,12 +29,16 @@ namespace N_Mathematics {
 	{
 		//assert(_Dx == _H->Dy()); // TODO: enforce that somewhere else
 		N_Configuration::Component::SubComponent_sequence subComponents(aDiffusionAlgo.SubComponent());
-		N_Configuration::Component::SubComponent_iterator it(std::find_if(subComponents.begin(), subComponents.end(), IsSubComponent("LinearSystem")));
+
+        std::for_each(subComponents.begin(), subComponents.end(), std::bind(&FiniteDifferenceDiffusionAlgorithm::setAlgorithmComponent, this, _1));
+
+/*		N_Configuration::Component::SubComponent_iterator it(std::find_if(subComponents.begin(), subComponents.end(), IsSubComponent("LinearSystem")));
 		if (it != subComponents.end())
 		{
 			LOG_INF("Setting diffusion algorithm's linear system.");
-			m_LinSyst.reset(LinSystFactory::make(&(*it)));
-		}
+//			m_LinSyst.reset(LinSystFactory::make(&(*it)));
+            m_LinSyst.reset(new LinSyst(&(*it)));
+        }*/
 	}
 
 	FiniteDifferenceDiffusionAlgorithm::~FiniteDifferenceDiffusionAlgorithm()
@@ -38,6 +46,15 @@ namespace N_Mathematics {
 
 	}
 	
+    void FiniteDifferenceDiffusionAlgorithm::setAlgorithmComponent(const N_Configuration::SubComponent& aSubComponent)
+    {
+        if(!aSubComponent.name()->compare("LinearSystem"))
+        {
+            LOG_INF("Setting diffusion algorithm's linear system.");
+            m_LinSyst.reset(new LinSyst(aSubComponent));
+        }
+    }
+
 	double FiniteDifferenceDiffusionAlgorithm::staggeredGradSurfNorm(unsigned int i, unsigned int j, const std::shared_ptr<Grid>& H) 
 	{
 		// because this function is also used in the FullyImplicit version

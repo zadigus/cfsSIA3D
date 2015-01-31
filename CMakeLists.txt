@@ -5,50 +5,58 @@ PROJECT(cfsSIA3D)
 SET(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${CMAKE_CURRENT_SOURCE_DIR}/CMake")
 SET(XSD_CONFIG_PATH "${CMAKE_CURRENT_SOURCE_DIR}/Configuration")
 
-OPTION(
-	USE_TRILINOS "Use Trilinos library for the solution of linear systems"
-)
+#OPTION(
+#	USE_TRILINOS "Use Trilinos library for the solution of linear systems"
+#)
 
-OPTION(
-	USE_PETSC "Use PETSc library for the solution of linear systems"
-)
+#OPTION(
+#	USE_PETSC "Use PETSc library for the solution of linear systems"
+#)
 
 FIND_PACKAGE(Xerces 3.1 REQUIRED)
 FIND_PACKAGE(Xsd 4.0 REQUIRED)
 
-IF(USE_TRILINOS)
-	FIND_PACKAGE(Trilinos 11.4 REQUIRED PATHS ${TRILINOS_PATH}/lib/cmake/Trilinos ${TRILINOS_PATH})
-	IF(Trilinos_FOUND)
-   MESSAGE("\nFound Trilinos!  Here are the details: ")
-   MESSAGE("   Trilinos_DIR = ${Trilinos_DIR}")
-   MESSAGE("   Trilinos_VERSION = ${Trilinos_VERSION}")
-   MESSAGE("   Trilinos_PACKAGE_LIST = ${Trilinos_PACKAGE_LIST}")
-   MESSAGE("   Trilinos_LIBRARIES = ${Trilinos_LIBRARIES}")
-   MESSAGE("   Trilinos_INCLUDE_DIRS = ${Trilinos_INCLUDE_DIRS}")
-   MESSAGE("   Trilinos_TPL_LIST = ${Trilinos_TPL_LIST}")
-   MESSAGE("   Trilinos_TPL_INCLUDE_DIRS = ${Trilinos_TPL_INCLUDE_DIRS}")
-   MESSAGE("   Trilinos_TPL_LIBRARIES = ${Trilinos_TPL_LIBRARIES}")
-   MESSAGE("   Trilinos_BUILD_SHARED_LIBS = ${Trilinos_BUILD_SHARED_LIBS}")
-   MESSAGE("   Trilinos_CXX_COMPILER = ${Trilinos_CXX_COMPILER}")
-   MESSAGE("   Trilinos_C_COMPILER = ${Trilinos_C_COMPILER}")
-   MESSAGE("   Trilinos_Fortran_COMPILER = ${Trilinos_Fortran_COMPILER}")
-   MESSAGE("   Trilinos_CXX_COMPILER_FLAGS = ${Trilinos_CXX_COMPILER_FLAGS}")
-   MESSAGE("   Trilinos_C_COMPILER_FLAGS = ${Trilinos_C_COMPILER_FLAGS}")
-   MESSAGE("   Trilinos_Fortran_COMPILER_FLAGS =
-     ${Trilinos_Fortran_COMPILER_FLAGS}")
-   MESSAGE("   Trilinos_LINKER = ${Trilinos_LINKER}")
-   MESSAGE("   Trilinos_EXTRA_LD_FLAGS = ${Trilinos_EXTRA_LD_FLAGS}")
-   MESSAGE("   Trilinos_AR = ${Trilinos_AR}")
-   MESSAGE("End of Trilinos details\n")
-	ELSE()
-	  MESSAGE(FATAL_ERROR "Could not find Trilinos!")
-	ENDIF()
+#IF(USE_TRILINOS)
+FIND_PACKAGE(Trilinos 11.4 REQUIRED PATHS ${TRILINOS_PATH}/lib/cmake/Trilinos ${TRILINOS_PATH})
+IF(Trilinos_FOUND)
+  MESSAGE("\nFound Trilinos!  Here are the details: ")
+  MESSAGE("   Trilinos_DIR = ${Trilinos_DIR}")
+  MESSAGE("   Trilinos_VERSION = ${Trilinos_VERSION}")
+  MESSAGE("   Trilinos_PACKAGE_LIST = ${Trilinos_PACKAGE_LIST}")
+  MESSAGE("   Trilinos_LIBRARIES = ${Trilinos_LIBRARIES}")
+  MESSAGE("   Trilinos_INCLUDE_DIRS = ${Trilinos_INCLUDE_DIRS}")
+  MESSAGE("   Trilinos_TPL_LIST = ${Trilinos_TPL_LIST}")
+  MESSAGE("   Trilinos_TPL_INCLUDE_DIRS = ${Trilinos_TPL_INCLUDE_DIRS}")
+  MESSAGE("   Trilinos_TPL_LIBRARIES = ${Trilinos_TPL_LIBRARIES}")
+  MESSAGE("   Trilinos_BUILD_SHARED_LIBS = ${Trilinos_BUILD_SHARED_LIBS}")
+  MESSAGE("   Trilinos_CXX_COMPILER = ${Trilinos_CXX_COMPILER}")
+  MESSAGE("   Trilinos_C_COMPILER = ${Trilinos_C_COMPILER}")
+  MESSAGE("   Trilinos_Fortran_COMPILER = ${Trilinos_Fortran_COMPILER}")
+  MESSAGE("   Trilinos_CXX_COMPILER_FLAGS = ${Trilinos_CXX_COMPILER_FLAGS}")
+  MESSAGE("   Trilinos_C_COMPILER_FLAGS = ${Trilinos_C_COMPILER_FLAGS}")
+  MESSAGE("   Trilinos_Fortran_COMPILER_FLAGS =
+    ${Trilinos_Fortran_COMPILER_FLAGS}")
+  MESSAGE("   Trilinos_LINKER = ${Trilinos_LINKER}")
+  MESSAGE("   Trilinos_EXTRA_LD_FLAGS = ${Trilinos_EXTRA_LD_FLAGS}")
+  MESSAGE("   Trilinos_AR = ${Trilinos_AR}")
+  MESSAGE("End of Trilinos details\n")
+ELSE()
+  MESSAGE(FATAL_ERROR "Could not find Trilinos!")
+ENDIF()
 
-ENDIF(USE_TRILINOS)
+find_package(MPI REQUIRED)
 
-IF(USE_PETSC)
-	FIND_PACKAGE(PETSc 3.5 REQUIRED)
-ENDIF(USE_PETSC)
+#MESSAGE("C = ${MPI_CXX_COMPILER}")
+#SET(CMAKE_C_COMPILER ${MPI_C_COMPILER})
+#SET(CMAKE_CXX_COMPILER ${MPI_CXX_COMPILER})
+set(CMAKE_CXX_COMPILE_FLAGS ${CMAKE_CXX_COMPILE_FLAGS} ${MPI_COMPILE_FLAGS})
+set(CMAKE_CXX_LINK_FLAGS ${CMAKE_CXX_LINK_FLAGS} ${MPI_LINK_FLAGS})
+
+#ENDIF(USE_TRILINOS)
+
+#IF(USE_PETSC)
+#	FIND_PACKAGE(PETSc 3.5 REQUIRED)
+#ENDIF(USE_PETSC)
 
 INCLUDE(Macros)
 

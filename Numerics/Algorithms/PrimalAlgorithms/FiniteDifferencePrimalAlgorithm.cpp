@@ -7,7 +7,7 @@
 #include "Configuration/ModelConfiguration.hpp"
 #include "Algorithms/NumericsCoreParams.hpp"
 
-#include "Numerics/LinSyst/IVector.hpp"
+#include "Epetra_Vector.h"
 
 #include <cassert>
 
@@ -32,7 +32,7 @@ namespace N_Mathematics {
 
 	}
 
-	void FiniteDifferencePrimalAlgorithm::Vector2Grid(const std::shared_ptr<IVector>& aVector, const std::shared_ptr<Grid>& aGrid)
+    void FiniteDifferencePrimalAlgorithm::Vector2Grid(const Teuchos::RCP<Epetra_Vector>& aVector, const std::shared_ptr<Grid>& aGrid)
 	{
 		LOG_WRN("Using default vector to grid conversion.");
 		unsigned int I(0);
