@@ -3,8 +3,6 @@
 
 #include "AltitudeSL.hpp"
 
-class Grid;
-
 namespace N_Glacier {
 	class ZeroSL : public AltitudeSL {
 	public:
@@ -12,7 +10,11 @@ namespace N_Glacier {
 		virtual ~ZeroSL();
 
 	protected:
-		virtual void Stagger(unsigned int);
+		virtual void Stagger(unsigned int a_GlenExp);
+
+	private:
+		ZeroSL(const ZeroSL&); // not implemented
+		ZeroSL& operator=(const ZeroSL&); // not implemented
 	};
 }
 

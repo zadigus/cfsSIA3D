@@ -10,17 +10,29 @@ namespace N_Glacier {
 
 	struct PhysicsCoreParams;
 
-	// Interface class for mass-balance data
+	// Interface class for geometry data
 	class Geometry : public GlacierComponent {
 		public:
-			//Geometry(N_Configuration::Component* aComponent = nullptr);
-			Geometry(const N_Configuration::Component& aComponent);
+			// constructors/destructors
+			Geometry(const N_Configuration::Component& a_Component);
 			virtual ~Geometry();
-			
-			std::shared_ptr<Grid> b();
-			std::shared_ptr<Grid> H();
-			std::shared_ptr<Grid> gradbx();
-			std::shared_ptr<Grid> gradby();
+			Geometry(const Geometry& a_Geometry);
+			Geometry& operator=(const Geometry& a_Geometry);
+
+    public:
+      // public members
+      double b(unsigned int i, unsigned int j);
+      double gradbx(unsigned int i, unsigned int j);
+      double gradby(unsigned int i, unsigned int j);
+      double& H(unsigned int i, unsigned int j);
+
+      void setH(const std::shared_ptr<Grid>& a_H);
+      double staggeredGradSurfNorm(unsigned int i, unsigned int j);
+
+			unsigned int Nx();
+			unsigned int Ny();
+			double Dx();
+			double Dy();
 
 		private:
 			std::shared_ptr<Grid> m_b; // bedrock topography
@@ -28,25 +40,10 @@ namespace N_Glacier {
 			std::shared_ptr<Grid> m_gradbx; // gradients of the bedrock topography wrt to x
 			std::shared_ptr<Grid> m_gradby; // wrt to y
 	};
-	
-	inline std::shared_ptr<Grid> Geometry::b()
-	{
-		return m_b;
-	}
 
-	inline std::shared_ptr<Grid> Geometry::H()
+	inline void Geometry::setH(const std::shared_ptr<Grid>& a_H)
 	{
-		return m_H;
-	}
-
-	inline std::shared_ptr<Grid> Geometry::gradbx()
-	{
-		return m_gradbx;
-	}
-
-	inline std::shared_ptr<Grid> Geometry::gradby()
-	{
-		return m_gradby;
+		m_H = a_H;
 	}
 
 }

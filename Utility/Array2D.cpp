@@ -4,7 +4,9 @@
 #include <functional>
 #include <cassert>
 
-Array2D::Array2D(int Nx, int Ny)
+using namespace std::placeholders;
+
+Array2D::Array2D(unsigned int Nx, unsigned int Ny)
 : m_Nx(Nx)
 , m_Ny(Ny)
 , m_Data(Nx*Ny, 0)
@@ -49,7 +51,7 @@ Array2D& Array2D::operator=(const Array2D& right) // set an existing object
 	m_Data.reset(new double[m_Nx*m_Ny]()); // reset with zeroes 
 }*/
 
-double& Array2D::operator()(const int i, const int j)
+double& Array2D::operator()(const int i, const int j) const
 {
 	return m_Data.at(i*m_Ny + j);
 }
@@ -72,7 +74,7 @@ Array2D& Array2D::operator-=(const Array2D& right)
 
 Array2D& Array2D::operator*=(double c)
 {
-	std::transform(m_Data.begin(), m_Data.end(), m_Data.begin(), std::bind(std::multiplies<double>(), std::placeholders::_1, c));
+    std::transform(m_Data.begin(), m_Data.end(), m_Data.begin(), std::bind(std::multiplies<double>(), _1, c));
 	return *this;
 }
 

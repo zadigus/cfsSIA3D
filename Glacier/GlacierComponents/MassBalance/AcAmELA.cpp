@@ -6,9 +6,8 @@
 
 namespace N_Glacier {
 
-	//AcAmELA::AcAmELA(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams, N_Configuration::Component* aComponent)
-	AcAmELA::AcAmELA(const PhysicsCoreParams& aPhysCoreParams, const N_Configuration::Component& aComponent)
-		: MassBalance(aPhysCoreParams, aComponent)
+	AcAmELA::AcAmELA(const PhysicsCoreParams& a_PhysCoreParams, const N_Configuration::Component& a_Component)
+		: MassBalance(a_PhysCoreParams, a_Component)
 		, m_ELA(std::stod(m_Parameters.at("ELA")))
 		, m_ac(std::stod(m_Parameters.at("ac")))
 		, m_am(std::stod(m_Parameters.at("am")))

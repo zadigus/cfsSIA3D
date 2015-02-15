@@ -4,14 +4,13 @@
 #include <cmath>
 
 #include "Numerics/Mesh/Grid.hpp"
+#include "Geometry/Geometry.hpp"
 #include "Configuration/ModelConfiguration.hpp"
 
 namespace N_Glacier {
 
-	AltitudeSL::AltitudeSL(const N_Configuration::Component& aComponent)
-		: SlidingLaw(aComponent)
-		//, m_Z(m_Parameters.find("Z") != m_Parameters.end() ? std::stod(m_Parameters["Z"]) : 0)
-		//, m_C(m_Parameters.find("C") != m_Parameters.end() ? std::stod(m_Parameters["C"]) : 0)
+	AltitudeSL::AltitudeSL(const N_Configuration::Component& a_Component)
+		: SlidingLaw(a_Component)
 		, m_Z(std::stod(m_Parameters.at("Z")))
 		, m_C(std::stod(m_Parameters.at("C")))
 	{
@@ -33,17 +32,16 @@ namespace N_Glacier {
 
 	}
 
-	void AltitudeSL::Fill(Grid& bed, unsigned int n)
+	void AltitudeSL::Fill(const std::shared_ptr<Geometry>& a_Geometry, double a_GlenExp)
 	{
 		assert(C() >= 0);
 		if (C() > 0) {
-			for (unsigned int i = 0; i < bed.Nx(); ++i)
+			for (unsigned int i(0); i < a_Geometry->Nx(); ++i)
 			{
-				for (unsigned int j = 0; j<bed.Ny(); ++j)
+				for (unsigned int j(0); j < a_Geometry->Ny(); ++j)
 				{
-					(*m_sc)(i, j) = 0;
-					if (Z() - bed(i, j) > 0)
-						(*m_sc)(i, j) = C() * pow(Z() - bed(i, j), 1. / n); // sliding at the grid points
+					if (Z() - a_Geometry->b(i, j) > 0)
+						(*m_sc)(i, j) = C() * pow(Z() - a_Geometry->b(i, j), 1. / a_GlenExp); // sliding at the grid points
 				}
 			}
 		}

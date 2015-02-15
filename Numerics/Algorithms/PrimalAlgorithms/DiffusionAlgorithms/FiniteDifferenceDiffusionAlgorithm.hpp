@@ -46,7 +46,7 @@ namespace N_Mathematics {
 			 * Utility methods
 			 */
 			// compute norm of gradient of grid in the staggered grid; corresponds to alpha in the papers, which is |grad s|
-			double staggeredGradSurfNorm(unsigned int i, unsigned int j, const std::shared_ptr<Grid>& H);
+//			double staggeredGradSurfNorm(unsigned int i, unsigned int j, const std::shared_ptr<Grid>& H);
 			double& D(unsigned int i, unsigned int j); // diffusivity
 			double  Sl(unsigned int i, unsigned int j);// sliding
 			double Gamma();

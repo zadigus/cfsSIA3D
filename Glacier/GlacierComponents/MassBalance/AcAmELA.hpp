@@ -5,15 +5,12 @@
 
 namespace N_Glacier {
 
-	//class Component;
 	struct PhysicsCoreParams;
 
 	class AcAmELA : public MassBalance {
 		public:
 			// Constructor / destructor
-			// TODO: make reference to const std::unique_ptr
-			/*AcAmELA(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams = std::unique_ptr<PhysicsCoreParams>(nullptr), N_Configuration::Component* aComponent = nullptr); */
-			AcAmELA(const PhysicsCoreParams& aPhysCoreParams, const N_Configuration::Component& aComponent);
+			AcAmELA(const PhysicsCoreParams& a_PhysCoreParams, const N_Configuration::Component& a_Component);
 			virtual ~AcAmELA();
 
 			virtual const double operator()(const double x, const double y, const double b, const double H);
@@ -27,6 +24,10 @@ namespace N_Glacier {
 			double  ac() { return m_ac; }
 			double  am() { return m_am; }
 			double eps() { return m_eps; }
+
+		private:
+			AcAmELA(const AcAmELA&); // not implemented
+			AcAmELA& operator=(const AcAmELA&); // not implemented
 
 		protected:
 			double m_ELA;

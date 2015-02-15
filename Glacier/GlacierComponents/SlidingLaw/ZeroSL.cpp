@@ -18,7 +18,7 @@ namespace N_Glacier {
 
 	}
 
-	void ZeroSL::Stagger(unsigned int n)
+	void ZeroSL::Stagger(unsigned int a_GlenExp)
 	{
 
 	}

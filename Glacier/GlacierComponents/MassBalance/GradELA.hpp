@@ -5,15 +5,13 @@
 
 namespace N_Glacier {
 
-	//class Component;
 	struct PhysicsCoreParams;
 
 	class GradELA : public MassBalance {
 		public:
 			// Constructor / destructor
-			//GradELA(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams, N_Configuration::Component* aComponent = nullptr);
-			GradELA(const PhysicsCoreParams& aPhysCoreParams, const N_Configuration::Component& aComponent);
-			GradELA(const PhysicsCoreParams& aPhysCoreParams);
+			GradELA(const PhysicsCoreParams& a_PhysCoreParams, const N_Configuration::Component& a_Component);
+			GradELA(const PhysicsCoreParams& a_PhysCoreParams);
 			virtual ~GradELA();
 
 			// Getters
@@ -27,6 +25,11 @@ namespace N_Glacier {
 			// Derivatives of B for Newton method
 			virtual const double operator()(const double b, const double H3, const double H2); // B(b, Hn, H)
 			virtual double dB(double b, double H3, double H2); // dBdH(b, Hn, H)
+
+		private:
+			GradELA(const GradELA&); // not implemented
+			GradELA& operator=(const GradELA&); // not implemented
+
 		protected:
 			double m_ELA; // equilibrium line altitude [m]
 			double  m_m1; // melting rate below ELA [w.e. / a]

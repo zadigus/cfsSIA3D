@@ -26,10 +26,10 @@ using namespace std::placeholders;
 namespace N_Glacier {
 
 	Glacier::Glacier()
-		: m_MassBalance(NULL)
-		, m_Rheology(NULL)
-		, m_SlidingLaw(NULL)
-		, m_Geometry(NULL)
+		: m_MassBalance(nullptr)
+		, m_Rheology(nullptr)
+		, m_SlidingLaw(nullptr)
+		, m_Geometry(nullptr)
 	{
 
 	}
@@ -39,42 +39,42 @@ namespace N_Glacier {
 
 	}
 
-	void Glacier::setComponent(const N_Configuration::Component& aComp, const PhysicsCoreParams& aCore)
+	void Glacier::setComponent(const N_Configuration::Component& a_Comp, const PhysicsCoreParams& a_Core)
 	{
-		if (!aComp.name()->compare("MassBalance"))
+		if (!a_Comp.name()->compare("MassBalance"))
 		{ // doesn't work with ==
-			m_MassBalance.reset(MassBalanceFactory::make(aCore, aComp));
+			m_MassBalance.reset(MassBalanceFactory::make(a_Core, a_Comp));
 		}
-		else if (!aComp.name()->compare("Rheology"))
+		else if (!a_Comp.name()->compare("Rheology"))
 		{
-			m_Rheology.reset(RheologyFactory::make(aCore, aComp));
+			m_Rheology.reset(RheologyFactory::make(a_Core, a_Comp));
 		}
-		else if (!aComp.name()->compare("SlidingLaw"))
+		else if (!a_Comp.name()->compare("SlidingLaw"))
 		{
-			m_SlidingLaw.reset(SlidingLawFactory::make(aComp));
+			m_SlidingLaw.reset(SlidingLawFactory::make(a_Comp));
 		}
-		else if (!aComp.name()->compare("Geometry"))
+		else if (!a_Comp.name()->compare("Geometry"))
 		{
-			m_Geometry.reset(GeometryFactory::make(aComp));
+			m_Geometry.reset(GeometryFactory::make(a_Comp));
 		}
 		else
 		{
-			LOG_ERR("Unknown component " << aComp.name()->c_str());
+			LOG_ERR("Unknown component " << a_Comp.name()->c_str());
 		}
 	}
 
-	void Glacier::init(const std::unique_ptr<N_Configuration::ModelConfiguration>& aPhysConf, const std::unique_ptr<N_Configuration::ModelCoreConfiguration>& aPhysCoreConf)
+	void Glacier::init(const std::unique_ptr<N_Configuration::ModelConfiguration>& a_PhysConf, const std::unique_ptr<N_Configuration::ModelCoreConfiguration>& a_PhysCoreConf)
 	{
-		if (!aPhysConf)
+		if (!a_PhysConf)
 		{
 			LOG_ERR("Glacier configuration not specified.");
 			exit(EXIT_FAILURE);
 		}
 
-		PhysicsCoreParams physCore(aPhysCoreConf);
+		PhysicsCoreParams physCore(a_PhysCoreConf);
 
 		// Read configuration
-		N_Configuration::ModelConfiguration::Component_sequence compSeq = aPhysConf->Component();
+		N_Configuration::ModelConfiguration::Component_sequence compSeq = a_PhysConf->Component();
 		std::for_each(compSeq.begin(), compSeq.end(), std::bind(&Glacier::setComponent, this, _1, physCore));
 
 		// Check configuration
@@ -98,27 +98,7 @@ namespace N_Glacier {
 		}
 
 		// Resolve the sliding law dependence on the geometry and the rheology
-		m_SlidingLaw->Generate(*b(), m_Rheology->n());
-	}
-
-	std::shared_ptr<Grid> Glacier::b()
-	{
-		return m_Geometry->b();
-	}
-
-	std::shared_ptr<Grid> Glacier::H()
-	{
-		return m_Geometry->H();
-	}
-
-	std::shared_ptr<Grid> Glacier::gradbx()
-	{
-		return m_Geometry->gradbx();
-	}
-
-	std::shared_ptr<Grid> Glacier::gradby()
-	{
-		return m_Geometry->gradby();
+		m_SlidingLaw->Generate(m_Geometry, m_Rheology->n());
 	}
 
 }

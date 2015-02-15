@@ -28,24 +28,22 @@ namespace N_Glacier {
 
 		public:
 			// implement the construction of the physics components with the various factories
-			void init(const std::unique_ptr<N_Configuration::ModelConfiguration>& aPhysConf, const std::unique_ptr<N_Configuration::ModelCoreConfiguration>& aPhysCoreConf);
+			void init(const std::unique_ptr<N_Configuration::ModelConfiguration>& a_PhysConf, const std::unique_ptr<N_Configuration::ModelCoreConfiguration>& a_PhysCoreConf);
 
 			// Getters
 			std::shared_ptr<MassBalance> B();
 			std::shared_ptr<Rheology>    Rh();
 			std::shared_ptr<SlidingLaw>  Sl();
 			std::shared_ptr<Geometry>    G();
-			std::shared_ptr<Grid>        b();
-			std::shared_ptr<Grid>        H();
-			std::shared_ptr<Grid>        gradbx();
-			std::shared_ptr<Grid>        gradby();
 
 		private:
 			Glacier();
-			~Glacier(); 
+			~Glacier();
+			Glacier(const Glacier&); // not implemented
+			Glacier& operator=(const Glacier&); // not implemented
 
 			// Configuration setup
-			void setComponent(const N_Configuration::Component& aComp, const PhysicsCoreParams& aCore);
+			void setComponent(const N_Configuration::Component& a_Comp, const PhysicsCoreParams& a_Core);
 
 		private:
 			// Physics

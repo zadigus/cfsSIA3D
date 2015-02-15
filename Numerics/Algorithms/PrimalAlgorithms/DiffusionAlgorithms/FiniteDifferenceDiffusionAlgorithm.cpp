@@ -55,13 +55,13 @@ namespace N_Mathematics {
         }
     }
 
-	double FiniteDifferenceDiffusionAlgorithm::staggeredGradSurfNorm(unsigned int i, unsigned int j, const std::shared_ptr<Grid>& H) 
-	{
+  /*double FiniteDifferenceDiffusionAlgorithm::staggeredGradSurfNorm(unsigned int i, unsigned int j, const std::shared_ptr<Grid>& H)
+    { // TODO: deactivate this
 		// because this function is also used in the FullyImplicit version
 		assert(i - 1 >= 0); assert(j - 1 >= 0); assert(i < m_Nx); assert(j < m_Ny);
 		return sqrt((b(i, j    ) + (*H)(i, j    ) - b(i - 1, j - 1) - (*H)(i - 1, j - 1))*(b(i, j    ) + (*H)(i, j    ) - b(i - 1, j - 1) - (*H)(i - 1, j - 1))
 							+ (b(i, j - 1) + (*H)(i, j - 1) - b(i - 1, j    ) - (*H)(i - 1, j    ))*(b(i, j - 1) + (*H)(i, j - 1) - b(i - 1, j    ) - (*H)(i - 1, j    ))) / (sqrt(2)*m_Dx);
-	}
+	}*/
 
 	double& FiniteDifferenceDiffusionAlgorithm::D(unsigned int i, unsigned int j)
 	{

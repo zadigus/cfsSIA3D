@@ -1,10 +1,11 @@
 #include "Math.hpp"
 #include <cassert>
+#include <algorithm>
 
 namespace N_MathUtils
 {
 	//===================================================================================================
-	double EuclideanDistance(std::vector<double>& v1, std::vector<double>& v2, unsigned int n)
+  double EuclideanDistance(const std::vector<double> &v1, const std::vector<double> &v2, unsigned int n)
 	// Norm of the n first components of v1-v2 
 	//===================================================================================================
 	{
@@ -18,7 +19,7 @@ namespace N_MathUtils
 	}
 
 	//===================================================================================================
-	std::vector<double> crossDiff3D(std::vector<double>& x, std::vector<double>& y, std::vector<double>& z)
+  std::vector<double> crossDiff3D(const std::vector<double> &x, const std::vector<double> &y, const std::vector<double> &z)
 	// Compute (y-x) cross (z-x)
 	//===================================================================================================
 	{
@@ -36,4 +37,21 @@ namespace N_MathUtils
 	{ 
 		return (x > ZERO ? 1.0 : 0.0); 
 	}
+
+  //===================================================================================================
+  double getPlaneElevation(const std::vector<std::vector<double>>& a_Points, const std::vector<double>& a_ConsideredPoint)
+  //===================================================================================================
+  {
+    // compute normal to the plane spanned by the 3 closest vectors to w
+    std::sort(a_Points.begin(), a_Points.end(), IsCloserToConsideredPoint(a_ConsideredPoint));
+    std::vector<double> n = crossDiff3D(a_Points[0], a_Points[1], a_Points[2]);
+
+    // planar interpolation
+    double out = a_Points[0][2];
+    if(abs(n[2]) > ZERO)
+      out -= (n[0] * (a_ConsideredPoint[0] - a_Points[0][0]) + n[1] * (a_ConsideredPoint[1] - a_Points[0][1])) / n[2];
+    assert(!isnan(out));
+    return out;
+  }
+
 }

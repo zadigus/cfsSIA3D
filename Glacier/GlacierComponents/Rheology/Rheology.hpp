@@ -13,7 +13,6 @@ namespace N_Glacier {
 
 	class Rheology : public GlacierComponent {
 	public:
-		//Rheology(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams, N_Configuration::Component* aComponent = nullptr);
 		Rheology(const PhysicsCoreParams& aPhysCoreParams, const N_Configuration::Component& aComponent);
 		virtual ~Rheology();
 
@@ -28,6 +27,10 @@ namespace N_Glacier {
 
 	protected:
 		void UpdateGamma();
+
+	private:
+		Rheology(const Rheology&); // not implemented
+		Rheology& operator=(const Rheology&); // not implemented
 
 	private:
 		double			  m_A; // rate factor [bar^{-n} a^{-1}]

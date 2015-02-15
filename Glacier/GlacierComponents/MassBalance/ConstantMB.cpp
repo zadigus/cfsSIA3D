@@ -6,9 +6,8 @@
 
 namespace N_Glacier {
 
-	//ConstantMB::ConstantMB(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams, N_Configuration::Component* aComponent)
-	ConstantMB::ConstantMB(const PhysicsCoreParams& aPhysCoreParams, const N_Configuration::Component& aComponent)
-		: MassBalance(aPhysCoreParams, aComponent)
+	ConstantMB::ConstantMB(const PhysicsCoreParams& a_PhysCoreParams, const N_Configuration::Component& a_Component)
+		: MassBalance(a_PhysCoreParams, a_Component)
 		, m_mb(new Grid(m_Parameters.at("grid"))) 
 	{
 		LOG_INF("Grid file name " << m_Parameters["grid"]);

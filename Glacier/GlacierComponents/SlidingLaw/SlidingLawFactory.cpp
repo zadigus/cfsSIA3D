@@ -8,7 +8,6 @@
 
 namespace N_Glacier {
 
-	//SlidingLaw* SlidingLawFactory::make(N_Configuration::Component* aSlidingLaw)
 	SlidingLaw* SlidingLawFactory::make(const N_Configuration::Component& aSlidingLaw)
 	{
 		//if (aSlidingLaw)

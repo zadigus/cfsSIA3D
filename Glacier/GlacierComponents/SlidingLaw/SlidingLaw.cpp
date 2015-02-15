@@ -2,13 +2,13 @@
 
 #include <cmath>
 #include "Numerics/Mesh/Grid.hpp"
+#include "Geometry/Geometry.hpp"
 #include "Configuration/ModelConfiguration.hpp"
 
 namespace N_Glacier {
 
-	//SlidingLaw::SlidingLaw(N_Configuration::Component* aSlidingLaw)
-	SlidingLaw::SlidingLaw(const N_Configuration::Component& aSlidingLaw)
-		: GlacierComponent(aSlidingLaw)
+	SlidingLaw::SlidingLaw(const N_Configuration::Component& a_SlidingLaw)
+		: GlacierComponent(a_SlidingLaw)
 		, m_sl(nullptr)
 		, m_sc(nullptr)
 	{
@@ -28,29 +28,29 @@ namespace N_Glacier {
 
 	}
 
-	void SlidingLaw::Generate(const Grid& fs, double n)
+	void SlidingLaw::Generate(const std::shared_ptr<Geometry> &a_Geometry, double a_GlenExp)
 	{
-		Init(fs);
-		Fill(fs, n);
-		Stagger(n);
+		Init(a_Geometry);
+		Fill(a_Geometry, a_GlenExp);
+		Stagger(a_GlenExp);
 	}
 
-	void SlidingLaw::Init(const Grid& bed)
+	void SlidingLaw::Init(const std::shared_ptr<Geometry>& a_Geometry)
 	{
-		m_sl.reset(new Grid(bed.Nx(), bed.Ny(), bed.Dx(), bed.Dy()));
-		m_sc.reset(new Grid(bed.Nx(), bed.Ny(), bed.Dx(), bed.Dy()));
+		m_sl.reset(new Grid(a_Geometry->Nx(), a_Geometry->Ny(), a_Geometry->Dx(), a_Geometry->Dy()));
+		m_sc.reset(new Grid(a_Geometry->Nx(), a_Geometry->Ny(), a_Geometry->Dx(), a_Geometry->Dy()));
 	}
 
-	void SlidingLaw::Fill(const Grid& bed, double n)
+	void SlidingLaw::Stagger(double a_GlenExp)
 	{
-
-	}
-
-	void SlidingLaw::Stagger(double n)
-	{ // n is Glen's exponent
+		double OnePaToBar(1e-5), convCoeff(pow(OnePaToBar, a_GlenExp));
 		for (unsigned int i = 1; i < m_sl->Nx(); ++i)
 			for (unsigned int j = 1; j < m_sl->Ny(); ++j) // convert to consistent units and project onto staggered grid
-				(*m_sl)(i, j) = (pow((*m_sc)(i, j)*1e-5, n) + pow((*m_sc)(i - 1, j)*1e-5, n) + pow((*m_sc)(i, j - 1)*1e-5, n) + pow((*m_sc)(i - 1, j - 1)*1e-5, n)) / 4.;
+				(*m_sl)(i, j) = convCoeff/4 *(		pow((*m_sc)(i  ,   j), a_GlenExp)
+																				+ pow((*m_sc)(i-1,   j), a_GlenExp)
+																				+ pow((*m_sc)(i  , j-1), a_GlenExp)
+																				+ pow((*m_sc)(i-1, j-1), a_GlenExp)
+																		 );
 	}
 
 	// Access to class members

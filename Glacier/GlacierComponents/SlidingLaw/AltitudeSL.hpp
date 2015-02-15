@@ -3,21 +3,22 @@
 
 #include "SlidingLaw.hpp"
 
-class Grid;
-
 namespace N_Glacier {
 
 	class AltitudeSL : public SlidingLaw {
 	public:
-		//AltitudeSL(N_Configuration::Component* aComponent = nullptr);
-		AltitudeSL(const N_Configuration::Component& aComponent);
+		AltitudeSL(const N_Configuration::Component& a_Component);
 		AltitudeSL();
 		virtual ~AltitudeSL();
 
 	protected:
-		virtual void Fill(Grid& fs, unsigned int n);
+		virtual void Fill(const std::shared_ptr<Geometry>& a_Geometry, double a_GlenExp);
 		virtual double Z() { return m_Z; }
 		virtual double C() { return m_C; }
+
+	private:
+		AltitudeSL(const AltitudeSL&); // not implemented
+		AltitudeSL& operator=(const AltitudeSL&); // not implemented
 
 	protected:
 		double m_Z; // Zsl, in m

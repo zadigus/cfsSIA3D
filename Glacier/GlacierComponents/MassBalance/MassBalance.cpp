@@ -5,18 +5,18 @@
 
 namespace N_Glacier {
 
-	MassBalance::MassBalance(const PhysicsCoreParams& aPhysCoreParams, const N_Configuration::Component& aComponent)
-		: GlacierComponent(aComponent)
-		, m_rho_ice(aPhysCoreParams.rho_i())
-		, m_rho_water(aPhysCoreParams.rho_w())
+	MassBalance::MassBalance(const PhysicsCoreParams& a_PhysCoreParams, const N_Configuration::Component& a_Component)
+		: GlacierComponent(a_Component)
+		, m_rho_ice(a_PhysCoreParams.rho_i())
+		, m_rho_water(a_PhysCoreParams.rho_w())
 	{
 
 	}
 
-	MassBalance::MassBalance(const PhysicsCoreParams& aPhysCoreParams)
+	MassBalance::MassBalance(const PhysicsCoreParams& a_PhysCoreParams)
 		: GlacierComponent()
-		, m_rho_ice(aPhysCoreParams.rho_i())
-		, m_rho_water(aPhysCoreParams.rho_w())
+		, m_rho_ice(a_PhysCoreParams.rho_i())
+		, m_rho_water(a_PhysCoreParams.rho_w())
 	{
 
 	}

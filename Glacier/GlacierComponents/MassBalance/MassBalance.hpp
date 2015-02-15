@@ -12,31 +12,33 @@ namespace N_Configuration {
 
 namespace N_Glacier { 
 
-	//class Component;
 	struct PhysicsCoreParams;
 
 	// Interface class for mass-balance data
 	class MassBalance : public GlacierComponent {
-	public:
-		//MassBalance(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams, N_Configuration::Component* aComponent = nullptr);
-		MassBalance(const PhysicsCoreParams& aPhysCoreParams, const N_Configuration::Component& aComponent);
-		MassBalance(const PhysicsCoreParams& aPhysCoreParams);
-		virtual ~MassBalance();
+		public:
+			MassBalance(const PhysicsCoreParams& a_PhysCoreParams, const N_Configuration::Component& a_Component);
+			MassBalance(const PhysicsCoreParams& a_PhysCoreParams);
+			virtual ~MassBalance();
 
-		// Routines to be interfaced
-		virtual const double operator()(const double, const double, const double, const double) = 0; // value of _B
-		virtual const double operator()(const double, const double, const double) = 0; // value of _B for the Newton method
-		virtual double dB(double, double, double) = 0; // derivative of _B for the Newton method
+			// Routines to be interfaced
+			virtual const double operator()(const double, const double, const double, const double) = 0; // value of _B
+			virtual const double operator()(const double, const double, const double) = 0; // value of _B for the Newton method
+			virtual double dB(double, double, double) = 0; // derivative of _B for the Newton method
 
-		//
-		//void Export(Grid& b, Grid& H, std::string fileName);
+			//
+			//void Export(Grid& b, Grid& H, std::string fileName);
 
-		// units transformation: convert quantity Q from meter water equivalent to meter ice equivalent
-		double water2ice(double Q) { return Q * m_rho_water / m_rho_ice; } // TODO: double-check that formula
+			// units transformation: convert quantity Q from meter water equivalent to meter ice equivalent
+			double water2ice(double Q) { return Q * m_rho_water / m_rho_ice; } // TODO: double-check that formula
 
-	private:
-		double m_rho_ice; // ice density
-		double m_rho_water; // water density
+		private:
+			MassBalance(const MassBalance&); // not implemented
+			MassBalance& operator=(const MassBalance&); // not implemented
+
+		private:
+			double m_rho_ice; // ice density
+			double m_rho_water; // water density
 	};
 
 }

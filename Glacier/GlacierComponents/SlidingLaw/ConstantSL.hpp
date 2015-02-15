@@ -3,17 +3,16 @@
 
 #include "SlidingLaw.hpp"
 
-class Grid;
-
 namespace N_Glacier {
 
 	class ConstantSL : public SlidingLaw {
-	public:
-		//ConstantSL(N_Configuration::Component* aComponent = nullptr);
-		ConstantSL(const N_Configuration::Component& aComponent);
-		~ConstantSL();
-	protected:
-		virtual void Init(const Grid&);
+		public:
+			ConstantSL(const N_Configuration::Component& a_Component);
+			~ConstantSL();
+
+		protected:
+			virtual void Init(const std::shared_ptr<Geometry>& a_Geometry);
+			virtual void Fill(const std::shared_ptr<Geometry>& a_Geometry, double a_GlenExp);
 	};
 }
 

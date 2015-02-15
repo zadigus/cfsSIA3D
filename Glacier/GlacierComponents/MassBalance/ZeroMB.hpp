@@ -10,11 +10,15 @@ namespace N_Glacier {
 	struct PhysicsCoreParams;
 
 	class ZeroMB : public GradELA {
-	public:
-		// Constructor / destructor
-		//ZeroMB(const std::unique_ptr<PhysicsCoreParams>& aPhysCoreParams);
-		ZeroMB(const PhysicsCoreParams& aPhysCoreParams);
-		virtual ~ZeroMB();
+		public:
+			// Constructor / destructor
+			ZeroMB(const PhysicsCoreParams& a_PhysCoreParams);
+			virtual ~ZeroMB();
+
+		private:
+			ZeroMB(const ZeroMB&); // not implemented
+			ZeroMB& operator=(const ZeroMB&); // not implemented
+
 	};
 
 }
