@@ -39,11 +39,18 @@ namespace N_MathUtils
 	}
 
   //===================================================================================================
-  double getPlaneElevation(const std::vector<std::vector<double>>& a_Points, const std::vector<double>& a_ConsideredPoint)
+  double getPlaneElevation(std::vector<std::vector<double>>& a_Points, const std::vector<double>& a_ConsideredPoint)
   //===================================================================================================
   {
-    // compute normal to the plane spanned by the 3 closest vectors to w
-    std::sort(a_Points.begin(), a_Points.end(), IsCloserToConsideredPoint(a_ConsideredPoint));
+    // find the 3 closest vectors to w
+    std::sort(  a_Points.begin()
+              , a_Points.end()
+              , [a_ConsideredPoint] (const std::vector<double>& a_Point1, const std::vector<double>& a_Point2) -> bool
+                {
+                  return EuclideanDistance(a_Point1, a_ConsideredPoint, 2) < EuclideanDistance(a_Point2, a_ConsideredPoint, 2);
+                }
+              );
+
     std::vector<double> n = crossDiff3D(a_Points[0], a_Points[1], a_Points[2]);
 
     // planar interpolation

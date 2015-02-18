@@ -7,7 +7,7 @@
 class Array2D {
 public:
 	// Constructor / destructor
-  Array2D(unsigned int Nrows=0, unsigned int Ncols=0);
+  Array2D(std::size_t Nrows=0, std::size_t Ncols=0);
 	~Array2D();
 
 	// Copy constructor / assignment operator
@@ -15,16 +15,17 @@ public:
 	Array2D& operator=(const Array2D&);
 
 	// Getters
-  unsigned int Nx() const { return m_Nx; }
-  unsigned int Ny() const { return m_Ny; }
-  double& operator()(const unsigned int, const unsigned int) const;
+  std::size_t Nx() const { return m_Nx; }
+  std::size_t Ny() const { return m_Ny; }
+  double& operator()(std::size_t, std::size_t);
+  double operator()(std::size_t, std::size_t) const;
 
 	// Data handling
 	Array2D& operator+=(const Array2D&);
 	Array2D& operator-=(const Array2D&);
 	Array2D& operator*=(double);
 
-	void Reset(int Nrows, int Ncols);
+  void Reset(std::size_t Nrows, std::size_t Ncols);
 private:
   unsigned int m_Nx;
   unsigned int m_Ny;

@@ -11,7 +11,7 @@ FILE(GLOB src RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "*.cpp" "*.hpp")
 
 ADD_EXECUTABLE(${PROJECT_NAME} ${src})
 
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} Mesh Utility Glacier Algorithms LinSyst Configuration ${MPI_LIBRARIES})
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} Mesh Utility Glacier Algorithms LinSyst Configuration) # ${MPI_LIBRARIES})
 
 FILE(GLOB includes RELATIVE "${PROJECT_SOURCE_DIR}" "*.hpp")
 INSTALL(FILES ${includes}	DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${PROJECT_NAME})

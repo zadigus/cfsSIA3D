@@ -4,9 +4,11 @@
 #include <functional>
 #include <cassert>
 
+#include <iostream>
+
 using namespace std::placeholders;
 
-Array2D::Array2D(unsigned int Nx, unsigned int Ny)
+Array2D::Array2D(std::size_t Nx, std::size_t Ny)
 : m_Nx(Nx)
 , m_Ny(Ny)
 , m_Data(Nx*Ny, 0)
@@ -36,24 +38,22 @@ Array2D& Array2D::operator=(const Array2D& right) // set an existing object
 	return *this;
 }
 
-/*void Array2D::Reset(int Nx, int Ny) // TODO: Do I really need such a method?
+void Array2D::Reset(std::size_t Nx, std::size_t Ny)
 {
 	m_Nx = Nx;
 	m_Ny = Ny;
 
-	//m_Data.
+  m_Data.resize(m_Nx*m_Ny);
+}
 
-	m_Data.reset(new double[m_Nx*m_Ny]());
-}*/
-
-/*void Array2D::operator()()
+double& Array2D::operator()(std::size_t i, std::size_t j)
 {
-	m_Data.reset(new double[m_Nx*m_Ny]()); // reset with zeroes 
-}*/
+  return m_Data.at(i*m_Ny + j);
+}
 
-double& Array2D::operator()(const int i, const int j) const
+double Array2D::operator()(std::size_t i, std::size_t j) const
 {
-	return m_Data.at(i*m_Ny + j);
+  return m_Data.at(i*m_Ny + j);
 }
 
 Array2D& Array2D::operator+=(const Array2D& right)

@@ -8,11 +8,12 @@
 #include "Utility/Array2D.hpp"
 #include "SpaceParams.hpp"
 
-class Grid{
+class Grid // TODO: this could be a container, i.e. could have iterators
+{
 	public: 
 		// Constructors / destructors
-		Grid(unsigned int Nx = 0, unsigned int Ny = 0, double Dx = 0, double Dy = 0, double Xll = 0, double Yll = 0);
-		Grid(std::string FileName);
+    Grid(std::size_t Nx = 0, std::size_t Ny = 0, double Dx = 0, double Dy = 0, double Xll = 0, double Yll = 0);
+    Grid(std::string a_FileName);
 		~Grid();
 
 		// Copy constructor and assignment operator
@@ -20,36 +21,44 @@ class Grid{
 		Grid& operator=(const Grid &);
 
 		// Getters
-    unsigned int Nx() const;
-    unsigned int Ny() const;
+    std::size_t Nx() const;
+    std::size_t Ny() const;
     double Dx()	const;
     double Dy()	const;
     double Xll() const;
     double Yll() const;
-    double  X(unsigned int i) const;
-    double  Y(unsigned int j) const;
-    bool IsData(unsigned int i, unsigned int j) const;
+    double  X(std::size_t i) const;
+    double  Y(std::size_t j) const;
+    bool IsData(std::size_t i, std::size_t j) const;
     double NoData() const;
 
 		// Data handling
-		//void Clear();
     void Refine(double ratio);
+    /*
+     *  Grid refinement or coarsening with ratio r, i.e. the original Dx is divided by r to make up the new mesh size
+     * r > 1 : refinement
+     * r < 1 : coarsening
+     */
     void Refine(double ratioX, double ratioY);
 
-    double& operator()(const unsigned int i, const unsigned int j) const;
+    double& operator()(std::size_t i, std::size_t j);
+    double operator()(std::size_t i, std::size_t j) const;
+    double& operator()(double i, double j) = delete;
+    double operator()(double i, double j) const = delete;
     /*
-     *  Interpolates the value of the grid elevation at position (x, y)
+     *  Interpolates linearly the value of the grid elevation at position (x, y)
      *  Coordinates x and y must be expressed in global coordinates
+     *  (i.e. x = Xll + i*Dx, y = Yll + j*Dy)
      */
-    const double operator()(const double x, const double y) const; /* throws */
+    double interpolateLinear(double x, double y) const;
 
 		Grid& operator+=(const Grid&);
 		Grid& operator-=(const Grid&);
 		Grid& operator*=(double c);
 
   private:
-    void readHeader(std::istream& a_Ist); /* throws */
-    void readData(std::istream& a_Ist); /* throws */
+    void readHeader(std::istream& a_Ist);
+    void readData(std::istream& a_Ist);
 
 	private:
 		SpaceParams m_Coords;
@@ -58,17 +67,22 @@ class Grid{
 };
 
 // Inline methods
-double& Grid::operator()(const unsigned int i, const unsigned int j) const
+inline double& Grid::operator()(std::size_t i, std::size_t j)
 {
-   return m_Data(i, j);
+  return m_Data(i, j);
 }
 
-inline unsigned int Grid::Nx() const
+inline double Grid::operator()(std::size_t i, std::size_t j) const
+{
+  return m_Data(i, j);
+}
+
+inline std::size_t Grid::Nx() const
 {
   return m_Coords.Nx;
 }
 
-inline unsigned int Grid::Ny() const
+inline std::size_t Grid::Ny() const
 {
   return m_Coords.Ny;
 }
@@ -93,17 +107,17 @@ inline double Grid::Yll() const
   return m_Coords.Yll;
 }
 
-inline double Grid::X(unsigned int i) const
+inline double Grid::X(std::size_t i) const
 {
   return Xll() + i*Dx();
 }
 
-inline double Grid::Y(unsigned int j) const
+inline double Grid::Y(std::size_t j) const
 {
   return Yll() + j*Dy();
 }
 
-inline bool Grid::IsData(unsigned int i, unsigned int j) const
+inline bool Grid::IsData(std::size_t i, std::size_t j) const
 {
   return (m_Data(i, j) != m_NoData);
 }
@@ -118,13 +132,16 @@ Grid operator+(const Grid&, const Grid&);
 Grid operator-(const Grid&, const Grid&);
 Grid operator*(const Grid&, double);
 Grid operator*(double, const Grid&);
-std::ostream& operator<<(std::ostream&, const Grid&);
+std::ostream& operator<<(std::ostream&, Grid&);
 
 double Min(const Grid& a_Grid);
 double Max(const Grid& a_Grid);
 
-double StaggeredValue(const Grid& a_Grid, unsigned int, unsigned int);
-double StaggeredGradNormValue(const Grid& a_Grid, unsigned int, unsigned int);
+// return staggered grid value at point (i-1/2, j-1/2)
+double StaggeredValue(const Grid& a_Grid, std::size_t, std::size_t);
+
+// compute norm of gradient of grid in the staggered grid
+double StaggeredGradNormValue(const Grid& a_Grid, std::size_t, std::size_t);
 
 void Export(const Grid& a_Grid, std::string a_FileName);
 void XYZ(const Grid& a_Grid, std::string a_FileName);
