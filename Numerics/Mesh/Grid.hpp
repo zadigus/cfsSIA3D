@@ -5,8 +5,10 @@
 #include <string>
 #include <vector>
 
-#include "Utility/Array2D.hpp"
+//#include "Utility/Array2D.hpp"
 #include "SpaceParams.hpp"
+
+#include <iostream>
 
 class Grid // TODO: this could be a container, i.e. could have iterators
 {
@@ -63,18 +65,21 @@ class Grid // TODO: this could be a container, i.e. could have iterators
 	private:
 		SpaceParams m_Coords;
 		double      m_NoData;          // no data value
-		Array2D       m_Data;          // values at the grid points
+//		Array2D       m_Data;          // values at the grid points
+    std::vector<double> m_Data; // values at the grid points
 };
 
 // Inline methods
 inline double& Grid::operator()(std::size_t i, std::size_t j)
 {
-  return m_Data(i, j);
+//  return m_Data(i, j);
+  return m_Data.at(i*Ny() + j);
 }
 
 inline double Grid::operator()(std::size_t i, std::size_t j) const
 {
-  return m_Data(i, j);
+//  return m_Data(i, j);
+  return m_Data.at(i*Ny() + j);
 }
 
 inline std::size_t Grid::Nx() const
@@ -119,7 +124,7 @@ inline double Grid::Y(std::size_t j) const
 
 inline bool Grid::IsData(std::size_t i, std::size_t j) const
 {
-  return (m_Data(i, j) != m_NoData);
+  return ((*this)(i, j) != m_NoData);
 }
 
 inline double Grid::NoData() const

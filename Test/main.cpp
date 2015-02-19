@@ -18,8 +18,8 @@ int main(int argc, char* argv[])
   g.Refine(0.5);
   Export(g, "out.grid");
 
-  size_t x(0); size_t y(1);
-  cout << "Value = " << g(x, y) << endl; // TODO: that shouldn't compile ...
+  size_t x(0); double y(1);
+  cout << "Value = " << g(0, x) << endl;
 
   cin.get();
 

@@ -8,14 +8,21 @@
 #include <limits>
 #include <exception>
 #include <algorithm>
+#include <functional>
 
 #include "Utility/Math.hpp"
 #include "Utility/Logger/Logger.hpp"
 
+#include <iostream>
+using namespace std;
+
+using namespace std::placeholders;
+
 Grid::Grid(std::size_t ncols, std::size_t nrows, double dx, double dy, double xl, double yl)
 	: m_Coords(ncols, nrows, dx, dy, xl, yl)
 	, m_NoData(-9999)
-	, m_Data(ncols, nrows)
+  , m_Data(ncols*nrows, 0)
+//	, m_Data(ncols, nrows)
 {
 
 }
@@ -44,12 +51,13 @@ void Grid::readHeader(std::istream& a_Ist)
 
 void Grid::readData(std::istream& a_Ist)
 {
-  m_Data = Array2D(Nx(), Ny());
+//  m_Data = Array2D(Nx(), Ny());
+  m_Data.resize(Nx()*Ny(), 0);
   for (std::size_t j(Ny()); j--; )
   {
     for (std::size_t i(0); i < Nx(); ++i)
     {
-       a_Ist >> m_Data(i, j);
+      a_Ist >> (*this)(i, j);
     }
   }
 }
@@ -106,7 +114,8 @@ void Grid::Refine(double rx, double ry)
   m_Coords.Nx *= rx; // TODO: that doesn't really make sense; this is not compatible with the definition of Dx and Dy! this will lead to loss of data or undefined data
   m_Coords.Ny *= ry;
 
-  m_Data.Reset(m_Coords.Nx, m_Coords.Ny); // TODO: this should be done automatically ...
+//  m_Data.Reset(m_Coords.Nx, m_Coords.Ny); // TODO: this should be done automatically ...
+  m_Data.resize(m_Coords.Nx*m_Coords.Ny); // TODO: this will work well if the array's size increases, not if it decreases ... --> apply shrink-to-fit idiom in this case
 
   double x(0.0), y(0.0); std::size_t i(0), j(0);
   while (x < Xmax) {
@@ -152,20 +161,23 @@ double Grid::interpolateLinear(double x, double y) const
 Grid& Grid::operator+=(const Grid& right)
 {
 	assert(m_Coords == right.m_Coords);
-	m_Data += right.m_Data;
+//	m_Data += right.m_Data;
+  std::transform(m_Data.begin(), m_Data.end(), right.m_Data.begin(), m_Data.begin(), std::plus<double>());
 	return *this;
 }
 
 Grid& Grid::operator-=(const Grid& right)
 {
 	assert(m_Coords == right.m_Coords);
-	m_Data -= right.m_Data;
+//	m_Data -= right.m_Data;
+  std::transform(m_Data.begin(), m_Data.end(), right.m_Data.begin(), m_Data.begin(), std::minus<double>());
 	return *this;
 }
 
 Grid& Grid::operator*=(double c)
 {
-	m_Data *= c;
+//	m_Data *= c;
+  std::transform(m_Data.begin(), m_Data.end(), m_Data.begin(), std::bind(std::multiplies<double>(), _1, c));
 	return *this;
 }
 

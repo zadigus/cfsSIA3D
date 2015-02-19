@@ -1,6 +1,6 @@
 #include "SpaceParams.hpp"
 
-SpaceParams::SpaceParams(unsigned int nx, unsigned int ny, double dx, double dy, double xll, double yll)
+SpaceParams::SpaceParams(std::size_t nx, std::size_t ny, double dx, double dy, double xll, double yll)
 	: Nx(nx) 
 	, Ny(ny)
 	, Dx(dx)
