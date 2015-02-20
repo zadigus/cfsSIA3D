@@ -21,10 +21,10 @@ namespace N_Glacier {
 		void Generate(const std::shared_ptr<Geometry>& a_Geometry, double a_GlenExp); // that method must be called outside the ctor, because it calls virtual methods
 
 		// Access to class members
-		const double& operator()(const unsigned int, const unsigned int) const;
+    const double& operator()(size_t, size_t) const;
 
 		// Data Export
-		void Export(std::string) const;
+    void Export(std::string) const;
 		void ExportSL(std::string) const;
 
 	protected:

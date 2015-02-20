@@ -21,11 +21,11 @@ namespace N_Mathematics {
 		friend class Singleton<Primal>;
 
 		public:
-			void init(std::unique_ptr<N_Configuration::ModelConfiguration>& aMathConf, const std::unique_ptr<N_Configuration::ModelCoreConfiguration>& aNumCoreConf);
+      void init(std::unique_ptr<N_Configuration::ModelConfiguration> aMathConf, std::unique_ptr<N_Configuration::ModelCoreConfiguration> aNumCoreConf);
 
 			// General purpose
 			void run(); 								// compute one whole evolution from time ti to time tf
-			void Store(); 							// store every velocity and ice thickness iterate
+      void store(); 							// store every velocity and ice thickness iterate
 
 		private:
 			// Ctor/Dtor
@@ -36,11 +36,10 @@ namespace N_Mathematics {
 			void setComponent(const N_Configuration::Component& aComp, const NumericsCoreParams& aCore);
 
 			// Primal algorithm
-			void Diffusion();						// solve the diffusion step
-			void Climate(); 						// compute step dh/dt = B
-			void Projection();					// enforce H >= 0
-
-			void Iterate();							// compute one whole forward iteration consisting of diffusion, accumulation/ablation, projection
+      void iterate();							// compute one whole forward iteration consisting of diffusion, accumulation/ablation, projection
+      void doDiffusion();					// solve the diffusion step
+      void doClimate(); 					// compute step dh/dt = B
+      void doProjection();				// enforce H >= 0
 		
 		private:
 			// Strategy pattern

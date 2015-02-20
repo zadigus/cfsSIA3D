@@ -4,7 +4,11 @@
 #include "PhysicsCoreParams.hpp"
 #include "Numerics/Mesh/Grid.hpp"
 
+#include "Epetra_Vector.h"
+
 #include <iostream>
+
+using namespace std;
 
 namespace N_Glacier {
 	Geometry::Geometry(const N_Configuration::Component& a_Component)
@@ -16,9 +20,9 @@ namespace N_Glacier {
 		Grid s(m_Parameters["surface"]);
 		m_H.reset(new Grid(s-*m_b));
 		
-		for (unsigned int i(1); i < m_b->Nx(); ++i) 
+    for (size_t i(1); i < m_b->Nx(); ++i)
 		{
-			for (unsigned int j(1); j < m_b->Ny(); ++j) 
+      for (size_t j(1); j < m_b->Ny(); ++j)
 			{
 				(*m_gradbx)(i, j) = ((*m_b)(i, j) - (*m_b)(i - 1, j)) / m_b->Dx(); 
 				(*m_gradby)(i, j) = ((*m_b)(i, j) - (*m_b)(i, j - 1)) / m_b->Dx(); 
@@ -48,51 +52,82 @@ namespace N_Glacier {
 		m_gradby = a_Geometry.m_gradby;
 	}
 
-	double Geometry::staggeredGradSurfNorm(unsigned int i, unsigned int j)
-	{
-		assert(m_H->Dx() == m_H->Dy());
-		return sqrt((b(i, j    ) + H(i, j    ) - b(i - 1, j - 1) - H(i - 1, j - 1))*(b(i, j    ) + H(i, j    ) - b(i - 1, j - 1) - H(i - 1, j - 1))
-							+ (b(i, j - 1) + H(i, j - 1) - b(i - 1, j    ) - H(i - 1, j    ))*(b(i, j - 1) + H(i, j - 1) - b(i - 1, j    ) - H(i - 1, j    ))
-							 ) / (sqrt(2)*m_H->Dx());
-	}
+  void Geometry::setH(const shared_ptr<Grid>& a_H)
+  {
+    m_H = a_H;
+  }
 
-	unsigned int Geometry::Nx()
+  size_t Geometry::Nx() const
 	{
 		return m_H->Nx();
 	}
 
-	unsigned int Geometry::Ny()
+  size_t Geometry::Ny() const
 	{
 		return m_H->Ny();
 	}
 
-	double Geometry::Dx()
+  double Geometry::Dx() const
 	{
 		return m_H->Dx();
 	}
 
-	double Geometry::Dy()
+  double Geometry::Dy() const
 	{
 		return m_H->Dy();
 	}
 
-	double Geometry::b(unsigned int i, unsigned int j)
+  double Geometry::b(size_t i, size_t j) const
 	{
 		return (*m_b)(i, j);
 	}
 
-	double& Geometry::H(unsigned int i, unsigned int j)
+  double& Geometry::H(size_t i, size_t j)
 	{
 		return (*m_H)(i, j);
 	}
 
-	double Geometry::gradbx(unsigned int i, unsigned int j)
+  double Geometry::H(size_t i, size_t j) const
+  {
+    return (*m_H)(i, j);
+  }
+
+  double Geometry::gradbx(size_t i, size_t j) const
 	{
 		return (*m_gradbx)(i, j);
 	}
 
-	double Geometry::gradby(unsigned int i, unsigned int j)
+  double Geometry::gradby(size_t i, size_t j) const
 	{
 		return (*m_gradby)(i, j);
 	}
+
+  /*
+   * Non-member methods
+   */
+  double staggeredGradSurfNorm(const Geometry& a_g, size_t i, size_t j)
+  {
+    assert(a_g.Dx() == a_g.Dy());
+    return sqrt((a_g.b(i, j    ) + a_g.H(i, j    ) - a_g.b(i - 1, j - 1) - a_g.H(i - 1, j - 1))*(a_g.b(i, j    ) + a_g.H(i, j    ) - a_g.b(i - 1, j - 1) - a_g.H(i - 1, j - 1))
+              + (a_g.b(i, j - 1) + a_g.H(i, j - 1) - a_g.b(i - 1, j    ) - a_g.H(i - 1, j    ))*(a_g.b(i, j - 1) + a_g.H(i, j - 1) - a_g.b(i - 1, j    ) - a_g.H(i - 1, j    ))
+               ) / (sqrt(2)*a_g.Dx());
+  }
+
+  void setThickness(Geometry& a_g, const shared_ptr<Grid>& a_H)
+  {
+    a_g.setH(a_H);
+  }
+
+  void setThickness(Geometry& a_g, const Teuchos::RCP<Epetra_Vector>& a_Vector)
+  {
+    size_t I(0);
+    for (size_t i(0); i < a_g.Nx(); ++i)   // by default, we go from 0 and end with Nx/Ny
+    {
+      for (size_t j(0); j < a_g.Ny(); ++j)
+      {
+        a_g.H(i, j) = (*a_Vector)[I++];
+      }
+    }
+  }
+
 }

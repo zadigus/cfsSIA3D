@@ -26,10 +26,10 @@ namespace N_Mathematics {
 			PrimalAlgorithm();
 			virtual ~PrimalAlgorithm();
 
-			virtual void run() = 0; 
+      virtual void transform(N_Glacier::Glacier& a_Glacier) = 0;
       
-		protected:
-			N_Glacier::Glacier& m_glacier;
+//		protected:
+//			N_Glacier::Glacier& m_glacier;
 	};
 
 }

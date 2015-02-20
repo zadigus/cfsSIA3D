@@ -2,6 +2,7 @@
 
 #include <cmath>
 #include "Numerics/Mesh/Grid.hpp"
+#include "Epetra_Vector.h"
 #include "Geometry/Geometry.hpp"
 #include "Configuration/ModelConfiguration.hpp"
 
@@ -44,8 +45,8 @@ namespace N_Glacier {
 	void SlidingLaw::Stagger(double a_GlenExp)
 	{
 		double OnePaToBar(1e-5), convCoeff(pow(OnePaToBar, a_GlenExp));
-		for (unsigned int i = 1; i < m_sl->Nx(); ++i)
-			for (unsigned int j = 1; j < m_sl->Ny(); ++j) // convert to consistent units and project onto staggered grid
+    for (size_t i = 1; i < m_sl->Nx(); ++i)
+      for (size_t j = 1; j < m_sl->Ny(); ++j) // convert to consistent units and project onto staggered grid
 				(*m_sl)(i, j) = convCoeff/4 *(		pow((*m_sc)(i  ,   j), a_GlenExp)
 																				+ pow((*m_sc)(i-1,   j), a_GlenExp)
 																				+ pow((*m_sc)(i  , j-1), a_GlenExp)
@@ -54,20 +55,20 @@ namespace N_Glacier {
 	}
 
 	// Access to class members
-	const double& SlidingLaw::operator()(const unsigned int i, const unsigned int j) const
+  const double& SlidingLaw::operator()(size_t i, size_t j) const
 	{
 		// access to staggered grid
 		return (*m_sl)(i, j);
 	}
 
-	void SlidingLaw::Export(std::string fileName) const
+  void SlidingLaw::Export(std::string fileName) const
 	{
-		m_sc->Export(fileName);
+    toGrid(*m_sc, fileName);
 	}
 
 	void SlidingLaw::ExportSL(std::string fileName) const
 	{
-		m_sl->Export(fileName);
+    toGrid(*m_sl, fileName);
 	}
 
 }

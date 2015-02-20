@@ -3,7 +3,6 @@
 
 #include <cmath>
 #include <vector>
-//#include <functional>
 
 namespace N_MathUtils
 {

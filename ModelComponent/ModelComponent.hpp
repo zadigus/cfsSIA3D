@@ -24,18 +24,4 @@ class ModelComponent
 		std::map<std::string, std::string> m_Parameters;
 };
 
-//class IsSubComponent : public std::unary_function<N_Configuration::SubComponent, bool>
-//{
-//	public:
-//		IsSubComponent(const std::string& aSubComponentName) : m_SubComponentName(aSubComponentName) { }
-
-//		bool operator() (const N_Configuration::SubComponent& aSubComponent) const
-//		{
-//			return !aSubComponent.name()->compare(m_SubComponentName);
-//		}
-
-//	private:
-//		std::string m_SubComponentName;
-//};
-
 #endif /* MODELCOMPONENT_HPP_ */

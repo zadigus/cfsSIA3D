@@ -21,7 +21,7 @@ namespace N_Glacier {
 	const double ConstantMB::operator()(const double x, const double y, const double b, const double H)
 	{
 		// only depends on surface altitude
-		return (*m_mb)(x, y);
+    return m_mb->interpolateLinear(x, y);
 	}
 
 	const double ConstantMB::operator()(const double b, const double H3, const double H2)

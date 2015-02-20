@@ -36,9 +36,9 @@ namespace N_Glacier {
 	{
 		assert(C() >= 0);
 		if (C() > 0) {
-			for (unsigned int i(0); i < a_Geometry->Nx(); ++i)
+      for (size_t i(0); i < a_Geometry->Nx(); ++i)
 			{
-				for (unsigned int j(0); j < a_Geometry->Ny(); ++j)
+        for (size_t j(0); j < a_Geometry->Ny(); ++j)
 				{
 					if (Z() - a_Geometry->b(i, j) > 0)
 						(*m_sc)(i, j) = C() * pow(Z() - a_Geometry->b(i, j), 1. / a_GlenExp); // sliding at the grid points

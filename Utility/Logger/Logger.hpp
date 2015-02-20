@@ -41,7 +41,7 @@ class Logger : public Singleton<Logger>
 	friend class Singleton<Logger>;
 
 	public:
-		void init(const std::unique_ptr<N_Configuration::AppConfiguration>& aLoggerConf); 
+    void init(std::unique_ptr<N_Configuration::AppConfiguration> aLoggerConf);
 
 		void info(std::stringstream& aMessage, const std::string& aFctSig = std::string(), const std::string& aFileName = std::string(), int aLineNb = 0); // more efficient to pass const string& as only string because no copy ctor is called 
 		void warning(std::stringstream& aMessage, const std::string& aFctSig = std::string(), const std::string& aFileName = std::string(), int aLineNb = 0);

@@ -2,9 +2,11 @@
 #define GEOMETRY_H_
 
 #include "Glacier/GlacierComponents/GlacierComponent.hpp"
-#include "Numerics/Mesh/Grid.hpp"
 
-#include <iostream>
+#include "Teuchos_RCP.hpp"
+
+class Epetra_Vector;
+class Grid;
 
 namespace N_Glacier { 
 
@@ -21,30 +23,32 @@ namespace N_Glacier {
 
     public:
       // public members
-      double b(unsigned int i, unsigned int j);
-      double gradbx(unsigned int i, unsigned int j);
-      double gradby(unsigned int i, unsigned int j);
-      double& H(unsigned int i, unsigned int j);
+      double b(std::size_t i, std::size_t j) const;
+      double gradbx(std::size_t i, std::size_t j) const;
+      double gradby(std::size_t i, std::size_t j) const;
+      double H(std::size_t i, std::size_t j) const;
+      double& H(std::size_t i, std::size_t j);
 
-      void setH(const std::shared_ptr<Grid>& a_H);
-      double staggeredGradSurfNorm(unsigned int i, unsigned int j);
+      void setH(const std::shared_ptr<Grid>& a_Grid);
 
-			unsigned int Nx();
-			unsigned int Ny();
-			double Dx();
-			double Dy();
+      std::size_t Nx() const;
+      std::size_t Ny() const;
+      double Dx() const;
+      double Dy() const;
 
-		private:
+    private: // TODO: probably not a good idea; maybe use the pImpl idiom here
 			std::shared_ptr<Grid> m_b; // bedrock topography
 			std::shared_ptr<Grid> m_H; // ice thickness
 			std::shared_ptr<Grid> m_gradbx; // gradients of the bedrock topography wrt to x
 			std::shared_ptr<Grid> m_gradby; // wrt to y
 	};
 
-	inline void Geometry::setH(const std::shared_ptr<Grid>& a_H)
-	{
-		m_H = a_H;
-	}
+  /*
+   * Non-member methods
+   */
+  double staggeredGradSurfNorm(const Geometry& a_Geometry, std::size_t i, std::size_t j);
 
+  void setThickness(Geometry& a_Geometry, const std::shared_ptr<Grid>& a_Grid);
+  void setThickness(Geometry& a_Geometry, const Teuchos::RCP<Epetra_Vector>& a_Vector);
 }
 #endif /* GEOMETRY_H_ */

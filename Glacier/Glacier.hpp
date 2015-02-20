@@ -28,7 +28,7 @@ namespace N_Glacier {
 
 		public:
 			// implement the construction of the physics components with the various factories
-			void init(const std::unique_ptr<N_Configuration::ModelConfiguration>& a_PhysConf, const std::unique_ptr<N_Configuration::ModelCoreConfiguration>& a_PhysCoreConf);
+      void init(std::unique_ptr<N_Configuration::ModelConfiguration> a_PhysConf, std::unique_ptr<N_Configuration::ModelCoreConfiguration> a_PhysCoreConf);
 
 			// Getters
 			std::shared_ptr<MassBalance> B();

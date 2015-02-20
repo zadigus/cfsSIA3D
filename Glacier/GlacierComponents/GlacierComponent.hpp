@@ -18,7 +18,6 @@ namespace N_Glacier {
 	class GlacierComponent : public ModelComponent 
 	{ 
 		public:
-			//GlacierComponent(N_Configuration::Component* aComponent = nullptr);
 			GlacierComponent(const N_Configuration::Component& aComponent);
 			GlacierComponent();
 			virtual ~GlacierComponent();

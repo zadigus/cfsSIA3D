@@ -1,6 +1,5 @@
 #include "Grid.hpp"
 
-#include <iostream>
 #include <fstream>
 #include <cassert>
 #include <cstdlib>
@@ -13,21 +12,18 @@
 #include "Utility/Math.hpp"
 #include "Utility/Logger/Logger.hpp"
 
-#include <iostream>
 using namespace std;
-
 using namespace std::placeholders;
 
-Grid::Grid(std::size_t ncols, std::size_t nrows, double dx, double dy, double xl, double yl)
+Grid::Grid(size_t ncols, size_t nrows, double dx, double dy, double xl, double yl)
 	: m_Coords(ncols, nrows, dx, dy, xl, yl)
 	, m_NoData(-9999)
   , m_Data(ncols*nrows, 0)
-//	, m_Data(ncols, nrows)
 {
 
 }
 
-void Grid::readHeader(std::istream& a_Ist)
+void Grid::readHeader(istream& a_Ist)
 {
   int bufferSize(512);
 
@@ -39,8 +35,8 @@ void Grid::readHeader(std::istream& a_Ist)
   assert(tmpx != 0 && "Nx = 0"); assert(tmpy != 0 && "Ny = 0");
   assert((N_MathUtils::isInteger(tmpx) && N_MathUtils::isInteger(tmpy)) && "ncols / nrows not integer in grid file");
 
-  m_Coords.Nx = static_cast<std::size_t>(tmpx);
-  m_Coords.Ny = static_cast<std::size_t>(tmpy);
+  m_Coords.Nx = static_cast<size_t>(tmpx);
+  m_Coords.Ny = static_cast<size_t>(tmpy);
 
   a_Ist.getline(line, bufferSize); sscanf(line, "%*s %lf", &m_Coords.Xll);
   a_Ist.getline(line, bufferSize); sscanf(line, "%*s %lf", &m_Coords.Yll);
@@ -49,30 +45,29 @@ void Grid::readHeader(std::istream& a_Ist)
   m_Coords.Dy = m_Coords.Dx;
 }
 
-void Grid::readData(std::istream& a_Ist)
+void Grid::readData(istream& a_Ist)
 {
-//  m_Data = Array2D(Nx(), Ny());
   m_Data.resize(Nx()*Ny(), 0);
-  for (std::size_t j(Ny()); j--; )
+  for (size_t j(Ny()); j--; )
   {
-    for (std::size_t i(0); i < Nx(); ++i)
+    for (size_t i(0); i < Nx(); ++i)
     {
       a_Ist >> (*this)(i, j);
     }
   }
 }
 
-Grid::Grid(std::string a_FileName)
+Grid::Grid(string a_FileName)
 {
   try
   {
-    std::ifstream ist(a_FileName.c_str(), std::ios::in);
+    ifstream ist(a_FileName.c_str(), ios::in);
     LOG_INF("Opening file " << a_FileName);
     readHeader(ist);
     readData(ist);
     ist.close();
   }
-  catch(std::ifstream::failure& e)
+  catch(ifstream::failure& e)
   {
     LOG_ERR("Cannot open file " << a_FileName << ": " << e.what());
     exit(EXIT_FAILURE); // TODO: find a workaround
@@ -105,19 +100,33 @@ Grid& Grid::operator=(const Grid& g) // an assignment operator overwrites an exi
 	return *this;
 }
 
-void Grid::Refine(double rx, double ry)
+double Grid::max()
+{
+  return *max_element(m_Data.begin(), m_Data.end());
+}
+
+double Grid::min()
+{
+  return *min_element(m_Data.begin(), m_Data.end());
+}
+
+void Grid::resize(double a_rx, double a_ry)
+{
+  m_Coords.Dx /= a_rx;
+  m_Coords.Dy /= a_ry;
+  m_Coords.Nx *= a_rx; // this obviously truncates the data
+  m_Coords.Ny *= a_ry;
+  m_Data.resize(Nx()*Ny());
+}
+
+void Grid::refine(double a_rx, double a_ry)
 {
   Grid tmp(*this);
   double Xmax(X(Nx())), Ymax(Y(Ny()));
-  m_Coords.Dx /= rx;
-  m_Coords.Dy /= ry;
-  m_Coords.Nx *= rx; // TODO: that doesn't really make sense; this is not compatible with the definition of Dx and Dy! this will lead to loss of data or undefined data
-  m_Coords.Ny *= ry;
 
-//  m_Data.Reset(m_Coords.Nx, m_Coords.Ny); // TODO: this should be done automatically ...
-  m_Data.resize(m_Coords.Nx*m_Coords.Ny); // TODO: this will work well if the array's size increases, not if it decreases ... --> apply shrink-to-fit idiom in this case
+  resize(a_rx, a_ry);
 
-  double x(0.0), y(0.0); std::size_t i(0), j(0);
+  double x(0.0), y(0.0); size_t i(0), j(0);
   while (x < Xmax) {
     y = 0.0; j = 0;
     while (y < Ymax) {
@@ -128,27 +137,27 @@ void Grid::Refine(double rx, double ry)
   }
 }
 
-void Grid::Refine(double r)
+void Grid::refine(double a_r)
 {
-  Refine(r, r);
+  refine(a_r, a_r);
 }
 
 double Grid::interpolateLinear(double x, double y) const
 {
-	std::vector<double> w{ x, y, 0 }; 
+  vector<double> w{ x, y, 0 };
 
 	// define lower left corner grid coordinates of w
-  const std::size_t i = static_cast<std::size_t>((w[0] - Xll()) / Dx());
-  const std::size_t j = static_cast<std::size_t>((w[1] - Yll()) / Dy());
+  const size_t i = static_cast<size_t>((w[0] - Xll()) / Dx());
+  const size_t j = static_cast<size_t>((w[1] - Yll()) / Dy());
 
   assert((j<Ny() || i<Nx()) && "The point to be interpolated lies outside of the grid");
 
 	// this is to deal with the case where w lies at the top or right boundary of the grid
-  const std::size_t I(i == Nx() - 1 ? i : i + 1);
-  const std::size_t J(j == Ny() - 1 ? j : j + 1);
+  const size_t I(i == Nx() - 1 ? i : i + 1);
+  const size_t J(j == Ny() - 1 ? j : j + 1);
 
 	// define the four nearest neighbours of point w
-  std::vector<std::vector<double>> bounds = {
+  vector<vector<double>> bounds = {
       std::vector<double> { X(i), Y(j), (*this)(i, j) }
     , std::vector<double> { X(i), Y(J), (*this)(i, J) }
     , std::vector<double> { X(I), Y(J), (*this)(I, J) }
@@ -161,23 +170,20 @@ double Grid::interpolateLinear(double x, double y) const
 Grid& Grid::operator+=(const Grid& right)
 {
 	assert(m_Coords == right.m_Coords);
-//	m_Data += right.m_Data;
-  std::transform(m_Data.begin(), m_Data.end(), right.m_Data.begin(), m_Data.begin(), std::plus<double>());
+  transform(m_Data.begin(), m_Data.end(), right.m_Data.begin(), m_Data.begin(), plus<double>());
 	return *this;
 }
 
 Grid& Grid::operator-=(const Grid& right)
 {
 	assert(m_Coords == right.m_Coords);
-//	m_Data -= right.m_Data;
-  std::transform(m_Data.begin(), m_Data.end(), right.m_Data.begin(), m_Data.begin(), std::minus<double>());
+  transform(m_Data.begin(), m_Data.end(), right.m_Data.begin(), m_Data.begin(), minus<double>());
 	return *this;
 }
 
 Grid& Grid::operator*=(double c)
 {
-//	m_Data *= c;
-  std::transform(m_Data.begin(), m_Data.end(), m_Data.begin(), std::bind(std::multiplies<double>(), _1, c));
+  transform(m_Data.begin(), m_Data.end(), m_Data.begin(), bind(multiplies<double>(), _1, c));
 	return *this;
 }
 
@@ -185,25 +191,25 @@ Grid& Grid::operator*=(double c)
  * Non-member functions
  */
 
-std::ostream& operator<<(std::ostream& ost, const Grid& g)
+ostream& operator<<(ostream& ost, const Grid& g)
 {
 	assert(g.Dx() == g.Dy());
 	ost << "NCOLS\t"        << g.Nx() << "\n"
-			<< "NROWS\t"        << g.Ny() << std::endl;
+      << "NROWS\t"        << g.Ny() << endl;
 	ost.precision(10);
 	ost << "XLLCORNER\t"    << g.Xll() << "\n"
 			<< "YLLCORNER\t"    << g.Yll() << "\n"
 			<< "CELLSIZE\t"     << g.Dx()  << "\n"
-			<< "NODATA_value\t" << g.NoData() << std::endl;
+      << "NODATA_value\t" << g.noData() << endl;
 
 	ost.precision(4);
 	double tmp(0.);
-  for (std::size_t j(g.Ny()); j--; )
+  for (size_t j(g.Ny()); j--; )
 	{
-    for (std::size_t i(0); i < g.Nx(); ++i)
+    for (size_t i(0); i < g.Nx(); ++i)
 		{
       tmp = g(i, j); assert(!std::isnan(tmp));
-			ost << std::fixed << std::setw(10) << tmp << " "; // Forgetting about formatting makes this operation faster
+      ost << fixed << setw(10) << tmp << " "; // Forgetting about formatting makes this operation faster
 		}
 	}
 
@@ -230,72 +236,47 @@ Grid operator*(double lhs, const Grid& rhs)
 	return Grid(rhs) *= lhs;
 }
 
-double Max(const Grid& a_Grid)
-{
-  double m(a_Grid(size_t(0), size_t(0))), tmp(0.);
-  for (std::size_t k(0); k<a_Grid.Nx(); ++k) {
-    for (std::size_t j(0); j<a_Grid.Ny(); ++j) {
-			tmp = a_Grid(k, j);
-			if (tmp > m) m = tmp;
-		}
-	}
-	return m;
-}
-
-double Min(const Grid& a_Grid)
-{
-
-  double m(a_Grid(size_t(0), size_t(0))), tmp(0.);
-  for (std::size_t k(0); k<a_Grid.Nx(); ++k) {
-    for (std::size_t j(0); j<a_Grid.Ny(); ++j) {
-			tmp = a_Grid(k, j);
-			if (tmp < m) m = tmp;
-		}
-	}
-	return m;
-}
-
-double StaggeredValue(const Grid& a_Grid, std::size_t i, std::size_t j)
+double StaggeredValue(const Grid& a_Grid, size_t i, size_t j)
 {
 	assert(a_Grid.Dx() == a_Grid.Dy());
 	return (a_Grid(i - 1, j - 1) + a_Grid(i, j - 1) + a_Grid(i - 1, j) + a_Grid(i, j)) / 4.;
 }
 
-double StaggeredGradNormValue(const Grid& a_Grid, std::size_t i, std::size_t j)
+double StaggeredGradNormValue(const Grid& a_Grid, size_t i, size_t j)
 {
 	assert(a_Grid.Dx() == a_Grid.Dy());
 	return sqrt((a_Grid(i,     j) - a_Grid(i - 1, j - 1))*(a_Grid(i,     j) - a_Grid(i - 1, j - 1))
-						+ (a_Grid(i, j - 1) - a_Grid(i - 1,     j))*(a_Grid(i, j - 1) - a_Grid(i - 1,     j))) / (std::sqrt(2)*a_Grid.Dx());
+            + (a_Grid(i, j - 1) - a_Grid(i - 1,     j))*(a_Grid(i, j - 1) - a_Grid(i - 1,     j))) / (sqrt(2)*a_Grid.Dx());
 }
 
-void Export(const Grid& a_Grid, std::string a_FileName)
+void toGrid(const Grid& a_Grid, string a_FileName)
 {
-  std::ofstream ofs(a_FileName.c_str());
+  ofstream ofs(a_FileName.c_str());
   ofs << a_Grid;
   ofs.close();
 }
 
-void XYZ(const Grid& a_Grid, std::string a_FileName)
+void toXYZ(const Grid& a_Grid, string a_FileName)
 {
   try
   {
-    std::ofstream ofs(a_FileName.c_str());
-    for (std::size_t i(0); i < a_Grid.Nx(); ++i)
+    ofstream ofs(a_FileName.c_str());
+    for (size_t i(0); i < a_Grid.Nx(); ++i)
     {
-      for (std::size_t j(0); j < a_Grid.Ny(); ++j)
+      for (size_t j(0); j < a_Grid.Ny(); ++j)
       {
-        ofs << a_Grid.X(i) << "\t" << a_Grid.Y(j) << "\t" << std::setprecision(4) << a_Grid(i, j) << std::endl;
+        ofs << a_Grid.X(i) << "\t" << a_Grid.Y(j) << "\t" << setprecision(4) << a_Grid(i, j) << endl;
       }
-      ofs << std::endl;
+      ofs << endl;
     }
     ofs.close();
   }
-  catch(std::ofstream::failure& e)
+  catch(ofstream::failure& e)
   {
     LOG_ERR("Cannot write file " << a_FileName << ": " << e.what());
     exit(EXIT_FAILURE); // TODO: find a workaround
   }
-  catch(std::range_error& e)
+  catch(range_error& e)
   {
     LOG_ERR("Index out of range: " << e.what());
     exit(EXIT_FAILURE);

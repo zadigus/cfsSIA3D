@@ -63,7 +63,7 @@ namespace N_Glacier {
 		}
 	}
 
-	void Glacier::init(const std::unique_ptr<N_Configuration::ModelConfiguration>& a_PhysConf, const std::unique_ptr<N_Configuration::ModelCoreConfiguration>& a_PhysCoreConf)
+  void Glacier::init(std::unique_ptr<N_Configuration::ModelConfiguration> a_PhysConf, std::unique_ptr<N_Configuration::ModelCoreConfiguration> a_PhysCoreConf)
 	{
 		if (!a_PhysConf)
 		{

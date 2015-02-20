@@ -31,17 +31,20 @@ class Grid // TODO: this could be a container, i.e. could have iterators
     double Yll() const;
     double  X(std::size_t i) const;
     double  Y(std::size_t j) const;
-    bool IsData(std::size_t i, std::size_t j) const;
-    double NoData() const;
+    bool isData(std::size_t i, std::size_t j) const;
+    double noData() const;
 
 		// Data handling
-    void Refine(double ratio);
+    void refine(double a_r);
     /*
      *  Grid refinement or coarsening with ratio r, i.e. the original Dx is divided by r to make up the new mesh size
      * r > 1 : refinement
      * r < 1 : coarsening
      */
-    void Refine(double ratioX, double ratioY);
+    void refine(double a_rx, double a_ry);
+
+    double min();
+    double max();
 
     double& operator()(std::size_t i, std::size_t j);
     double operator()(std::size_t i, std::size_t j) const;
@@ -61,24 +64,22 @@ class Grid // TODO: this could be a container, i.e. could have iterators
   private:
     void readHeader(std::istream& a_Ist);
     void readData(std::istream& a_Ist);
+    void resize(double a_rx, double a_ry);
 
 	private:
 		SpaceParams m_Coords;
-		double      m_NoData;          // no data value
-//		Array2D       m_Data;          // values at the grid points
+    double      m_NoData;       // no data value
     std::vector<double> m_Data; // values at the grid points
 };
 
 // Inline methods
 inline double& Grid::operator()(std::size_t i, std::size_t j)
 {
-//  return m_Data(i, j);
   return m_Data.at(i*Ny() + j);
 }
 
 inline double Grid::operator()(std::size_t i, std::size_t j) const
 {
-//  return m_Data(i, j);
   return m_Data.at(i*Ny() + j);
 }
 
@@ -122,12 +123,12 @@ inline double Grid::Y(std::size_t j) const
   return Yll() + j*Dy();
 }
 
-inline bool Grid::IsData(std::size_t i, std::size_t j) const
+inline bool Grid::isData(std::size_t i, std::size_t j) const
 {
   return ((*this)(i, j) != m_NoData);
 }
 
-inline double Grid::NoData() const
+inline double Grid::noData() const
 {
   return m_NoData;
 }
@@ -139,16 +140,13 @@ Grid operator*(const Grid&, double);
 Grid operator*(double, const Grid&);
 std::ostream& operator<<(std::ostream&, Grid&);
 
-double Min(const Grid& a_Grid);
-double Max(const Grid& a_Grid);
-
 // return staggered grid value at point (i-1/2, j-1/2)
 double StaggeredValue(const Grid& a_Grid, std::size_t, std::size_t);
 
 // compute norm of gradient of grid in the staggered grid
 double StaggeredGradNormValue(const Grid& a_Grid, std::size_t, std::size_t);
 
-void Export(const Grid& a_Grid, std::string a_FileName);
-void XYZ(const Grid& a_Grid, std::string a_FileName);
+void toGrid(const Grid& a_Grid, std::string a_FileName);
+void toXYZ(const Grid& a_Grid, std::string a_FileName);
 
 #endif /* GRID_H_ */

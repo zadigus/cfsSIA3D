@@ -25,6 +25,8 @@ namespace N_Mathematics {
 		, m_ClimateAlgo(nullptr)
 		, m_ProjectionAlgo(nullptr)
 		, m_dt(0)
+    , m_ti(0)
+    , m_tf(0)
 	{
 	
 	}
@@ -54,7 +56,7 @@ namespace N_Mathematics {
 		}
 	}
 
-	void Primal::init(std::unique_ptr<N_Configuration::ModelConfiguration>& aMathConf, const std::unique_ptr<N_Configuration::ModelCoreConfiguration>& aNumCoreConf)
+  void Primal::init(std::unique_ptr<N_Configuration::ModelConfiguration> aMathConf, std::unique_ptr<N_Configuration::ModelCoreConfiguration> aNumCoreConf)
 	{
 		if (!aMathConf)
 		{
@@ -95,30 +97,30 @@ namespace N_Mathematics {
 		while (currentTime < m_tf)
 		{
 			LOG_INF("Current time : " << currentTime);
-			Iterate();
+      iterate();
 			currentTime += m_dt;
 		}
 	}
 
-	void Primal::Iterate() // TODO: argument l is probably not necessary; let's just store the data in a vector ...
+  void Primal::iterate()
 	{
-		Diffusion();
-		Climate();
-		Projection();
+    doDiffusion();
+    doClimate();
+    doProjection();
 		// TODO: handle the "Store" feature
 	}
 
-	void Primal::Diffusion()
+  void Primal::doDiffusion()
 	{
 		m_DiffusionAlgo->run(); 
 	}
 
-	void Primal::Climate()
+  void Primal::doClimate()
 	{
 		m_ClimateAlgo->run();
 	}
 
-	void Primal::Projection()
+  void Primal::doProjection()
 	{
 		m_ProjectionAlgo->run();
 	}

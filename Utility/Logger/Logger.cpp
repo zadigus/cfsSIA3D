@@ -51,7 +51,7 @@ void Logger::applyParameter(const N_Configuration::Parameter& aParam)
 	}
 }
 
-void Logger::init(const std::unique_ptr<N_Configuration::AppConfiguration>& aLoggerConf)
+void Logger::init(std::unique_ptr<N_Configuration::AppConfiguration> aLoggerConf)
 { 
 	if (!aLoggerConf)
 	{

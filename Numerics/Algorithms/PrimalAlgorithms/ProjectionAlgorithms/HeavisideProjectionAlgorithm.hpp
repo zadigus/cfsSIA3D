@@ -3,24 +3,25 @@
 
 #include "FiniteDifferenceProjectionAlgorithm.hpp"
 
-class Grid;
-
 namespace N_Configuration {
 	class Component;
+}
+
+namespace N_Glacier {
+  class Glacier;
 }
 
 namespace N_Mathematics {
 
 	struct NumericsCoreParams;
 
-	class HeavisideProjectionAlgorithm : public FiniteDifferenceProjectionAlgorithm
+  class HeavisideProjectionAlgorithm : public PrimalAlgorithm
 	{
 		public:
-			//HeavisideProjectionAlgorithm(const std::unique_ptr<NumericsCoreParams>& aNumCoreParams, N_Configuration::Component* aProjectionAlgo);
 			HeavisideProjectionAlgorithm(const NumericsCoreParams& aNumCoreParams, const N_Configuration::Component& aProjectionAlgo);
 			virtual ~HeavisideProjectionAlgorithm();
 
-			virtual void run();
+      virtual void transform(const N_Glacier::Glacier a_Glacier);
 	};
 
 }
