@@ -112,17 +112,17 @@ namespace N_Mathematics {
 
   void Primal::doDiffusion()
 	{
-		m_DiffusionAlgo->run(); 
+    m_DiffusionAlgo->transform(m_Glacier);
 	}
 
   void Primal::doClimate()
 	{
-		m_ClimateAlgo->run();
+    m_ClimateAlgo->transform(m_Glacier);
 	}
 
   void Primal::doProjection()
 	{
-		m_ProjectionAlgo->run();
+    m_ProjectionAlgo->transform(m_Glacier);
 	}
 
 }

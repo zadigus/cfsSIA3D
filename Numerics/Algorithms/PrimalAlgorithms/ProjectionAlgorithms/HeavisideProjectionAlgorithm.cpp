@@ -18,11 +18,11 @@ namespace N_Mathematics {
 
 	}
 
-	void HeavisideProjectionAlgorithm::run()
+  void HeavisideProjectionAlgorithm::transform(N_Glacier::Glacier& a_g)
 	{
-		for(unsigned int i(0); i < m_Nx; ++i) // prefix increment operator is more efficient
-			for(unsigned int j(0); j < m_Ny; ++j)
-				H(i, j) = N_MathUtils::Heaviside(H(i, j)) * H(i, j);
+    for(size_t i(0); i < a_g.Nx(); ++i) // prefix increment operator is more efficient
+      for(size_t j(0); j < a_g.Ny(); ++j)
+        a_g.H(i, j) = N_MathUtils::Heaviside(a_g.H(i, j)) * a_g.H(i, j);
 	}
 
 }

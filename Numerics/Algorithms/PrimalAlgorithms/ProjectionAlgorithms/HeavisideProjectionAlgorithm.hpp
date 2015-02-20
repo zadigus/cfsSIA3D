@@ -21,7 +21,7 @@ namespace N_Mathematics {
 			HeavisideProjectionAlgorithm(const NumericsCoreParams& aNumCoreParams, const N_Configuration::Component& aProjectionAlgo);
 			virtual ~HeavisideProjectionAlgorithm();
 
-      virtual void transform(const N_Glacier::Glacier a_Glacier);
+      virtual void transform(N_Glacier::Glacier& a_Glacier);
 	};
 
 }
